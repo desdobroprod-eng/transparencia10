@@ -1,39 +1,78 @@
-name: Deploy Transparencia10
+name: Deploy para GitHub Pages
 
+# Dispara no push de código/frontend OU após a coleta de dados ser concluída
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+      - "frontend/public/data/**"
+  workflow_run:
+    workflows: ["Coleta de Dados"]
+    types:
+      - completed
+
+# Permissões mínimas necessárias para deploy no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Garante que apenas um deploy rode por vez; cancela o pendente se um novo chegar
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  deploy-backend:
-    name: Deploy Backend (Railway)
+  # ── Build ──────────────────────────────────────────────────────────────────
+  build:
+    name: Build do frontend
     runs-on: ubuntu-latest
+    # No caso de workflow_run, só executa se a coleta teve sucesso
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+
     steps:
-      - uses: actions/checkout@v4
+      # 1. Checkout do repositório
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
 
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
+      # 2. Configurar Node.js 20
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
 
-      - name: Deploy backend
-        working-directory: ./backend
-        run: railway up --service backend --detach
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      # 3. Instalar dependências de forma determinística
+      - name: Instalar dependências
+        working-directory: frontend
+        run: npm ci
 
-  deploy-frontend:
-    name: Deploy Frontend (Vercel)
+      # 4. Gerar build estático do Next.js
+      - name: Build da aplicação
+        working-directory: frontend
+        run: npm run build
+
+      # 5. Publicar o artefato para o job de deploy
+      - name: Publicar artefato do GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/out
+
+  # ── Deploy ─────────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy no GitHub Pages
     runs-on: ubuntu-latest
-    needs: deploy-backend
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Vercel CLI
-        run: npm install -g vercel
-
-      - name: Deploy frontend
-        working-directory: ./frontend
-        run: vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.BACKEND_URL }}
+      - name: Deploy para GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

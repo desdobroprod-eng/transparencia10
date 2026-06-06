@@ -9,7 +9,7 @@ import TabelaContratos from "@/components/TabelaContratos";
 type Periodo = "tempo_real" | "2024" | "2023" | "2022" | "2021";
 
 const PERIODOS: { valor: Periodo; label: string }[] = [
-  { valor: "tempo_real", label: "Tempo real" },
+  { valor: "tempo_real", label: "Todos os períodos" },
   { valor: "2024", label: "2024" },
   { valor: "2023", label: "2023" },
   { valor: "2022", label: "2022" },
@@ -23,32 +23,16 @@ const ENTES_CONFIG: { chave: string; nome: string }[] = [
   { chave: "paco_lumiar", nome: "Paço do Lumiar" },
 ];
 
-const INTERVALO_REFRESH = 30;
+const INTERVALO_REFRESH = 14400; // 4 horas em segundos
 
-function IndicadorAoVivo() {
+function IndicadorEstatico() {
   return (
-    <span className="flex items-center gap-1.5 text-xs font-medium text-green-600">
+    <span className="flex items-center gap-1.5 text-xs font-medium text-blue-600">
       <span className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
       </span>
-      Ao vivo
+      Atualizado a cada 4h
     </span>
-  );
-}
-
-function CountdownBar({ segundos, total }: { segundos: number; total: number }) {
-  const pct = (segundos / total) * 100;
-  return (
-    <div className="flex items-center gap-2 text-xs text-gray-400">
-      <span>Atualiza em {segundos}s</span>
-      <div className="w-20 h-1 bg-gray-200 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-blue-400 rounded-full transition-all duration-1000"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
   );
 }
 
@@ -56,10 +40,10 @@ export default function Home() {
   const [periodo, setPeriodo] = useState<Periodo>("tempo_real");
   const [countdown, setCountdown] = useState(INTERVALO_REFRESH);
 
-  const { stats, alertas, contratos, loading, erro, ultimaAtualizacao, refetch } =
+  const { stats, alertas, contratos, meta, loading, erro, ultimaAtualizacao, refetch } =
     useTransparencia(periodo);
 
-  // Auto-refresh a cada 30s + countdown
+  // Countdown visual até próxima atualização dos JSONs (4h)
   useEffect(() => {
     setCountdown(INTERVALO_REFRESH);
     const tick = setInterval(() => {
@@ -72,14 +56,25 @@ export default function Home() {
       });
     }, 1000);
     return () => clearInterval(tick);
-  }, [refetch, periodo]);
+  }, [refetch]);
 
   const dataFormatada = ultimaAtualizacao
     ? ultimaAtualizacao.toLocaleString("pt-BR")
     : "—";
 
+  const horas = Math.floor(countdown / 3600);
+  const minutos = Math.floor((countdown % 3600) / 60);
+  const proximaAtualizacao = horas > 0
+    ? `${horas}h ${minutos}min`
+    : `${minutos}min`;
+
   return (
     <main className="min-h-screen bg-gray-50 text-gray-900">
+      {/* Banner de atualização automática */}
+      <div className="bg-blue-50 border-b border-blue-100 px-4 py-2 text-center text-xs text-blue-700">
+        Dados atualizados automaticamente a cada 4 horas via GitHub Actions
+      </div>
+
       {/* Header */}
       <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
@@ -89,7 +84,7 @@ export default function Home() {
                 <h1 className="text-lg font-bold text-gray-900 tracking-tight">
                   Transparencia10
                 </h1>
-                {periodo === "tempo_real" && <IndicadorAoVivo />}
+                <IndicadorEstatico />
               </div>
               <p className="text-xs text-gray-500 mt-0.5">
                 Monitoramento de gastos públicos — Secretarias de Cultura do Maranhão
@@ -99,11 +94,11 @@ export default function Home() {
 
           <div className="flex flex-col items-end gap-1">
             <p className="text-xs text-gray-400">
-              Última atualização: <span className="text-gray-600">{dataFormatada}</span>
+              Dados carregados: <span className="text-gray-600">{dataFormatada}</span>
             </p>
-            {periodo === "tempo_real" && (
-              <CountdownBar segundos={countdown} total={INTERVALO_REFRESH} />
-            )}
+            <p className="text-xs text-gray-400">
+              Próximo refresh: <span className="text-gray-600">{proximaAtualizacao}</span>
+            </p>
           </div>
         </div>
       </header>
@@ -233,6 +228,21 @@ export default function Home() {
 
         {/* Rodapé legal */}
         <footer className="border-t border-gray-200 pt-6 text-xs text-gray-400 space-y-1">
+          {meta && (
+            <div className="bg-gray-50 rounded-lg px-4 py-3 mb-4 text-xs text-gray-500 flex flex-wrap gap-4">
+              <span>
+                <strong className="text-gray-600">Última coleta:</strong>{" "}
+                {new Date(meta.ultima_coleta).toLocaleString("pt-BR")}
+              </span>
+              <span>
+                <strong className="text-gray-600">Total de registros:</strong>{" "}
+                {meta.total_registros.toLocaleString("pt-BR")}
+              </span>
+              <span>
+                <strong className="text-gray-600">Fonte:</strong> {meta.fonte}
+              </span>
+            </div>
+          )}
           <p>
             Todos os dados exibidos são{" "}
             <strong className="text-gray-500">públicos</strong>, obtidos

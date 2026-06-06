@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const BASE = "/transparencia10/data";
 
 export interface EsteStats {
   total_gasto: number;
@@ -25,6 +25,7 @@ export interface Alerta {
   score: number;
   nivel: "critico" | "atencao" | "baixo";
   detectado_em: string;
+  ano?: number;
   cnpj?: string;
   fornecedor?: string;
 }
@@ -38,23 +39,55 @@ export interface Contrato {
   modalidade: string;
   score_risco: number;
   data_publicacao: string;
+  ano?: number;
   alertas?: Alerta[];
+}
+
+export interface Meta {
+  ultima_coleta: string;
+  total_registros: number;
+  fonte: string;
+}
+
+interface DadosBrutos {
+  stats: StatsGeral | null;
+  alertas: Alerta[];
+  contratos: Contrato[];
+  meta: Meta | null;
 }
 
 interface UseTransparenciaResult {
   stats: StatsGeral | null;
   alertas: Alerta[];
   contratos: Contrato[];
+  meta: Meta | null;
   loading: boolean;
   erro: string | null;
   ultimaAtualizacao: Date | null;
   refetch: () => void;
 }
 
-export function useTransparencia(ano: string): UseTransparenciaResult {
-  const [stats, setStats] = useState<StatsGeral | null>(null);
-  const [alertas, setAlertas] = useState<Alerta[]>([]);
-  const [contratos, setContratos] = useState<Contrato[]>([]);
+function filtrarPorPeriodo<T extends { ano?: number; data_publicacao?: string; detectado_em?: string }>(
+  items: T[],
+  periodo: string
+): T[] {
+  if (periodo === "tempo_real") return items;
+  const anoFiltro = parseInt(periodo, 10);
+  return items.filter((item) => {
+    if (item.ano !== undefined) return item.ano === anoFiltro;
+    const dataStr = item.data_publicacao ?? item.detectado_em ?? "";
+    if (!dataStr) return true;
+    return new Date(dataStr).getFullYear() === anoFiltro;
+  });
+}
+
+export function useTransparencia(periodo: string): UseTransparenciaResult {
+  const [brutos, setBrutos] = useState<DadosBrutos>({
+    stats: null,
+    alertas: [],
+    contratos: [],
+    meta: null,
+  });
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState<Date | null>(null);
@@ -62,36 +95,52 @@ export function useTransparencia(ano: string): UseTransparenciaResult {
   const fetchData = useCallback(async () => {
     setErro(null);
     try {
-      const params = ano !== "tempo_real" ? `?ano=${ano}` : "";
-      const [sRes, aRes, cRes] = await Promise.all([
-        fetch(`${API}/stats${params}`),
-        fetch(`${API}/alertas${params}`),
-        fetch(`${API}/contratos${params}`),
+      const [sRes, aRes, cRes, mRes] = await Promise.all([
+        fetch(`${BASE}/stats.json`),
+        fetch(`${BASE}/alertas.json`),
+        fetch(`${BASE}/contratos.json`),
+        fetch(`${BASE}/meta.json`),
       ]);
 
-      if (!sRes.ok || !aRes.ok || !cRes.ok) {
-        throw new Error("Erro ao buscar dados da API");
+      if (!sRes.ok || !aRes.ok || !cRes.ok || !mRes.ok) {
+        throw new Error("Erro ao carregar arquivos de dados");
       }
 
       const s: StatsGeral = await sRes.json();
       const a: { alertas: Alerta[] } = await aRes.json();
       const c: { contratos: Contrato[] } = await cRes.json();
+      const m: Meta = await mRes.json();
 
-      setStats(s);
-      setAlertas(a.alertas ?? []);
-      setContratos(c.contratos ?? []);
+      setBrutos({
+        stats: s,
+        alertas: a.alertas ?? [],
+        contratos: c.contratos ?? [],
+        meta: m,
+      });
       setUltimaAtualizacao(new Date());
     } catch (e) {
       setErro(e instanceof Error ? e.message : "Erro desconhecido");
     } finally {
       setLoading(false);
     }
-  }, [ano]);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
     fetchData();
   }, [fetchData]);
 
-  return { stats, alertas, contratos, loading, erro, ultimaAtualizacao, refetch: fetchData };
+  const alertasFiltrados = filtrarPorPeriodo(brutos.alertas, periodo);
+  const contratosFiltrados = filtrarPorPeriodo(brutos.contratos, periodo);
+
+  return {
+    stats: brutos.stats,
+    alertas: alertasFiltrados,
+    contratos: contratosFiltrados,
+    meta: brutos.meta,
+    loading,
+    erro,
+    ultimaAtualizacao,
+    refetch: fetchData,
+  };
 }

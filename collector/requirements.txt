@@ -1,0 +1,8 @@
+# Dependências do coletor standalone — Transparencia10
+# Sem FastAPI, sem SQLAlchemy, sem servidor
+
+# HTTP assíncrono — requisições às APIs públicas (PNCP, SICONFI, Portal Transparência)
+httpx==0.27.2
+
+# Variáveis de ambiente (.env) — chave de API do Portal Transparência (opcional)
+python-dotenv==1.0.1
