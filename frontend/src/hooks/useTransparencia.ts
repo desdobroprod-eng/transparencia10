@@ -2,7 +2,11 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-const BASE = "/transparencia10/data";
+// Em produção (GitHub Pages), usar a raiz relativa
+// Em dev, usar /transparencia10/data
+const BASE = typeof window !== "undefined" && window.location.hostname.includes("github.io")
+  ? "/transparencia10/data"
+  : "/data";
 
 export interface EsteStats {
   total_gasto: number;
