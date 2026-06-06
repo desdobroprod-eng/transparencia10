@@ -28,6 +28,9 @@ export interface Alerta {
   ano?: number;
   cnpj?: string;
   fornecedor?: string;
+  // Campos da Fase 4 — cruzamento com servidores públicos
+  categoria?: "financeiro" | "conflito_interesse" | "nepotismo";
+  orgao_servidor?: string;
 }
 
 export interface Contrato {

@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTransparencia } from "@/hooks/useTransparencia";
 import CardEnte from "@/components/CardEnte";
-import AlertaBadge from "@/components/AlertaBadge";
+import AlertaBadge, { type CategoriaAlerta } from "@/components/AlertaBadge";
 import TabelaContratos from "@/components/TabelaContratos";
 
 type Periodo = "tempo_real" | "2024" | "2023" | "2022" | "2021";
+
+// "todos" significa sem filtro por categoria
+type FiltroCategoria = "todos" | CategoriaAlerta;
 
 const PERIODOS: { valor: Periodo; label: string }[] = [
   { valor: "tempo_real", label: "Todos os períodos" },
@@ -23,6 +26,44 @@ const ENTES_CONFIG: { chave: string; nome: string }[] = [
   { chave: "paco_lumiar", nome: "Paço do Lumiar" },
 ];
 
+// Configuração dos botões de filtro por categoria
+const FILTROS_CATEGORIA: {
+  valor: FiltroCategoria;
+  label: string;
+  icone: string;
+  classeAtivo: string;
+  classeInativo: string;
+}[] = [
+  {
+    valor: "todos",
+    label: "Todos",
+    icone: "📋",
+    classeAtivo: "bg-gray-700 text-white shadow-sm",
+    classeInativo: "bg-white border border-gray-300 text-gray-600 hover:border-gray-500 hover:text-gray-800",
+  },
+  {
+    valor: "financeiro",
+    label: "Financeiro",
+    icone: "💰",
+    classeAtivo: "bg-blue-600 text-white shadow-sm",
+    classeInativo: "bg-white border border-blue-200 text-blue-700 hover:border-blue-400",
+  },
+  {
+    valor: "conflito_interesse",
+    label: "Conflito",
+    icone: "👤",
+    classeAtivo: "bg-orange-500 text-white shadow-sm",
+    classeInativo: "bg-white border border-orange-200 text-orange-700 hover:border-orange-400",
+  },
+  {
+    valor: "nepotismo",
+    label: "Nepotismo",
+    icone: "👨‍👩‍👧",
+    classeAtivo: "bg-purple-600 text-white shadow-sm",
+    classeInativo: "bg-white border border-purple-200 text-purple-700 hover:border-purple-400",
+  },
+];
+
 const INTERVALO_REFRESH = 14400; // 4 horas em segundos
 
 function IndicadorEstatico() {
@@ -36,8 +77,36 @@ function IndicadorEstatico() {
   );
 }
 
+// Badge de contador por categoria — exibido no header de alertas
+function ContadorCategoria({
+  icone,
+  rotulo,
+  total,
+  destaque,
+}: {
+  icone: string;
+  rotulo: string;
+  total: number;
+  destaque: boolean;
+}) {
+  if (total === 0) return null;
+  return (
+    <span
+      className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
+        destaque
+          ? "bg-orange-100 text-orange-700 border border-orange-200"
+          : "bg-gray-100 text-gray-600"
+      }`}
+      title={rotulo}
+    >
+      {icone} {total}
+    </span>
+  );
+}
+
 export default function Home() {
   const [periodo, setPeriodo] = useState<Periodo>("tempo_real");
+  const [filtroCategoria, setFiltroCategoria] = useState<FiltroCategoria>("todos");
   const [countdown, setCountdown] = useState(INTERVALO_REFRESH);
 
   const { stats, alertas, contratos, meta, loading, erro, ultimaAtualizacao, refetch } =
@@ -58,6 +127,11 @@ export default function Home() {
     return () => clearInterval(tick);
   }, [refetch]);
 
+  // Quando o período muda, reseta o filtro de categoria
+  useEffect(() => {
+    setFiltroCategoria("todos");
+  }, [periodo]);
+
   const dataFormatada = ultimaAtualizacao
     ? ultimaAtualizacao.toLocaleString("pt-BR")
     : "—";
@@ -67,6 +141,28 @@ export default function Home() {
   const proximaAtualizacao = horas > 0
     ? `${horas}h ${minutos}min`
     : `${minutos}min`;
+
+  // Contadores por categoria — calculados sobre a lista completa de alertas
+  const contadoresPorCategoria = useMemo(() => {
+    const acc: Record<CategoriaAlerta, number> = {
+      financeiro: 0,
+      conflito_interesse: 0,
+      nepotismo: 0,
+    };
+    for (const alerta of alertas) {
+      const cat = alerta.categoria as CategoriaAlerta | undefined;
+      if (cat && cat in acc) {
+        acc[cat]++;
+      }
+    }
+    return acc;
+  }, [alertas]);
+
+  // Lista de alertas filtrada pela categoria selecionada
+  const alertasFiltrados = useMemo(() => {
+    if (filtroCategoria === "todos") return alertas;
+    return alertas.filter((a) => a.categoria === filtroCategoria);
+  }, [alertas, filtroCategoria]);
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-900">
@@ -165,14 +261,71 @@ export default function Home() {
 
         {/* Feed de alertas */}
         <section>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center gap-2">
-              Indicadores de Anomalia
-              <span className="bg-gray-200 text-gray-600 text-xs px-2 py-0.5 rounded-full font-mono">
-                {alertas.length}
-              </span>
-            </h2>
-            <p className="text-xs text-gray-400">
+          {/* Header da seção com contadores separados por categoria */}
+          <div className="flex items-start justify-between mb-3 gap-3 flex-wrap">
+            <div className="flex flex-col gap-1.5">
+              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center gap-2">
+                Indicadores de Anomalia
+                {/* Contador total */}
+                <span className="bg-gray-200 text-gray-600 text-xs px-2 py-0.5 rounded-full font-mono">
+                  {alertas.length}
+                </span>
+                {/* Contadores por categoria — só exibidos quando há dados */}
+                {!loading && alertas.length > 0 && (
+                  <span className="flex items-center gap-1.5 ml-1">
+                    <ContadorCategoria
+                      icone="💰"
+                      rotulo="Financeiros"
+                      total={contadoresPorCategoria.financeiro}
+                      destaque={false}
+                    />
+                    <ContadorCategoria
+                      icone="👤"
+                      rotulo="Conflito de interesse"
+                      total={contadoresPorCategoria.conflito_interesse}
+                      destaque={contadoresPorCategoria.conflito_interesse > 0}
+                    />
+                    <ContadorCategoria
+                      icone="👨‍👩‍👧"
+                      rotulo="Nepotismo / Testa-ferro"
+                      total={contadoresPorCategoria.nepotismo}
+                      destaque={contadoresPorCategoria.nepotismo > 0}
+                    />
+                  </span>
+                )}
+              </h2>
+
+              {/* Botões de filtro por categoria */}
+              {!loading && alertas.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap">
+                  {FILTROS_CATEGORIA.map((f) => {
+                    // Oculta categorias sem alertas (exceto "Todos")
+                    const totalCategoria =
+                      f.valor === "todos"
+                        ? alertas.length
+                        : contadoresPorCategoria[f.valor as CategoriaAlerta] ?? 0;
+
+                    if (f.valor !== "todos" && totalCategoria === 0) return null;
+
+                    return (
+                      <button
+                        key={f.valor}
+                        onClick={() => setFiltroCategoria(f.valor)}
+                        className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                          filtroCategoria === f.valor ? f.classeAtivo : f.classeInativo
+                        }`}
+                      >
+                        <span>{f.icone}</span>
+                        <span>{f.label}</span>
+                        <span className="opacity-75">({totalCategoria})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <p className="text-xs text-gray-400 self-start mt-1">
               Dado público — indicativo, não acusação
             </p>
           </div>
@@ -186,13 +339,15 @@ export default function Home() {
                 />
               ))}
             </div>
-          ) : alertas.length === 0 ? (
+          ) : alertasFiltrados.length === 0 ? (
             <div className="bg-white rounded-xl border border-gray-200 p-6 text-center text-gray-400 text-sm">
-              Nenhum indicador de anomalia detectado no período selecionado.
+              {filtroCategoria === "todos"
+                ? "Nenhum indicador de anomalia detectado no período selecionado."
+                : `Nenhum alerta do tipo "${FILTROS_CATEGORIA.find((f) => f.valor === filtroCategoria)?.label}" no período selecionado.`}
             </div>
           ) : (
             <div className="space-y-3">
-              {alertas.map((a) => (
+              {alertasFiltrados.map((a) => (
                 <AlertaBadge
                   key={a.id}
                   nivel={a.nivel}
@@ -202,6 +357,8 @@ export default function Home() {
                   detectado_em={a.detectado_em}
                   cnpj={a.cnpj}
                   fornecedor={a.fornecedor}
+                  categoria={a.categoria as CategoriaAlerta | undefined}
+                  orgao_servidor={a.orgao_servidor}
                 />
               ))}
             </div>

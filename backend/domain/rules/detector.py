@@ -318,6 +318,222 @@ def verificar_contrato_vencido_renovado(
     return None
 
 
+# ---------------------------------------------------------------------------
+# Helpers de comparação nominal
+# ---------------------------------------------------------------------------
+
+_PREPOSICOES = {"de", "da", "do", "dos", "das", "e", "van", "von"}
+
+
+def extrair_sobrenomes(nome: str) -> list[str]:
+    """
+    Remove preposições e o primeiro token (primeiro nome), retorna sobrenomes
+    em maiúsculo.
+
+    Exemplo: "João Silva Marques" → ["SILVA", "MARQUES"]
+    """
+    tokens = nome.upper().split()
+    # Remove o primeiro token (primeiro nome) e preposições (case-insensitive)
+    sobrenomes = [
+        t for i, t in enumerate(tokens)
+        if i > 0 and t.lower() not in _PREPOSICOES
+    ]
+    return sobrenomes
+
+
+def score_similaridade_nomes(nome_a: str, nome_b: str) -> tuple[int, list[str]]:
+    """
+    Compara dois nomes completos e retorna (quantidade_em_comum, sobrenomes_comuns).
+    """
+    sobrenomes_a = set(extrair_sobrenomes(nome_a))
+    sobrenomes_b = set(extrair_sobrenomes(nome_b))
+    comuns = sorted(sobrenomes_a & sobrenomes_b)
+    return len(comuns), comuns
+
+
+# ---------------------------------------------------------------------------
+# Regras de conflito de interesse e testa-de-ferro
+# ---------------------------------------------------------------------------
+
+def verificar_conflito_interesse(
+    contrato: dict,
+    socios_empresa: list[dict],
+    servidores_orgao: list[dict],
+) -> list[ResultadoRegra]:
+    """
+    Detecta possível conflito de interesse entre sócios da empresa contratada
+    e servidores do órgão contratante, comparando nomes por sobrenomes em comum.
+
+    Níveis de alerta:
+      - Match exato de nome completo            → score 92, CONFLITO_INTERESSE_DIRETO
+      - 3+ sobrenomes em comum                  → score 85, PROVAVEL_PARENTE
+      - 2 sobrenomes em comum                   → score 72, POSSIVEL_PARENTE
+      - 1 sobrenome em comum com > 7 caracteres → score 60, SOBRENOME_RARO_COINCIDENTE
+    """
+    alertas: list[ResultadoRegra] = []
+
+    valor_contrato = float(contrato.get("valorInicial") or contrato.get("valor") or 0)
+    orgao = contrato.get("unidadeGestora") or contrato.get("orgao") or "não informado"
+
+    for socio in socios_empresa:
+        nome_socio = (socio.get("nome") or "").strip().upper()
+        if not nome_socio:
+            continue
+
+        for servidor in servidores_orgao:
+            nome_servidor = (servidor.get("nome") or "").strip().upper()
+            if not nome_servidor:
+                continue
+
+            # Match exato de nome completo
+            if nome_socio == nome_servidor:
+                alertas.append(ResultadoRegra(
+                    regra="CONFLITO_INTERESSE_DIRETO",
+                    score=92,
+                    motivo=(
+                        f"Sócio '{nome_socio}' tem nome idêntico ao servidor "
+                        f"'{nome_servidor}' do órgão contratante"
+                    ),
+                    dados={
+                        "nome_socio": nome_socio,
+                        "nome_servidor": nome_servidor,
+                        "sobrenomes_comuns": extrair_sobrenomes(nome_socio),
+                        "valor_contrato": valor_contrato,
+                        "orgao": orgao,
+                    },
+                ))
+                continue
+
+            qtd_comuns, sobrenomes_comuns = score_similaridade_nomes(nome_socio, nome_servidor)
+
+            if qtd_comuns >= 3:
+                regra = "PROVAVEL_PARENTE"
+                score = 85
+                motivo = (
+                    f"Sócio '{nome_socio}' compartilha {qtd_comuns} sobrenomes "
+                    f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
+                    f"do mesmo órgão"
+                )
+            elif qtd_comuns == 2:
+                regra = "POSSIVEL_PARENTE"
+                score = 72
+                motivo = (
+                    f"Sócio '{nome_socio}' compartilha 2 sobrenomes "
+                    f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
+                    f"do mesmo órgão"
+                )
+            elif qtd_comuns == 1 and len(sobrenomes_comuns[0]) > 7:
+                regra = "SOBRENOME_RARO_COINCIDENTE"
+                score = 60
+                motivo = (
+                    f"Sócio '{nome_socio}' compartilha sobrenome raro "
+                    f"'{sobrenomes_comuns[0]}' com servidor '{nome_servidor}' "
+                    f"do mesmo órgão"
+                )
+            else:
+                continue
+
+            alertas.append(ResultadoRegra(
+                regra=regra,
+                score=score,
+                motivo=motivo,
+                dados={
+                    "nome_socio": nome_socio,
+                    "nome_servidor": nome_servidor,
+                    "sobrenomes_comuns": sobrenomes_comuns,
+                    "valor_contrato": valor_contrato,
+                    "orgao": orgao,
+                },
+            ))
+
+    return alertas
+
+
+def verificar_testa_ferro(
+    socios_empresa: list[dict],
+    servidores_todos: list[dict],
+    contrato: dict,
+) -> list[ResultadoRegra]:
+    """
+    Variante ampla do conflito de interesse: compara sócios contra TODOS os
+    servidores do estado (não apenas do órgão contratante).
+
+    Threshold mais conservador — só dispara com 3+ sobrenomes em comum ou
+    match exato de nome completo, para reduzir falsos positivos na base ampla.
+
+    Regra: TESTA_FERRO_POSSIVEL, score 70.
+    O campo `orgao_servidor` indica onde o servidor trabalha, para orientar
+    o investigador.
+    """
+    alertas: list[ResultadoRegra] = []
+
+    valor_contrato = float(contrato.get("valorInicial") or contrato.get("valor") or 0)
+    orgao_contrato = contrato.get("unidadeGestora") or contrato.get("orgao") or "não informado"
+
+    for socio in socios_empresa:
+        nome_socio = (socio.get("nome") or "").strip().upper()
+        if not nome_socio:
+            continue
+
+        for servidor in servidores_todos:
+            nome_servidor = (servidor.get("nome") or "").strip().upper()
+            if not nome_servidor:
+                continue
+
+            orgao_servidor = (
+                servidor.get("orgao")
+                or servidor.get("unidadeGestora")
+                or servidor.get("lotacao")
+                or "não informado"
+            )
+
+            # Match exato
+            if nome_socio == nome_servidor:
+                alertas.append(ResultadoRegra(
+                    regra="TESTA_FERRO_POSSIVEL",
+                    score=70,
+                    motivo=(
+                        f"Sócio '{nome_socio}' tem nome idêntico ao servidor "
+                        f"'{nome_servidor}' (lotado em '{orgao_servidor}') — "
+                        f"possível uso como testa de ferro no contrato com '{orgao_contrato}'"
+                    ),
+                    dados={
+                        "nome_socio": nome_socio,
+                        "nome_servidor": nome_servidor,
+                        "sobrenomes_comuns": extrair_sobrenomes(nome_socio),
+                        "valor_contrato": valor_contrato,
+                        "orgao_contrato": orgao_contrato,
+                        "orgao_servidor": orgao_servidor,
+                    },
+                ))
+                continue
+
+            qtd_comuns, sobrenomes_comuns = score_similaridade_nomes(nome_socio, nome_servidor)
+
+            # Threshold mais alto: apenas 3+ sobrenomes em comum
+            if qtd_comuns >= 3:
+                alertas.append(ResultadoRegra(
+                    regra="TESTA_FERRO_POSSIVEL",
+                    score=70,
+                    motivo=(
+                        f"Sócio '{nome_socio}' compartilha {qtd_comuns} sobrenomes "
+                        f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
+                        f"(lotado em '{orgao_servidor}') — possível testa de ferro "
+                        f"no contrato com '{orgao_contrato}'"
+                    ),
+                    dados={
+                        "nome_socio": nome_socio,
+                        "nome_servidor": nome_servidor,
+                        "sobrenomes_comuns": sobrenomes_comuns,
+                        "valor_contrato": valor_contrato,
+                        "orgao_contrato": orgao_contrato,
+                        "orgao_servidor": orgao_servidor,
+                    },
+                ))
+
+    return alertas
+
+
 def calcular_score_final(resultados: list[ResultadoRegra]) -> dict:
     """Agrega scores e define nível de risco."""
     if not resultados:

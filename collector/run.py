@@ -33,6 +33,7 @@ sys.path.insert(0, str(BACKEND_PATH))
 # ── Importa coletores e detector ───────────────────────────────────────────────
 from collectors.historical import coletar_historico_4_anos
 from collectors.siconfi_full import coletar_rreo_todos_entes, coletar_rreo_historico_ente
+from collectors.servidores import coletar_servidores_ma, verificar_conflito_interesse, verificar_testa_ferro
 from domain.rules.detector import (
     verificar_empresa_nova,
     verificar_fracionamento,
@@ -108,6 +109,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
             "motivo": r.motivo,
             "dados": r.dados,
             "id_contrato": None,
+            "categoria": "financeiro",
         })
 
     # Regra: monopólio de fornecedor (opera sobre toda a lista)
@@ -119,6 +121,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
             "motivo": r.motivo,
             "dados": r.dados,
             "id_contrato": None,
+            "categoria": "financeiro",
         })
 
     # Regras por contrato individual
@@ -135,6 +138,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "motivo": r_sem_lic.motivo,
                 "dados": r_sem_lic.dados,
                 "id_contrato": id_c,
+                "categoria": "financeiro",
             })
 
         # Regra: contrato vencido com aditivos ou ainda ativo
@@ -146,6 +150,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "motivo": r_venc.motivo,
                 "dados": r_venc.dados,
                 "id_contrato": id_c,
+                "categoria": "financeiro",
             })
 
         # Regra: preço abusivo — compara com histórico do mesmo ente
@@ -157,6 +162,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "motivo": r_preco.motivo,
                 "dados": r_preco.dados,
                 "id_contrato": id_c,
+                "categoria": "financeiro",
             })
 
     # Regra: fracionamento — agrupa por CNPJ do fornecedor
@@ -175,6 +181,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "motivo": r_frac.motivo,
                 "dados": r_frac.dados,
                 "id_contrato": None,
+                "categoria": "financeiro",
             })
 
     return alertas
@@ -344,6 +351,112 @@ async def executar_coleta(
 
     print(f"\n[FASE 3] Concluída — {len(todos_alertas)} alertas detectados")
 
+    # ── FASE 4: Cruzamento com servidores públicos ─────────────────────────────
+    print("\n[FASE 4/4] Cruzamento com servidores públicos (SIAPE + TCE-MA)")
+    print("-" * 50)
+
+    cruzamento_servidores_ok = False
+    servidores_coletados: dict = {}
+
+    try:
+        servidores_coletados = await coletar_servidores_ma()
+        servidores_todos = servidores_coletados.get("todos", [])
+
+        print(f"  [OK] {len(servidores_todos)} servidores carregados para cruzamento")
+
+        # Para cada ente, cruza contratos com servidores do órgão correspondente
+        for chave, ente in entes_processar.items():
+            contratos_ente = [c for c in todos_contratos if c.get("chave_ente") == chave]
+
+            # Filtra servidores que pertencem ao órgão deste ente (busca por nome parcial)
+            nome_ente_norm = ente["nome"].upper()
+            servidores_orgao = [
+                s for s in servidores_todos
+                if any(
+                    token in s.orgao.upper()
+                    for token in nome_ente_norm.split()
+                    if len(token) > 3
+                )
+            ]
+
+            print(
+                f"\n  → {ente['nome']}: {len(contratos_ente)} contratos | "
+                f"{len(servidores_orgao)} servidores do órgão"
+            )
+
+            for contrato in contratos_ente:
+                # Extrai quadro societário do contrato (enriquecido via CNPJ)
+                cnpj_info = contrato.get("cnpj_info") or {}
+                socios: list[dict] = cnpj_info.get("qsa") or cnpj_info.get("socios") or []
+
+                if not socios:
+                    continue  # sem dados de QSA, pula cruzamento
+
+                # Conflito de interesse: sócio é servidor do próprio órgão contratante
+                r_conflito = verificar_conflito_interesse(contrato, socios, servidores_orgao)
+                if r_conflito:
+                    todos_alertas.append({
+                        "regra": r_conflito.regra,
+                        "score": r_conflito.score,
+                        "motivo": r_conflito.motivo,
+                        "dados": r_conflito.dados,
+                        "id_contrato": contrato.get("numeroControlePNCP") or contrato.get("id") or "",
+                        "chave_ente": chave,
+                        "nome_ente": ente["nome"],
+                        "categoria": "conflito_interesse",
+                        "orgao_servidor": r_conflito.dados.get("orgao_servidor", ""),
+                    })
+                    print(
+                        f"    [ALERTA] CONFLITO_INTERESSE — "
+                        f"{contrato.get('cnpjFornecedor', '')} | score={r_conflito.score}"
+                    )
+
+                # Testa-ferro: sócio é servidor de qualquer órgão (nepotismo cruzado)
+                r_testa = verificar_testa_ferro(socios, servidores_todos, contrato)
+                if r_testa:
+                    todos_alertas.append({
+                        "regra": r_testa.regra,
+                        "score": r_testa.score,
+                        "motivo": r_testa.motivo,
+                        "dados": r_testa.dados,
+                        "id_contrato": contrato.get("numeroControlePNCP") or contrato.get("id") or "",
+                        "chave_ente": chave,
+                        "nome_ente": ente["nome"],
+                        "categoria": "nepotismo",
+                        "orgao_servidor": r_testa.dados.get("orgao_servidor", ""),
+                    })
+                    print(
+                        f"    [ALERTA] TESTA_FERRO — "
+                        f"{contrato.get('cnpjFornecedor', '')} | score={r_testa.score}"
+                    )
+
+        cruzamento_servidores_ok = True
+        print(f"\n[FASE 4] Concluída — {len(todos_alertas)} alertas totais após cruzamento")
+
+    except Exception as exc:
+        # Fase 4 é não-bloqueante: log de aviso e continua sem cruzamento
+        print(f"[AVISO] Fase 4 — cruzamento de servidores falhou (não bloqueante): {exc}")
+        logger_aviso = f"Erro no cruzamento de servidores: {exc}"
+
+    # Salva servidores.json com a lista coletada (ou vazio em caso de erro)
+    servidores_serializaveis = {
+        fonte: [
+            {"nome": s.nome, "cpf_parcial": s.cpf_parcial, "orgao": s.orgao,
+             "cargo": s.cargo, "situacao": s.situacao, "fonte": s.fonte}
+            for s in lista
+        ]
+        for fonte, lista in servidores_coletados.items()
+        if isinstance(lista, list)
+    }
+    _salvar_json("servidores.json", servidores_serializaveis)
+
+    # Contadores por categoria para o meta.json
+    contadores_categoria = {
+        "financeiro": sum(1 for a in todos_alertas if a.get("categoria") == "financeiro"),
+        "conflito_interesse": sum(1 for a in todos_alertas if a.get("categoria") == "conflito_interesse"),
+        "nepotismo": sum(1 for a in todos_alertas if a.get("categoria") == "nepotismo"),
+    }
+
     # ── Geração dos arquivos JSON ──────────────────────────────────────────────
     fim = _timestamp_utc()
     print("\n[OUTPUT] Gerando arquivos JSON estáticos")
@@ -364,20 +477,26 @@ async def executar_coleta(
         "timestamp_fim": fim,
         "total_contratos": len(todos_contratos),
         "total_alertas": len(todos_alertas),
+        "alertas_por_categoria": contadores_categoria,
         "entes_processados": list(entes_processar.keys()),
         "anos_coletados": [str(a) for a in anos] if anos else "2021-hoje",
-        "fontes_usadas": ["pncp", "siconfi"],
+        "fontes_usadas": ["pncp", "siconfi", "siape", "tce_ma"],
         "siconfi_disponivel": "erro" not in dados_siconfi,
-        "versao_coletor": "1.0.0",
+        "cruzamento_servidores": cruzamento_servidores_ok,
+        "versao_coletor": "1.1.0",
     }
     _salvar_json("meta.json", meta)
 
     print("\n" + "=" * 70)
     print("[TRANSPARENCIA10] Pipeline concluído com sucesso")
-    print(f"  Contratos : {len(todos_contratos)}")
-    print(f"  Alertas   : {len(todos_alertas)}")
-    print(f"  Entes     : {len(entes_processar)}")
-    print(f"  Saída     : {DIR_SAIDA}")
+    print(f"  Contratos           : {len(todos_contratos)}")
+    print(f"  Alertas (total)     : {len(todos_alertas)}")
+    print(f"    → Financeiros     : {contadores_categoria['financeiro']}")
+    print(f"    → Conflito        : {contadores_categoria['conflito_interesse']}")
+    print(f"    → Nepotismo       : {contadores_categoria['nepotismo']}")
+    print(f"  Cruzamento serv.    : {'OK' if cruzamento_servidores_ok else 'FALHOU (não bloqueante)'}")
+    print(f"  Entes               : {len(entes_processar)}")
+    print(f"  Saída               : {DIR_SAIDA}")
     print("=" * 70 + "\n")
 
     return 0
