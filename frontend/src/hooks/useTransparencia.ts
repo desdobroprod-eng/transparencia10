@@ -105,19 +105,23 @@ export function useTransparencia(periodo: string): UseTransparenciaResult {
         fetch(`${BASE}/meta.json`),
       ]);
 
-      if (!sRes.ok || !aRes.ok || !cRes.ok || !mRes.ok) {
-        throw new Error("Erro ao carregar arquivos de dados");
-      }
-
-      const s: StatsGeral = await sRes.json();
-      const a: { alertas: Alerta[] } = await aRes.json();
-      const c: { contratos: Contrato[] } = await cRes.json();
-      const m: Meta = await mRes.json();
+      const s: StatsGeral = sRes.ok
+        ? await sRes.json()
+        : { stats: {}, total_alertas: 0, ultima_atualizacao: null };
+      const a: { alertas: Alerta[] } = aRes.ok
+        ? await aRes.json()
+        : { alertas: [] };
+      const c: { contratos: Contrato[] } = cRes.ok
+        ? await cRes.json()
+        : { contratos: [] };
+      const m: Meta = mRes.ok
+        ? await mRes.json()
+        : { ultima_coleta: "", total_registros: 0, fonte: "" };
 
       setBrutos({
         stats: s,
-        alertas: a.alertas ?? [],
-        contratos: c.contratos ?? [],
+        alertas: Array.isArray(a) ? a : (a.alertas ?? []),
+        contratos: Array.isArray(c) ? c : (c.contratos ?? []),
         meta: m,
       });
       setUltimaAtualizacao(new Date());
