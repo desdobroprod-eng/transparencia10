@@ -1,11 +1,18 @@
 """
 Coletores de dados públicos — APIs Gov.br
 Fontes: Portal Transparência, SICONFI, PNCP, CNPJ Federal
+
+Inclui integração com coletores históricos (4 anos) e coleta completa PNCP.
 """
 import httpx
 import asyncio
 from datetime import datetime
 from typing import Optional
+
+# Importa coletores históricos e especializados
+from collectors.historical import coletar_historico_4_anos
+from collectors.pncp_full import coletar_tudo_cnpj
+from collectors.siconfi_full import coletar_rreo_todos_entes
 
 BASE_URLS = {
     "transparencia": "https://api.portaldatransparencia.gov.br/api-de-dados",
@@ -82,11 +89,20 @@ async def fetch_cnpj_info(cnpj: str) -> dict:
 
 async def fetch_empresa_sancionada(cnpj: str) -> bool:
     """Verifica se CNPJ consta no CEIS ou CNEP (lista negra federal)."""
+    import os
     cnpj_limpo = "".join(filter(str.isdigit, cnpj))
-    async with httpx.AsyncClient(timeout=15) as client:
+    # Header obrigatório para Portal da Transparência (CGU)
+    headers = {}
+    api_key = os.getenv("PORTAL_TRANSPARENCIA_API_KEY")
+    if api_key:
+        headers["chave-api"] = api_key
+    async with httpx.AsyncClient(timeout=15, headers=headers) as client:
         for lista in ["ceis", "cnep"]:
             url = BASE_URLS[lista]
             resp = await client.get(url, params={"cnpjSancionado": cnpj_limpo, "pagina": 1})
+            if resp.status_code == 401:
+                # Sem chave API — pulando verificação de sanção
+                return False
             if resp.status_code == 200:
                 data = resp.json()
                 if data.get("data") and len(data["data"]) > 0:
@@ -102,6 +118,75 @@ def filtrar_contratos_cultura(contratos: list[dict]) -> list[dict]:
         unidade = (c.get("nomeUnidadeOrgao") or "").lower()
         if any(kw in objeto or kw in unidade for kw in KEYWORDS_CULTURA):
             resultado.append(c)
+    return resultado
+
+
+async def coletar_completo_todos_entes() -> dict:
+    """
+    Coleta histórica completa (4 anos) + tempo real para todos os entes.
+    Combina:
+        - Histórico PNCP (2021 até hoje) via historical.py
+        - RREO/SICONFI (função Cultura) via siconfi_full.py
+        - Coleta tempo real (ano corrente) via fetch_contratos_pncp
+
+    Retorna dicionário unificado com dados históricos e em tempo real.
+    """
+    print("\n" + "=" * 70)
+    print("[COLETA COMPLETA] Iniciando coleta histórica 4 anos + tempo real")
+    print("=" * 70 + "\n")
+
+    resultado = {
+        "historico_pncp": {},
+        "rreo_cultura": {},
+        "tempo_real": {},
+        "meta": {
+            "iniciado_em": datetime.utcnow().isoformat(),
+            "entes": list(ENTES_ALVO.keys()),
+        },
+    }
+
+    # 1. Coleta histórica PNCP por ente (2021 até hoje)
+    print("\n[FASE 1] Coleta histórica PNCP (2021 → hoje)")
+    for chave, ente in ENTES_ALVO.items():
+        print(f"\n  → {ente['nome']} (IBGE={ente['codigo']})")
+        try:
+            historico = await coletar_historico_4_anos(
+                codigo_ibge=ente["codigo"],
+                tipo_ente=ente["tipo"],
+            )
+            total = sum(len(v) for v in historico.values())
+            resultado["historico_pncp"][chave] = {
+                "ente": ente["nome"],
+                "dados_por_ano": historico,
+                "total_contratos": total,
+            }
+        except Exception as e:
+            print(f"[ERRO] Falha no histórico PNCP para {chave}: {e}")
+            resultado["historico_pncp"][chave] = {"erro": str(e)}
+
+    # 2. Coleta RREO/SICONFI — gastos com cultura
+    print("\n[FASE 2] Coleta RREO/SICONFI — função Cultura (2021 → hoje)")
+    try:
+        rreo = await coletar_rreo_todos_entes()
+        resultado["rreo_cultura"] = rreo
+    except Exception as e:
+        print(f"[ERRO] Falha na coleta RREO: {e}")
+        resultado["rreo_cultura"] = {"erro": str(e)}
+
+    # 3. Coleta em tempo real (ano corrente — igual ao coletar_todos_entes)
+    print("\n[FASE 3] Coleta tempo real (ano corrente)")
+    tempo_real = await coletar_todos_entes()
+    resultado["tempo_real"] = tempo_real
+
+    resultado["meta"]["concluido_em"] = datetime.utcnow().isoformat()
+
+    total_historico = sum(
+        v.get("total_contratos", 0)
+        for v in resultado["historico_pncp"].values()
+        if isinstance(v, dict)
+    )
+    print(f"\n[COLETA COMPLETA] Concluída — {total_historico} contratos históricos coletados")
+
     return resultado
 
 
