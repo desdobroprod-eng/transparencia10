@@ -2,6 +2,7 @@ name: Deploy para GitHub Pages
 
 # Dispara no push de código/frontend OU após a coleta de dados ser concluída
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
