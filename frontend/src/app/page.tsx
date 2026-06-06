@@ -389,14 +389,18 @@ export default function Home() {
             <div className="bg-gray-50 rounded-lg px-4 py-3 mb-4 text-xs text-gray-500 flex flex-wrap gap-4">
               <span>
                 <strong className="text-gray-600">Última coleta:</strong>{" "}
-                {new Date(meta.ultima_coleta).toLocaleString("pt-BR")}
+                {meta.ultima_coleta
+                  ? new Date(meta.ultima_coleta).toLocaleString("pt-BR")
+                  : "—"}
               </span>
               <span>
                 <strong className="text-gray-600">Total de registros:</strong>{" "}
-                {meta.total_registros.toLocaleString("pt-BR")}
+                {meta.total_registros != null
+                  ? meta.total_registros.toLocaleString("pt-BR")
+                  : "—"}
               </span>
               <span>
-                <strong className="text-gray-600">Fonte:</strong> {meta.fonte}
+                <strong className="text-gray-600">Fonte:</strong> {meta.fonte || "—"}
               </span>
             </div>
           )}
