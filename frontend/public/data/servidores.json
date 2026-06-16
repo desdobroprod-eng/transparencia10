@@ -12,49 +12,9 @@
         "SANTOS",
         "NETA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000112/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000113/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000128/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "maranhao_estado",
@@ -68,63 +28,9 @@
         "ROCHA",
         "COELHO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000016/2026",
-      "cnpj": "57226251000106",
-      "fornecedor": "KADU MARTINS PRODUCOES ARTISTICAS LTDA",
-      "socio": "RUAN SILVA VIEIRA LIMA",
-      "servidor": "MARIA JOSE SILVA LIMA VIEIRA",
-      "sobrenomes_comuns": [
-        "LIMA",
-        "SILVA",
-        "VIEIRA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000016/2026",
-      "cnpj": "57226251000106",
-      "fornecedor": "KADU MARTINS PRODUCOES ARTISTICAS LTDA",
-      "socio": "RUAN SILVA VIEIRA LIMA",
-      "servidor": "JANEIDE LIMA DA SILVA VIEIRA",
-      "sobrenomes_comuns": [
-        "LIMA",
-        "SILVA",
-        "VIEIRA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000004/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000045/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "maranhao_estado",
@@ -139,21 +45,9 @@
         "SILVA",
         "NOBRE"
       ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000046/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 3
     },
     {
       "ente": "maranhao_estado",
@@ -163,11 +57,13 @@
       "socio": "JOAO PAULO GOMES DA SILVA",
       "servidor": "MARCOS PAULO GOMES DA SILVA",
       "sobrenomes_comuns": [
-        "GOMES",
         "PAULO",
+        "GOMES",
         "SILVA"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "maranhao_estado",
@@ -182,51 +78,9 @@
         "BRAGA",
         "CAMARGO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000114/2026",
-      "cnpj": "00659137000152",
-      "fornecedor": "INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA",
-      "socio": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "servidor": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "sobrenomes_comuns": [
-        "RAYANNE",
-        "SERRAO",
-        "SILVA",
-        "NOBRE"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000008/2026",
-      "cnpj": "00659137000152",
-      "fornecedor": "INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA",
-      "socio": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "servidor": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "sobrenomes_comuns": [
-        "RAYANNE",
-        "SERRAO",
-        "SILVA",
-        "NOBRE"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000048/2026",
-      "cnpj": "16456070000199",
-      "fornecedor": "UIII-DIVERSIDADE CULTURAL",
-      "socio": "ANTONIO MARIA SALES DA ROCHA",
-      "servidor": "CONCEICAO DE MARIA ROCHA SALES",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "ROCHA",
-        "SALES"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "maranhao_estado",
@@ -239,7 +93,9 @@
         "SANTOS",
         "SILVA"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -253,35 +109,9 @@
         "SANTOS",
         "SOUSA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000254/2024",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "ALINE MARIA JOSE DINIZ DOS SANTOS RIBEIRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000254/2024",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "CONCEICAO DE MARIA DOS SANTOS RIBEIRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -295,21 +125,9 @@
         "RIBEIRO",
         "SANTOS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000254/2024",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "IEDA MARIA RIBEIRO DOS SANTOS CASTRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -323,7 +141,9 @@
         "RIBEIRO",
         "SANTOS"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -336,7 +156,9 @@
         "TANABE",
         "VIEGAS"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -346,53 +168,13 @@
       "socio": "EDUARDO HENRIQUE DE ARAUJO SILVA",
       "servidor": "DANIEL HENRIQUE ARAUJO DA SILVA",
       "sobrenomes_comuns": [
-        "ARAUJO",
         "HENRIQUE",
+        "ARAUJO",
         "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000166/2024",
-      "cnpj": "48351834000178",
-      "fornecedor": "EDUARDO HENRIQUE DE A SILVA LTDA",
-      "socio": "EDUARDO HENRIQUE DE ARAUJO SILVA",
-      "servidor": "PEDRO HENRIQUE ARAUJO ASSUNCAO SILVA",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "HENRIQUE",
-        "SILVA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000033/2025",
-      "cnpj": "05451196000154",
-      "fornecedor": "ASSOCIACAO ALTERNATIVA E RECREATIVA SOCIOCULTURAL B G ARTES MUSICA E DANCAS",
-      "socio": "HENRIQUE DE JESUS DIAS DOS SANTOS",
-      "servidor": "JOSE ADOLFO DE JESUS DIAS DOS SANTOS JUNIOR",
-      "sobrenomes_comuns": [
-        "DIAS",
-        "JESUS",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000033/2025",
-      "cnpj": "05451196000154",
-      "fornecedor": "ASSOCIACAO ALTERNATIVA E RECREATIVA SOCIOCULTURAL B G ARTES MUSICA E DANCAS",
-      "socio": "HENRIQUE DE JESUS DIAS DOS SANTOS",
-      "servidor": "TEREZA DE JESUS DOS SANTOS DIAS",
-      "sobrenomes_comuns": [
-        "DIAS",
-        "JESUS",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -405,35 +187,9 @@
         "SANTOS",
         "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000057/2025",
-      "cnpj": "00799636000145",
-      "fornecedor": "TERRA SAMBA PRODUCOES ARTISTICAS LTDA",
-      "socio": "ANTONIO CEZAR DOS SANTOS SILVA",
-      "servidor": "MAURICIO CEZAR SILVA SANTOS",
-      "sobrenomes_comuns": [
-        "CEZAR",
-        "SANTOS",
-        "SILVA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000057/2025",
-      "cnpj": "00799636000145",
-      "fornecedor": "TERRA SAMBA PRODUCOES ARTISTICAS LTDA",
-      "socio": "ANTONIO CEZAR DOS SANTOS SILVA",
-      "servidor": "PAULO CEZAR SILVA SANTOS",
-      "sobrenomes_comuns": [
-        "CEZAR",
-        "SANTOS",
-        "SILVA"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -447,7 +203,9 @@
         "PEREIRA",
         "SANTOS"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -461,7 +219,9 @@
         "PEREIRA",
         "SANTOS"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -475,7 +235,9 @@
         "SANTOS",
         "NETA"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -488,7 +250,9 @@
         "SOCORRO",
         "ARAUJO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -501,7 +265,9 @@
         "RAIMUNDA",
         "BOGEA"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -515,21 +281,9 @@
         "RIBEIRO",
         "NETO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000317/2025",
-      "cnpj": "05099622000132",
-      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
-      "socio": "ANTONIO DANTAS RIBEIRO NETO",
-      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
-      "sobrenomes_comuns": [
-        "DANTAS",
-        "RIBEIRO",
-        "NETO"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -543,7 +297,9 @@
         "ROCHA",
         "COELHO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -556,7 +312,9 @@
         "ANTONIO",
         "RIBEIRO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -567,24 +325,12 @@
       "servidor": "JHONATA DE JESUS SIMOES SANTOS",
       "sobrenomes_comuns": [
         "JESUS",
-        "SANTOS",
-        "SIMOES"
+        "SIMOES",
+        "SANTOS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000255/2025",
-      "cnpj": "32756933000108",
-      "fornecedor": "AGENCIA BRASILEIRA DE DESENVOLVIMENTO SUSTENTAVEL DOS POVOS E COMUNIDADES TRADICIONAIS",
-      "socio": "JHULIANNE DE JESUS SIMOES SANTOS",
-      "servidor": "MARIA DE JESUS SANTOS SIMOES",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "SANTOS",
-        "SIMOES"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -597,7 +343,9 @@
         "LIMA",
         "COELHO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -610,49 +358,9 @@
         "COSTA",
         "DURANS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000335/2025",
-      "cnpj": "19738556000108",
-      "fornecedor": "INTERART PRODUCAO CRIATIVA E SERVICOS LTDA",
-      "socio": "EMANUEL DE JESUS PEREIRA DE SOUSA",
-      "servidor": "GIOVANE DE JESUS SOUSA RODRIGUES PEREIRA",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "PEREIRA",
-        "SOUSA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000335/2025",
-      "cnpj": "19738556000108",
-      "fornecedor": "INTERART PRODUCAO CRIATIVA E SERVICOS LTDA",
-      "socio": "EMANUEL DE JESUS PEREIRA DE SOUSA",
-      "servidor": "JOSELMA DE JESUS SOUSA PEREIRA",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "PEREIRA",
-        "SOUSA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000335/2025",
-      "cnpj": "19738556000108",
-      "fornecedor": "INTERART PRODUCAO CRIATIVA E SERVICOS LTDA",
-      "socio": "EMANUEL DE JESUS PEREIRA DE SOUSA",
-      "servidor": "MARIA DE JESUS COELHO DE SOUSA PEREIRA",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "PEREIRA",
-        "SOUSA"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -666,7 +374,9 @@
         "PEREIRA",
         "SOUSA"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -680,7 +390,9 @@
         "PEREIRA",
         "SOUSA"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -693,49 +405,9 @@
         "ANDRADE",
         "RODRIGUES"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000297/2025",
-      "cnpj": "04428126000112",
-      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO",
-      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "sobrenomes_comuns": [
-        "RODRIGUES",
-        "SANTOS",
-        "NETA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000301/2025",
-      "cnpj": "12832423000157",
-      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL BUMBA BOI MOCIDADE ALEGRE DE ITAPECURU-MIRIM",
-      "socio": "ROBERTO SANTOS RODRIGUES DA COSTA",
-      "servidor": "MARCO ANTONIO SANTOS COSTA RODRIGUES",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "RODRIGUES",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000301/2025",
-      "cnpj": "12832423000157",
-      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL BUMBA BOI MOCIDADE ALEGRE DE ITAPECURU-MIRIM",
-      "socio": "ROBERTO SANTOS RODRIGUES DA COSTA",
-      "servidor": "MARIA DO SOCORRO RODRIGUES DOS SANTOS DA COSTA",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "RODRIGUES",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -749,34 +421,9 @@
         "RODRIGUES",
         "COSTA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000301/2025",
-      "cnpj": "12832423000157",
-      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL BUMBA BOI MOCIDADE ALEGRE DE ITAPECURU-MIRIM",
-      "socio": "ROBERTO SANTOS RODRIGUES DA COSTA",
-      "servidor": "WALMAR RODRIGUES SANTOS COSTA",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "RODRIGUES",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000310/2025",
-      "cnpj": "02496566000181",
-      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
-      "socio": "JOSE ANTONIO RIBEIRO",
-      "servidor": "JOSE ANTONIO RIBEIRO",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -789,7 +436,9 @@
         "COSTA",
         "MACEDO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -803,20 +452,9 @@
         "BIBIANO",
         "NAIVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000309/2025",
-      "cnpj": "05162047000175",
-      "fornecedor": "CLUBE CULTURAL DE BUMBA-MEU-BOI DE ZABUMBA E TAMBOR DE CRIOULA DO MARANHAO",
-      "socio": "BASILIO COSTA DURANS",
-      "servidor": "BASILIO COSTA DURANS",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "DURANS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -829,35 +467,9 @@
         "MIGUEL",
         "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000341/2025",
-      "cnpj": "06347959000184",
-      "fornecedor": "LABORATORIO DE EXPRESSOES ARTISTICAS",
-      "socio": "ROSANGELA DE JESUS SANTOS REIS",
-      "servidor": "MAC DOWELL DE JESUS SANTOS REIS JUNIOR",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "REIS",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000341/2025",
-      "cnpj": "06347959000184",
-      "fornecedor": "LABORATORIO DE EXPRESSOES ARTISTICAS",
-      "socio": "ROSANGELA DE JESUS SANTOS REIS",
-      "servidor": "FATIMA DE JESUS REIS SANTOS",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "REIS",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -871,7 +483,9 @@
         "SANTOS",
         "REIS"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -882,10 +496,12 @@
       "servidor": "ANDYARA DE JESUS SANTOS REIS",
       "sobrenomes_comuns": [
         "JESUS",
-        "REIS",
-        "SANTOS"
+        "SANTOS",
+        "REIS"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -900,7 +516,9 @@
         "BRAGA",
         "CAMARGO"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -913,35 +531,9 @@
         "MARIA",
         "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000508/2025",
-      "cnpj": "11302593000167",
-      "fornecedor": "PALMARES CONSTRUCOES LTDA",
-      "socio": "WALBERT COSTA PINHEIRO FILHO",
-      "servidor": "JOAO PINHEIRO COSTA FILHO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "FILHO",
-        "PINHEIRO"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000508/2025",
-      "cnpj": "11302593000167",
-      "fornecedor": "PALMARES CONSTRUCOES LTDA",
-      "socio": "WALBERT COSTA PINHEIRO FILHO",
-      "servidor": "JOSE ANTONIO PINHEIRO COSTA FILHO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "FILHO",
-        "PINHEIRO"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -951,25 +543,13 @@
       "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
       "servidor": "CARLOS AUGUSTO SILVA ARAUJO",
       "sobrenomes_comuns": [
-        "ARAUJO",
         "AUGUSTO",
-        "SILVA"
+        "SILVA",
+        "ARAUJO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000439/2025",
-      "cnpj": "23674205000158",
-      "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
-      "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
-      "servidor": "HENRIQUE AUGUSTO ARAUJO DA SILVA",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "AUGUSTO",
-        "SILVA"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -979,25 +559,13 @@
       "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
       "servidor": "HENRIQUE AUGUSTO SILVA DE ARAUJO",
       "sobrenomes_comuns": [
-        "ARAUJO",
         "AUGUSTO",
-        "SILVA"
+        "SILVA",
+        "ARAUJO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000520/2025",
-      "cnpj": "45288591000182",
-      "fornecedor": "VAE TER PAGODE PROMOCOES E EVENTOS LTDA",
-      "socio": "MARCOS VINICIUS SOARES DE OLIVEIRA",
-      "servidor": "MARCOS VINICIUS OLIVEIRA RABELO SOARES",
-      "sobrenomes_comuns": [
-        "OLIVEIRA",
-        "SOARES",
-        "VINICIUS"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -1011,21 +579,9 @@
         "SANTOS",
         "ALVES"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000669/2025",
-      "cnpj": "32740455000130",
-      "fornecedor": "ASSOCIACAO DA ORQUESTRA JOVEM DO MARANHAO JOAO DO VALE",
-      "socio": "MARCO ANTONIO SANTOS RIBEIRO",
-      "servidor": "MARCIO ANTONIO RIBEIRO DOS SANTOS",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1039,21 +595,9 @@
         "SANTOS",
         "RIBEIRO"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000669/2025",
-      "cnpj": "32740455000130",
-      "fornecedor": "ASSOCIACAO DA ORQUESTRA JOVEM DO MARANHAO JOAO DO VALE",
-      "socio": "MARCO ANTONIO SANTOS RIBEIRO",
-      "servidor": "MARCOS ANTONIO RIBEIRO SANTOS",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1063,11 +607,13 @@
       "socio": "JOAO PAULO GOMES DA SILVA",
       "servidor": "MARCOS PAULO GOMES DA SILVA",
       "sobrenomes_comuns": [
-        "GOMES",
         "PAULO",
+        "GOMES",
         "SILVA"
       ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1077,122 +623,13 @@
       "socio": "JOSE RAIMUNDO ARAUJO JUNIOR",
       "servidor": "JOSE RAIMUNDO DE ARAUJO JUNIOR",
       "sobrenomes_comuns": [
+        "RAIMUNDO",
         "ARAUJO",
-        "JUNIOR",
-        "RAIMUNDO"
+        "JUNIOR"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000660/2025",
-      "cnpj": "11302593000167",
-      "fornecedor": "PALMARES CONSTRUCOES LTDA",
-      "socio": "WALBERT COSTA PINHEIRO FILHO",
-      "servidor": "JOAO PINHEIRO COSTA FILHO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "FILHO",
-        "PINHEIRO"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000660/2025",
-      "cnpj": "11302593000167",
-      "fornecedor": "PALMARES CONSTRUCOES LTDA",
-      "socio": "WALBERT COSTA PINHEIRO FILHO",
-      "servidor": "JOSE ANTONIO PINHEIRO COSTA FILHO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "FILHO",
-        "PINHEIRO"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000716/2025",
-      "cnpj": "20087290000160",
-      "fornecedor": "TIME PROJETOS E EVENTOS LTDA",
-      "socio": "WANDERSON DOS SANTOS SILVA",
-      "servidor": "WANDERSON DOS SANTOS SILVA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000963/2025",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "ALINE MARIA JOSE DINIZ DOS SANTOS RIBEIRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000963/2025",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "CONCEICAO DE MARIA DOS SANTOS RIBEIRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000963/2025",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "CONCEICAO DE MARIA RIBEIRO DOS SANTOS",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000963/2025",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "IEDA MARIA RIBEIRO DOS SANTOS CASTRO",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000963/2025",
-      "cnpj": "26773378000111",
-      "fornecedor": "COOPERATIVA DE AGRICULTORES FAMILIARES DO CINTURAO VERDE - COOAFACIV",
-      "socio": "ILZA MARIA RIBEIRO SANTOS",
-      "servidor": "KATIA MARIA RIBEIRO DOS SANTOS",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "RIBEIRO",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1205,49 +642,9 @@
         "PEREIRA",
         "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-001010/2025",
-      "cnpj": "23674205000158",
-      "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
-      "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
-      "servidor": "CARLOS AUGUSTO SILVA ARAUJO",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "AUGUSTO",
-        "SILVA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-001010/2025",
-      "cnpj": "23674205000158",
-      "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
-      "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
-      "servidor": "HENRIQUE AUGUSTO ARAUJO DA SILVA",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "AUGUSTO",
-        "SILVA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-001010/2025",
-      "cnpj": "23674205000158",
-      "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
-      "socio": "FREDERICO AUGUSTO DA SILVA ARAUJO",
-      "servidor": "HENRIQUE AUGUSTO SILVA DE ARAUJO",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "AUGUSTO",
-        "SILVA"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1260,35 +657,9 @@
         "GOMES",
         "SANTOS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "LOURIVAN SOUZA SILVA DOS SANTOS",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "FIRMINA SILVA SOUZA SANTOS",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "sao_luis",
@@ -1299,66 +670,12 @@
       "servidor": "ANTONIA SANTOS SOUZA SILVA",
       "sobrenomes_comuns": [
         "SANTOS",
-        "SILVA",
-        "SOUZA"
+        "SOUZA",
+        "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "ISRAEL SILVA SANTOS DE SOUZA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "ZULEIDE DE SOUZA SILVA SANTOS",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "GEANNE DE SOUZA SILVA SANTOS",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "CARLA MARIA SOUZA E SILVA SANTOS",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA",
-        "SOUZA"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1368,37 +685,13 @@
       "socio": "JOSE DE RIBAMAR COELHO SANTOS",
       "servidor": "MARIA RIBAMAR COELHO SANTOS",
       "sobrenomes_comuns": [
-        "COELHO",
         "RIBAMAR",
+        "COELHO",
         "SANTOS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000486/2026",
-      "cnpj": "40517164000105",
-      "fornecedor": "CBSD SERVICOS DE EVENTOS E LOCACOES LTDA",
-      "socio": "RAFAEL GOMES DOS SANTOS",
-      "servidor": "RAFAEL GOMES DOS SANTOS",
-      "sobrenomes_comuns": [
-        "GOMES",
-        "SANTOS"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000512/2026",
-      "cnpj": "01509178000125",
-      "fornecedor": "BANDA MAGNIFICOS PRODUCOES E EVENTOS ARTISTICOS LTDA",
-      "socio": "MARIA DO SOCORRO ARAUJO",
-      "servidor": "MARIA DO SOCORRO ARAUJO",
-      "sobrenomes_comuns": [
-        "SOCORRO",
-        "ARAUJO"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -1411,7 +704,9 @@
         "RODRIGUES",
         "SILVA"
       ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "raposa",
@@ -1424,20 +719,9 @@
         "LIRA",
         "SANTOS"
       ],
-      "score": 70
-    },
-    {
-      "ente": "raposa",
-      "contrato": "01612325000198-2-000039/2024",
-      "cnpj": "05294460000193",
-      "fornecedor": "COMERCIAL SAMPECAS LTDA",
-      "socio": "EUZENEAS LIRA DOS SANTOS",
-      "servidor": "EUZENEAS LIRA DOS SANTOS",
-      "sobrenomes_comuns": [
-        "LIRA",
-        "SANTOS"
-      ],
-      "score": 70
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
     },
     {
       "ente": "raposa",
@@ -1448,52 +732,12 @@
       "servidor": "GUSTAVO ANDRE DA SILVA LOPES",
       "sobrenomes_comuns": [
         "ANDRE",
-        "LOPES",
-        "SILVA"
+        "SILVA",
+        "LOPES"
       ],
-      "score": 70
-    },
-    {
-      "ente": "raposa",
-      "contrato": "01612325000198-2-000166/2025",
-      "cnpj": "40044491000197",
-      "fornecedor": "JESSIK PRODUCOES E EVENTOS LTDA",
-      "socio": "JESSICA SAMMIA RIBEIRO DE SOUSA PEREIRA",
-      "servidor": "ANA REGINA RIBEIRO PEREIRA DE SOUSA",
-      "sobrenomes_comuns": [
-        "PEREIRA",
-        "RIBEIRO",
-        "SOUSA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "raposa",
-      "contrato": "01612325000198-2-000166/2025",
-      "cnpj": "40044491000197",
-      "fornecedor": "JESSIK PRODUCOES E EVENTOS LTDA",
-      "socio": "JESSICA SAMMIA RIBEIRO DE SOUSA PEREIRA",
-      "servidor": "MARLENE PEREIRA RIBEIRO DE SOUSA",
-      "sobrenomes_comuns": [
-        "PEREIRA",
-        "RIBEIRO",
-        "SOUSA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "raposa",
-      "contrato": "01612325000198-2-000166/2025",
-      "cnpj": "40044491000197",
-      "fornecedor": "JESSIK PRODUCOES E EVENTOS LTDA",
-      "socio": "JESSICA SAMMIA RIBEIRO DE SOUSA PEREIRA",
-      "servidor": "RONIELLE PEREIRA RIBEIRO DE SOUSA",
-      "sobrenomes_comuns": [
-        "PEREIRA",
-        "RIBEIRO",
-        "SOUSA"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "paco_lumiar",
@@ -1504,80 +748,12 @@
       "servidor": "CARLOS ANDRE VIEIRA DA SILVA",
       "sobrenomes_comuns": [
         "ANDRE",
-        "SILVA",
-        "VIEIRA"
+        "VIEIRA",
+        "SILVA"
       ],
-      "score": 70
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000008/2025",
-      "cnpj": "13278683000195",
-      "fornecedor": "MARKA - SERVICO E LOCACAO LTDA",
-      "socio": "MARCO ANDRE VIEIRA DA SILVA",
-      "servidor": "CARLOS ANDRE VIEIRA DA SILVA",
-      "sobrenomes_comuns": [
-        "ANDRE",
-        "SILVA",
-        "VIEIRA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000051/2025",
-      "cnpj": "17422433000138",
-      "fornecedor": "ADTR SERVICOS DE INFORMATICA LTDA",
-      "socio": "THAIANE MARIA ARAUJO BARROSO",
-      "servidor": "HOSANA MARIA BARROSO DE ARAUJO",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "BARROSO",
-        "MARIA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000051/2025",
-      "cnpj": "17422433000138",
-      "fornecedor": "ADTR SERVICOS DE INFORMATICA LTDA",
-      "socio": "THAIANE MARIA ARAUJO BARROSO",
-      "servidor": "JULIA MARIA ALVES BARROSO ARAUJO",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "BARROSO",
-        "MARIA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000051/2025",
-      "cnpj": "17422433000138",
-      "fornecedor": "ADTR SERVICOS DE INFORMATICA LTDA",
-      "socio": "THAIANE MARIA ARAUJO BARROSO",
-      "servidor": "TERESA MARIA SANTANA ARAUJO BARROSO",
-      "sobrenomes_comuns": [
-        "ARAUJO",
-        "BARROSO",
-        "MARIA"
-      ],
-      "score": 70
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000277/2025",
-      "cnpj": "13278683000195",
-      "fornecedor": "MARKA - SERVICO E LOCACAO LTDA",
-      "socio": "MARCO ANDRE VIEIRA DA SILVA",
-      "servidor": "CARLOS ANDRE VIEIRA DA SILVA",
-      "sobrenomes_comuns": [
-        "ANDRE",
-        "SILVA",
-        "VIEIRA"
-      ],
-      "score": 70
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 3
     }
   ]
 }

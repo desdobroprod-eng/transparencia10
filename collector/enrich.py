@@ -111,11 +111,19 @@ async def enriquecer_cnpj(client: httpx.AsyncClient, cnpj: str) -> dict:
                 for s in (d.get("qsa") or [])
                 if (s.get("nome_socio") or s.get("nome"))
             ]
+            try:
+                capital = float(d.get("capital_social") or 0)
+            except (TypeError, ValueError):
+                capital = 0.0
             info = {
                 "razao_social": d.get("razao_social") or "",
                 "data_inicio_atividade": d.get("data_inicio_atividade") or "",
                 "situacao": d.get("descricao_situacao_cadastral")
                 or d.get("situacao_cadastral") or "",
+                "capital_social": capital,
+                "porte": d.get("porte") or d.get("descricao_porte") or "",
+                "mei": bool(d.get("opcao_pelo_mei")),
+                "cnae": d.get("cnae_fiscal_descricao") or "",
                 "socios": socios,
             }
             break

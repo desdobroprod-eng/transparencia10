@@ -46,6 +46,9 @@ from domain.rules.detector import (
     verificar_contrato_sem_licitacao,
     verificar_fornecedor_monopolio,
     verificar_contrato_vencido_renovado,
+    verificar_capital_incompativel,
+    verificar_valor_inconsistente,
+    verificar_contrato_retificado,
     verificar_conflito_interesse,
     verificar_testa_ferro,
     extrair_sobrenomes,
@@ -210,19 +213,23 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
         id_c = contrato.get("id") or contrato.get("numeroControlePNCP") or ""
         valor = float(contrato.get("valorInicial") or 0)
 
-        # Regra: empresa nova (< 180 dias) recebendo contrato relevante.
-        # Usa o cadastro enriquecido (BrasilAPI) anexado em cnpj_info.
+        # Regras baseadas no cadastro enriquecido (BrasilAPI) em cnpj_info.
         cnpj_info = contrato.get("cnpj_info") or {}
-        r_nova = verificar_empresa_nova(cnpj_info, valor)
-        if r_nova:
-            alertas.append({
-                "regra": r_nova.regra,
-                "score": r_nova.score,
-                "motivo": r_nova.motivo,
-                "dados": r_nova.dados,
-                "id_contrato": id_c,
-                "categoria": "financeiro",
-            })
+        for r in (
+            verificar_empresa_nova(cnpj_info, valor),
+            verificar_capital_incompativel(contrato, cnpj_info),
+            verificar_valor_inconsistente(contrato, cnpj_info),
+            verificar_contrato_retificado(contrato),
+        ):
+            if r:
+                alertas.append({
+                    "regra": r.regra,
+                    "score": r.score,
+                    "motivo": r.motivo,
+                    "dados": r.dados,
+                    "id_contrato": id_c,
+                    "categoria": "financeiro",
+                })
 
         # Regra: contrato sem licitação acima do teto legal
         r_sem_lic = verificar_contrato_sem_licitacao(contrato)
@@ -510,6 +517,7 @@ async def executar_coleta(
 
     cruzamento_servidores_ok = False
     matches_servidores: list[dict] = []
+    vistos_cruz: dict = {}  # (ente, sócio, servidor) → registro (dedup)
 
     try:
         async with httpx.AsyncClient(verify=False) as client:
@@ -549,6 +557,28 @@ async def executar_coleta(
                         )
                         for r in r_testa:
                             cid = contrato.get("numeroControlePNCP") or contrato.get("id") or ""
+                            soc = r.dados.get("nome_socio", nome_socio)
+                            srv = r.dados.get("nome_servidor", "")
+                            # Dedup: 1 relação (ente, sócio, servidor) conta uma vez,
+                            # não por contrato. Repetições só acumulam nº de contratos.
+                            chave_cruz = (chave, soc.upper(), srv.upper())
+                            if chave_cruz in vistos_cruz:
+                                vistos_cruz[chave_cruz]["num_contratos"] += 1
+                                continue
+                            registro = {
+                                "ente": chave,
+                                "contrato": cid,
+                                "cnpj": contrato.get("cnpjFornecedor", ""),
+                                "fornecedor": contrato.get("nomeRazaoSocialFornecedor", ""),
+                                "socio": soc,
+                                "servidor": srv,
+                                "sobrenomes_comuns": r.dados.get("sobrenomes_comuns", []),
+                                "match": r.dados.get("match", ""),
+                                "score": r.score,
+                                "num_contratos": 1,
+                            }
+                            vistos_cruz[chave_cruz] = registro
+                            matches_servidores.append(registro)
                             todos_alertas.append({
                                 "regra": r.regra,
                                 "score": r.score,
@@ -561,20 +591,9 @@ async def executar_coleta(
                                 "orgao_servidor": r.dados.get("orgao_servidor", ""),
                             })
                             achados_ente += 1
-                            matches_servidores.append({
-                                "ente": chave,
-                                "contrato": cid,
-                                "cnpj": contrato.get("cnpjFornecedor", ""),
-                                "fornecedor": contrato.get("nomeRazaoSocialFornecedor", ""),
-                                "socio": r.dados.get("nome_socio", nome_socio),
-                                "servidor": r.dados.get("nome_servidor", ""),
-                                "sobrenomes_comuns": r.dados.get("sobrenomes_comuns", []),
-                                "score": r.score,
-                            })
                             print(
                                 f"    [ALERTA] TESTA_FERRO/{ente['nome']} — "
-                                f"sócio '{r.dados.get('nome_socio','')}' ≈ servidor "
-                                f"'{r.dados.get('nome_servidor','')}' | score={r.score}"
+                                f"sócio '{soc}' ≈ servidor '{srv}' | score={r.score}"
                             )
 
                 print(f"  → {ente['nome']}: {achados_ente} cruzamentos sócio×servidor")
@@ -679,10 +698,16 @@ async def executar_coleta(
     for c in todos_contratos:
         cid = c.get("numeroControlePNCP") or c.get("id") or ""
         ano = c.get("ano_coleta")
+        info = c.get("cnpj_info") or {}
+        try:
+            retif = int(c.get("numeroRetificacao") or 0)
+        except (TypeError, ValueError):
+            retif = 0
         contratos_frontend.append({
             "id": cid,
             "ente": c.get("chave_ente") or "",
             "fornecedor": c.get("nomeRazaoSocialFornecedor") or "",
+            "cnpj": c.get("cnpjFornecedor") or "",
             "objeto": c.get("objetoContrato") or "",
             "valor": float(c.get("valorInicial") or 0),
             "modalidade": c.get("modalidadeNome") or "",
@@ -690,6 +715,14 @@ async def executar_coleta(
             "data_publicacao": c.get("dataPublicacaoPncp") or c.get("dataAssinatura") or "",
             "ano": int(ano) if ano and str(ano).isdigit() else None,
             "unidade": c.get("unidadeGestora") or "",
+            # Enriquecimento do fornecedor (BrasilAPI)
+            "razao_social": info.get("razao_social") or "",
+            "capital_social": float(info.get("capital_social") or 0),
+            "porte": info.get("porte") or "",
+            "mei": bool(info.get("mei")),
+            "abertura": info.get("data_inicio_atividade") or "",
+            "situacao": info.get("situacao") or "",
+            "retificacoes": retif,
         })
     # Mais recentes primeiro
     contratos_frontend.sort(key=lambda x: x.get("data_publicacao") or "", reverse=True)

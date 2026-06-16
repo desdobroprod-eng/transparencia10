@@ -34,6 +34,7 @@ export interface Contrato {
   id: string;
   ente: string;
   fornecedor: string;
+  cnpj: string;
   objeto: string;
   valor: number;
   modalidade: string;
@@ -41,7 +42,29 @@ export interface Contrato {
   data_publicacao: string;
   ano: number | null;
   unidade: string;
+  // Enriquecimento do fornecedor (BrasilAPI)
+  razao_social: string;
+  capital_social: number;
+  porte: string;
+  mei: boolean;
+  abertura: string; // data de abertura do CNPJ (ISO)
+  situacao: string;
+  retificacoes: number;
   alertas: Alerta[]; // ligado no carregamento
+}
+
+export interface EmpresaRanking {
+  cnpj: string;
+  nome: string;
+  razao_social: string;
+  total_valor: number;
+  num_contratos: number;
+  capital_social: number;
+  porte: string;
+  mei: boolean;
+  abertura: string;
+  entes: string[];
+  num_alertas: number;
 }
 
 export interface Cruzamento {
@@ -75,6 +98,7 @@ export interface Dados {
   alertas: Alerta[];
   contratos: Contrato[];
   cruzamentos: Cruzamento[];
+  empresas: EmpresaRanking[]; // fornecedores agregados, ordenados por valor desc
   meta: Meta | null;
   anosDisponiveis: number[];
   ultimaAtualizacao: Date | null;
@@ -87,7 +111,7 @@ function norm(s: string): string {
 export function useDados(): Dados {
   const [d, setD] = useState<Dados>({
     loading: true, erro: null, stats: {}, alertas: [], contratos: [],
-    cruzamentos: [], meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
+    cruzamentos: [], empresas: [], meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
   });
 
   useEffect(() => {
@@ -127,10 +151,29 @@ export function useDados(): Dados {
         for (const ct of contratos) if (ct.ano) anos.add(ct.ano);
         const anosDisponiveis = [...anos].sort((x, y) => y - x);
 
+        // Ranking de empresas: agrega contratos por CNPJ
+        const porCnpj: Record<string, EmpresaRanking> = {};
+        for (const ct of contratos) {
+          const k = ct.cnpj || ct.fornecedor;
+          if (!k) continue;
+          const e = (porCnpj[k] ||= {
+            cnpj: ct.cnpj, nome: ct.fornecedor, razao_social: ct.razao_social,
+            total_valor: 0, num_contratos: 0, capital_social: ct.capital_social,
+            porte: ct.porte, mei: ct.mei, abertura: ct.abertura, entes: [], num_alertas: 0,
+          });
+          e.total_valor += ct.valor || 0;
+          e.num_contratos += 1;
+          e.num_alertas += ct.alertas.length;
+          if (ct.ente && !e.entes.includes(ct.ente)) e.entes.push(ct.ente);
+          if (!e.capital_social && ct.capital_social) e.capital_social = ct.capital_social;
+          if (!e.razao_social && ct.razao_social) e.razao_social = ct.razao_social;
+        }
+        const empresas = Object.values(porCnpj).sort((x, y) => y.total_valor - x.total_valor);
+
         setD({
           loading: false, erro: null,
           stats: s?.stats ?? {},
-          alertas, contratos, cruzamentos,
+          alertas, contratos, cruzamentos, empresas,
           meta: m,
           anosDisponiveis,
           ultimaAtualizacao: m?.ultima_coleta ? new Date(m.ultima_coleta) : new Date(),

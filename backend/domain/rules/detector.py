@@ -40,6 +40,92 @@ def verificar_empresa_nova(cnpj_info: dict, valor_contrato: float) -> Optional[R
     return None
 
 
+def verificar_capital_incompativel(
+    contrato: dict,
+    cnpj_info: dict,
+    fator: float = 50.0,
+) -> Optional[ResultadoRegra]:
+    """
+    Capital social muito menor que o valor contratado. Empresa de capital
+    irrisório fechando contrato vultoso é indício clássico de inidoneidade
+    econômico-financeira / empresa de fachada.
+
+    Dispara quando valor do contrato > fator × capital social.
+    """
+    capital = float(cnpj_info.get("capital_social") or 0)
+    valor = float(contrato.get("valorInicial") or contrato.get("valor") or 0)
+    if capital <= 0 or valor <= 0:
+        return None
+
+    razao = valor / capital
+    if razao < fator:
+        return None
+
+    score = min(95, int(60 + min(razao / fator, 6) * 6))
+    return ResultadoRegra(
+        regra="CAPITAL_INCOMPATIVEL",
+        score=score,
+        motivo=(
+            f"Capital social de R${capital:,.2f} é incompatível com o contrato "
+            f"de R${valor:,.2f} ({razao:,.0f}x o capital)"
+        ),
+        dados={
+            "capital_social": capital,
+            "valor": valor,
+            "razao": round(razao, 1),
+            "razao_social": cnpj_info.get("razao_social", ""),
+        },
+    )
+
+
+def verificar_valor_inconsistente(
+    contrato: dict,
+    cnpj_info: dict,
+    teto_mei: float = 81_000.0,
+) -> Optional[ResultadoRegra]:
+    """
+    Valor do contrato legalmente impossível para o porte da empresa.
+    MEI tem teto de faturamento anual (~R$81 mil) — contrato acima disso para
+    um MEI é inconsistência grave (erro de digitação na fonte ou irregularidade).
+    """
+    valor = float(contrato.get("valorInicial") or contrato.get("valor") or 0)
+    if valor <= 0:
+        return None
+
+    if cnpj_info.get("mei") and valor > teto_mei:
+        return ResultadoRegra(
+            regra="VALOR_INCONSISTENTE",
+            score=90,
+            motivo=(
+                f"Fornecedor é MEI (teto legal de R${teto_mei:,.0f}/ano), mas o "
+                f"contrato é de R${valor:,.2f} — valor juridicamente incompatível "
+                f"(verificar possível erro de digitação na fonte ou irregularidade)"
+            ),
+            dados={"valor": valor, "porte": "MEI", "teto_mei": teto_mei},
+        )
+    return None
+
+
+def verificar_contrato_retificado(contrato: dict) -> Optional[ResultadoRegra]:
+    """
+    Contrato com retificações/alterações registradas no PNCP.
+    Não é irregularidade por si — é sinalização de alteração contratual para
+    acompanhamento (aumento de valor, prazo, etc.).
+    """
+    try:
+        retif = int(contrato.get("numeroRetificacao") or 0)
+    except (TypeError, ValueError):
+        retif = 0
+    if retif <= 0:
+        return None
+    return ResultadoRegra(
+        regra="CONTRATO_RETIFICADO",
+        score=55,
+        motivo=f"Contrato sofreu {retif} retificação(ões)/alteração(ões) após a publicação",
+        dados={"numero_retificacao": retif},
+    )
+
+
 def verificar_fracionamento(contratos_fornecedor: list[dict], teto_dispensa: float = 17_600) -> Optional[ResultadoRegra]:
     """
     Soma de dispensas ao mesmo CNPJ supera teto legal de dispensa de licitação.
@@ -322,33 +408,73 @@ def verificar_contrato_vencido_renovado(
 # Helpers de comparação nominal
 # ---------------------------------------------------------------------------
 
+import unicodedata
+
 _PREPOSICOES = {"de", "da", "do", "dos", "das", "e", "van", "von"}
+
+
+def _sem_acento(txt: str) -> str:
+    t = unicodedata.normalize("NFKD", txt or "")
+    return "".join(c for c in t if not unicodedata.combining(c))
 
 
 def extrair_sobrenomes(nome: str) -> list[str]:
     """
     Remove preposições e o primeiro token (primeiro nome), retorna sobrenomes
-    em maiúsculo.
+    em maiúsculo, sem acento, NA ORDEM original.
 
     Exemplo: "João Silva Marques" → ["SILVA", "MARQUES"]
     """
-    tokens = nome.upper().split()
-    # Remove o primeiro token (primeiro nome) e preposições (case-insensitive)
+    tokens = _sem_acento(nome).upper().split()
     sobrenomes = [
         t for i, t in enumerate(tokens)
-        if i > 0 and t.lower() not in _PREPOSICOES
+        if i > 0 and t.lower() not in _PREPOSICOES and len(t) > 1
     ]
     return sobrenomes
 
 
+def mesma_familia(nome_a: str, nome_b: str, min_sobrenomes: int = 3) -> list[str]:
+    """
+    Retorna a lista de sobrenomes se os dois nomes têm EXATAMENTE os mesmos
+    sobrenomes, na MESMA ORDEM (lista idêntica). Caso contrário, [].
+
+    Para comprovar parentesco/nepotismo os sobrenomes precisam ser iguais e na
+    mesma ordem. Mesmos sobrenomes em ordem trocada são pessoas diferentes:
+      "MARIA DE JESUS PIRES"  → [JESUS, PIRES]
+      "JOAO PIRES DE JESUS"   → [PIRES, JESUS]   → ordem diferente → []
+
+      "JOAO SILVA SANTOS"  → [SILVA, SANTOS]
+      "MARIA SILVA SANTOS" → [SILVA, SANTOS]     → iguais → [SILVA, SANTOS]
+
+    Exige ao menos `min_sobrenomes` sobrenomes (evita match por 1 sobrenome).
+    Nomes com nº de sobrenomes diferente NÃO casam (sobrenomes têm de ser iguais).
+    """
+    a = extrair_sobrenomes(nome_a)
+    b = extrair_sobrenomes(nome_b)
+    if len(a) < min_sobrenomes:
+        return []
+    if a == b:
+        return a
+    return []
+
+
+# Compat: nome antigo aponta para a regra estrita
+def sufixo_sobrenomes_comum(nome_a: str, nome_b: str) -> list[str]:
+    return mesma_familia(nome_a, nome_b)
+
+
+def nomes_iguais(nome_a: str, nome_b: str) -> bool:
+    """True se os nomes completos são idênticos (ignorando acento/caixa)."""
+    return _sem_acento(nome_a).upper().split() == _sem_acento(nome_b).upper().split()
+
+
 def score_similaridade_nomes(nome_a: str, nome_b: str) -> tuple[int, list[str]]:
     """
-    Compara dois nomes completos e retorna (quantidade_em_comum, sobrenomes_comuns).
+    Compatibilidade: agora baseado no SUFIXO ordenado de sobrenomes (não mais
+    interseção de conjunto). Retorna (qtd_sobrenomes_no_sufixo, sufixo).
     """
-    sobrenomes_a = set(extrair_sobrenomes(nome_a))
-    sobrenomes_b = set(extrair_sobrenomes(nome_b))
-    comuns = sorted(sobrenomes_a & sobrenomes_b)
-    return len(comuns), comuns
+    suf = sufixo_sobrenomes_comum(nome_a, nome_b)
+    return len(suf), suf
 
 
 # ---------------------------------------------------------------------------
@@ -376,17 +502,17 @@ def verificar_conflito_interesse(
     orgao = contrato.get("unidadeGestora") or contrato.get("orgao") or "não informado"
 
     for socio in socios_empresa:
-        nome_socio = (socio.get("nome") or "").strip().upper()
+        nome_socio = (socio.get("nome") or "").strip()
         if not nome_socio:
             continue
 
         for servidor in servidores_orgao:
-            nome_servidor = (servidor.get("nome") or "").strip().upper()
+            nome_servidor = (servidor.get("nome") or "").strip()
             if not nome_servidor:
                 continue
 
-            # Match exato de nome completo
-            if nome_socio == nome_servidor:
+            # Match exato de nome completo (indício forte)
+            if nomes_iguais(nome_socio, nome_servidor):
                 alertas.append(ResultadoRegra(
                     regra="CONFLITO_INTERESSE_DIRETO",
                     score=92,
@@ -404,47 +530,26 @@ def verificar_conflito_interesse(
                 ))
                 continue
 
-            qtd_comuns, sobrenomes_comuns = score_similaridade_nomes(nome_socio, nome_servidor)
-
-            if qtd_comuns >= 3:
-                regra = "PROVAVEL_PARENTE"
-                score = 85
-                motivo = (
-                    f"Sócio '{nome_socio}' compartilha {qtd_comuns} sobrenomes "
-                    f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
-                    f"do mesmo órgão"
-                )
-            elif qtd_comuns == 2:
-                regra = "POSSIVEL_PARENTE"
-                score = 72
-                motivo = (
-                    f"Sócio '{nome_socio}' compartilha 2 sobrenomes "
-                    f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
-                    f"do mesmo órgão"
-                )
-            elif qtd_comuns == 1 and len(sobrenomes_comuns[0]) > 7:
-                regra = "SOBRENOME_RARO_COINCIDENTE"
-                score = 60
-                motivo = (
-                    f"Sócio '{nome_socio}' compartilha sobrenome raro "
-                    f"'{sobrenomes_comuns[0]}' com servidor '{nome_servidor}' "
-                    f"do mesmo órgão"
-                )
-            else:
-                continue
-
-            alertas.append(ResultadoRegra(
-                regra=regra,
-                score=score,
-                motivo=motivo,
-                dados={
-                    "nome_socio": nome_socio,
-                    "nome_servidor": nome_servidor,
-                    "sobrenomes_comuns": sobrenomes_comuns,
-                    "valor_contrato": valor_contrato,
-                    "orgao": orgao,
-                },
-            ))
+            # Parentesco: sobrenomes de família iguais E na mesma ordem (sufixo).
+            # Ordem diferente = pessoa diferente → ignorado.
+            suf = sufixo_sobrenomes_comum(nome_socio, nome_servidor)
+            if len(suf) >= 2:
+                alertas.append(ResultadoRegra(
+                    regra="PROVAVEL_PARENTE",
+                    score=80,
+                    motivo=(
+                        f"Sócio '{nome_socio}' e servidor '{nome_servidor}' do mesmo "
+                        f"órgão têm os mesmos sobrenomes de família, na mesma ordem "
+                        f"({' '.join(suf)})"
+                    ),
+                    dados={
+                        "nome_socio": nome_socio,
+                        "nome_servidor": nome_servidor,
+                        "sobrenomes_comuns": suf,
+                        "valor_contrato": valor_contrato,
+                        "orgao": orgao,
+                    },
+                ))
 
     return alertas
 
@@ -471,12 +576,12 @@ def verificar_testa_ferro(
     orgao_contrato = contrato.get("unidadeGestora") or contrato.get("orgao") or "não informado"
 
     for socio in socios_empresa:
-        nome_socio = (socio.get("nome") or "").strip().upper()
+        nome_socio = (socio.get("nome") or "").strip()
         if not nome_socio:
             continue
 
         for servidor in servidores_todos:
-            nome_servidor = (servidor.get("nome") or "").strip().upper()
+            nome_servidor = (servidor.get("nome") or "").strip()
             if not nome_servidor:
                 continue
 
@@ -487,11 +592,11 @@ def verificar_testa_ferro(
                 or "não informado"
             )
 
-            # Match exato
-            if nome_socio == nome_servidor:
+            # Match exato de nome completo (indício forte)
+            if nomes_iguais(nome_socio, nome_servidor):
                 alertas.append(ResultadoRegra(
                     regra="TESTA_FERRO_POSSIVEL",
-                    score=70,
+                    score=75,
                     motivo=(
                         f"Sócio '{nome_socio}' tem nome idêntico ao servidor "
                         f"'{nome_servidor}' (lotado em '{orgao_servidor}') — "
@@ -501,6 +606,7 @@ def verificar_testa_ferro(
                         "nome_socio": nome_socio,
                         "nome_servidor": nome_servidor,
                         "sobrenomes_comuns": extrair_sobrenomes(nome_socio),
+                        "match": "nome_identico",
                         "valor_contrato": valor_contrato,
                         "orgao_contrato": orgao_contrato,
                         "orgao_servidor": orgao_servidor,
@@ -508,23 +614,23 @@ def verificar_testa_ferro(
                 ))
                 continue
 
-            qtd_comuns, sobrenomes_comuns = score_similaridade_nomes(nome_socio, nome_servidor)
-
-            # Threshold mais alto: apenas 3+ sobrenomes em comum
-            if qtd_comuns >= 3:
+            # Parentesco: sobrenomes de família iguais E na mesma ordem (sufixo).
+            # Mesmos sobrenomes em ordem trocada = pessoa diferente → ignorado.
+            suf = sufixo_sobrenomes_comum(nome_socio, nome_servidor)
+            if len(suf) >= 2:
                 alertas.append(ResultadoRegra(
                     regra="TESTA_FERRO_POSSIVEL",
-                    score=70,
+                    score=65,
                     motivo=(
-                        f"Sócio '{nome_socio}' compartilha {qtd_comuns} sobrenomes "
-                        f"({', '.join(sobrenomes_comuns)}) com servidor '{nome_servidor}' "
-                        f"(lotado em '{orgao_servidor}') — possível testa de ferro "
-                        f"no contrato com '{orgao_contrato}'"
+                        f"Sócio '{nome_socio}' e servidor '{nome_servidor}' (lotado em "
+                        f"'{orgao_servidor}') têm os mesmos sobrenomes de família, na "
+                        f"mesma ordem ({' '.join(suf)}) — possível parentesco/testa de ferro"
                     ),
                     dados={
                         "nome_socio": nome_socio,
                         "nome_servidor": nome_servidor,
-                        "sobrenomes_comuns": sobrenomes_comuns,
+                        "sobrenomes_comuns": suf,
+                        "match": "sobrenome_familia",
                         "valor_contrato": valor_contrato,
                         "orgao_contrato": orgao_contrato,
                         "orgao_servidor": orgao_servidor,
