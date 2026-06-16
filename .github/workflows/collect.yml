@@ -1,9 +1,9 @@
 name: Coleta de Dados
 
-# Executa a cada 4 horas e permite disparo manual
+# Executa de hora em hora e permite disparo manual
 on:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:

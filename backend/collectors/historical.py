@@ -13,10 +13,11 @@ import httpx
 # Caminho base para cache local
 CACHE_DIR = "/tmp"
 
-# Configurações de retry
-MAX_TENTATIVAS = 3
-BACKOFF_BASE = 1.0  # segundos
-SLEEP_ENTRE_REQUESTS = 0.3  # segundos entre requisições
+# Configurações de retry — o PNCP aplica rate limit (HTTP 429) agressivo,
+# então usamos backoff longo, mais tentativas e pausa generosa entre chamadas.
+MAX_TENTATIVAS = 6
+BACKOFF_BASE = 3.0  # segundos
+SLEEP_ENTRE_REQUESTS = 1.5  # segundos entre requisições
 TAMANHO_PAGINA = 500
 
 
@@ -67,6 +68,10 @@ async def _fetch_pagina_com_retry(
         if resp.status_code in (429, 500, 502, 503, 504):
             if tentativa <= MAX_TENTATIVAS:
                 espera = BACKOFF_BASE * (2 ** (tentativa - 1))
+                # Honra o header Retry-After quando presente (429)
+                retry_after = resp.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    espera = max(espera, float(retry_after))
                 print(
                     f"[RETRY] Status {resp.status_code} — aguardando {espera:.1f}s "
                     f"(tentativa {tentativa}/{MAX_TENTATIVAS})"
@@ -77,7 +82,13 @@ async def _fetch_pagina_com_retry(
                 print(f"[ERRO] Falha definitiva após {MAX_TENTATIVAS} tentativas: {resp.status_code}")
                 return None
 
+        # 204 = sem contratos para o filtro/ano (resposta sem corpo)
+        if resp.status_code == 204:
+            return {"data": [], "totalPaginas": 0, "totalRegistros": 0}
+
         resp.raise_for_status()
+        if not resp.content:
+            return {"data": [], "totalPaginas": 0, "totalRegistros": 0}
         return resp.json()
 
     except httpx.TimeoutException as e:
@@ -95,42 +106,42 @@ async def _fetch_pagina_com_retry(
 
 
 async def _coletar_contratos_ano(
-    codigo_ibge: str,
+    cnpj_orgao: str,
     tipo_ente: str,
     ano: int,
 ) -> list[dict]:
     """
-    Coleta todos os contratos de um ente para um ano específico,
+    Coleta todos os contratos de um órgão (por CNPJ) para um ano específico,
     iterando por todas as páginas disponíveis.
+
+    IMPORTANTE: o endpoint /consulta/v1/contratos do PNCP NÃO filtra por
+    `codigoMunicipioIbge` nem por `codigoUnidadeFederacao` quando usado com
+    intervalo de datas — esses parâmetros são ignorados e a API devolve
+    contratos do Brasil inteiro. O único filtro confiável é `cnpjOrgao`
+    (CNPJ do órgão/ente contratante). Por isso a coleta é feita por CNPJ.
     """
-    chave_ente = f"{tipo_ente}_{codigo_ibge}"
+    chave_ente = f"{tipo_ente}_{cnpj_orgao}"
 
     # Verifica cache antes de fazer requests
     cache = _carregar_cache(chave_ente, ano)
     if cache is not None:
         return cache
 
-    url = "https://pncp.gov.br/api/pncp/v1/contratos"
+    url = "https://pncp.gov.br/api/consulta/v1/contratos"
     todos_contratos = []
     pagina = 1
 
-    print(f"[COLETA] Iniciando {tipo_ente} IBGE={codigo_ibge} ano={ano}")
+    print(f"[COLETA] Iniciando {tipo_ente} CNPJ={cnpj_orgao} ano={ano}")
 
     async with httpx.AsyncClient(timeout=30) as client:
         while True:
             params = {
                 "dataInicial": f"{ano}0101",
                 "dataFinal": f"{ano}1231",
+                "cnpjOrgao": cnpj_orgao,
                 "pagina": pagina,
                 "tamanhoPagina": TAMANHO_PAGINA,
             }
-
-            # Adiciona filtro correto conforme tipo do ente
-            if tipo_ente == "municipio":
-                params["codigoMunicipioIbge"] = codigo_ibge
-            else:
-                # Estado: usa código UF (2 dígitos)
-                params["codigoUnidadeFederacao"] = codigo_ibge[:2] if len(codigo_ibge) > 2 else codigo_ibge
 
             dados = await _fetch_pagina_com_retry(client, url, params)
 
@@ -169,23 +180,23 @@ async def _coletar_contratos_ano(
 
 
 async def coletar_historico_4_anos(
-    codigo_ibge: str,
+    cnpj_orgao: str,
     tipo_ente: str,
 ) -> dict[str, list[dict]]:
     """
-    Coleta contratos do PNCP de 2021 até o ano atual para um ente.
+    Coleta contratos do PNCP de 2021 até o ano atual para um órgão (por CNPJ).
 
     Parâmetros:
-        codigo_ibge: Código IBGE do ente (ex: "2111300" para São Luís)
+        cnpj_orgao: CNPJ do órgão contratante (ex: "06307102000130" São Luís)
         tipo_ente: "municipio" ou "estado"
 
     Retorna dicionário {ano: [contratos]}
     """
     ano_atual = datetime.now().year
-    anos = list(range(2021, ano_atual + 1))
+    anos = list(range(2024, ano_atual + 1))
 
     print(f"\n{'='*60}")
-    print(f"[HISTÓRICO] Iniciando coleta 4 anos para {tipo_ente} IBGE={codigo_ibge}")
+    print(f"[HISTÓRICO] Iniciando coleta para {tipo_ente} CNPJ={cnpj_orgao}")
     print(f"[HISTÓRICO] Anos: {anos}")
     print(f"{'='*60}\n")
 
@@ -193,12 +204,12 @@ async def coletar_historico_4_anos(
 
     for ano in anos:
         try:
-            contratos = await _coletar_contratos_ano(codigo_ibge, tipo_ente, ano)
+            contratos = await _coletar_contratos_ano(cnpj_orgao, tipo_ente, ano)
             resultado[str(ano)] = contratos
             # Pausa entre anos para não sobrecarregar a API
             await asyncio.sleep(SLEEP_ENTRE_REQUESTS)
         except Exception as e:
-            print(f"[ERRO] Falha ao coletar {codigo_ibge}/{ano}: {e}")
+            print(f"[ERRO] Falha ao coletar {cnpj_orgao}/{ano}: {e}")
             resultado[str(ano)] = []
 
     total_geral = sum(len(v) for v in resultado.values())

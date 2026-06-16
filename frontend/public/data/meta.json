@@ -1,1 +1,38 @@
-{"timestamp_inicio":null,"timestamp_fim":null,"total_contratos":0,"fontes":[],"cruzamento_servidores":false,"alertas_por_categoria":{"financeiro":0,"conflito_interesse":0,"nepotismo":0}}
+{
+  "ultima_coleta": "2026-06-16T21:25:24.775107+00:00",
+  "total_registros": 900,
+  "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
+  "timestamp_inicio": "2026-06-16T21:23:31.762288+00:00",
+  "timestamp_fim": "2026-06-16T21:25:24.775107+00:00",
+  "total_contratos": 900,
+  "total_alertas": 321,
+  "gasto_cultura_siconfi": {
+    "maranhao_estado": 1166256489.86,
+    "sao_luis": 290211889.45,
+    "raposa": 3930936.0,
+    "sao_jose_ribamar": 0.0,
+    "paco_lumiar": 0.0
+  },
+  "alertas_por_categoria": {
+    "financeiro": 207,
+    "conflito_interesse": 0,
+    "nepotismo": 114
+  },
+  "entes_processados": [
+    "maranhao_estado",
+    "sao_luis",
+    "raposa",
+    "sao_jose_ribamar",
+    "paco_lumiar"
+  ],
+  "anos_coletados": "2021-hoje",
+  "fontes_usadas": [
+    "pncp",
+    "siconfi",
+    "siape",
+    "tce_ma"
+  ],
+  "siconfi_disponivel": true,
+  "cruzamento_servidores": true,
+  "versao_coletor": "2.0.0"
+}

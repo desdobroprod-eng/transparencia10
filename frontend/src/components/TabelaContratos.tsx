@@ -10,6 +10,7 @@ interface TabelaContratosProps {
 const ENTES_LABEL: Record<string, string> = {
   maranhao_estado: "Estado MA",
   sao_luis: "São Luís",
+  raposa: "Raposa",
   sao_jose_ribamar: "S.J. Ribamar",
   paco_lumiar: "Paço do Lumiar",
 };
@@ -151,8 +152,8 @@ export default function TabelaContratos({ contratos }: TabelaContratosProps) {
             </tr>
           </thead>
           <tbody>
-            {contratos.map((c) => (
-              <LinhaExpansivel key={c.id} contrato={c} />
+            {contratos.map((c, i) => (
+              <LinhaExpansivel key={`${c.id}-${i}`} contrato={c} />
             ))}
           </tbody>
         </table>

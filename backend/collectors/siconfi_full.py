@@ -27,6 +27,12 @@ ENTES_SICONFI = {
         "nome": "Prefeitura de São Luís",
         "tipo": "municipio",
     },
+    "raposa": {
+        "id_ente": "2110906",
+        "co_uf": "MA",
+        "nome": "Prefeitura de Raposa",
+        "tipo": "municipio",
+    },
     "sao_jose_ribamar": {
         "id_ente": "2110856",
         "co_uf": "MA",
@@ -91,35 +97,65 @@ async def _fetch_com_retry(
 
 def _extrair_gastos_cultura(dados_rreo: dict) -> list[dict]:
     """
-    Extrai linhas de gasto com Cultura (função 13) dos dados brutos do RREO.
-    O SICONFI retorna items em dados_rreo["items"] com campo co_funcao ou ds_funcao.
-    """
-    gastos = []
+    Extrai o gasto com a função Cultura (função 13) do RREO-Anexo 02
+    (Demonstrativo da Despesa por Função/Subfunção).
 
-    # A resposta do SICONFI vem em diferentes estruturas — tenta ambas
+    Estrutura real do SICONFI (apidatalake): cada item em `items` tem
+    `conta` (nome da função, ex.: "Cultura"), `coluna` (estágio da despesa,
+    ex.: "DESPESAS LIQUIDADAS ATÉ O BIMESTRE (d)") e `valor`. Os valores
+    "ATÉ O BIMESTRE" são acumulados no exercício — o período 6 traz o total
+    do ano.
+
+    Considera apenas a função `Cultura` (exata) — ignora a subfunção
+    "Difusão Cultural" (evita dupla contagem) e "Agricultura" (contém
+    "cultura" por acaso).
+    """
     itens = dados_rreo.get("items", dados_rreo.get("data", []))
 
+    dotacao = empenhado = liquidado = pago = 0.0
+    encontrou = False
+
     for item in itens:
-        co_funcao = str(item.get("co_funcao") or item.get("cd_funcao") or "")
-        ds_funcao = (item.get("ds_funcao") or item.get("no_funcao") or "").lower()
+        conta = (item.get("conta") or "").strip()
+        if conta.lower() != "cultura":  # função 13 — linha-total
+            continue
+        # O RREO traz duas linhas "Cultura": a consolidada ("Exceto
+        # Intra-Orçamentárias", o valor cheio) e a intra-orçamentária (resíduo).
+        # Considera apenas a consolidada.
+        rotulo = (item.get("rotulo") or "").lower()
+        if "intra" in rotulo and "exceto" not in rotulo:
+            continue
+        coluna = (item.get("coluna") or "").upper()
+        try:
+            valor = float(item.get("valor") or 0)
+        except (TypeError, ValueError):
+            continue
 
-        # Filtra por código 13 (Cultura) ou pelo nome
-        if co_funcao == FUNCAO_CULTURA or "cultura" in ds_funcao:
-            gastos.append({
-                "co_funcao": co_funcao,
-                "ds_funcao": item.get("ds_funcao") or item.get("no_funcao") or FUNCAO_CULTURA_NOME,
-                "vl_dotacao_inicial": float(item.get("vl_dotacao_inicial") or 0),
-                "vl_dotacao_atualizada": float(item.get("vl_dotacao_atualizada") or 0),
-                "vl_empenhado": float(item.get("vl_empenhado") or 0),
-                "vl_liquidado": float(item.get("vl_liquidado") or 0),
-                "vl_pago": float(item.get("vl_pago") or item.get("vl_realizado") or 0),
-                "co_periodo": item.get("nr_periodo") or item.get("co_periodo"),
-                "an_exercicio": item.get("an_exercicio"),
-                "no_entidade": item.get("no_entidade") or item.get("no_ente"),
-                "_raw": item,
-            })
+        encontrou = True
+        if "DOTAÇÃO ATUALIZADA" in coluna or "DOTACAO ATUALIZADA" in coluna:
+            dotacao = valor
+        elif "EMPENHADAS ATÉ O BIMESTRE" in coluna or "EMPENHADAS ATE O BIMESTRE" in coluna:
+            empenhado = valor
+        elif "LIQUIDADAS ATÉ O BIMESTRE" in coluna or "LIQUIDADAS ATE O BIMESTRE" in coluna:
+            liquidado = valor
+        elif "PAGAS ATÉ O BIMESTRE" in coluna or "PAGAS ATE O BIMESTRE" in coluna:
+            pago = valor
 
-    return gastos
+    if not encontrou:
+        return []
+
+    # Sem coluna "pagas", usa liquidado como melhor proxy de execução.
+    if pago <= 0:
+        pago = liquidado
+
+    return [{
+        "co_funcao": FUNCAO_CULTURA,
+        "ds_funcao": FUNCAO_CULTURA_NOME,
+        "vl_dotacao_atualizada": dotacao,
+        "vl_empenhado": empenhado,
+        "vl_liquidado": liquidado,
+        "vl_pago": pago,
+    }]
 
 
 async def coletar_rreo_ente(
@@ -169,10 +205,15 @@ async def coletar_rreo_ente(
                     "total_itens": len(dados.get("items", dados.get("data", []))),
                 }
 
-                # Acumula totais anuais
+                # Valores "ATÉ O BIMESTRE" são acumulados no exercício — o total
+                # anual é o MAIOR valor observado entre os períodos (não a soma).
                 for g in gastos:
-                    resultado["total_pago_cultura"] += g["vl_pago"]
-                    resultado["total_liquidado_cultura"] += g["vl_liquidado"]
+                    resultado["total_pago_cultura"] = max(
+                        resultado["total_pago_cultura"], g["vl_pago"]
+                    )
+                    resultado["total_liquidado_cultura"] = max(
+                        resultado["total_liquidado_cultura"], g["vl_liquidado"]
+                    )
 
                 print(
                     f"[SICONFI] {nome_ente}/{ano}/p{periodo} — "
@@ -201,7 +242,7 @@ async def coletar_rreo_historico_ente(
 
     ente = ENTES_SICONFI[chave_ente]
     ano_atual = datetime.now().year
-    anos = anos or list(range(2021, ano_atual + 1))
+    anos = anos or list(range(2024, ano_atual + 1))
 
     print(f"\n{'='*60}")
     print(f"[SICONFI] Histórico {ente['nome']} — anos: {anos}")
@@ -235,7 +276,7 @@ async def coletar_rreo_todos_entes(anos: list[int] = None) -> dict:
     Retorna dicionário indexado por chave do ente.
     """
     ano_atual = datetime.now().year
-    anos = anos or list(range(2021, ano_atual + 1))
+    anos = anos or list(range(2024, ano_atual + 1))
 
     print(f"\n{'='*60}")
     print(f"[SICONFI] Coleta completa todos os entes — anos: {anos}")

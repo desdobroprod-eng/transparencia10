@@ -16,7 +16,7 @@ from collectors.siconfi_full import coletar_rreo_todos_entes
 
 BASE_URLS = {
     "transparencia": "https://api.portaldatransparencia.gov.br/api-de-dados",
-    "pncp": "https://pncp.gov.br/api/pncp/v1",
+    "pncp": "https://pncp.gov.br/api/consulta/v1",
     "cnpj": "https://publica.cnpj.ws/cnpj",
     "siconfi": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt",
     "ceis": "https://api.portaldatransparencia.gov.br/api-de-dados/ceis",

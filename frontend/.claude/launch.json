@@ -5,7 +5,8 @@
       "name": "transparencia10-frontend",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "port": 3017,
+      "autoPort": true
     }
   ]
 }
