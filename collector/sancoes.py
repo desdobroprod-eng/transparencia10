@@ -48,12 +48,14 @@ def persistir_cache() -> None:
 async def _consulta(client: httpx.AsyncClient, caminho: str, cnpj: str) -> list:
     """Consulta um endpoint (ceis|cnep) por CNPJ. Retorna lista de registros."""
     import asyncio
+    # IMPORTANTE: o parâmetro que realmente filtra é `codigoSancionado`.
+    # `cnpjSancionado` é ignorado pela API (retorna a lista geral).
     url = f"{_BASE}/{caminho}"
     for tent in range(1, _MAX_TENT + 1):
         try:
             r = await client.get(
                 url,
-                params={"cnpjSancionado": cnpj, "pagina": 1},
+                params={"codigoSancionado": cnpj, "pagina": 1},
                 headers={"chave-api-dados": _TOKEN, "User-Agent": _UA, "Accept": "application/json"},
                 timeout=30,
             )
@@ -100,13 +102,14 @@ async def verificar_sancao(client: httpx.AsyncClient, cnpj: str) -> dict:
         fontes.append("CNEP")
 
     def _resumo(reg: dict, fonte: str) -> dict:
-        sanc = reg.get("sancao") or {}
+        tipo = reg.get("tipoSancao") or {}
         return {
             "fonte": fonte,
-            "tipo": sanc.get("tipoSancao") or sanc.get("descricaoResumida") or "",
+            "tipo": tipo.get("descricaoResumida") or tipo.get("descricaoPortal") or "",
             "orgao": (reg.get("orgaoSancionador") or {}).get("nome") or "",
-            "data_inicio": sanc.get("dataInicioSancao") or "",
-            "data_fim": sanc.get("dataFimSancao") or "",
+            "data_inicio": reg.get("dataInicioSancao") or "",
+            "data_fim": reg.get("dataFimSancao") or "",
+            "sancionado": (reg.get("sancionado") or {}).get("nome") or "",
         }
 
     detalhes = [_resumo(r, "CEIS") for r in ceis[:3]] + [_resumo(r, "CNEP") for r in cnep[:3]]

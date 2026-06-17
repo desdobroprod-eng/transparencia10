@@ -754,6 +754,198 @@
       "match": "sobrenome_familia",
       "score": 65,
       "num_contratos": 3
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "MARIA DE JESUS COSTA DA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 5
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "MARIA DE JESUS COSTA E SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "MANOEL DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "JOYCE DE JESUS COSTA DA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "DIANA DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "FABIANA DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "MARILILCE DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "DALVANIRA DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "MARIA DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "LUCINEY DE JESUS COSTA DA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "NILSON DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "pinheiro",
+      "contrato": "06200745000180-2-000021/2025",
+      "cnpj": "05459983000142",
+      "fornecedor": "ASSOCIACAO DE DESENVOLVIMENTO COMUNITARIO DOS MORADORES DO POVADO SUDARIO",
+      "socio": "MARIA DE JESUS COSTA SILVA",
+      "servidor": "JOEDSON DE JESUS COSTA SILVA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "COSTA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     }
   ]
 }
