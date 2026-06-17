@@ -33,3 +33,9 @@ docker-compose up --build
 Todos os dados são públicos e obtidos de fontes oficiais.  
 Os indicadores de anomalia são sinalizações automáticas — **não constituem acusação**.  
 Devem ser investigados pelos órgãos competentes (TCE-MA, CGU, MPF).
+
+## Licença
+
+Distribuído sob a **Licença MIT**. Veja o arquivo [LICENSE](LICENSE).
+
+© 2026 10Dobro Prod. Uso livre mediante manutenção do aviso de copyright.

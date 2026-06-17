@@ -2,6 +2,8 @@
   "name": "transparencia10-frontend",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
+  "author": "10Dobro Prod",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
