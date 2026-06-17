@@ -91,9 +91,8 @@ export default function VisaoGeralPage() {
     nepotismo: 0,
   };
   const categorias = [
-    { rotulo: "Financeiro", valor: cat.financeiro, cor: RISCO.critico.cor },
-    { rotulo: "Conflito de interesse", valor: cat.conflito_interesse, cor: RISCO.atencao.cor },
-    { rotulo: "Nepotismo", valor: cat.nepotismo, cor: "#7c3aed" },
+    { rotulo: "Financeiro (empresa/contrato)", valor: cat.financeiro, cor: RISCO.critico.cor },
+    { rotulo: "Coincidência nominal (a apurar)", valor: cat.conflito_interesse + cat.nepotismo, cor: "#7c3aed" },
   ];
   const maxCat = Math.max(1, ...categorias.map((c) => c.valor));
 

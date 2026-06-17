@@ -12,8 +12,18 @@ export default function Rodape() {
           regras objetivas sobre dados públicos. <strong className="text-gray-700">Não constituem acusação</strong> e
           devem ser investigados pelos órgãos competentes (TCE-MA, CGU, MPF). Homonímia é possível.
         </p>
+        <p>
+          <strong className="text-gray-700">Canal de retificação:</strong> se você ou sua empresa
+          foram citados e identificou erro, imprecisão ou deseja exercer seus direitos (LGPD,
+          Lei 13.709/2018), escreva para{" "}
+          <a href="mailto:contato@10dobroprod.com.br" className="text-blue-700 underline">
+            contato@10dobroprod.com.br
+          </a>
+          . Pedidos de correção são analisados em até 7 dias úteis, com retificação ou remoção
+          imediata em caso de erro comprovado.
+        </p>
         <p className="text-gray-400">
-          Transparência 10 · fiscalização cidadã das Secretarias de Cultura do Maranhão.
+          Portal Transparência Cultural do Brasil · fiscalização cidadã de gastos públicos com cultura.
         </p>
       </div>
     </footer>

@@ -19,12 +19,12 @@ export default function CardCruzamento({ c }: { c: Cruzamento }) {
       {/* Selo de classificação do indício */}
       <div className="mb-3 flex items-center justify-between gap-2">
         {exato ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-red-700 border border-red-300">
-            ● Nome idêntico
+          <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-semibold tracking-wide text-red-700 border border-red-300">
+            ● Nome idêntico — a verificar identidade
           </span>
         ) : (
           <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 border border-gray-300">
-            Sobrenomes em comum
+            Sobrenomes coincidentes — a apurar
             {sobrenomes.length > 0 && (
               <span className="font-normal text-gray-500">
                 : {sobrenomes.join(", ")}

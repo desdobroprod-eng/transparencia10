@@ -47,8 +47,8 @@ def verificar_capital_incompativel(
 ) -> Optional[ResultadoRegra]:
     """
     Capital social muito menor que o valor contratado. Empresa de capital
-    irrisório fechando contrato vultoso é indício clássico de inidoneidade
-    econômico-financeira / empresa de fachada.
+    irrisório frente a contrato de valor muito superior é uma divergência
+    cadastral que merece verificação.
 
     Dispara quando valor do contrato > fator × capital social.
     """
@@ -511,14 +511,16 @@ def verificar_conflito_interesse(
             if not nome_servidor:
                 continue
 
-            # Match exato de nome completo (indício forte)
+            # Nome do sócio idêntico ao de um servidor do órgão — a verificar
+            # identidade (coincidência de nome NÃO confirma ser a mesma pessoa).
             if nomes_iguais(nome_socio, nome_servidor):
                 alertas.append(ResultadoRegra(
-                    regra="CONFLITO_INTERESSE_DIRETO",
+                    regra="NOME_IDENTICO_SERVIDOR",
                     score=92,
                     motivo=(
-                        f"Sócio '{nome_socio}' tem nome idêntico ao servidor "
-                        f"'{nome_servidor}' do órgão contratante"
+                        f"O nome do sócio '{nome_socio}' coincide integralmente com o de "
+                        f"um servidor do órgão contratante. Coincidência de nome não "
+                        f"confirma tratar-se da mesma pessoa — a apurar pelos órgãos de controle."
                     ),
                     dados={
                         "nome_socio": nome_socio,
@@ -530,17 +532,17 @@ def verificar_conflito_interesse(
                 ))
                 continue
 
-            # Parentesco: sobrenomes de família iguais E na mesma ordem (sufixo).
+            # Sobrenomes de família iguais E na mesma ordem (sufixo).
             # Ordem diferente = pessoa diferente → ignorado.
             suf = sufixo_sobrenomes_comum(nome_socio, nome_servidor)
             if len(suf) >= 2:
                 alertas.append(ResultadoRegra(
-                    regra="PROVAVEL_PARENTE",
+                    regra="SOBRENOMES_COINCIDENTES",
                     score=80,
                     motivo=(
-                        f"Sócio '{nome_socio}' e servidor '{nome_servidor}' do mesmo "
-                        f"órgão têm os mesmos sobrenomes de família, na mesma ordem "
-                        f"({' '.join(suf)})"
+                        f"O sócio '{nome_socio}' e um servidor do órgão contratante "
+                        f"têm os mesmos sobrenomes, na mesma ordem ({' '.join(suf)}). "
+                        f"Sobrenomes coincidentes não comprovam parentesco — a apurar."
                     ),
                     dados={
                         "nome_socio": nome_socio,
@@ -592,15 +594,15 @@ def verificar_testa_ferro(
                 or "não informado"
             )
 
-            # Match exato de nome completo (indício forte)
+            # Nome idêntico ao de um servidor estadual — a verificar identidade.
             if nomes_iguais(nome_socio, nome_servidor):
                 alertas.append(ResultadoRegra(
-                    regra="TESTA_FERRO_POSSIVEL",
+                    regra="NOME_IDENTICO_SERVIDOR",
                     score=75,
                     motivo=(
-                        f"Sócio '{nome_socio}' tem nome idêntico ao servidor "
-                        f"'{nome_servidor}' (lotado em '{orgao_servidor}') — "
-                        f"possível uso como testa de ferro no contrato com '{orgao_contrato}'"
+                        f"O nome do sócio '{nome_socio}' coincide integralmente com o de "
+                        f"um servidor estadual. Coincidência de nome não confirma tratar-se "
+                        f"da mesma pessoa — a apurar pelos órgãos de controle."
                     ),
                     dados={
                         "nome_socio": nome_socio,
@@ -614,17 +616,16 @@ def verificar_testa_ferro(
                 ))
                 continue
 
-            # Parentesco: sobrenomes de família iguais E na mesma ordem (sufixo).
-            # Mesmos sobrenomes em ordem trocada = pessoa diferente → ignorado.
+            # Sobrenomes iguais E na mesma ordem. Ordem trocada → ignorado.
             suf = sufixo_sobrenomes_comum(nome_socio, nome_servidor)
             if len(suf) >= 2:
                 alertas.append(ResultadoRegra(
-                    regra="TESTA_FERRO_POSSIVEL",
+                    regra="SOBRENOMES_COINCIDENTES",
                     score=65,
                     motivo=(
-                        f"Sócio '{nome_socio}' e servidor '{nome_servidor}' (lotado em "
-                        f"'{orgao_servidor}') têm os mesmos sobrenomes de família, na "
-                        f"mesma ordem ({' '.join(suf)}) — possível parentesco/testa de ferro"
+                        f"O sócio '{nome_socio}' e um servidor estadual têm os mesmos "
+                        f"sobrenomes, na mesma ordem ({' '.join(suf)}). Sobrenomes "
+                        f"coincidentes não comprovam parentesco — a apurar."
                     ),
                     dados={
                         "nome_socio": nome_socio,

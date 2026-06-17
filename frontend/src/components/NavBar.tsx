@@ -23,8 +23,8 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-base font-bold text-gray-900 tracking-tight">Transparência 10</span>
-            <span className="hidden sm:inline text-xs text-gray-400">· Cultura no Maranhão</span>
+            <span className="text-base font-bold text-gray-900 tracking-tight">Transparência Cultural</span>
+            <span className="hidden sm:inline text-xs text-gray-400">· do Brasil</span>
           </Link>
           <nav className="flex items-center gap-1 overflow-x-auto">
             {LINKS.map((l) => {

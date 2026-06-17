@@ -4,9 +4,9 @@ import NavBar from "@/components/NavBar";
 import Rodape from "@/components/Rodape";
 
 export const metadata: Metadata = {
-  title: "Transparência 10 — Cultura no Maranhão",
+  title: "Portal Transparência Cultural do Brasil",
   description:
-    "Fiscalização cidadã dos gastos das Secretarias de Cultura do Maranhão: contratos, indicadores de risco e cruzamento sócio × servidor.",
+    "Fiscalização cidadã dos gastos públicos com cultura: contratos, indicadores e cruzamento de dados públicos. Começando pelo Maranhão.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

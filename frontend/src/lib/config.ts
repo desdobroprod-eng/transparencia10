@@ -28,3 +28,31 @@ export const RISCO = {
 } as const;
 
 export type NivelRisco = keyof typeof RISCO;
+
+// Rótulos amigáveis e juridicamente sóbrios para as regras (evita exibir o
+// código cru como "TESTA_FERRO_POSSIVEL"). Linguagem factual/condicional.
+export const REGRA_LABEL: Record<string, string> = {
+  // Cruzamento sócio × servidor (linguagem condicional, sem imputação)
+  NOME_IDENTICO_SERVIDOR: "Nome idêntico a servidor — a verificar identidade",
+  SOBRENOMES_COINCIDENTES: "Sobrenomes coincidentes — a apurar",
+  // (chaves antigas, caso ainda apareçam em dados de coletas anteriores)
+  TESTA_FERRO_POSSIVEL: "Coincidência nominal — a apurar",
+  PROVAVEL_PARENTE: "Sobrenomes coincidentes — a apurar",
+  CONFLITO_INTERESSE_DIRETO: "Nome idêntico a servidor — a verificar identidade",
+  // Financeiras (recaem sobre empresa/contrato)
+  PRECO_ABUSIVO: "Preço acima da mediana",
+  CAPITAL_INCOMPATIVEL: "Capital social inferior ao contrato",
+  VALOR_INCONSISTENTE: "Valor incompatível com o porte",
+  EMPRESA_NOVA: "Empresa recém-aberta",
+  EMPRESA_SANCIONADA: "Empresa em lista de sanção (CEIS/CNEP)",
+  DUPLICIDADE_CONTRATO: "Contratos semelhantes em curto intervalo",
+  FRACIONAMENTO_LICITACAO: "Possível fracionamento de dispensa",
+  FORNECEDOR_MONOPOLIO: "Concentração de contratos no fornecedor",
+  CONTRATO_SEM_LICITACAO: "Dispensa/inexigibilidade acima do teto",
+  CONTRATO_VENCIDO_RENOVADO: "Contrato vencido ainda ativo",
+  CONTRATO_RETIFICADO: "Contrato com alteração registrada",
+};
+
+export function rotuloRegra(regra: string): string {
+  return REGRA_LABEL[regra] ?? regra.replace(/_/g, " ").toLowerCase();
+}

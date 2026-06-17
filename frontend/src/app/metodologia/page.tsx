@@ -42,16 +42,20 @@ const indicadores = [
     desc: "Um único fornecedor concentra uma fatia desproporcional dos contratos de um órgão, sinalizando baixa concorrência.",
   },
   {
-    nome: "Preço abusivo",
-    desc: "Valor muito acima do padrão observado para objetos semelhantes, considerando o conjunto dos contratos analisados.",
+    nome: "Preço acima da mediana",
+    desc: "Valor acima do padrão observado para objetos semelhantes, considerando o conjunto dos contratos analisados. É uma comparação estatística, não um juízo sobre legalidade.",
   },
   {
-    nome: "Empresa nova",
-    desc: "Fornecedor com CNPJ aberto há pouco tempo antes da contratação, o que merece olhar atento quando associado a valores altos.",
+    nome: "Empresa recém-aberta",
+    desc: "Fornecedor com CNPJ aberto há pouco tempo antes da contratação, o que merece verificação quando associado a valores altos.",
   },
   {
-    nome: "Sócio × Servidor",
-    desc: "Cruzamento entre os sócios das empresas contratadas e a base de servidores estaduais, buscando indícios de testa-de-ferro ou nepotismo.",
+    nome: "Capital social inferior ao contrato",
+    desc: "O capital social declarado da empresa é muito menor que o valor contratado — divergência cadastral que merece verificação.",
+  },
+  {
+    nome: "Coincidência de nomes (sócio × servidor)",
+    desc: "Comparação entre nomes de sócios das empresas contratadas e a base de servidores estaduais. Sinaliza apenas COINCIDÊNCIA DE NOME — não confirma identidade, parentesco ou irregularidade (homonímia é comum). Serve para orientar apuração pelos órgãos de controle.",
   },
 ];
 

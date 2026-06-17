@@ -1,5 +1,7 @@
 "use client";
 
+import { rotuloRegra } from "@/lib/config";
+
 // Categorias possíveis de alerta (espelho do campo `categoria` do alertas.json)
 export type CategoriaAlerta = "financeiro" | "conflito_interesse" | "nepotismo";
 
@@ -19,21 +21,21 @@ interface AlertaBadgeProps {
 // Configuração visual por nível de risco
 const CONFIG_NIVEL = {
   critico: {
-    label: "CRÍTICO",
-    bg: "bg-red-100 border-red-400",
+    label: "Prioridade alta",
+    bg: "bg-red-50 border-red-300",
     badge: "bg-red-600 text-white",
-    icone: "🚨",
+    icone: "🔎",
   },
   atencao: {
-    label: "ATENÇÃO",
-    bg: "bg-yellow-50 border-yellow-400",
+    label: "Atenção",
+    bg: "bg-yellow-50 border-yellow-300",
     badge: "bg-yellow-500 text-white",
     icone: "⚠️",
   },
   baixo: {
-    label: "BAIXO",
-    bg: "bg-green-50 border-green-400",
-    badge: "bg-green-600 text-white",
+    label: "Informativo",
+    bg: "bg-gray-50 border-gray-300",
+    badge: "bg-gray-500 text-white",
     icone: "ℹ️",
   },
 } as const;
@@ -50,12 +52,12 @@ const CONFIG_CATEGORIA: Record<
   },
   conflito_interesse: {
     icone: "👤",
-    rotulo: "Conflito de Interesse",
+    rotulo: "Coincidência nominal (a apurar)",
     badge: "bg-orange-100 text-orange-700 border border-orange-200",
   },
   nepotismo: {
-    icone: "👨‍👩‍👧",
-    rotulo: "Nepotismo / Testa-ferro",
+    icone: "👤",
+    rotulo: "Coincidência nominal (a apurar)",
     badge: "bg-purple-100 text-purple-700 border border-purple-200",
   },
 };
@@ -102,8 +104,8 @@ export default function AlertaBadge({
 
         {/* Tags: regra + categoria */}
         <div className="mt-1.5 flex flex-wrap gap-2 text-xs">
-          <span className="bg-gray-200 text-gray-600 px-2 py-0.5 rounded font-mono">
-            {regra.replace(/_/g, " ")}
+          <span className="bg-gray-200 text-gray-600 px-2 py-0.5 rounded">
+            {rotuloRegra(regra)}
           </span>
 
           {/* Badge de categoria — visível sempre que o campo estiver presente */}

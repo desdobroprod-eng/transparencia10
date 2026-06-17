@@ -1,6 +1,6 @@
-# Transparencia10
+# Portal Transparência Cultural do Brasil
 
-Painel público de monitoramento de gastos das Secretarias de Cultura do Maranhão.
+Portal público de fiscalização cidadã de gastos públicos com cultura. Reúne dados oficiais (PNCP, Portal da Transparência, SICONFI, Receita Federal) e sinaliza padrões que merecem verificação. Início pelo Maranhão.
 
 **Entes monitorados:**
 - Secretaria de Cultura — Estado do Maranhão
