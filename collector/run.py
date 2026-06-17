@@ -57,6 +57,7 @@ from domain.rules.detector import (
 
 # ── Enriquecimento (BrasilAPI + servidores MA) ────────────────────────────────
 import enrich
+import sancoes
 from notas_ma import coletar_execucao_cultura_estado
 
 # ── Entes monitorados ───────────────────────────────────────────────────────--
@@ -224,6 +225,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
             verificar_capital_incompativel(contrato, cnpj_info),
             verificar_valor_inconsistente(contrato, cnpj_info),
             verificar_contrato_retificado(contrato),
+            verificar_sancionado(contrato.get("cnpjFornecedor", ""), bool(cnpj_info.get("sancionada")), valor),
         ):
             if r:
                 alertas.append({
@@ -446,14 +448,31 @@ async def executar_coleta(
     })
     print(f"  {len(cnpjs_unicos)} CNPJs únicos a enriquecer")
 
+    if sancoes.tem_chave():
+        print("  [SANÇÕES] chave do Portal da Transparência presente — checando CEIS/CNEP")
+    else:
+        print("  [SANÇÕES] sem PORTAL_TRANSPARENCIA_API_KEY — CEIS/CNEP desativado (não bloqueante)")
+
     info_por_cnpj: dict[str, dict] = {}
+    n_sancionadas = 0
     async with httpx.AsyncClient(verify=False) as client:
         for i, cnpj in enumerate(cnpjs_unicos, 1):
-            info_por_cnpj[cnpj] = await enrich.enriquecer_cnpj(client, cnpj)
+            info = await enrich.enriquecer_cnpj(client, cnpj)
+            # Sanções CEIS/CNEP (fonte federal CGU; só roda se houver chave)
+            sanc = await sancoes.verificar_sancao(client, cnpj)
+            info["sancionada"] = sanc.get("sancionada", False)
+            info["sancoes"] = sanc.get("detalhes", [])
+            if info["sancionada"]:
+                n_sancionadas += 1
+            info_por_cnpj[cnpj] = info
             if i % 25 == 0:
                 print(f"  ... {i}/{len(cnpjs_unicos)} CNPJs")
                 enrich.persistir_caches()
+                sancoes.persistir_cache()
     enrich.persistir_caches()
+    sancoes.persistir_cache()
+    if sancoes.tem_chave():
+        print(f"  [SANÇÕES] {n_sancionadas} empresa(s) em lista de sanção (CEIS/CNEP)")
 
     com_socios = 0
     for c in todos_contratos:
