@@ -30,7 +30,7 @@ function formatarData(iso: string): string {
 }
 
 export default function ContratosPage() {
-  const { loading, erro, contratos, anosDisponiveis } = useDados();
+  const { loading, erro, contratos, anosDisponiveis, explicacoes } = useDados();
 
   // Filtros
   const [busca, setBusca] = useState("");
@@ -306,7 +306,10 @@ export default function ContratosPage() {
                   {row.getIsExpanded() && (
                     <tr>
                       <td colSpan={row.getVisibleCells().length} className="p-0">
-                        <DetalheContrato contrato={row.original} />
+                        <DetalheContrato
+                          contrato={row.original}
+                          explicacao={explicacoes?.contratos?.[row.original.id]}
+                        />
                       </td>
                     </tr>
                   )}

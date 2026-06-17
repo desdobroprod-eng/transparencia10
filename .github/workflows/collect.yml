@@ -39,6 +39,10 @@ jobs:
         env:
           PORTAL_TRANSPARENCIA_API_KEY: ${{ secrets.PORTAL_TRANSPARENCIA_API_KEY }}
 
+      # 4b. Gerar explicações em linguagem simples (template; usa IA local se houver)
+      - name: Gerar explicações
+        run: python collector/explicador.py
+
       # 5. Configurar identidade do bot para o commit
       - name: Configurar git
         run: |

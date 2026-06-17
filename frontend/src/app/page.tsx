@@ -21,7 +21,7 @@ function Skeleton({ className = "" }: { className?: string }) {
 }
 
 export default function VisaoGeralPage() {
-  const { loading, erro, stats, meta, cruzamentos, ultimaAtualizacao } = useDados();
+  const { loading, erro, stats, meta, cruzamentos, explicacoes, ultimaAtualizacao } = useDados();
 
   const dadosBarras = useMemo(
     () =>
@@ -186,6 +186,30 @@ export default function VisaoGeralPage() {
           })}
         </div>
       </div>
+
+      {/* Entenda os números (explicação em linguagem simples por ente) */}
+      {explicacoes?.entes && (
+        <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
+          <h2 className="flex items-center gap-1.5 text-base font-semibold text-blue-900">
+            <span aria-hidden>💬</span> Entenda em linguagem simples
+          </h2>
+          <ul className="mt-3 space-y-2.5">
+            {ENTES.map((e) =>
+              explicacoes.entes[e.chave] ? (
+                <li key={e.chave} className="text-sm leading-snug text-blue-900">
+                  <strong className="font-semibold">{e.curto}:</strong>{" "}
+                  {explicacoes.entes[e.chave]}
+                </li>
+              ) : null
+            )}
+          </ul>
+          {explicacoes.fonte_ia && (
+            <p className="mt-3 text-xs text-blue-700/70">
+              Explicações geradas automaticamente a partir dos dados oficiais.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Composição de alertas */}
       <div className="mt-8 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">

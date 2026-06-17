@@ -91,6 +91,14 @@ export interface Meta {
   anos_coletados: string[] | string;
 }
 
+export interface Explicacoes {
+  entes: Record<string, string>;
+  regras: Record<string, string>;
+  contratos: Record<string, string>;
+  empresas: Record<string, string>;
+  fonte_ia?: string;
+}
+
 export interface Dados {
   loading: boolean;
   erro: string | null;
@@ -99,6 +107,7 @@ export interface Dados {
   contratos: Contrato[];
   cruzamentos: Cruzamento[];
   empresas: EmpresaRanking[]; // fornecedores agregados, ordenados por valor desc
+  explicacoes: Explicacoes | null;
   meta: Meta | null;
   anosDisponiveis: number[];
   ultimaAtualizacao: Date | null;
@@ -111,19 +120,20 @@ function norm(s: string): string {
 export function useDados(): Dados {
   const [d, setD] = useState<Dados>({
     loading: true, erro: null, stats: {}, alertas: [], contratos: [],
-    cruzamentos: [], empresas: [], meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
+    cruzamentos: [], empresas: [], explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
   });
 
   useEffect(() => {
     let vivo = true;
     (async () => {
       try {
-        const [s, a, c, m, sv] = await Promise.all([
+        const [s, a, c, m, sv, ex] = await Promise.all([
           fetch(`${BASE}/stats.json`).then((r) => (r.ok ? r.json() : { stats: {} })),
           fetch(`${BASE}/alertas.json`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${BASE}/contratos.json`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${BASE}/meta.json`).then((r) => (r.ok ? r.json() : null)),
           fetch(`${BASE}/servidores.json`).then((r) => (r.ok ? r.json() : { cruzamentos: [] })),
+          fetch(`${BASE}/explicacoes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
         ]);
         if (!vivo) return;
 
@@ -174,6 +184,7 @@ export function useDados(): Dados {
           loading: false, erro: null,
           stats: s?.stats ?? {},
           alertas, contratos, cruzamentos, empresas,
+          explicacoes: ex,
           meta: m,
           anosDisponiveis,
           ultimaAtualizacao: m?.ultima_coleta ? new Date(m.ultima_coleta) : new Date(),
