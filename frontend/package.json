@@ -2,7 +2,7 @@
   "name": "transparencia10-frontend",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "author": "10Dobro Prod",
   "scripts": {
     "dev": "next dev",

@@ -36,6 +36,9 @@ Devem ser investigados pelos órgãos competentes (TCE-MA, CGU, MPF).
 
 ## Licença
 
-Distribuído sob a **Licença MIT**. Veja o arquivo [LICENSE](LICENSE).
+Licenciamento duplo (detalhes em [LICENSING.md](LICENSING.md)):
 
-© 2026 10Dobro Prod. Uso livre mediante manutenção do aviso de copyright.
+- **Código** → [GNU AGPL-3.0](LICENSE) (alternativa [GPL-3.0](LICENSE-GPL)) — modificações, inclusive em uso via servidor, devem ser abertas.
+- **Dados/conteúdo** → [CC BY-NC 4.0](LICENSE-CC-BY-NC) — citar a fonte e proibido uso comercial.
+
+© 2026 10Dobro Prod.
