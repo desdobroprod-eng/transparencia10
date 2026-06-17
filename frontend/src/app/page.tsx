@@ -76,7 +76,7 @@ export default function VisaoGeralPage() {
           ))}
         </div>
         <Skeleton className="mt-8 h-72 w-full" />
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {Array.from({ length: 5 }).map((_, i) => (
             <Skeleton key={i} className="h-24" />
           ))}
@@ -168,10 +168,10 @@ export default function VisaoGeralPage() {
         </div>
       </div>
 
-      {/* Semáforo de risco por ente */}
+      {/* Pontos a verificar por ente */}
       <div className="mt-8">
-        <h2 className="text-base font-semibold text-gray-900">Risco por ente</h2>
-        <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <h2 className="text-base font-semibold text-gray-900">Pontos a verificar por ente</h2>
+        <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {ENTES.map((e) => {
             const s = stats[e.chave];
             return (
@@ -216,10 +216,10 @@ export default function VisaoGeralPage() {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
           <h2 className="text-base font-semibold text-gray-900">Composição de alertas</h2>
           <a
-            href="/transparencia10/investigacao"
+            href="/transparencia10/cruzamentos"
             className="text-sm font-medium text-blue-700 hover:text-blue-800 hover:underline"
           >
-            Ver investigação sócio × servidor →
+            Ver coincidências de nomes (sócio × servidor) →
           </a>
         </div>
         <ul className="mt-4 space-y-3">

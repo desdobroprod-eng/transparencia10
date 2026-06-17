@@ -10,14 +10,14 @@ export function formatarCNPJ(cnpj: string): string {
 }
 
 export interface EmpresaComRisco extends EmpresaRanking {
-  fachada: boolean;
+  capitalBaixo: boolean;
   multiplo: number;
 }
 
 export function comRisco(e: EmpresaRanking): EmpresaComRisco {
-  const fachada = e.capital_social > 0 && e.total_valor > 50 * e.capital_social;
+  const capitalBaixo = e.capital_social > 0 && e.total_valor > 50 * e.capital_social;
   const multiplo = e.capital_social > 0 ? e.total_valor / e.capital_social : 0;
-  return { ...e, fachada, multiplo };
+  return { ...e, capitalBaixo, multiplo };
 }
 
 export default function TabelaEmpresas({
@@ -52,19 +52,19 @@ export default function TabelaEmpresas({
           {empresas.map((e, i) => (
             <tr
               key={e.cnpj || e.nome}
-              className={e.fachada ? "bg-red-50/60" : "hover:bg-gray-50"}
+              className={e.capitalBaixo ? "bg-amber-50/60" : "hover:bg-gray-50"}
             >
               <td className="px-3 py-3 align-top text-gray-400">{i + 1}</td>
 
               <td className="px-3 py-3 align-top">
                 <div className="flex items-start gap-2">
-                  {e.fachada && (
+                  {e.capitalBaixo && (
                     <span
                       title={`Valor contratado é ${e.multiplo.toLocaleString("pt-BR", {
                         maximumFractionDigits: 0,
-                      })}x o capital social — possível indício de empresa de fachada.`}
-                      className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white"
-                      aria-label="Indício de fachada"
+                      })}x o capital social declarado — divergência a verificar.`}
+                      className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-500 text-[10px] font-bold text-white"
+                      aria-label="Ponto a verificar"
                     >
                       !
                     </span>
@@ -76,13 +76,13 @@ export default function TabelaEmpresas({
                     <div className="text-xs text-gray-400">
                       {formatarCNPJ(e.cnpj)}
                     </div>
-                    {e.fachada && (
-                      <div className="mt-0.5 text-xs font-medium text-red-700">
+                    {e.capitalBaixo && (
+                      <div className="mt-0.5 text-xs font-medium text-amber-700">
                         Valor é{" "}
                         {e.multiplo.toLocaleString("pt-BR", {
                           maximumFractionDigits: 0,
                         })}
-                        x o capital social
+                        x o capital social — a verificar
                       </div>
                     )}
                   </div>

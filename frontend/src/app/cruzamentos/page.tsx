@@ -25,7 +25,7 @@ function norm(s: string): string {
   return (s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toUpperCase().trim();
 }
 
-export default function InvestigacaoPage() {
+export default function CruzamentosPage() {
   const { cruzamentos, loading, erro } = useDados();
 
   const [filtroEnte, setFiltroEnte] = useState<string>("todos");
@@ -69,12 +69,12 @@ export default function InvestigacaoPage() {
         {/* Título */}
         <header className="space-y-2">
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-            Investigação: Sócio × Servidor
+            Coincidências de Nomes: Sócio × Servidor
           </h1>
           <p className="max-w-3xl text-sm text-gray-500">
-            Cruzamentos entre sócios de empresas contratadas (Receita Federal) e
-            servidores públicos estaduais (Portal da Transparência MA),
-            organizados por força do indício.
+            Comparação entre nomes de sócios de empresas contratadas (Receita
+            Federal) e nomes de servidores públicos (Portal da Transparência),
+            apenas para apontar coincidências que merecem verificação.
           </p>
         </header>
 

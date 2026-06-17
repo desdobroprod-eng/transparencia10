@@ -41,7 +41,7 @@ export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] })
           Top 20 por valor contratado
         </h2>
         <p className="text-xs text-gray-400">
-          Barras em vermelho: valor contratado muito acima do capital social.
+          Barras em destaque: valor contratado muito acima do capital social — a verificar.
         </p>
       </div>
       <div className="mt-4" style={{ width: "100%", height: 600 }}>
@@ -70,7 +70,7 @@ export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] })
             />
             <Bar dataKey="valor" radius={[0, 4, 4, 0]} barSize={18}>
               {dados.map((d) => (
-                <Cell key={d.cnpj} fill={d.risco ? "#dc2626" : "#1d4ed8"} />
+                <Cell key={d.cnpj} fill={d.risco ? "#b45309" : "#1d4ed8"} />
               ))}
             </Bar>
           </BarChart>

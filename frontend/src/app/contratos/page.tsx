@@ -138,7 +138,7 @@ export default function ContratosPage() {
       },
       {
         accessorKey: "score_risco",
-        header: "Risco",
+        header: "Pontuação",
         cell: (info) => <RiscoBadge score={info.getValue<number>()} />,
         sortingFn: "basic",
       },

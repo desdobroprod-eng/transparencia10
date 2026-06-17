@@ -84,6 +84,10 @@ ENTES_ALVO = {
         "cnpj": "06003636000173", "codigo_ibge": "2107704", "tipo": "municipio",
         "nome": "Prefeitura de Paço do Lumiar",
     },
+    "pinheiro": {
+        "cnpj": "06200745000180", "codigo_ibge": "2108603", "tipo": "municipio",
+        "nome": "Prefeitura de Pinheiro",
+    },
 }
 
 # ── Recorte temático: Cultura ───────────────────────────────────────────────---

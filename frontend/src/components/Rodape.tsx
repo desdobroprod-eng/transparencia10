@@ -10,7 +10,7 @@ export default function Rodape() {
         <p>
           Os indicadores e cruzamentos são <strong className="text-gray-700">sinalizações automáticas</strong> por
           regras objetivas sobre dados públicos. <strong className="text-gray-700">Não constituem acusação</strong> e
-          devem ser investigados pelos órgãos competentes (TCE-MA, CGU, MPF). Homonímia é possível.
+          devem ser apurados pelos órgãos competentes (TCE-MA, CGU, MPF). Homonímia é possível.
         </p>
         <p>
           <strong className="text-gray-700">Canal de retificação:</strong> se você ou sua empresa

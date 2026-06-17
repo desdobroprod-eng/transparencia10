@@ -195,21 +195,20 @@ export default function MetodologiaPage() {
             ))}
           </div>
           <p className="mt-6">
-            Cada indicador contribui para um <strong>score de 0 a 100</strong>, em
-            que valores mais altos representam maior necessidade de atenção. As
-            faixas são:
+            Cada indicador contribui para uma <strong>pontuação de 0 a 100</strong>,
+            em que valores mais altos representam maior necessidade de verificação.
+            A pontuação NÃO é um julgamento — apenas ordena o que merece olhar
+            primeiro:
           </p>
           <ul>
             <li>
-              <strong>≥ 80 — risco alto:</strong> conjunto de sinais que pede
-              apuração prioritária.
+              <strong>≥ 80:</strong> vários pontos a verificar — convém apurar primeiro.
             </li>
             <li>
-              <strong>≥ 60 — atenção:</strong> sinais relevantes que merecem
-              acompanhamento.
+              <strong>≥ 60:</strong> alguns pontos que merecem acompanhamento.
             </li>
             <li>
-              <strong>Abaixo de 60:</strong> sem indícios significativos no momento.
+              <strong>Abaixo de 60:</strong> poucos ou nenhum ponto a verificar no momento.
             </li>
           </ul>
         </section>
@@ -222,8 +221,9 @@ export default function MetodologiaPage() {
           </p>
           <ul>
             <li>
-              A base de servidores cobre apenas servidores <strong>estaduais</strong> do
-              Maranhão. Servidores municipais não estão incluídos no cruzamento.
+              A base de servidores cobre servidores <strong>estaduais</strong> do
+              Maranhão e, quando disponível, servidores <strong>municipais</strong> dos
+              municípios monitorados.
             </li>
             <li>
               O cruzamento por nome pode gerar coincidências (homonímia). Um{" "}
@@ -250,7 +250,7 @@ export default function MetodologiaPage() {
               geradas sobre dados públicos. Eles <strong>não constituem acusação</strong>{" "}
               nem comprovação de irregularidade. Cada apontamento deve ser apurado
               pelos órgãos competentes — como o TCE-MA, a CGU e o MPF — que detêm os
-              meios e a autoridade para investigação.
+              meios e a autoridade para apuração.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-amber-900">
               Encontrou uma informação incorreta ou deseja contestar um apontamento?

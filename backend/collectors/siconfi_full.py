@@ -45,6 +45,12 @@ ENTES_SICONFI = {
         "nome": "Prefeitura de Paço do Lumiar",
         "tipo": "municipio",
     },
+    "pinheiro": {
+        "id_ente": "2108603",
+        "co_uf": "MA",
+        "nome": "Prefeitura de Pinheiro",
+        "tipo": "municipio",
+    },
 }
 
 # Períodos bimestrais do RREO (1 a 6)

@@ -7,7 +7,7 @@ const LINKS = [
   { href: "/", label: "Visão Geral" },
   { href: "/contratos", label: "Contratos" },
   { href: "/empresas", label: "Empresas" },
-  { href: "/investigacao", label: "Sócio × Servidor" },
+  { href: "/cruzamentos", label: "Coincidências de Nomes" },
   { href: "/metodologia", label: "Metodologia" },
 ];
 
