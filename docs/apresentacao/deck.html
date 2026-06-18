@@ -1,0 +1,242 @@
+<!doctype html>
+<!-- #10Dobro_Brain #Ctx_TransparenciaCultural #Ctx_Deck -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portal Transparência Cultural do Brasil — Apresentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --tinta:#0B0B0C; --papel:#F7F3EC; --carmim:#C8102E;
+    --dourado:#E2B100; --cobalto:#1B3A8B;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#2a2a2c;color:var(--tinta);font-family:var(--sans);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck{display:flex;flex-direction:column;align-items:center;gap:24px;padding:32px 16px}
+
+  /* 16:9 slide — 1280x720 base, escala por print */
+  .slide{
+    position:relative;width:1280px;height:720px;overflow:hidden;
+    background:var(--papel);box-shadow:0 12px 40px rgba(0,0,0,.45);
+    display:flex;flex-direction:column;
+  }
+  .pad{padding:72px 84px;flex:1;display:flex;flex-direction:column}
+
+  /* marca d'água / régua superior */
+  .brandbar{display:flex;align-items:center;gap:14px;margin-bottom:38px}
+  .brandbar .nm{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.01em}
+  .brandbar .sub{font-size:12px;color:#6b6b6b;font-weight:500}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--carmim)}
+  .pagenum{position:absolute;right:84px;bottom:54px;font-size:13px;color:#9a958c;font-weight:600;letter-spacing:.1em}
+  .rule{height:4px;width:64px;background:var(--dourado);border-radius:99px;margin:18px 0 26px}
+
+  h1{font-family:var(--serif);font-weight:900;line-height:1.02;letter-spacing:-.02em}
+  h2{font-family:var(--serif);font-weight:900;font-size:54px;line-height:1.04;letter-spacing:-.02em}
+  .lead{font-size:20px;line-height:1.5;color:#3a3a3a;max-width:760px;margin-top:8px}
+  ul.bul{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:18px}
+  ul.bul li{position:relative;padding-left:34px;font-size:21px;line-height:1.42;color:#222}
+  ul.bul li::before{content:"";position:absolute;left:0;top:11px;width:13px;height:13px;border-radius:3px;background:var(--cobalto)}
+  ul.bul li.c::before{background:var(--carmim)}
+  ul.bul li.d::before{background:var(--dourado)}
+  strong{font-weight:700;color:var(--tinta)}
+
+  /* CAPA */
+  .cover{background:var(--tinta);color:var(--papel)}
+  .cover .pad{justify-content:center}
+  .cover .kicker{color:var(--dourado)}
+  .cover h1{font-size:82px;color:var(--papel);margin:18px 0 0;max-width:1000px}
+  .cover .lead{color:#d8d2c6;font-size:22px;max-width:820px;margin-top:26px}
+  .cover .foot{position:absolute;left:84px;bottom:56px;display:flex;align-items:center;gap:14px;color:#bdb7ab;font-size:15px;font-weight:600}
+  .cover .glow{position:absolute;right:-160px;top:-160px;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(200,16,46,.55),transparent 62%);filter:blur(8px)}
+  .cover .glow2{position:absolute;right:120px;bottom:-220px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(27,58,139,.5),transparent 64%)}
+
+  /* NÚMEROS */
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:34px}
+  .stat{background:#fff;border:1px solid #e7e0d3;border-radius:18px;padding:30px 32px}
+  .stat .n{font-family:var(--serif);font-weight:900;font-size:52px;line-height:1;letter-spacing:-.02em}
+  .stat .l{margin-top:10px;font-size:15px;color:#5a5a5a;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+  .stat.c .n{color:var(--carmim)} .stat.b .n{color:var(--cobalto)} .stat.d .n{color:#9a7a00}
+
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;flex:1}
+  .quote{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.28;color:var(--tinta)}
+  .src{margin-top:auto;font-size:13px;color:#8a857b}
+
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    html,body{background:#fff}
+    .deck{display:block;padding:0;gap:0}
+    .slide{box-shadow:none;page-break-after:always;break-after:page;width:1280px;height:720px}
+    .slide:last-child{page-break-after:auto}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 · CAPA -->
+  <section class="slide cover">
+    <div class="glow"></div><div class="glow2"></div>
+    <div class="pad">
+      <div class="kicker">Fiscalização cidadã · Maranhão</div>
+      <h1>Portal Transparência<br/>Cultural do Brasil</h1>
+      <p class="lead">Os gastos públicos com cultura, reunidos, cruzados e abertos a qualquer cidadão. Dados abertos, código aberto, sem fins lucrativos.</p>
+      <div class="foot">
+        <svg width="30" height="30" viewBox="0 0 120 120" role="img" aria-label="logo">
+          <path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/>
+          <path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/>
+          <rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/>
+          <rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/>
+          <circle cx="66" cy="46" r="4" fill="#F7F3EC"/>
+        </svg>
+        Uma iniciativa 10Dobro Prod · 10dobroprod.com.br
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · O PROBLEMA -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">O problema</div>
+      <div class="rule"></div>
+      <h2>O dinheiro existe.<br/>A leitura, não.</h2>
+      <ul class="bul">
+        <li class="c">O dinheiro da cultura sustenta a <strong>festa, o ofício e a memória</strong> do povo</li>
+        <li>Gastos pulverizados em <strong>centenas de contratos</strong> de difícil leitura</li>
+        <li class="d">Os dados públicos existem — mas <strong>dispersos e não cruzados</strong></li>
+        <li class="b">Falta uma <strong>camada cidadã</strong> que conecte os pontos</li>
+      </ul>
+    </div>
+    <div class="pagenum">02</div>
+  </section>
+
+  <!-- 3 · O QUE É -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">O que é o Portal</div>
+      <div class="rule"></div>
+      <h2>Proposta de valor</h2>
+      <ul class="bul">
+        <li class="b">Reúne contratos de cultura de <strong>6 entes do MA</strong> em um só lugar</li>
+        <li class="c">Cruza dados públicos para apontar <strong>coincidências a verificar</strong></li>
+        <li class="d">Linguagem sóbria: <strong>pontos a apurar</strong>, nunca acusação</li>
+        <li>Fonte oficial <strong>sempre linkada</strong> (PNCP, Portal da Transparência)</li>
+      </ul>
+    </div>
+    <div class="pagenum">03</div>
+  </section>
+
+  <!-- 4 · COMO FUNCIONA -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">Como funciona o cruzamento</div>
+      <div class="rule"></div>
+      <h2>O motor de análise</h2>
+      <ul class="bul">
+        <li class="b"><strong>Sócios</strong> de empresas contratadas × <strong>servidores públicos</strong></li>
+        <li class="c">Sobrenomes idênticos e em mesma ordem — <strong>rigor anti-falso-positivo</strong></li>
+        <li class="d">Empresa nova, <strong>capital incompatível</strong> com o valor, retificações</li>
+        <li>Sanções federais <strong>CEIS / CNEP (CGU)</strong> sobre as contratadas</li>
+      </ul>
+    </div>
+    <div class="pagenum">04</div>
+  </section>
+
+  <!-- 5 · NÚMEROS -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">Os números</div>
+      <div class="rule"></div>
+      <h2 style="font-size:46px">Resultado atual</h2>
+      <div class="stats">
+        <div class="stat b"><div class="n">6</div><div class="l">entes fiscalizados — estado + 5 municípios</div></div>
+        <div class="stat"><div class="n">918</div><div class="l">contratos de cultura mapeados · 2024–2026</div></div>
+        <div class="stat d"><div class="n">R$ 1,6 bi</div><div class="l">em execução de cultura acompanhada</div></div>
+        <div class="stat c"><div class="n">335</div><div class="l">pontos a verificar · 60 coincidências · 6 sancionadas</div></div>
+      </div>
+    </div>
+    <div class="pagenum">05</div>
+  </section>
+
+  <!-- 6 · RIGOR -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">Rigor e honestidade</div>
+      <div class="rule"></div>
+      <div class="two">
+        <div style="display:flex;flex-direction:column">
+          <div class="quote">"Coincidência de nomes não é prova. É ponto de partida para uma apuração — não uma conclusão."</div>
+          <div class="src">Princípio metodológico do Portal · parecer jurídico aplicado</div>
+        </div>
+        <ul class="bul" style="margin-top:0;justify-content:center">
+          <li class="b"><strong>Limite declarado:</strong> cruzamento usa servidores estaduais</li>
+          <li class="d">Canal de retificação aberto · <strong>resposta em 7 dias</strong></li>
+          <li class="c">Conformidade <strong>LGPD</strong> e parecer jurídico aplicado</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pagenum">06</div>
+  </section>
+
+  <!-- 7 · TECNOLOGIA -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar">
+        <svg width="26" height="26" viewBox="0 0 120 120"><path d="M88 33 A36 36 0 1 0 88 87" fill="none" stroke="#C8102E" stroke-width="13" stroke-linecap="round"/><path d="M88 33 q 7 -5 13 2" fill="none" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/><rect x="44" y="40" width="44" height="11" rx="5.5" fill="#E2B100"/><rect x="60.5" y="44" width="11" height="40" rx="5.5" fill="#1B3A8B"/><circle cx="66" cy="46" r="4" fill="#F7F3EC"/></svg>
+        <span class="nm">Transparência Cultural</span><span class="sub">· do Brasil</span>
+      </div>
+      <div class="kicker">Tecnologia e dados abertos</div>
+      <div class="rule"></div>
+      <h2>Como é construído</h2>
+      <ul class="bul">
+        <li class="b">APIs públicas: <strong>PNCP, BrasilAPI, Portal Transparência MA, SICONFI, CGU</strong></li>
+        <li>Coleta automatizada, painel web e <strong>camada explicativa de IA</strong></li>
+        <li class="d">Código sob <strong>AGPL-3.0 + GPL-3.0</strong> · dados sob <strong>CC BY-NC 4.0</strong></li>
+        <li class="c"><strong>Reprodutível e auditável</strong> por qualquer cidadão</li>
+      </ul>
+    </div>
+    <div class="pagenum">07</div>
+  </section>
+
+  <!-- 8 · PARCERIA -->
+  <section class="slide cover">
+    <div class="glow"></div><div class="glow2"></div>
+    <div class="pad" style="justify-content:center">
+      <div class="kicker">Chamado à parceria</div>
+      <h1 style="font-size:64px">Cultura fiscalizada<br/>é cultura protegida.</h1>
+      <ul class="bul" style="margin-top:34px">
+        <li class="d" style="color:#ece7db">Convite ao <strong style="color:#fff">Ministério Público</strong> e à sociedade civil</li>
+        <li class="b" style="color:#ece7db">Expansão para <strong style="color:#fff">novos entes e esferas</strong></li>
+      </ul>
+      <div class="foot" style="color:#e6e0d4;font-size:17px">contato@10dobroprod.com.br</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
