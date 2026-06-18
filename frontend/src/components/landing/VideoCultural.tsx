@@ -42,8 +42,26 @@ export default function VideoCultural() {
           O dinheiro público da cultura sustenta a festa, o ofício e a memória do
           povo. Fiscalizar é proteger o que faz o Maranhão ser o Maranhão.
         </p>
-        <p className="mt-8 text-[11px] text-[#F7F3EC]/45">
-          Imagens: Tambor de Crioula do Maranhão — TVNBR, CC BY 3.0, via Wikimedia Commons.
+        <p className="mt-8 text-[11px] leading-relaxed text-[#F7F3EC]/55">
+          Vídeo:{" "}
+          <a
+            href="https://commons.wikimedia.org/wiki/File:Patrim%C3%B4nio_Cultural_do_Brasil,_Tambor_de_Crioula_do_Maranh%C3%A3o_envolve_dan%C3%A7a,_canto_e_percuss%C3%A3o.webm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-[#E2B100]/60 underline-offset-2 hover:text-[#F7F3EC]"
+          >
+            “Tambor de Crioula do Maranhão”
+          </a>{" "}
+          por <strong className="font-semibold">TVNBR</strong>, licenciado sob{" "}
+          <a
+            href="https://creativecommons.org/licenses/by/3.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-[#E2B100]/60 underline-offset-2 hover:text-[#F7F3EC]"
+          >
+            CC BY 3.0
+          </a>
+          , via Wikimedia Commons. Trecho recortado.
         </p>
       </div>
     </section>
