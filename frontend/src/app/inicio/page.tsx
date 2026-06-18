@@ -8,6 +8,7 @@ import SpotlightCard from "@/components/landing/SpotlightCard";
 import GaleriaCultural, {
   type FotoCultural,
 } from "@/components/landing/GaleriaCultural";
+import VideoCultural from "@/components/landing/VideoCultural";
 import creditosData from "../../../public/cultura/CREDITOS.json";
 
 // Tipografia editorial: serifa de alto contraste (Fraunces) para títulos e
@@ -362,6 +363,9 @@ export default function LandingInicio() {
           </div>
         </div>
       </section>
+
+      {/* ╔══ FAIXA DE VÍDEO (TAMBOR DE CRIOULA) ══╗ */}
+      <VideoCultural />
 
       {/* ╔══ GALERIA CULTURAL ══╗ */}
       <section className="bg-[#0B0B0C] py-20 sm:py-28">
