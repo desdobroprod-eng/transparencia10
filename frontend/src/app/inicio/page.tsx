@@ -10,6 +10,7 @@ import GaleriaCultural, {
 } from "@/components/landing/GaleriaCultural";
 import VideoCultural from "@/components/landing/VideoCultural";
 import { LogoIcon } from "@/components/Logo";
+import BaseLegal from "@/components/BaseLegal";
 import creditosData from "../../../public/cultura/CREDITOS.json";
 
 // Tipografia editorial: serifa de alto contraste (Fraunces) para títulos e
@@ -424,6 +425,15 @@ export default function LandingInicio() {
               </ScrollReveal>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* ╔══ BASE LEGAL (explicada para o público) ══╗ */}
+      <section className="bg-[#F7F3EC] pb-20 sm:pb-28">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
+          <ScrollReveal>
+            <BaseLegal compacto />
+          </ScrollReveal>
         </div>
       </section>
 
