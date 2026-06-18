@@ -217,9 +217,10 @@ function LinhaEmenda({ e }: { e: Emenda }) {
       <td className="px-4 py-3">
         {e.cnpj_favorecido ? (
           <a
-            href={`https://publica.cnpj.ws/cnpj/${e.cnpj_favorecido}`}
+            href={`https://portaldatransparencia.gov.br/pessoa-juridica/${e.cnpj_favorecido}`}
             target="_blank"
             rel="noopener noreferrer"
+            title="Abrir no Portal da Transparência federal (fonte oficial)"
             className="text-blue-600 underline hover:text-blue-800"
           >
             {fmtCnpj(e.cnpj_favorecido)}
@@ -231,6 +232,16 @@ function LinhaEmenda({ e }: { e: Emenda }) {
           <span className="mt-1 block rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-medium text-orange-700">
             também é fornecedor
           </span>
+        )}
+        {e.detalhe_url && (
+          <a
+            href={e.detalhe_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 block text-xs text-blue-600 underline hover:text-blue-800"
+          >
+            ver no Portal Federal →
+          </a>
         )}
       </td>
       <td className="px-4 py-3 text-right font-medium text-gray-900">
