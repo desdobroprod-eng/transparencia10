@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import Rodape from "@/components/Rodape";
+import LayoutChrome from "@/components/LayoutChrome";
 
 export const metadata: Metadata = {
   title: "Portal Transparência Cultural do Brasil",
@@ -13,9 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body className="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
-        <NavBar />
-        <main className="flex-1">{children}</main>
-        <Rodape />
+        <LayoutChrome>{children}</LayoutChrome>
       </body>
     </html>
   );

@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Entrada suave da landing — base SEMPRE visível (sem animation-fill-mode que
+   esconda); a animação é puramente aditiva. Se não rodar, o conteúdo aparece. */
+@keyframes revealRise {
+  0% { opacity: 0.001; transform: translateY(22px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.reveal-rise { animation: revealRise 720ms cubic-bezier(.2,.65,.3,1); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-rise { animation: none; }
+}
