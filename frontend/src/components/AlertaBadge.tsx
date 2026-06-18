@@ -135,10 +135,10 @@ export default function AlertaBadge({
           <p className="text-xs text-gray-500 mt-1">
             CNPJ:{" "}
             <a
-              href={`https://portaldatransparencia.gov.br/pessoa-juridica/${cnpj}`}
+              href={`https://www.consultacnpj.com/cnpj/${cnpj}`}
               target="_blank"
               rel="noopener noreferrer"
-              title="Abrir no Portal da Transparência federal (fonte oficial)"
+              title="Consultar dados públicos deste CNPJ"
               className="text-blue-600 underline hover:text-blue-800"
             >
               {cnpj}

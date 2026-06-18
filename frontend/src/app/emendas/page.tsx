@@ -217,10 +217,10 @@ function LinhaEmenda({ e }: { e: Emenda }) {
       <td className="px-4 py-3">
         {e.cnpj_favorecido ? (
           <a
-            href={`https://portaldatransparencia.gov.br/pessoa-juridica/${e.cnpj_favorecido}`}
+            href={`https://www.consultacnpj.com/cnpj/${e.cnpj_favorecido}`}
             target="_blank"
             rel="noopener noreferrer"
-            title="Abrir no Portal da Transparência federal (fonte oficial)"
+            title="Consultar dados públicos deste CNPJ"
             className="text-blue-600 underline hover:text-blue-800"
           >
             {fmtCnpj(e.cnpj_favorecido)}
