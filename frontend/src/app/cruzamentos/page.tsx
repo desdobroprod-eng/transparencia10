@@ -144,12 +144,12 @@ export default function CruzamentosPage() {
               detalhe="Indício mais forte (homonímia possível)"
             />
             <KpiCard
-              rotulo="Empresas envolvidas"
+              rotulo="Empresas"
               valor={kpis.empresas}
               detalhe="Fornecedores distintos"
             />
             <KpiCard
-              rotulo="Servidores envolvidos"
+              rotulo="Servidores"
               valor={kpis.servidores}
               detalhe="Servidores estaduais distintos"
             />
