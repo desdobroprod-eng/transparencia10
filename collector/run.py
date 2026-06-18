@@ -786,6 +786,38 @@ async def executar_coleta(
     _salvar_json("alertas.json", alertas_frontend)
     _salvar_json("stats.json", stats_frontend)
 
+    # ── Emendas parlamentares de Cultura (estaduais + federais MA) ─────────────
+    # Não-bloqueante: se a fonte cair, o pipeline segue sem emendas.
+    emendas_stats: dict = {"total": 0}
+    try:
+        from emendas_ma import coletar_emendas_cultura
+
+        dados_emendas = await coletar_emendas_cultura()
+        emendas = dados_emendas["emendas"]
+        # Cruza favorecido da emenda × fornecedor contratado (mesmo CNPJ).
+        cnpjs_fornecedores = {
+            "".join(ch for ch in str(c.get("cnpj") or "") if ch.isdigit())
+            for c in contratos_frontend
+        }
+        cnpjs_fornecedores.discard("")
+        for e in emendas:
+            e["fornecedor_contratado"] = bool(
+                e.get("cnpj_favorecido") and e["cnpj_favorecido"] in cnpjs_fornecedores
+            )
+        emendas_stats = dados_emendas["stats"]
+        emendas_stats["favorecido_tambem_fornecedor"] = sum(
+            1 for e in emendas if e.get("fornecedor_contratado")
+        )
+        _salvar_json("emendas.json", {"emendas": emendas, "stats": emendas_stats})
+        print(
+            f"[EMENDAS] {len(emendas)} de cultura · "
+            f"{emendas_stats['favorecido_tambem_fornecedor']} favorecido(s) também fornecedor"
+        )
+    except Exception as exc:  # noqa: BLE001 — não-bloqueante por design
+        emendas_stats = {"total": 0, "erro": str(exc)}
+        _salvar_json("emendas.json", {"emendas": [], "stats": emendas_stats})
+        print(f"[EMENDAS] falhou (não bloqueante): {exc}")
+
     # meta.json — metadados da execução (campos lidos pelo frontend)
     meta = {
         "ultima_coleta": fim,
@@ -797,9 +829,11 @@ async def executar_coleta(
         "total_alertas": len(alertas_frontend),
         "gasto_cultura_siconfi": gasto_siconfi_por_ente,
         "alertas_por_categoria": contadores_categoria,
+        "total_emendas_cultura": emendas_stats.get("total", 0),
+        "valor_emendas_cultura": emendas_stats.get("valor_empenhado", 0),
         "entes_processados": list(entes_processar.keys()),
-        "anos_coletados": [str(a) for a in anos] if anos else "2021-hoje",
-        "fontes_usadas": ["pncp", "siconfi", "siape", "tce_ma"],
+        "anos_coletados": [str(a) for a in anos] if anos else "2024-2026",
+        "fontes_usadas": ["pncp", "siconfi", "siape", "tce_ma", "emendas_ma"],
         "siconfi_disponivel": "erro" not in dados_siconfi,
         "cruzamento_servidores": cruzamento_servidores_ok,
         "versao_coletor": "2.0.0",

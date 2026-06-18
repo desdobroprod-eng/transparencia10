@@ -21,7 +21,14 @@ function Skeleton({ className = "" }: { className?: string }) {
 }
 
 export default function VisaoGeralPage() {
-  const { loading, erro, stats, meta, cruzamentos, explicacoes, ultimaAtualizacao } = useDados();
+  const { loading, erro, stats, meta, cruzamentos, emendas, explicacoes, ultimaAtualizacao } = useDados();
+
+  const emendasResumo = useMemo(() => {
+    const total = emendas.length;
+    const valor = emendas.reduce((s, e) => s + (e.valor_empenhado || 0), 0);
+    const fornecedor = emendas.filter((e) => e.fornecedor_contratado).length;
+    return { total, valor, fornecedor };
+  }, [emendas]);
 
   const dadosBarras = useMemo(
     () =>
@@ -123,6 +130,29 @@ export default function VisaoGeralPage() {
           valor={cruzamentos.length.toLocaleString("pt-BR")}
         />
       </div>
+
+      {/* Destaque — emendas parlamentares para a cultura */}
+      {emendasResumo.total > 0 && (
+        <a
+          href="/transparencia10/emendas"
+          className="mt-4 flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-blue-300 hover:shadow sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">
+              Novo · Emendas parlamentares para a cultura
+            </p>
+            <p className="mt-1 text-sm text-gray-600">
+              <strong className="text-gray-900">{emendasResumo.total.toLocaleString("pt-BR")}</strong>{" "}
+              emendas ({formatBRL(emendasResumo.valor)} empenhados) —{" "}
+              <strong className="text-orange-700">{emendasResumo.fornecedor}</strong> com favorecido
+              que também é fornecedor contratado.
+            </p>
+          </div>
+          <span className="shrink-0 rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white">
+            Ver emendas →
+          </span>
+        </a>
+      )}
 
       {/* Gráfico de barras — gasto por ente */}
       <div className="mt-8 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">

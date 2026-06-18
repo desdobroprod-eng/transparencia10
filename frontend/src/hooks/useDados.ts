@@ -80,6 +80,26 @@ export interface Cruzamento {
   exato: boolean;
 }
 
+export interface Emenda {
+  esfera: "estadual" | "federal";
+  id: string;
+  ano: string;
+  parlamentar: string;
+  tipo: string;
+  unidade: string;
+  objeto: string;
+  beneficiada: string;
+  cnpj_favorecido: string;
+  funcao: string;
+  subfuncao: string;
+  valor_empenhado: number;
+  valor_liquidado: number;
+  valor_pago: number;
+  fonte: string;
+  detalhe_url?: string;
+  fornecedor_contratado?: boolean;
+}
+
 export interface Meta {
   ultima_coleta: string;
   total_registros: number;
@@ -89,6 +109,8 @@ export interface Meta {
   alertas_por_categoria: { financeiro: number; conflito_interesse: number; nepotismo: number };
   gasto_cultura_siconfi: Record<string, number>;
   anos_coletados: string[] | string;
+  total_emendas_cultura?: number;
+  valor_emendas_cultura?: number;
 }
 
 export interface Explicacoes {
@@ -107,6 +129,7 @@ export interface Dados {
   contratos: Contrato[];
   cruzamentos: Cruzamento[];
   empresas: EmpresaRanking[]; // fornecedores agregados, ordenados por valor desc
+  emendas: Emenda[];
   explicacoes: Explicacoes | null;
   meta: Meta | null;
   anosDisponiveis: number[];
@@ -120,20 +143,21 @@ function norm(s: string): string {
 export function useDados(): Dados {
   const [d, setD] = useState<Dados>({
     loading: true, erro: null, stats: {}, alertas: [], contratos: [],
-    cruzamentos: [], empresas: [], explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
+    cruzamentos: [], empresas: [], emendas: [], explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
   });
 
   useEffect(() => {
     let vivo = true;
     (async () => {
       try {
-        const [s, a, c, m, sv, ex] = await Promise.all([
+        const [s, a, c, m, sv, ex, emd] = await Promise.all([
           fetch(`${BASE}/stats.json`).then((r) => (r.ok ? r.json() : { stats: {} })),
           fetch(`${BASE}/alertas.json`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${BASE}/contratos.json`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${BASE}/meta.json`).then((r) => (r.ok ? r.json() : null)),
           fetch(`${BASE}/servidores.json`).then((r) => (r.ok ? r.json() : { cruzamentos: [] })),
           fetch(`${BASE}/explicacoes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+          fetch(`${BASE}/emendas.json`).then((r) => (r.ok ? r.json() : { emendas: [] })).catch(() => ({ emendas: [] })),
         ]);
         if (!vivo) return;
 
@@ -180,10 +204,12 @@ export function useDados(): Dados {
         }
         const empresas = Object.values(porCnpj).sort((x, y) => y.total_valor - x.total_valor);
 
+        const emendas: Emenda[] = (Array.isArray(emd) ? emd : emd?.emendas ?? []) as Emenda[];
+
         setD({
           loading: false, erro: null,
           stats: s?.stats ?? {},
-          alertas, contratos, cruzamentos, empresas,
+          alertas, contratos, cruzamentos, empresas, emendas,
           explicacoes: ex,
           meta: m,
           anosDisponiveis,
