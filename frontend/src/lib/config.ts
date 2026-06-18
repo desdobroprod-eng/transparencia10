@@ -48,7 +48,7 @@ export const REGRA_LABEL: Record<string, string> = {
   EMPRESA_NOVA: "Empresa recém-aberta",
   EMPRESA_SANCIONADA: "Empresa em lista de sanção (CEIS/CNEP)",
   DUPLICIDADE_CONTRATO: "Contratos semelhantes em curto intervalo",
-  FRACIONAMENTO_LICITACAO: "Possível fracionamento de dispensa",
+  FRACIONAMENTO_LICITACAO: "Dispensas em sequência — a verificar",
   FORNECEDOR_MONOPOLIO: "Concentração de contratos no fornecedor",
   CONTRATO_SEM_LICITACAO: "Dispensa/inexigibilidade acima do teto",
   CONTRATO_VENCIDO_RENOVADO: "Contrato vencido ainda ativo",

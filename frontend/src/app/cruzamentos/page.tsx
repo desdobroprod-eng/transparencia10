@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useDados, type Cruzamento } from "@/hooks/useDados";
 import { ENTES, NOME_ENTE } from "@/lib/config";
 import KpiCard from "@/components/visao/KpiCard";
@@ -80,6 +81,35 @@ export default function CruzamentosPage() {
 
         {/* Disclaimer fixo e obrigatório */}
         <DisclaimerInvestigacao />
+
+        {/* Base legal — por que a coincidência merece apuração (sem imputação) */}
+        <details className="rounded-xl border border-gray-200 bg-white px-5 py-4 text-sm text-gray-600">
+          <summary className="cursor-pointer font-medium text-gray-700">
+            Por que esse cruzamento importa? (base legal)
+          </summary>
+          <div className="mt-3 space-y-2 leading-relaxed">
+            <p>
+              Servidor público <strong>pode ser sócio</strong>, mas não pode
+              administrar empresa privada (art. 117 da Lei nº 8.112/1990) — o que
+              também o impede de ser MEI, EI ou SLU. E o art. 14 da Lei nº
+              14.133/2021 <strong>veda</strong> a participação, direta ou
+              indireta, de agente público como licitante ou contratado do próprio
+              órgão. Contratar com a Administração da mesma esfera pode configurar
+              conflito de interesses.
+            </p>
+            <p>
+              Por isso uma coincidência de nome entre sócio e servidor é
+              justamente o que merece ser checado. Isto <strong>não</strong>{" "}
+              afirma que houve irregularidade em qualquer caso: confirmar
+              identidade (CPF) e quem administra a empresa cabe aos órgãos de
+              controle. Detalhes na{" "}
+              <Link href="/metodologia" className="text-blue-700 underline">
+                Metodologia
+              </Link>
+              .
+            </p>
+          </div>
+        </details>
 
         {/* Estado de erro */}
         {erro && (

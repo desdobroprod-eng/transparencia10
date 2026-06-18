@@ -35,7 +35,7 @@ export default function VideoCultural() {
           Tambor de Crioula · Maranhão
         </p>
         <h2 className="font-serif text-3xl font-black leading-tight sm:text-5xl">
-          Cada real desviado é uma saia que deixa de rodar,
+          Cada real mal aplicado é uma saia que deixa de rodar,
           <br className="hidden sm:block" /> um tambor que deixa de soar.
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#F7F3EC]/80 sm:text-lg">

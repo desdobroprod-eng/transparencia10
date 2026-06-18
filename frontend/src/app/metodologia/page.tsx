@@ -69,8 +69,8 @@ export default function MetodologiaPage() {
           Metodologia &amp; Sobre
         </h1>
         <p className="mt-3 text-base text-gray-600">
-          Como o Transparência 10 reúne, organiza e analisa os dados públicos de
-          gastos com cultura no Maranhão.
+          Como o Portal Transparência Cultural do Brasil reúne, organiza e
+          analisa os dados públicos de gastos com cultura no Maranhão.
         </p>
         {!loading && meta && (
           <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -114,11 +114,12 @@ export default function MetodologiaPage() {
         <section>
           <h2>O que é</h2>
           <p>
-            O Transparência 10 acompanha os gastos com cultura das secretarias do
-            Maranhão — Estado (SECMA), São Luís, Raposa, São José de Ribamar e Paço
-            do Lumiar. A plataforma reúne dados públicos de diferentes fontes
-            oficiais e sinaliza padrões que merecem atenção, tornando mais simples
-            para o cidadão acompanhar para onde vai o dinheiro da cultura.
+            O Portal Transparência Cultural do Brasil acompanha os gastos com
+            cultura das secretarias do Maranhão — Estado (SECMA), São Luís,
+            Raposa, São José de Ribamar, Paço do Lumiar e Pinheiro. A plataforma
+            reúne dados públicos de diferentes fontes oficiais e sinaliza padrões
+            que merecem atenção, tornando mais simples para o cidadão acompanhar
+            para onde vai o dinheiro da cultura.
           </p>
         </section>
 
@@ -211,6 +212,51 @@ export default function MetodologiaPage() {
               <strong>Abaixo de 60:</strong> poucos ou nenhum ponto a verificar no momento.
             </li>
           </ul>
+        </section>
+
+        <section>
+          <h2>Fundamento legal do cruzamento sócio × servidor</h2>
+          <p>
+            Por que comparar sócios de empresas contratadas com servidores
+            públicos? Porque a lei estabelece limites objetivos para a relação
+            entre o agente público e contratos com a Administração. Em resumo:
+          </p>
+          <ul>
+            <li>
+              <strong>Servidor pode ser sócio, não administrador.</strong> Pela
+              legislação (por exemplo, o art. 117 da Lei nº 8.112/1990, para
+              federais), o servidor pode ser acionista, cotista ou sócio
+              investidor, mas <strong>não pode exercer a gerência ou a
+              administração</strong> de sociedade privada. Por isso fica
+              impedido de figurar como administrador no contrato social e de ser
+              MEI, Empresário Individual (EI) ou Sociedade Limitada Unipessoal
+              (SLU).
+            </li>
+            <li>
+              <strong>Vedação de contratar com a própria esfera.</strong> O
+              art. 14 da Lei nº 14.133/2021 (Nova Lei de Licitações) veda
+              expressamente a participação, direta ou indireta, de agente
+              público do órgão contratante como licitante ou contratado. A
+              contratação da Administração com empresa de servidor da mesma
+              esfera pode configurar <strong>conflito de interesses</strong>.
+            </li>
+            <li>
+              Para participar de licitações, o servidor sócio deve afastar-se da
+              gestão da empresa e transferir a administração a terceiro,
+              evitando contratos com o setor público que possam incorrer em
+              improbidade ou violação de estatuto de carreira.
+            </li>
+          </ul>
+          <p>
+            <strong>Como isso se aplica aqui:</strong> quando o nome de um sócio
+            coincide com o de um servidor, esse é exatamente o cenário que a lei
+            manda observar — e por isso o dado é <strong>sinalizado para
+            apuração</strong>. O portal <strong>não afirma</strong> que houve
+            vedação, conflito de interesses ou irregularidade em nenhum caso
+            concreto: a coincidência de nome não confirma identidade, e a
+            verificação (inclusive de quem administra a empresa e de CPF)
+            compete aos órgãos de controle.
+          </p>
         </section>
 
         <section>

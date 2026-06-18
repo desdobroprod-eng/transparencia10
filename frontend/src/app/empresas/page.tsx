@@ -100,9 +100,10 @@ export default function EmpresasPage() {
         </div>
 
         <p className="mt-3 text-xs text-gray-400">
-          A marca vermelha (!) sinaliza empresas cujo valor contratado supera em
-          mais de 50 vezes o capital social declarado — possível indício de
-          empresa de fachada, que merece verificação.
+          A marca (!) sinaliza empresas cujo valor contratado supera em mais de
+          50 vezes o capital social declarado — uma divergência cadastral entre
+          o porte registrado e o montante contratado que merece verificação
+          pelos órgãos de controle. Não é, por si só, indício de irregularidade.
         </p>
       </div>
     </section>

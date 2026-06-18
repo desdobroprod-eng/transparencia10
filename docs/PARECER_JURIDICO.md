@@ -134,3 +134,45 @@ card; amostra mínima maior em PRECO_ABUSIVO; documentar proporcionalidade LGPD;
 **Síntese:** manter intacta a camada sobre empresa/CNPJ/contrato e fatos verificáveis; reescrever
 toda a camada que conclui sobre pessoa física para registro descritivo-condicional. Feito isso, o
 portal passa de "exposto" para "razoavelmente defensável".
+
+---
+
+## 6. Fundamento legal do recorte sócio × servidor (reforço de defesa)
+
+O cruzamento sócio×servidor não é curiosidade: ele observa exatamente as hipóteses que a
+lei manda observar. Isso **reforça a defesa de interesse público** — o portal aponta para um
+parâmetro legal objetivo, não para um juízo próprio.
+
+- **Servidor pode ser sócio, não administrador.** Art. 117 da Lei nº 8.112/1990 (federais) e
+  estatutos análogos: servidor pode ser acionista, cotista ou sócio investidor, mas não pode
+  exercer gerência/administração de sociedade privada. Logo, está impedido de ser administrador
+  no contrato social e de ser MEI, EI ou SLU (que exigem o titular na gestão).
+- **Vedação de contratar com a própria esfera.** Art. 14 da Lei nº 14.133/2021 veda a
+  participação, direta ou indireta, de agente público do órgão como licitante ou contratado.
+  Contrato da Administração com empresa de servidor da mesma esfera pode configurar conflito de
+  interesses (Lei nº 12.813/2013) e, conforme o caso, improbidade (Lei nº 8.429/1992, com a
+  redação da Lei nº 14.230/2021, que exige dolo).
+- **Saída legal:** o servidor sócio deve afastar-se da gestão e transferir a administração a
+  terceiro antes de a empresa contratar com o poder público.
+
+**Blindagem de redação (obrigatória ao citar a lei):** apresentar a norma sempre **em abstrato**
+("a lei veda…") e jamais afirmar que um caso concreto a violou. A frase-padrão do portal —
+*"coincidência de nome não confirma identidade; a apuração compete aos órgãos de controle"* —
+deve acompanhar toda menção legal. A citação da lei explica **por que** o dado é sinalizado, não
+**que** alguém infringiu.
+
+---
+
+## 7. Status dos bloqueadores (revisão de 2026-06-18)
+
+| # | Bloqueador | Status |
+|---|---|---|
+| 1 | "testa-de-ferro"/"nepotismo" como rótulo | ✅ Resolvido — rótulos condicionais ("Coincidência nominal — a apurar"). |
+| 2 | Exposição nominal em match fraco | ⚠️ Mitigado — filtro "somente nome idêntico"; disclaimer + base legal. Avaliar ocultar nome em match fraco antes de deploy. |
+| 3 | Threshold × afirmação (sobrenome 2 vs 3+) | ✅ Resolvido — exige sobrenomes idênticos e em mesma ordem (≥3) ou nome completo. |
+| 4 | Canal de retificação + SLA | ✅ Resolvido — contato@10dobroprod.com.br, SLA 7 dias úteis, nota LGPD no rodapé. |
+| 5 | Docstrings/strings acusatórios ("fachada") | ✅ Resolvido — UI "empresa de fachada" trocada por "divergência cadastral que merece verificação"; "real desviado"→"mal aplicado"; "fracionamento"→"dispensas em sequência — a verificar". |
+| 6 | Cruzamento contra base estadual inteira | ⚠️ Mitigado — escopo limitado a servidores estaduais (declarado); coincidência tratada como indício. |
+
+**Observação:** o termo interno `PRECO_ABUSIVO` (chave de regra) **não é exibido** — a UI mostra
+"Preço acima da mediana". Mantido por ser interno; renomear apenas se exposto futuramente.
