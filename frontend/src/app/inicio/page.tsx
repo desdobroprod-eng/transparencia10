@@ -9,6 +9,7 @@ import GaleriaCultural, {
   type FotoCultural,
 } from "@/components/landing/GaleriaCultural";
 import VideoCultural from "@/components/landing/VideoCultural";
+import { LogoIcon } from "@/components/Logo";
 import creditosData from "../../../public/cultura/CREDITOS.json";
 
 // Tipografia editorial: serifa de alto contraste (Fraunces) para títulos e
@@ -174,11 +175,7 @@ export default function LandingInicio() {
             className="flex items-center gap-2 text-[#F7F3EC]"
             aria-label="Transparência Cultural — início"
           >
-            <span
-              aria-hidden="true"
-              className="inline-block h-6 w-6 rounded-sm"
-              style={{ background: CARMIM }}
-            />
+            <LogoIcon size={30} />
             <span
               className="text-lg font-semibold tracking-tight"
               style={{ fontFamily: "var(--font-fraunces), serif" }}
