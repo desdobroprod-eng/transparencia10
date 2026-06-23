@@ -50,6 +50,7 @@ export interface Contrato {
   abertura: string; // data de abertura do CNPJ (ISO)
   situacao: string;
   retificacoes: number;
+  area_cultura?: boolean; // false = contrato fora do recorte cultura, de empresa com cultura
   alertas: Alerta[]; // ligado no carregamento
 }
 

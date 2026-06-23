@@ -379,6 +379,7 @@ async def executar_coleta(
     print("-" * 50)
 
     todos_contratos: list[dict] = []
+    todos_contratos_bruto: list[dict] = []  # todos os contratos, incluindo fora do recorte cultura
     sucesso_minimo = False  # ao menos um ente coletado com sucesso
 
     for chave, ente in entes_processar.items():
@@ -398,6 +399,8 @@ async def executar_coleta(
             contratos_ente = _planificar_contratos(historico_filtrado, chave, ente["nome"])
 
             # Recorte temático: portal foca em Cultura.
+            # Bruto: todos os contratos do ente (para Option A — empresas com cultura)
+            todos_contratos_bruto.extend(contratos_ente)
             contratos_cultura = [c for c in contratos_ente if c.get("area_cultura")]
             todos_contratos.extend(contratos_cultura)
             sucesso_minimo = True
@@ -429,6 +432,19 @@ async def executar_coleta(
         unicos.append(c)
     duplicatas = len(todos_contratos) - len(unicos)
     todos_contratos = unicos
+
+    # Dedup todos_contratos_bruto (mesma chave)
+    vistos_b: set[str] = set()
+    unicos_b: list[dict] = []
+    for c in todos_contratos_bruto:
+        cid_b = c.get("numeroControlePNCP") or c.get("id") or ""
+        chave_b = f"{c.get('chave_ente')}|{cid_b}" if cid_b else None
+        if chave_b and chave_b in vistos_b:
+            continue
+        if chave_b:
+            vistos_b.add(chave_b)
+        unicos_b.append(c)
+    todos_contratos_bruto = unicos_b
 
     print(
         f"\n[FASE 1] Concluída — {len(todos_contratos)} contratos únicos "
@@ -835,9 +851,59 @@ async def executar_coleta(
             "abertura": info.get("data_inicio_atividade") or "",
             "situacao": info.get("situacao") or "",
             "retificacoes": retif,
+            "area_cultura": True,
         })
     # Mais recentes primeiro
     contratos_frontend.sort(key=lambda x: x.get("data_publicacao") or "", reverse=True)
+
+    # Option A: incluir TODOS os contratos de empresas com ≥1 contrato de cultura
+    cnpjs_com_cultura: set[str] = {
+        c.get("cnpjFornecedor", "").strip()
+        for c in todos_contratos
+        if c.get("cnpjFornecedor", "").strip()
+    }
+    ids_incluidos: set[str] = {c["id"] for c in contratos_frontend if c.get("id")}
+    contratos_extras: list[dict] = []
+    for c in todos_contratos_bruto:
+        if c.get("area_cultura"):
+            continue  # já incluído acima
+        cnpj_e = (c.get("cnpjFornecedor") or "").strip()
+        if cnpj_e not in cnpjs_com_cultura:
+            continue
+        cid_e = c.get("numeroControlePNCP") or c.get("id") or ""
+        if cid_e in ids_incluidos:
+            continue
+        info_e = info_por_cnpj.get(cnpj_e, {})
+        try:
+            retif_e = int(c.get("numeroRetificacao") or 0)
+        except (TypeError, ValueError):
+            retif_e = 0
+        ano_e = c.get("ano_coleta")
+        contratos_extras.append({
+            "id": cid_e,
+            "ente": c.get("chave_ente") or "",
+            "fornecedor": c.get("nomeRazaoSocialFornecedor") or "",
+            "cnpj": cnpj_e,
+            "objeto": c.get("objetoContrato") or "",
+            "valor": float(c.get("valorInicial") or 0),
+            "modalidade": c.get("modalidadeNome") or "",
+            "score_risco": 0,
+            "data_publicacao": c.get("dataPublicacaoPncp") or c.get("dataAssinatura") or "",
+            "ano": int(ano_e) if ano_e and str(ano_e).isdigit() else None,
+            "unidade": c.get("unidadeGestora") or "",
+            "razao_social": info_e.get("razao_social") or "",
+            "capital_social": float(info_e.get("capital_social") or 0),
+            "porte": info_e.get("porte") or "",
+            "mei": bool(info_e.get("mei")),
+            "abertura": info_e.get("data_inicio_atividade") or "",
+            "situacao": info_e.get("situacao") or "",
+            "retificacoes": retif_e,
+            "area_cultura": False,
+        })
+    if contratos_extras:
+        contratos_frontend.extend(contratos_extras)
+        contratos_frontend.sort(key=lambda x: x.get("data_publicacao") or "", reverse=True)
+        print(f"[CONTRATOS] +{len(contratos_extras)} extra(s): empresa(s) com cultura, fora do recorte temático")
 
     # stats.json: dicionário indexado por chave de ente, no formato {stats:{...}}
     stats_dict = {}
@@ -883,6 +949,21 @@ async def executar_coleta(
 
         dados_emendas = await coletar_emendas_cultura()
         emendas = dados_emendas["emendas"]
+
+        # Se a fonte retornou vazio, tenta preservar arquivo existente com dados
+        if not emendas:
+            caminho_emendas_prev = DIR_SAIDA / "emendas.json"
+            if caminho_emendas_prev.exists():
+                try:
+                    import json as _json
+                    existente = _json.loads(caminho_emendas_prev.read_text(encoding="utf-8"))
+                    if isinstance(existente.get("emendas"), list) and existente["emendas"]:
+                        print("[EMENDAS] mantendo arquivo anterior (fonte retornou vazio)")
+                        emendas = existente["emendas"]
+                        emendas_stats = existente.get("stats", emendas_stats)
+                except Exception:
+                    pass
+
         # Cruza favorecido da emenda × fornecedor contratado (mesmo CNPJ).
         cnpjs_fornecedores = {
             "".join(ch for ch in str(c.get("cnpj") or "") if ch.isdigit())

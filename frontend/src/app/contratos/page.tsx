@@ -105,11 +105,27 @@ export default function ContratosPage() {
         accessorKey: "objeto",
         header: "Objeto",
         enableSorting: false,
-        cell: (info) => (
-          <span className="block max-w-[22rem]" title={info.getValue<string>()}>
-            {truncar(info.getValue<string>())}
-          </span>
-        ),
+        cell: (info) => {
+          const ct = info.row.original;
+          return (
+            <span className="block max-w-[22rem]">
+              {ct.area_cultura === false && (
+                <span
+                  className="mb-0.5 inline-block rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-500"
+                  title="Este contrato está fora do recorte cultural, mas a empresa possui outros contratos de cultura"
+                >
+                  Fora do recorte cultural
+                </span>
+              )}
+              <span
+                className={ct.area_cultura === false ? "mt-0.5 block text-gray-500" : ""}
+                title={info.getValue<string>()}
+              >
+                {truncar(info.getValue<string>())}
+              </span>
+            </span>
+          );
+        },
       },
       {
         accessorKey: "valor",
