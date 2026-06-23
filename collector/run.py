@@ -856,54 +856,9 @@ async def executar_coleta(
     # Mais recentes primeiro
     contratos_frontend.sort(key=lambda x: x.get("data_publicacao") or "", reverse=True)
 
-    # Option A: incluir TODOS os contratos de empresas com ≥1 contrato de cultura
-    cnpjs_com_cultura: set[str] = {
-        c.get("cnpjFornecedor", "").strip()
-        for c in todos_contratos
-        if c.get("cnpjFornecedor", "").strip()
-    }
-    ids_incluidos: set[str] = {c["id"] for c in contratos_frontend if c.get("id")}
-    contratos_extras: list[dict] = []
-    for c in todos_contratos_bruto:
-        if c.get("area_cultura"):
-            continue  # já incluído acima
-        cnpj_e = (c.get("cnpjFornecedor") or "").strip()
-        if cnpj_e not in cnpjs_com_cultura:
-            continue
-        cid_e = c.get("numeroControlePNCP") or c.get("id") or ""
-        if cid_e in ids_incluidos:
-            continue
-        info_e = info_por_cnpj.get(cnpj_e, {})
-        try:
-            retif_e = int(c.get("numeroRetificacao") or 0)
-        except (TypeError, ValueError):
-            retif_e = 0
-        ano_e = c.get("ano_coleta")
-        contratos_extras.append({
-            "id": cid_e,
-            "ente": c.get("chave_ente") or "",
-            "fornecedor": c.get("nomeRazaoSocialFornecedor") or "",
-            "cnpj": cnpj_e,
-            "objeto": c.get("objetoContrato") or "",
-            "valor": float(c.get("valorInicial") or 0),
-            "modalidade": c.get("modalidadeNome") or "",
-            "score_risco": 0,
-            "data_publicacao": c.get("dataPublicacaoPncp") or c.get("dataAssinatura") or "",
-            "ano": int(ano_e) if ano_e and str(ano_e).isdigit() else None,
-            "unidade": c.get("unidadeGestora") or "",
-            "razao_social": info_e.get("razao_social") or "",
-            "capital_social": float(info_e.get("capital_social") or 0),
-            "porte": info_e.get("porte") or "",
-            "mei": bool(info_e.get("mei")),
-            "abertura": info_e.get("data_inicio_atividade") or "",
-            "situacao": info_e.get("situacao") or "",
-            "retificacoes": retif_e,
-            "area_cultura": False,
-        })
-    if contratos_extras:
-        contratos_frontend.extend(contratos_extras)
-        contratos_frontend.sort(key=lambda x: x.get("data_publicacao") or "", reverse=True)
-        print(f"[CONTRATOS] +{len(contratos_extras)} extra(s): empresa(s) com cultura, fora do recorte temático")
+    # (Option A desativada: pequenos municípios como Raposa usam uma única
+    # unidade gestora para todos os contratos, injetando centenas de contratos
+    # de combustível/peças/obras irrelevantes. Mantendo filtro cultura-only.)
 
     # stats.json: dicionário indexado por chave de ente, no formato {stats:{...}}
     stats_dict = {}

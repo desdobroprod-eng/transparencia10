@@ -35,7 +35,7 @@ const fontes = [
 const indicadores = [
   {
     nome: "Duplicidade",
-    desc: "Contratos muito parecidos — mesmo fornecedor, valor e objeto em datas próximas — que podem indicar fracionamento ou pagamento repetido.",
+    desc: "Contratos com fornecedor, valor e objeto semelhantes em datas próximas — padrão que os órgãos de controle verificam como possível redundância ou pagamento repetido.",
   },
   {
     nome: "Monopólio de fornecedor",
@@ -243,15 +243,15 @@ export default function MetodologiaPage() {
             <li>
               Para participar de licitações, o servidor sócio deve afastar-se da
               gestão da empresa e transferir a administração a terceiro,
-              evitando contratos com o setor público que possam incorrer em
-              improbidade ou violação de estatuto de carreira.
+              evitando contratos com o setor público para não incorrer em
+              vedações previstas no estatuto de carreira.
             </li>
           </ul>
           <p>
             <strong>Como isso se aplica aqui:</strong> quando o nome de um sócio
             coincide com o de um servidor, esse é exatamente o cenário que a lei
             manda observar — e por isso o dado é <strong>sinalizado para
-            apuração</strong>. O portal <strong>não afirma</strong> que houve
+            verificação pelos órgãos de controle</strong>. O portal <strong>não afirma</strong> que houve
             vedação, conflito de interesses ou irregularidade em nenhum caso
             concreto: a coincidência de nome não confirma identidade, e a
             verificação (inclusive de quem administra a empresa e de CPF)

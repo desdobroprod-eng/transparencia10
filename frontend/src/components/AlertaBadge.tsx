@@ -21,7 +21,7 @@ interface AlertaBadgeProps {
 // Configuração visual por nível de risco
 const CONFIG_NIVEL = {
   critico: {
-    label: "Prioridade alta",
+    label: "A verificar",
     bg: "bg-red-50 border-red-300",
     badge: "bg-red-600 text-white",
     icone: "🔎",
