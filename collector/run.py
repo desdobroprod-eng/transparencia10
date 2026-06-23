@@ -536,12 +536,24 @@ async def executar_coleta(
     # Para cada sócio das empresas contratadas, consulta a base de servidores
     # do Portal da Transparência do MA (por nome) e aplica o detector de
     # testa-de-ferro/nepotismo (match exato de nome ou 3+ sobrenomes em comum).
-    print("\n[FASE 4/4] Cruzamento sócio × servidor estadual (Portal Transparência MA)")
+    print("\n[FASE 4/4] Cruzamento sócio × servidor (Portal MA + Diário Oficial São Luís)")
     print("-" * 50)
 
     cruzamento_servidores_ok = False
     matches_servidores: list[dict] = []
     vistos_cruz: dict = {}  # (ente, sócio, servidor) → registro (dedup)
+
+    # Carrega base de servidores municipais de São Luís do Diário Oficial (Querido Diário)
+    base_qd: dict = {}
+    try:
+        base_qd = diario_servidores.carregar_cache()
+        if not base_qd:
+            print("  [QD] Coletando base de servidores municipais São Luís (DOM)…")
+            base_qd = await diario_servidores.coletar_atos_pessoal(anos=2)
+            diario_servidores.salvar_cache(base_qd)
+        print(f"  [QD] Base DOM São Luís: {len(base_qd)} servidores municipais carregados")
+    except Exception as exc_qd:
+        print(f"  [QD] Falha ao carregar base DOM (não bloqueante): {exc_qd}")
 
     try:
         async with httpx.AsyncClient(verify=False) as client:
@@ -561,24 +573,47 @@ async def executar_coleta(
                         continue
 
                     for nome_socio in socios_pf:
-                        # Busca servidores cujo nome contenha o sobrenome mais
-                        # distintivo do sócio (reduz ruído e nº de chamadas).
                         sobrenomes = extrair_sobrenomes(nome_socio)
                         if not sobrenomes:
                             continue
                         termo = max(sobrenomes, key=len)
+
+                        # Fonte 1: Portal da Transparência MA (servidores estaduais)
                         servidores_raw = await enrich.buscar_servidores(client, termo)
-                        if not servidores_raw:
-                            continue
                         servidores = [
                             {
                                 "nome": s["nome"],
                                 "orgao": "Servidor estadual MA",
                                 "cargo": s.get("cargo", ""),
                                 "fonte": "Portal da Transparência MA (servidores estaduais)",
+                                "situacao": "ativo",
+                                "situacao_fonte": "",
                             }
                             for s in servidores_raw
                         ]
+
+                        # Fonte 2: Diário Oficial São Luís via Querido Diário (servidores municipais)
+                        # Filtra nomes da base QD que contêm o sobrenome buscado
+                        if base_qd:
+                            termo_n = enrich.normalizar(termo)
+                            servidores_qd = [
+                                {
+                                    "nome": nome_qd,
+                                    "orgao": "Servidor municipal São Luís",
+                                    "cargo": "",
+                                    "fonte": "Diário Oficial São Luís (Querido Diário)",
+                                    "situacao": dado_qd.get("situacao", "ativo"),
+                                    "situacao_fonte": (
+                                        f"Diário Oficial São Luís — último ato: {dado_qd.get('ultima_data', '')}"
+                                    ),
+                                }
+                                for nome_qd, dado_qd in base_qd.items()
+                                if termo_n in nome_qd
+                            ]
+                            servidores.extend(servidores_qd)
+
+                        if not servidores:
+                            continue
 
                         r_testa = verificar_testa_ferro(
                             [{"nome": nome_socio}], servidores, contrato
@@ -593,7 +628,6 @@ async def executar_coleta(
                             if chave_cruz in vistos_cruz:
                                 vistos_cruz[chave_cruz]["num_contratos"] += 1
                                 continue
-                            # Recupera campos do servidor correspondente (se disponível)
                             srv_info = next(
                                 (s for s in servidores if s["nome"] == srv), {}
                             )
@@ -608,12 +642,11 @@ async def executar_coleta(
                                 "match": r.dados.get("match", ""),
                                 "score": r.score,
                                 "num_contratos": 1,
-                                # Campos de proveniência e situação
                                 "orgao": r.dados.get("orgao_servidor", srv_info.get("orgao", "Servidor Estadual MA")),
                                 "cargo": srv_info.get("cargo", ""),
                                 "fonte": srv_info.get("fonte", "Portal da Transparência MA (servidores estaduais)"),
-                                "situacao": "ativo",  # atualizado na fase 4b via Querido Diário
-                                "situacao_fonte": "",
+                                "situacao": srv_info.get("situacao", "ativo"),
+                                "situacao_fonte": srv_info.get("situacao_fonte", ""),
                             }
                             vistos_cruz[chave_cruz] = registro
                             matches_servidores.append(registro)
