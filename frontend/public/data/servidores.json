@@ -2,34 +2,20 @@
   "cruzamentos": [
     {
       "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000024/2026",
-      "cnpj": "04428126000112",
-      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO HUMBERTO DE CAMPOS",
-      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
+      "contrato": "05508362000101-2-000008/2026",
+      "cnpj": "00659137000152",
+      "fornecedor": "INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA",
+      "socio": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
+      "servidor": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
       "sobrenomes_comuns": [
-        "RODRIGUES",
-        "SANTOS",
-        "NETA"
+        "RAYANNE",
+        "SERRAO",
+        "SILVA",
+        "NOBRE"
       ],
       "match": "nome_identico",
       "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000061/2026",
-      "cnpj": "20087290000160",
-      "fornecedor": "TIME PROJETOS E EVENTOS LTDA",
-      "socio": "WANDERSON DOS SANTOS SILVA",
-      "servidor": "WANDERSON DOS SANTOS SILVA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
+      "num_contratos": 3
     },
     {
       "ente": "maranhao_estado",
@@ -49,32 +35,15 @@
     },
     {
       "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000140/2026",
-      "cnpj": "00659137000152",
-      "fornecedor": "INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA",
-      "socio": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "servidor": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
+      "contrato": "05508362000101-2-000024/2026",
+      "cnpj": "04428126000112",
+      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO HUMBERTO DE CAMPOS",
+      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
+      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
       "sobrenomes_comuns": [
-        "RAYANNE",
-        "SERRAO",
-        "SILVA",
-        "NOBRE"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 3
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000010/2026",
-      "cnpj": "00190781000124",
-      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
-      "socio": "WASHINGTON LUIS ROCHA COELHO",
-      "servidor": "WASHINGTON LUIS ROCHA COELHO",
-      "sobrenomes_comuns": [
-        "LUIS",
-        "ROCHA",
-        "COELHO"
+        "RODRIGUES",
+        "SANTOS",
+        "NETA"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -99,6 +68,22 @@
     },
     {
       "ente": "maranhao_estado",
+      "contrato": "05508362000101-2-000183/2026",
+      "cnpj": "05099622000132",
+      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
+      "socio": "ANTONIO DANTAS RIBEIRO NETO",
+      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
+      "sobrenomes_comuns": [
+        "DANTAS",
+        "RIBEIRO",
+        "NETO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
+    },
+    {
+      "ente": "maranhao_estado",
       "contrato": "05508362000101-2-000163/2026",
       "cnpj": "02496566000181",
       "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
@@ -114,19 +99,50 @@
     },
     {
       "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000183/2026",
-      "cnpj": "05099622000132",
-      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
-      "socio": "ANTONIO DANTAS RIBEIRO NETO",
-      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
+      "contrato": "05508362000101-2-000010/2026",
+      "cnpj": "00190781000124",
+      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
+      "socio": "WASHINGTON LUIS ROCHA COELHO",
+      "servidor": "WASHINGTON LUIS ROCHA COELHO",
       "sobrenomes_comuns": [
-        "DANTAS",
-        "RIBEIRO",
-        "NETO"
+        "LUIS",
+        "ROCHA",
+        "COELHO"
       ],
       "match": "nome_identico",
       "score": 75,
-      "num_contratos": 2
+      "num_contratos": 1
+    },
+    {
+      "ente": "maranhao_estado",
+      "contrato": "05508362000101-2-000061/2026",
+      "cnpj": "20087290000160",
+      "fornecedor": "TIME PROJETOS E EVENTOS LTDA",
+      "socio": "WANDERSON DOS SANTOS SILVA",
+      "servidor": "WANDERSON DOS SANTOS SILVA",
+      "sobrenomes_comuns": [
+        "SANTOS",
+        "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000166/2024",
+      "cnpj": "48351834000178",
+      "fornecedor": "EDUARDO HENRIQUE DE A SILVA LTDA",
+      "socio": "EDUARDO HENRIQUE DE ARAUJO SILVA",
+      "servidor": "DANIEL HENRIQUE ARAUJO DA SILVA",
+      "sobrenomes_comuns": [
+        "HENRIQUE",
+        "ARAUJO",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -193,22 +209,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000166/2024",
-      "cnpj": "48351834000178",
-      "fornecedor": "EDUARDO HENRIQUE DE A SILVA LTDA",
-      "socio": "EDUARDO HENRIQUE DE ARAUJO SILVA",
-      "servidor": "DANIEL HENRIQUE ARAUJO DA SILVA",
-      "sobrenomes_comuns": [
-        "HENRIQUE",
-        "ARAUJO",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-000053/2025",
       "cnpj": "20087290000160",
       "fornecedor": "TIME PROJETOS E EVENTOS LTDA",
@@ -232,130 +232,6 @@
       "sobrenomes_comuns": [
         "SOCORRO",
         "ARAUJO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000263/2025",
-      "cnpj": "01137139000144",
-      "fornecedor": "UNIAO DE BUMBA MEU BOI DO POVOADO MALVINAS",
-      "socio": "ODIRLEI SOUSA RODRIGUES",
-      "servidor": "ODIRLEI SOUSA RODRIGUES",
-      "sobrenomes_comuns": [
-        "SOUSA",
-        "RODRIGUES"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000237/2025",
-      "cnpj": "00190781000124",
-      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
-      "socio": "WASHINGTON LUIS ROCHA COELHO",
-      "servidor": "WASHINGTON LUIS ROCHA COELHO",
-      "sobrenomes_comuns": [
-        "LUIS",
-        "ROCHA",
-        "COELHO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000239/2025",
-      "cnpj": "02496566000181",
-      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
-      "socio": "JOSE ANTONIO RIBEIRO",
-      "servidor": "JOSE ANTONIO RIBEIRO",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000255/2025",
-      "cnpj": "32756933000108",
-      "fornecedor": "AGENCIA BRASILEIRA DE DESENVOLVIMENTO SUSTENTAVEL DOS POVOS E COMUNIDADES TRADICIONAIS",
-      "socio": "JHULIANNE DE JESUS SIMOES SANTOS",
-      "servidor": "JHONATA DE JESUS SIMOES SANTOS",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "SIMOES",
-        "SANTOS"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000287/2025",
-      "cnpj": "05371128000185",
-      "fornecedor": "ASSOCIACAO CULTURAL TAMBOR DE CRIOULA BRINQUEDO DE SAO BENEDITO",
-      "socio": "ADRIANO ANDRADE RODRIGUES",
-      "servidor": "ADRIANO ANDRADE RODRIGUES",
-      "sobrenomes_comuns": [
-        "ANDRADE",
-        "RODRIGUES"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000297/2025",
-      "cnpj": "04428126000112",
-      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO",
-      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "sobrenomes_comuns": [
-        "RODRIGUES",
-        "SANTOS",
-        "NETA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000317/2025",
-      "cnpj": "05099622000132",
-      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
-      "socio": "ANTONIO DANTAS RIBEIRO NETO",
-      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
-      "sobrenomes_comuns": [
-        "DANTAS",
-        "RIBEIRO",
-        "NETO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000324/2025",
-      "cnpj": "05162047000175",
-      "fornecedor": "CLUBE CULTURAL DE BUMBA-MEU-BOI DE ZABUMBA E TAMBOR DE CRIOULA DO MARANHAO",
-      "socio": "BASILIO COSTA DURANS",
-      "servidor": "BASILIO COSTA DURANS",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "DURANS"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -395,6 +271,100 @@
     },
     {
       "ente": "sao_luis",
+      "contrato": "06307102000130-2-000219/2025",
+      "cnpj": "59524148000178",
+      "fornecedor": "ASSOCIACAO CULTURAL E SOCIAL TAMBOR DE CRIOULA PROTECAO DE SAO BENEDITO II",
+      "socio": "MARIA DE LOURDES MORAIS COELHO",
+      "servidor": "MARIA DE LOURDES MORAIS COELHO",
+      "sobrenomes_comuns": [
+        "LOURDES",
+        "MORAIS",
+        "COELHO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000237/2025",
+      "cnpj": "00190781000124",
+      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
+      "socio": "WASHINGTON LUIS ROCHA COELHO",
+      "servidor": "WASHINGTON LUIS ROCHA COELHO",
+      "sobrenomes_comuns": [
+        "LUIS",
+        "ROCHA",
+        "COELHO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000263/2025",
+      "cnpj": "01137139000144",
+      "fornecedor": "UNIAO DE BUMBA MEU BOI DO POVOADO MALVINAS",
+      "socio": "ODIRLEI SOUSA RODRIGUES",
+      "servidor": "ODIRLEI SOUSA RODRIGUES",
+      "sobrenomes_comuns": [
+        "SOUSA",
+        "RODRIGUES"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000297/2025",
+      "cnpj": "04428126000112",
+      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO",
+      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
+      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
+      "sobrenomes_comuns": [
+        "RODRIGUES",
+        "SANTOS",
+        "NETA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000298/2025",
+      "cnpj": "06163101000160",
+      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL DE BUMBA BOI DE MATRACA DO MAIOBAO",
+      "socio": "SILIANE LIMA COELHO",
+      "servidor": "SILIANE LIMA COELHO",
+      "sobrenomes_comuns": [
+        "LIMA",
+        "COELHO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000301/2025",
+      "cnpj": "12832423000157",
+      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL BUMBA BOI MOCIDADE ALEGRE DE ITAPECURU-MIRIM",
+      "socio": "ROBERTO SANTOS RODRIGUES DA COSTA",
+      "servidor": "ROBERTO SANTOS RODRIGUES DA COSTA",
+      "sobrenomes_comuns": [
+        "SANTOS",
+        "RODRIGUES",
+        "COSTA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
       "contrato": "06307102000130-2-000305/2025",
       "cnpj": "02244409000189",
       "fornecedor": "GRUPO FOLCLORICO BENEFICENTE BUMBA-MEU-BOI DE AXIXA",
@@ -404,6 +374,130 @@
         "LEILA",
         "BIBIANO",
         "NAIVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000316/2025",
+      "cnpj": "06221120000286",
+      "fornecedor": "ASSOCIACAO ARTISTICA - CULTURAL BRILHO DA BALAIADA",
+      "socio": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
+      "servidor": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
+      "sobrenomes_comuns": [
+        "CONCEICAO",
+        "FORTES",
+        "BRAGA",
+        "CAMARGO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000255/2025",
+      "cnpj": "32756933000108",
+      "fornecedor": "AGENCIA BRASILEIRA DE DESENVOLVIMENTO SUSTENTAVEL DOS POVOS E COMUNIDADES TRADICIONAIS",
+      "socio": "JHULIANNE DE JESUS SIMOES SANTOS",
+      "servidor": "JHONATA DE JESUS SIMOES SANTOS",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "SIMOES",
+        "SANTOS"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000271/2025",
+      "cnpj": "04832815000198",
+      "fornecedor": "ASSOCIACAO CULTURAL E FOLCLORICA BRILHO DA JUVENTUDE",
+      "socio": "MARIA RAIMUNDA BOGEA",
+      "servidor": "MARIA RAIMUNDA BOGEA",
+      "sobrenomes_comuns": [
+        "RAIMUNDA",
+        "BOGEA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000310/2025",
+      "cnpj": "02496566000181",
+      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
+      "socio": "JOSE ANTONIO RIBEIRO",
+      "servidor": "JOSE ANTONIO RIBEIRO",
+      "sobrenomes_comuns": [
+        "ANTONIO",
+        "RIBEIRO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000317/2025",
+      "cnpj": "05099622000132",
+      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
+      "socio": "ANTONIO DANTAS RIBEIRO NETO",
+      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
+      "sobrenomes_comuns": [
+        "DANTAS",
+        "RIBEIRO",
+        "NETO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000286/2025",
+      "cnpj": "63442149000140",
+      "fornecedor": "INSTITUTO SOCIAL E CULTURAL DA CIDADE OPERARIA - ISCCO",
+      "socio": "ROMULO COSTA MACEDO",
+      "servidor": "ROMULO COSTA MACEDO",
+      "sobrenomes_comuns": [
+        "COSTA",
+        "MACEDO"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000287/2025",
+      "cnpj": "05371128000185",
+      "fornecedor": "ASSOCIACAO CULTURAL TAMBOR DE CRIOULA BRINQUEDO DE SAO BENEDITO",
+      "socio": "ADRIANO ANDRADE RODRIGUES",
+      "servidor": "ADRIANO ANDRADE RODRIGUES",
+      "sobrenomes_comuns": [
+        "ANDRADE",
+        "RODRIGUES"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000324/2025",
+      "cnpj": "05162047000175",
+      "fornecedor": "CLUBE CULTURAL DE BUMBA-MEU-BOI DE ZABUMBA E TAMBOR DE CRIOULA DO MARANHAO",
+      "socio": "BASILIO COSTA DURANS",
+      "servidor": "BASILIO COSTA DURANS",
+      "sobrenomes_comuns": [
+        "COSTA",
+        "DURANS"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -443,147 +537,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000286/2025",
-      "cnpj": "63442149000140",
-      "fornecedor": "INSTITUTO SOCIAL E CULTURAL DA CIDADE OPERARIA - ISCCO",
-      "socio": "ROMULO COSTA MACEDO",
-      "servidor": "ROMULO COSTA MACEDO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "MACEDO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000316/2025",
-      "cnpj": "06221120000286",
-      "fornecedor": "ASSOCIACAO ARTISTICA - CULTURAL BRILHO DA BALAIADA",
-      "socio": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
-      "servidor": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
-      "sobrenomes_comuns": [
-        "CONCEICAO",
-        "FORTES",
-        "BRAGA",
-        "CAMARGO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000219/2025",
-      "cnpj": "59524148000178",
-      "fornecedor": "ASSOCIACAO CULTURAL E SOCIAL TAMBOR DE CRIOULA PROTECAO DE SAO BENEDITO II",
-      "socio": "MARIA DE LOURDES MORAIS COELHO",
-      "servidor": "MARIA DE LOURDES MORAIS COELHO",
-      "sobrenomes_comuns": [
-        "LOURDES",
-        "MORAIS",
-        "COELHO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000271/2025",
-      "cnpj": "04832815000198",
-      "fornecedor": "ASSOCIACAO CULTURAL E FOLCLORICA BRILHO DA JUVENTUDE",
-      "socio": "MARIA RAIMUNDA BOGEA",
-      "servidor": "MARIA RAIMUNDA BOGEA",
-      "sobrenomes_comuns": [
-        "RAIMUNDA",
-        "BOGEA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000301/2025",
-      "cnpj": "12832423000157",
-      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL BUMBA BOI MOCIDADE ALEGRE DE ITAPECURU-MIRIM",
-      "socio": "ROBERTO SANTOS RODRIGUES DA COSTA",
-      "servidor": "ROBERTO SANTOS RODRIGUES DA COSTA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "RODRIGUES",
-        "COSTA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000330/2025",
-      "cnpj": "32467010000128",
-      "fornecedor": "E M DA S LTDA",
-      "socio": "EVERALDO MIGUEL DA SILVA",
-      "servidor": "EVERALDO MIGUEL DA SILVA",
-      "sobrenomes_comuns": [
-        "MIGUEL",
-        "SILVA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000341/2025",
-      "cnpj": "06347959000184",
-      "fornecedor": "LABORATORIO DE EXPRESSOES ARTISTICAS",
-      "socio": "ROSANGELA DE JESUS SANTOS REIS",
-      "servidor": "ROSANGELA DE JESUS SANTOS REIS",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "SANTOS",
-        "REIS"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000341/2025",
-      "cnpj": "06347959000184",
-      "fornecedor": "LABORATORIO DE EXPRESSOES ARTISTICAS",
-      "socio": "ROSANGELA DE JESUS SANTOS REIS",
-      "servidor": "ANDYARA DE JESUS SANTOS REIS",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "SANTOS",
-        "REIS"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000461/2025",
-      "cnpj": "22518056000175",
-      "fornecedor": "CANA PRODUCOES & MS LTDA",
-      "socio": "TEREZINHA MARIA DA SILVA",
-      "servidor": "TEREZINHA MARIA DA SILVA",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "SILVA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-000439/2025",
       "cnpj": "23674205000158",
       "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
@@ -613,6 +566,21 @@
       "match": "sobrenome_familia",
       "score": 65,
       "num_contratos": 2
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000461/2025",
+      "cnpj": "22518056000175",
+      "fornecedor": "CANA PRODUCOES & MS LTDA",
+      "socio": "TEREZINHA MARIA DA SILVA",
+      "servidor": "TEREZINHA MARIA DA SILVA",
+      "sobrenomes_comuns": [
+        "MARIA",
+        "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1
     },
     {
       "ente": "sao_luis",
@@ -710,22 +678,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "ANTONIA SANTOS SOUZA SILVA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SOUZA",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-000476/2026",
       "cnpj": "02666289000108",
       "fornecedor": "PONTO DE BALA PRODUCOES E EDITORA MUSICAL LTDA",
@@ -735,6 +687,22 @@
         "RIBAMAR",
         "COELHO",
         "SANTOS"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000474/2026",
+      "cnpj": "35442671000197",
+      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
+      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
+      "servidor": "ANTONIA SANTOS SOUZA SILVA",
+      "sobrenomes_comuns": [
+        "SANTOS",
+        "SOUZA",
+        "SILVA"
       ],
       "match": "sobrenome_familia",
       "score": 65,
