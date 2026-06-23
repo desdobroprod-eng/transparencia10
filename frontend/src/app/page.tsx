@@ -152,8 +152,7 @@ export default function VisaoGeralPage() {
             <p className="mt-1 text-sm text-gray-600">
               <strong className="text-gray-900">{emendasResumo.total.toLocaleString("pt-BR")}</strong>{" "}
               emendas ({formatBRL(emendasResumo.valor)} empenhados) —{" "}
-              <strong className="text-orange-700">{emendasResumo.fornecedor}</strong> com favorecido
-              que também é fornecedor contratado.
+              <strong className="text-orange-700">{emendasResumo.fornecedor}</strong> com emenda e contrato público no mesmo CNPJ.
             </p>
           </div>
           <span className="shrink-0 rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white">

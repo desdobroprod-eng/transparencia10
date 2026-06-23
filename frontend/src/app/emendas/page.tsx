@@ -72,20 +72,20 @@ export default function EmendasPage() {
           <KpiCard rotulo="Valor empenhado" valor={formatBRL(kpis.empenhado)} detalhe="Soma das emendas" />
           <KpiCard rotulo="Com favorecido (CNPJ)" valor={kpis.comCnpj} detalhe="Beneficiário identificado" />
           <KpiCard
-            rotulo="Favorecido também fornecedor"
+            rotulo="CNPJ com emenda e contrato"
             valor={<span className="text-orange-700">{kpis.fornecedor}</span>}
-            detalhe="CNPJ recebeu emenda E tem contrato"
+            detalhe="Mesmo CNPJ consta em emenda e em contrato público"
           />
         </div>
 
         {/* Destaque do cruzamento emenda × contrato */}
         {kpis.fornecedor > 0 && (
           <div className="rounded-xl border-l-4 border-orange-400 bg-orange-50 px-5 py-4 text-sm leading-relaxed text-orange-900">
-            <strong>{kpis.fornecedor}</strong> emenda(s) têm como favorecido um CNPJ
-            que também aparece como <strong>fornecedor contratado</strong> nos dados
-            do portal. Isso mostra a ligação entre a indicação do recurso e a empresa
-            que o recebeu — um ponto natural para acompanhamento. Coincidência de CNPJ
-            é um fato verificável; não constitui, por si só, indício de irregularidade.
+            <strong>{kpis.fornecedor}</strong> emenda(s) apresentam o mesmo CNPJ
+            registrado tanto como beneficiário de emenda parlamentar quanto como
+            parte de contrato público. Trata-se de fato verificável nos dados oficiais;
+            receber emenda e ter contrato público são instrumentos legais independentes
+            e não constituem, por si só, irregularidade.
           </div>
         )}
 
@@ -119,7 +119,7 @@ export default function EmendasPage() {
                   onChange={(e) => setSoFornecedor(e.target.checked)}
                   className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                 />
-                Só favorecido contratado
+                Só CNPJ com emenda e contrato
               </label>
               <input
                 type="text"
@@ -230,7 +230,7 @@ function LinhaEmenda({ e }: { e: Emenda }) {
         )}
         {e.fornecedor_contratado && (
           <span className="mt-1 block rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-medium text-orange-700">
-            também é fornecedor
+            CNPJ com contrato público
           </span>
         )}
         {e.detalhe_url && (
