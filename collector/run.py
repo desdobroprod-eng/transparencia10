@@ -870,9 +870,13 @@ async def executar_coleta(
             f"{emendas_stats['favorecido_tambem_fornecedor']} favorecido(s) também fornecedor"
         )
     except Exception as exc:  # noqa: BLE001 — não-bloqueante por design
-        emendas_stats = {"total": 0, "erro": str(exc)}
-        _salvar_json("emendas.json", {"emendas": [], "stats": emendas_stats})
         print(f"[EMENDAS] falhou (não bloqueante): {exc}")
+        # Preserva emendas.json existente — não sobrescreve com lista vazia
+        caminho_emendas = DIR_SAIDA / "emendas.json"
+        if caminho_emendas.exists():
+            print("[EMENDAS] mantendo arquivo anterior (fonte indisponível)")
+        else:
+            _salvar_json("emendas.json", {"emendas": [], "stats": {"total": 0, "erro": str(exc)}})
 
     # meta.json — metadados da execução (campos lidos pelo frontend)
     meta = {
