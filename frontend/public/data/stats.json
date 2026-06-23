@@ -1,38 +1,47 @@
-[
-  {
-    "chave_ente": "maranhao_estado",
-    "nome_ente": "Secretaria de Cultura MA",
-    "total_contratos": 0,
-    "total_gasto": 0,
-    "total_alertas": 0,
-    "score_max": 0,
-    "nivel_risco": "normal"
-  },
-  {
-    "chave_ente": "sao_luis",
-    "nome_ente": "Sec. Cultura São Luís",
-    "total_contratos": 0,
-    "total_gasto": 0,
-    "total_alertas": 0,
-    "score_max": 0,
-    "nivel_risco": "normal"
-  },
-  {
-    "chave_ente": "sao_jose_ribamar",
-    "nome_ente": "Sec. Cultura S.J. Ribamar",
-    "total_contratos": 0,
-    "total_gasto": 0,
-    "total_alertas": 0,
-    "score_max": 0,
-    "nivel_risco": "normal"
-  },
-  {
-    "chave_ente": "paco_lumiar",
-    "nome_ente": "Sec. Cultura Paço do Lumiar",
-    "total_contratos": 0,
-    "total_gasto": 0,
-    "total_alertas": 0,
-    "score_max": 0,
-    "nivel_risco": "normal"
+{
+  "ultima_atualizacao": "2026-06-17T22:07:57.719290+00:00",
+  "stats": {
+    "maranhao_estado": {
+      "total_gasto": 1359070313.39,
+      "total_contratos": 155,
+      "total_alertas": 48,
+      "nivel_risco": "critico",
+      "base_gasto": "empenhos_estado_ma"
+    },
+    "sao_luis": {
+      "total_gasto": 198204845.73,
+      "total_contratos": 661,
+      "total_alertas": 193,
+      "nivel_risco": "critico",
+      "base_gasto": "contratos_pncp"
+    },
+    "raposa": {
+      "total_gasto": 3930936.0,
+      "total_contratos": 54,
+      "total_alertas": 3,
+      "nivel_risco": "critico",
+      "base_gasto": "siconfi_funcao_cultura"
+    },
+    "sao_jose_ribamar": {
+      "total_gasto": 19113039.0,
+      "total_contratos": 3,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
+      "base_gasto": "contratos_pncp"
+    },
+    "paco_lumiar": {
+      "total_gasto": 11354221.11,
+      "total_contratos": 27,
+      "total_alertas": 17,
+      "nivel_risco": "critico",
+      "base_gasto": "contratos_pncp"
+    },
+    "pinheiro": {
+      "total_gasto": 18716823.82,
+      "total_contratos": 18,
+      "total_alertas": 14,
+      "nivel_risco": "critico",
+      "base_gasto": "contratos_pncp"
+    }
   }
-]
+}
