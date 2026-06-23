@@ -106,12 +106,20 @@ export default function VisaoGeralPage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
       {/* Cabeçalho */}
-      <header>
-        <h1 className="text-2xl font-bold text-gray-900">Visão Geral</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Gastos com cultura nas secretarias do Maranhão
-        </p>
-        <p className="mt-1 text-xs text-gray-400">Atualizado em {dataFmt}</p>
+      <header className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Visão Geral</h1>
+          <p className="mt-1 text-sm text-gray-600">
+            Gastos com cultura nas secretarias do Maranhão
+          </p>
+          <p className="mt-1 text-xs text-gray-400">Atualizado em {dataFmt}</p>
+        </div>
+        <a
+          href="/transparencia10/inicio"
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#C8102E] px-5 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#a30d26]"
+        >
+          <span>🏛️</span> Sobre o portal
+        </a>
       </header>
 
       {/* KPI cards */}
