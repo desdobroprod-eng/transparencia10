@@ -84,6 +84,41 @@ export default function CardCruzamento({ c }: { c: Cruzamento }) {
             </span>
           )}
         </p>
+        {c.orgao && (
+          <p className="mt-0.5">
+            <span className="text-gray-400">Órgão:</span>{" "}
+            <span className="text-gray-600">{c.orgao}</span>
+          </p>
+        )}
+        {c.cargo && (
+          <p className="mt-0.5">
+            <span className="text-gray-400">Cargo:</span>{" "}
+            <span className="text-gray-600">{c.cargo}</span>
+          </p>
+        )}
+        {/* Situação do servidor */}
+        {c.situacao === "exonerado" ? (
+          <p className="mt-1.5 flex items-center gap-1.5">
+            <span className="rounded bg-gray-200 px-1.5 py-0.5 text-[10px] font-semibold text-gray-600">
+              Ex-servidor
+            </span>
+            <span className="text-gray-400">
+              {c.situacao_fonte
+                ? `— ${c.situacao_fonte}`
+                : "— ato de exoneração localizado no Diário Oficial"}
+            </span>
+          </p>
+        ) : null}
+        {/* Fonte do dado */}
+        <p className="mt-1.5 text-[10px] text-gray-400">
+          Fonte:{" "}
+          {c.fonte || "Portal da Transparência MA (servidores estaduais)"}
+          {c.situacao === "exonerado" && c.situacao_fonte
+            ? ` · ${c.situacao_fonte}`
+            : c.situacao === "ativo" && c.situacao_fonte
+            ? ` · situação confirmada: ${c.situacao_fonte}`
+            : null}
+        </p>
       </div>
     </div>
   );

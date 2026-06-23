@@ -58,6 +58,7 @@ from domain.rules.detector import (
 # ── Enriquecimento (BrasilAPI + servidores MA) ────────────────────────────────
 import enrich
 import sancoes
+import diario_servidores
 from notas_ma import coletar_execucao_cultura_estado
 
 # ── Entes monitorados ───────────────────────────────────────────────────────--
@@ -570,8 +571,12 @@ async def executar_coleta(
                         if not servidores_raw:
                             continue
                         servidores = [
-                            {"nome": s["nome"],
-                             "orgao": "Servidor estadual MA (Portal Transparência MA)"}
+                            {
+                                "nome": s["nome"],
+                                "orgao": "Servidor estadual MA",
+                                "cargo": s.get("cargo", ""),
+                                "fonte": "Portal da Transparência MA (servidores estaduais)",
+                            }
                             for s in servidores_raw
                         ]
 
@@ -588,6 +593,10 @@ async def executar_coleta(
                             if chave_cruz in vistos_cruz:
                                 vistos_cruz[chave_cruz]["num_contratos"] += 1
                                 continue
+                            # Recupera campos do servidor correspondente (se disponível)
+                            srv_info = next(
+                                (s for s in servidores if s["nome"] == srv), {}
+                            )
                             registro = {
                                 "ente": chave,
                                 "contrato": cid,
@@ -599,6 +608,12 @@ async def executar_coleta(
                                 "match": r.dados.get("match", ""),
                                 "score": r.score,
                                 "num_contratos": 1,
+                                # Campos de proveniência e situação
+                                "orgao": r.dados.get("orgao_servidor", srv_info.get("orgao", "Servidor Estadual MA")),
+                                "cargo": srv_info.get("cargo", ""),
+                                "fonte": srv_info.get("fonte", "Portal da Transparência MA (servidores estaduais)"),
+                                "situacao": "ativo",  # atualizado na fase 4b via Querido Diário
+                                "situacao_fonte": "",
                             }
                             vistos_cruz[chave_cruz] = registro
                             matches_servidores.append(registro)
@@ -628,6 +643,47 @@ async def executar_coleta(
     except Exception as exc:
         print(f"[AVISO] Fase 4 — cruzamento falhou (não bloqueante): {exc}")
         enrich.persistir_caches()
+
+    # ── FASE 4b: Verificação de exoneração via Diário Oficial (Querido Diário) ──
+    # Para cada cruzamento encontrado, verifica se o servidor consta no DOM de
+    # São Luís com ato de exoneração mais recente que o de nomeação.
+    # Servidores exonerados são mantidos no dataset mas sinalizados ("ex-servidor").
+    if matches_servidores:
+        print("\n[FASE 4b] Verificando situação via Diário Oficial (Querido Diário)…")
+        try:
+            cache_qd = diario_servidores.carregar_cache()
+            # Recoleta apenas se cache vazio ou muito antigo (>7 dias)
+            if not cache_qd:
+                print("  → Coletando atos de pessoal do DOM de São Luís…")
+                cache_qd = await diario_servidores.coletar_atos_pessoal(anos=2)
+                diario_servidores.salvar_cache(cache_qd)
+                print(f"  → {len(cache_qd)} servidores indexados no DOM")
+
+            verificados = 0
+            exonerados = 0
+            for reg in matches_servidores:
+                check = diario_servidores.verificar_situacao_servidor(
+                    reg["servidor"], cache_qd
+                )
+                if check["fonte_qd"]:
+                    verificados += 1
+                    if check["situacao_qd"] == "exonerado":
+                        reg["situacao"] = "exonerado"
+                        reg["situacao_fonte"] = (
+                            f"Diário Oficial São Luís — último ato: {check.get('ultima_data_qd', '')}"
+                        )
+                        exonerados += 1
+                    else:
+                        reg["situacao"] = "ativo"
+                        reg["situacao_fonte"] = (
+                            f"Diário Oficial São Luís — último ato: {check.get('ultima_data_qd', '')}"
+                        )
+            print(
+                f"  → {verificados}/{len(matches_servidores)} verificados no DOM | "
+                f"{exonerados} sinalizado(s) como ex-servidor"
+            )
+        except Exception as exc:
+            print(f"[AVISO] Fase 4b falhou (não bloqueante): {exc}")
 
     # servidores.json — cruzamentos sócio × servidor encontrados
     _salvar_json("servidores.json", {"cruzamentos": matches_servidores})

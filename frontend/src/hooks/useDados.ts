@@ -76,6 +76,12 @@ export interface Cruzamento {
   servidor: string;
   sobrenomes_comuns: string[];
   score: number;
+  // proveniência e situação
+  orgao?: string;
+  cargo?: string;
+  fonte?: string;
+  situacao?: "ativo" | "exonerado";
+  situacao_fonte?: string;
   // derivado: match exato de nome completo
   exato: boolean;
 }
