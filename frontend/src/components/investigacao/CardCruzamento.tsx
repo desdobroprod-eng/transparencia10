@@ -13,18 +13,18 @@ export default function CardCruzamento({ c }: { c: Cruzamento }) {
   return (
     <div
       className={`rounded-xl border bg-white p-4 shadow-sm ${
-        exato ? "border-red-300" : "border-gray-200"
+        exato ? "border-amber-300" : "border-gray-200"
       }`}
     >
-      {/* Selo de classificação do indício */}
+      {/* Selo de classificação */}
       <div className="mb-3 flex items-center justify-between gap-2">
         {exato ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-semibold tracking-wide text-red-700 border border-red-300">
-            ● Nome idêntico — a verificar identidade
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-semibold tracking-wide text-amber-700 border border-amber-300">
+            Nome idêntico — identidade não verificada
           </span>
         ) : (
           <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 border border-gray-300">
-            Sobrenomes coincidentes — a apurar
+            Sobrenomes coincidentes — sem vínculo confirmado
             {sobrenomes.length > 0 && (
               <span className="font-normal text-gray-500">
                 : {sobrenomes.join(", ")}
@@ -34,9 +34,9 @@ export default function CardCruzamento({ c }: { c: Cruzamento }) {
         )}
         <span
           className="shrink-0 rounded-md bg-gray-50 px-2 py-0.5 text-xs font-mono text-gray-500"
-          title="Score de coincidência"
+          title="Grau de similaridade textual entre os nomes"
         >
-          score {Number(c.score ?? 0).toFixed(2)}
+          sim. {Number(c.score ?? 0).toFixed(2)}
         </span>
       </div>
 

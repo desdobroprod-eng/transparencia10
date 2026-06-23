@@ -113,9 +113,9 @@ export default function CruzamentosPage() {
             <KpiCard
               rotulo="Nome idêntico"
               valor={
-                <span className="text-red-700">{kpis.exatos}</span>
+                <span className="text-amber-700">{kpis.exatos}</span>
               }
-              detalhe="Indício mais forte (homonímia possível)"
+              detalhe="Nome completo igual — identidade não verificada"
             />
             <KpiCard
               rotulo="Empresas"
@@ -237,8 +237,8 @@ export default function CruzamentosPage() {
             Fontes públicas: quadro societário via Receita Federal (CNPJ) ×
             servidores estaduais via Portal da Transparência do Maranhão.
             Coincidência de nome é{" "}
-            <strong className="text-gray-500">indício, não prova</strong>; a
-            apuração compete aos órgãos de controle.
+            <strong className="text-gray-500">sinalização automática, não prova</strong>; a
+            verificação compete aos órgãos de controle.
           </p>
         </footer>
       </div>

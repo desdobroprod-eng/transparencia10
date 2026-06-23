@@ -99,7 +99,7 @@ export default function VisaoGeralPage() {
   };
   const categorias = [
     { rotulo: "Financeiro (empresa/contrato)", valor: cat.financeiro, cor: RISCO.critico.cor },
-    { rotulo: "Coincidência nominal (a apurar)", valor: cat.conflito_interesse + cat.nepotismo, cor: "#7c3aed" },
+    { rotulo: "Coincidência nominal (a verificar)", valor: cat.conflito_interesse + cat.nepotismo, cor: "#7c3aed" },
   ];
   const maxCat = Math.max(1, ...categorias.map((c) => c.valor));
 

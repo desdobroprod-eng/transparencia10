@@ -18,7 +18,7 @@ export default function DisclaimerInvestigacao() {
             <strong className="font-semibold">
               não confirma que se trata da mesma pessoa — não há checagem de CPF.
               Coincidência ou semelhança de nome é comum e não significa parentesco,
-              sociedade oculta, fraude ou qualquer irregularidade.
+              sociedade oculta ou qualquer irregularidade.
             </strong>{" "}
             Nenhuma das pessoas citadas é acusada de conduta ilícita. A verificação de
             identidade e de eventual irregularidade compete exclusivamente aos órgãos de
