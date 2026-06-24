@@ -1,23 +1,23 @@
 {
-  "ultima_atualizacao": "2026-06-23T22:27:00.054428+00:00",
+  "ultima_atualizacao": "2026-06-24T18:59:03.996369+00:00",
   "stats": {
     "maranhao_estado": {
-      "total_gasto": 1374976865.38,
-      "total_contratos": 183,
-      "total_alertas": 44,
+      "total_gasto": 20988200.0,
+      "total_contratos": 186,
+      "total_alertas": 45,
       "nivel_risco": "critico",
-      "base_gasto": "empenhos_estado_ma"
+      "base_gasto": "contratos_pncp"
     },
     "sao_luis": {
-      "total_gasto": 199577740.46,
-      "total_contratos": 680,
-      "total_alertas": 192,
+      "total_gasto": 195483384.37,
+      "total_contratos": 675,
+      "total_alertas": 189,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "raposa": {
       "total_gasto": 3930936.0,
-      "total_contratos": 54,
+      "total_contratos": 55,
       "total_alertas": 4,
       "nivel_risco": "critico",
       "base_gasto": "siconfi_funcao_cultura"
