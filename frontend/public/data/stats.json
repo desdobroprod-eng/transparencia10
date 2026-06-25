@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-06-24T23:09:45.168499+00:00",
+  "ultima_atualizacao": "2026-06-25T02:30:08.499423+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 21188200.0,
@@ -9,22 +9,22 @@
       "base_gasto": "contratos_pncp"
     },
     "sao_luis": {
-      "total_gasto": 199787318.96,
-      "total_contratos": 672,
-      "total_alertas": 188,
+      "total_gasto": 128642637.95,
+      "total_contratos": 182,
+      "total_alertas": 32,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "raposa": {
       "total_gasto": 3930936.0,
       "total_contratos": 55,
-      "total_alertas": 3,
+      "total_alertas": 4,
       "nivel_risco": "critico",
       "base_gasto": "siconfi_funcao_cultura"
     },
     "sao_jose_ribamar": {
-      "total_gasto": 19113039.0,
-      "total_contratos": 3,
+      "total_gasto": 231410.52,
+      "total_contratos": 2,
       "total_alertas": 0,
       "nivel_risco": "normal",
       "base_gasto": "contratos_pncp"
@@ -37,9 +37,9 @@
       "base_gasto": "contratos_pncp"
     },
     "pinheiro": {
-      "total_gasto": 18716823.82,
-      "total_contratos": 18,
-      "total_alertas": 14,
+      "total_gasto": 10859799.77,
+      "total_contratos": 12,
+      "total_alertas": 11,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     }

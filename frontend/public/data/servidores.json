@@ -1,25 +1,3 @@
 {
-  "cruzamentos": [
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000166/2024",
-      "cnpj": "48351834000178",
-      "fornecedor": "EDUARDO HENRIQUE DE A SILVA LTDA",
-      "socio": "EDUARDO HENRIQUE DE ARAUJO SILVA",
-      "servidor": "SERGIO HENRIQUE ARAUJO SILVA",
-      "sobrenomes_comuns": [
-        "HENRIQUE",
-        "ARAUJO",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1,
-      "orgao": "Servidor municipal São Luís",
-      "cargo": "",
-      "fonte": "Diário Oficial São Luís (Querido Diário)",
-      "situacao": "ativo",
-      "situacao_fonte": "Diário Oficial São Luís — último ato: 2025-11-06"
-    }
-  ]
+  "cruzamentos": []
 }
