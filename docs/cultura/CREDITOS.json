@@ -1,0 +1,53 @@
+{
+  "creditos": [
+    {
+      "arquivo": "bumba-1.jpg",
+      "titulo": "09. Pandeirões do Bumba meu Boi do Maranhão- Ensaio Retratos de Pai Francisco foto de Tairo Lisboa.jpg",
+      "autor": "EXUBERANTES",
+      "licenca": "CC BY-SA 4.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:09._Pandeir%C3%B5es_do_Bumba_meu_Boi_do_Maranh%C3%A3o-_Ensaio_Retratos_de_Pai_Francisco_foto_de_Tairo_Lisboa.jpg"
+    },
+    {
+      "arquivo": "bumba-2.jpg",
+      "titulo": "Bumba Boi Maranhao.jpg",
+      "autor": "Mauricioalexandre55",
+      "licenca": "CC BY-SA 4.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Bumba_Boi_Maranhao.jpg"
+    },
+    {
+      "arquivo": "tambor-1.jpg",
+      "titulo": "Tambor de Crioula do Maranhão - 0136.jpg",
+      "autor": "Maria Eugenia Tita",
+      "licenca": "CC BY 4.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Tambor_de_Crioula_do_Maranh%C3%A3o_-_0136.jpg"
+    },
+    {
+      "arquivo": "tambor-2.jpg",
+      "titulo": "Casa do Tambor de Crioula - 06.jpg",
+      "autor": "Ajmcbarreto",
+      "licenca": "CC BY-SA 4.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Casa_do_Tambor_de_Crioula_-_06.jpg"
+    },
+    {
+      "arquivo": "cacuria-1.jpg",
+      "titulo": "Cacuria 1.jpg",
+      "autor": "Kjhm",
+      "licenca": "CC BY-SA 4.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Cacuria_1.jpg"
+    },
+    {
+      "arquivo": "cacuria-2.jpg",
+      "titulo": "Tambor de Cacuriá.jpg",
+      "autor": "dpadua",
+      "licenca": "CC BY-SA 2.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Tambor_de_Cacuri%C3%A1.jpg"
+    },
+    {
+      "arquivo": "video/tambor.mp4",
+      "titulo": "Tambor de Crioula do Maranhão (documentário)",
+      "autor": "TVNBR",
+      "licenca": "CC BY 3.0",
+      "fonte": "https://commons.wikimedia.org/wiki/File:Patrim%C3%B4nio_Cultural_do_Brasil,_Tambor_de_Crioula_do_Maranh%C3%A3o_envolve_dan%C3%A7a,_canto_e_percuss%C3%A3o.webm"
+    }
+  ]
+}
