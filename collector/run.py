@@ -339,8 +339,8 @@ def _calcular_stats_ente(
 # ──────────────────────────────────────────────────────────────────────────────
 
 async def executar_coleta(
-    anos: list[int] | None = None,
-    filtro_ente: str | None = None,
+    anos: "Optional[list]" = None,
+    filtro_ente: "Optional[str]" = None,
 ) -> int:
     """
     Executa o pipeline completo:

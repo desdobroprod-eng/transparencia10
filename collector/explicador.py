@@ -21,6 +21,7 @@ Uso:
 import json
 import os
 from pathlib import Path
+from typing import Optional
 
 import httpx
 
@@ -46,7 +47,7 @@ def _brl(v: float) -> str:
     return "R$ " + f"{float(v or 0):,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
-def _ia(prompt: str) -> str | None:
+def _ia(prompt: str) -> Optional[str]:
     """Tenta gerar via Ollama; retorna None se indisponível/lento."""
     global _ollama_ok
     if not _ollama_ok:

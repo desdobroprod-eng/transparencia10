@@ -24,6 +24,7 @@ import csv
 import io
 import re
 from datetime import datetime, timezone
+from typing import Optional
 
 import httpx
 
@@ -80,7 +81,7 @@ def _eh_cultura(funcao: str, nome_ug: str) -> bool:
     return "cultura" in ug
 
 
-async def _baixar_csv(client: httpx.AsyncClient, url: str) -> str | None:
+async def _baixar_csv(client: httpx.AsyncClient, url: str) -> Optional[str]:
     for tent in range(1, _MAX_TENT + 1):
         try:
             r = await client.get(url, headers={"User-Agent": _UA, "Accept": "text/csv"})

@@ -13,6 +13,7 @@ Endpoint: GET https://transparencia.ma.gov.br/api/consulta-notas?ano=&codigo_ug=
 
 import asyncio
 from datetime import datetime
+from typing import Optional
 
 import httpx
 
@@ -36,7 +37,7 @@ def _valor(v) -> float:
         return 0.0
 
 
-async def coletar_execucao_cultura_estado(anos: list[int] | None = None) -> dict:
+async def coletar_execucao_cultura_estado(anos: Optional[list] = None) -> dict:
     """
     Retorna {total_empenhado, por_ano:{ano:valor}, por_ug:{ug:valor}, fonte}.
     Soma o valor líquido dos empenhos (tipo_documento 'E') das UGs de cultura.
