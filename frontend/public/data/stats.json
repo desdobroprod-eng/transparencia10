@@ -1,47 +1,47 @@
 {
-  "ultima_atualizacao": "2026-06-28T02:27:40.391053+00:00",
+  "ultima_atualizacao": "2026-06-29T14:20:27.589741+00:00",
   "stats": {
     "maranhao_estado": {
-      "total_gasto": 1408452354.24,
-      "total_contratos": 203,
-      "total_alertas": 46,
-      "nivel_risco": "critico",
-      "base_gasto": "empenhos_estado_ma"
+      "total_gasto": 1166256489.86,
+      "total_contratos": 0,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
+      "base_gasto": "siconfi_funcao_cultura"
     },
     "sao_luis": {
-      "total_gasto": 200873299.28,
-      "total_contratos": 681,
-      "total_alertas": 194,
-      "nivel_risco": "critico",
-      "base_gasto": "contratos_pncp"
+      "total_gasto": 290211889.45,
+      "total_contratos": 0,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
+      "base_gasto": "siconfi_funcao_cultura"
     },
     "raposa": {
       "total_gasto": 3930936.0,
-      "total_contratos": 55,
-      "total_alertas": 4,
-      "nivel_risco": "critico",
+      "total_contratos": 0,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
       "base_gasto": "siconfi_funcao_cultura"
     },
     "sao_jose_ribamar": {
-      "total_gasto": 19113039.0,
-      "total_contratos": 3,
+      "total_gasto": 0,
+      "total_contratos": 0,
       "total_alertas": 0,
       "nivel_risco": "normal",
       "base_gasto": "contratos_pncp"
     },
     "paco_lumiar": {
-      "total_gasto": 11354221.11,
-      "total_contratos": 27,
-      "total_alertas": 17,
-      "nivel_risco": "critico",
+      "total_gasto": 0,
+      "total_contratos": 0,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
       "base_gasto": "contratos_pncp"
     },
     "pinheiro": {
-      "total_gasto": 18716823.82,
-      "total_contratos": 18,
-      "total_alertas": 14,
-      "nivel_risco": "critico",
-      "base_gasto": "contratos_pncp"
+      "total_gasto": 16150619.66,
+      "total_contratos": 0,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
+      "base_gasto": "siconfi_funcao_cultura"
     }
   }
 }
