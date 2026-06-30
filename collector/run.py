@@ -892,6 +892,31 @@ async def executar_coleta(
     print("\n[OUTPUT] Gerando arquivos JSON estáticos")
     print("-" * 50)
 
+    # Preserve-on-empty: se a API retornou 0 contratos, mantém arquivo anterior.
+    # Evita apagar dados bons quando transparencia.ma.gov.br fica offline.
+    if not contratos_frontend:
+        _prev_contratos = DIR_SAIDA / "contratos.json"
+        if _prev_contratos.exists():
+            try:
+                import json as _json
+                _existente = _json.loads(_prev_contratos.read_text(encoding="utf-8"))
+                if isinstance(_existente, list) and _existente:
+                    print(f"[CONTRATOS] mantendo {len(_existente)} contratos anteriores (API retornou vazio)")
+                    contratos_frontend = _existente
+            except Exception:
+                pass
+    if not alertas_frontend:
+        _prev_alertas = DIR_SAIDA / "alertas.json"
+        if _prev_alertas.exists():
+            try:
+                import json as _json
+                _ex_a = _json.loads(_prev_alertas.read_text(encoding="utf-8"))
+                if isinstance(_ex_a, list) and _ex_a:
+                    print(f"[ALERTAS] mantendo {len(_ex_a)} alertas anteriores (API retornou vazio)")
+                    alertas_frontend = _ex_a
+            except Exception:
+                pass
+
     _salvar_json("contratos.json", contratos_frontend)
     _salvar_json("alertas.json", alertas_frontend)
     _salvar_json("stats.json", stats_frontend)
