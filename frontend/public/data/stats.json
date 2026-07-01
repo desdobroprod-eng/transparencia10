@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-07-01T15:35:02.085113+00:00",
+  "ultima_atualizacao": "2026-07-01T18:13:21.317445+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 1166256489.86,
@@ -17,23 +17,23 @@
     },
     "raposa": {
       "total_gasto": 3930936.0,
-      "total_contratos": 0,
-      "total_alertas": 0,
-      "nivel_risco": "normal",
+      "total_contratos": 11,
+      "total_alertas": 2,
+      "nivel_risco": "critico",
       "base_gasto": "siconfi_funcao_cultura"
     },
     "sao_jose_ribamar": {
-      "total_gasto": 0,
-      "total_contratos": 0,
+      "total_gasto": 19113039.0,
+      "total_contratos": 3,
       "total_alertas": 0,
       "nivel_risco": "normal",
       "base_gasto": "contratos_pncp"
     },
     "paco_lumiar": {
-      "total_gasto": 0,
-      "total_contratos": 0,
-      "total_alertas": 0,
-      "nivel_risco": "normal",
+      "total_gasto": 6665910.78,
+      "total_contratos": 12,
+      "total_alertas": 7,
+      "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "pinheiro": {
