@@ -4,8 +4,8 @@
     "sao_luis": "Prefeitura de São Luís aparece com R$ 290.211.889,45 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "raposa": "Prefeitura de Raposa aparece com R$ 3.930.936,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "sao_jose_ribamar": "Prefeitura de São José de Ribamar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
-    "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 11.354.221,11 em gastos de cultura e 27 contrato(s) nos dados públicos. 17 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
-    "pinheiro": "pinheiro aparece com R$ 10.859.799,77 em gastos de cultura e 12 contrato(s) nos dados públicos. 11 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação."
+    "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
+    "pinheiro": "pinheiro aparece com R$ 16.150.619,66 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação."
   },
   "regras": {
     "NOME_IDENTICO_SERVIDOR": "O nome de um sócio da empresa é igual ao de um servidor público. Coincidência de nome não confirma que é a mesma pessoa — é apenas um ponto a verificar.",
