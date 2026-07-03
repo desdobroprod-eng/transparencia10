@@ -451,6 +451,40 @@ async def executar_coleta(
         f"({duplicatas} duplicatas removidas)"
     )
 
+    # ── Guarda contra regressão da fonte (evita zerar o portal) ────────────────
+    # PNCP / transparencia.ma.gov.br às vezes voltam degradados (poucos ou zero
+    # contratos). Se a coleta desta rodada for drasticamente menor que o dataset
+    # já publicado no repositório, NÃO sobrescrevemos: preservamos o conjunto
+    # anterior inteiro (contratos + alertas + servidores + stats), que são
+    # derivados da mesma rodada e precisam ficar consistentes entre si. Um único
+    # contrato "sobrevivente" não pode arrastar KPIs e cruzamentos para zero.
+    # Override manual: FORCAR_ATUALIZACAO=1 python3 run.py
+    def _contagem_publicada(nome: str) -> int:
+        p = DIR_SAIDA / nome
+        if not p.exists():
+            return 0
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+            return len(d) if isinstance(d, list) else 0
+        except Exception:
+            return 0
+
+    _n_publicado = _contagem_publicada("contratos.json")
+    _n_coletado = len(todos_contratos)
+    _preservar_dataset = (
+        _n_publicado >= 50
+        and _n_coletado < _n_publicado * 0.5
+        and os.environ.get("FORCAR_ATUALIZACAO") != "1"
+    )
+    if _preservar_dataset:
+        print("=" * 60)
+        print(f"[GUARD] Regressão detectada: coleta atual = {_n_coletado} contratos; "
+              f"dataset publicado = {_n_publicado}.")
+        print("[GUARD] Fonte provavelmente instável. PRESERVANDO dataset anterior —")
+        print("[GUARD] contratos/alertas/servidores/stats NÃO serão sobrescritos.")
+        print("[GUARD] Para forçar mesmo assim: FORCAR_ATUALIZACAO=1 python3 run.py")
+        print("=" * 60)
+
     # ── FASE 1.5: Enriquecimento de CNPJ (BrasilAPI) ──────────────────────────
     # Para cada fornecedor único, busca razão social, data de abertura, situação
     # cadastral e QSA (sócios). É o que viabiliza EMPRESA_NOVA e o cruzamento
@@ -735,7 +769,11 @@ async def executar_coleta(
             print(f"[AVISO] Fase 4b falhou (não bloqueante): {exc}")
 
     # servidores.json — cruzamentos sócio × servidor encontrados
-    _salvar_json("servidores.json", {"cruzamentos": matches_servidores})
+    # (respeita a guarda de regressão: não zera cruzamentos com fonte instável)
+    if not _preservar_dataset:
+        _salvar_json("servidores.json", {"cruzamentos": matches_servidores})
+    else:
+        print("[GUARD] servidores.json preservado (dataset anterior mantido)")
 
     # Contadores por categoria para o meta.json
     contadores_categoria = {
@@ -892,34 +930,25 @@ async def executar_coleta(
     print("\n[OUTPUT] Gerando arquivos JSON estáticos")
     print("-" * 50)
 
-    # Preserve-on-empty: se a API retornou 0 contratos, mantém arquivo anterior.
-    # Evita apagar dados bons quando transparencia.ma.gov.br fica offline.
-    if not contratos_frontend:
-        _prev_contratos = DIR_SAIDA / "contratos.json"
-        if _prev_contratos.exists():
-            try:
-                import json as _json
-                _existente = _json.loads(_prev_contratos.read_text(encoding="utf-8"))
-                if isinstance(_existente, list) and _existente:
-                    print(f"[CONTRATOS] mantendo {len(_existente)} contratos anteriores (API retornou vazio)")
-                    contratos_frontend = _existente
-            except Exception:
-                pass
-    if not alertas_frontend:
-        _prev_alertas = DIR_SAIDA / "alertas.json"
-        if _prev_alertas.exists():
-            try:
-                import json as _json
-                _ex_a = _json.loads(_prev_alertas.read_text(encoding="utf-8"))
-                if isinstance(_ex_a, list) and _ex_a:
-                    print(f"[ALERTAS] mantendo {len(_ex_a)} alertas anteriores (API retornou vazio)")
-                    alertas_frontend = _ex_a
-            except Exception:
-                pass
-
-    _salvar_json("contratos.json", contratos_frontend)
-    _salvar_json("alertas.json", alertas_frontend)
-    _salvar_json("stats.json", stats_frontend)
+    # Guarda de regressão (decidida na FASE 1): se a fonte voltou degradada,
+    # preserva o dataset publicado inteiro em vez de sobrescrever com dados ruins.
+    # Reatribui contratos_frontend/alertas_frontend ao dataset preservado para que
+    # o cruzamento de emendas e o meta.json a seguir usem as contagens corretas.
+    if _preservar_dataset:
+        print("[GUARD] contratos/alertas/stats preservados — dataset anterior mantido.")
+        try:
+            _prev_c = json.loads((DIR_SAIDA / "contratos.json").read_text(encoding="utf-8"))
+            if isinstance(_prev_c, list) and _prev_c:
+                contratos_frontend = _prev_c
+            _prev_a = json.loads((DIR_SAIDA / "alertas.json").read_text(encoding="utf-8"))
+            if isinstance(_prev_a, list) and _prev_a:
+                alertas_frontend = _prev_a
+        except Exception:
+            pass
+    else:
+        _salvar_json("contratos.json", contratos_frontend)
+        _salvar_json("alertas.json", alertas_frontend)
+        _salvar_json("stats.json", stats_frontend)
 
     # ── Emendas parlamentares de Cultura (estaduais + federais MA) ─────────────
     # Não-bloqueante: se a fonte cair, o pipeline segue sem emendas.
