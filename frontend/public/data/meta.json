@@ -1,9 +1,9 @@
 {
-  "ultima_coleta": "2026-07-04T14:17:10.882654+00:00",
+  "ultima_coleta": "2026-07-04T19:20:17.259946+00:00",
   "total_registros": 1009,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-07-04T11:59:10.935870+00:00",
-  "timestamp_fim": "2026-07-04T14:17:10.882654+00:00",
+  "timestamp_inicio": "2026-07-04T14:55:29.875995+00:00",
+  "timestamp_fim": "2026-07-04T19:20:17.259946+00:00",
   "total_contratos": 1009,
   "total_alertas": 291,
   "gasto_cultura_siconfi": {
@@ -15,7 +15,7 @@
     "pinheiro": 16150619.66
   },
   "alertas_por_categoria": {
-    "financeiro": 20,
+    "financeiro": 111,
     "conflito_interesse": 0,
     "nepotismo": 0
   },
