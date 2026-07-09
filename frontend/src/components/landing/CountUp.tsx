@@ -36,7 +36,6 @@ export default function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [value, setValue] = useState<number>(from);
-  const started = useRef(false);
 
   const format = (n: number) =>
     n.toLocaleString(locale, {
@@ -53,10 +52,9 @@ export default function CountUp({
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
+    // Reanima sempre que `to` mudar (ex.: KPI atualizado após fetch dos dados
+    // reais) — o cleanup do effect cancela a animação anterior.
     const animate = () => {
-      if (started.current) return;
-      started.current = true;
-
       if (prefersReduced) {
         setValue(to);
         return;
