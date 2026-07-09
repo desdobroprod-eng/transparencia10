@@ -5979,13 +5979,8 @@
     }
   ],
   "stats": {
-    "total": 332,
-    "estaduais": 331,
-    "federais": 1,
-    "com_cnpj_favorecido": 324,
-    "valor_empenhado": 119122176.1,
-    "valor_pago": 114512176.1,
-    "atualizado_em": "2026-07-09T04:53:12.404591+00:00",
+    "total": 0,
+    "indisponivel": true,
     "favorecido_tambem_fornecedor": 65
   }
 }
