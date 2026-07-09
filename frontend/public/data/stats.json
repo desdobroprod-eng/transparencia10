@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-07-09T05:09:15.645664+00:00",
+  "ultima_atualizacao": "2026-07-09T05:23:28.635354+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 1437008354.25,
@@ -9,37 +9,37 @@
       "base_gasto": "empenhos_estado_ma"
     },
     "sao_luis": {
-      "total_gasto": 203285917.73,
-      "total_contratos": 733,
-      "total_alertas": 240,
+      "total_gasto": 177112436.33,
+      "total_contratos": 502,
+      "total_alertas": 170,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "raposa": {
       "total_gasto": 3930936.0,
-      "total_contratos": 55,
-      "total_alertas": 4,
-      "nivel_risco": "critico",
+      "total_contratos": 22,
+      "total_alertas": 0,
+      "nivel_risco": "normal",
       "base_gasto": "siconfi_funcao_cultura"
     },
     "sao_jose_ribamar": {
-      "total_gasto": 19113039.0,
-      "total_contratos": 3,
+      "total_gasto": 0,
+      "total_contratos": 0,
       "total_alertas": 0,
       "nivel_risco": "normal",
       "base_gasto": "contratos_pncp"
     },
     "paco_lumiar": {
-      "total_gasto": 11354221.11,
-      "total_contratos": 27,
-      "total_alertas": 17,
+      "total_gasto": 5308657.05,
+      "total_contratos": 19,
+      "total_alertas": 9,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "pinheiro": {
-      "total_gasto": 18716823.82,
-      "total_contratos": 18,
-      "total_alertas": 14,
+      "total_gasto": 17509913.82,
+      "total_contratos": 15,
+      "total_alertas": 11,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     }

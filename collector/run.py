@@ -20,6 +20,7 @@ import argparse
 import asyncio
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -99,11 +100,37 @@ ENTES_ALVO = {
 # (ex.: Raposa) publicam tudo numa unidade genérica, por isso o filtro por
 # objeto é essencial.
 _CULTURA_UNIDADE = ("cultura", "cultural", "patrimonio histor", "patrimônio histór")
-_CULTURA_OBJETO = (
-    "cultura", "cultural", "artist", "artíst", "evento", "festiv", "festejo",
-    "carnaval", "são joão", "sao joao", "junino", "show", "banda", "música",
-    "musica", "teatro", "dança", "danca", "folclore", "biblioteca", "museu",
-    "artesanat", "audiovisual", "cineteatro", "patrimônio", "patrimonio",
+
+# Unidades que CONTÊM "cultura" mas NÃO são do setor cultural (falsos amigos).
+_UNIDADE_VETO = ("agricult", "pesca", "abastec")
+
+# Palavras FORTES no objeto — usadas com FRONTEIRA DE PALAVRA (\b) para não
+# casar dentro de outra palavra. Ex.: \bcultura\b NÃO casa em "puericultura",
+# "agricultura", "piscicultura"; \bdança\b NÃO casa em "mudança"; \bteatr\w*
+# casa "teatro"/"teatral". Sem \b, nomes de rua/bairro ("Rio São João",
+# "Rua do Teatro") e termos técnicos ("puericultura") entravam como cultura.
+_CULTURA_OBJETO_RGX = re.compile("|".join((
+    r"\bcultura\b", r"\bcultura(is|l)\b",
+    r"\bart[íi]stic\w*", r"\bartes\b", r"\bartesanat\w*",
+    r"\bfestival\w*", r"\bfestejos?\b", r"\bfestivid\w*",
+    r"\bjunin\w*", r"\barraial\w*", r"\bquadrilha\w*", r"\bcarnaval\w*",
+    r"\bfolclor\w*", r"\bbumba\b", r"\btambor de crioula\b", r"\bcacuri\w*",
+    r"\bteatr\w*", r"\bcineteatro\b", r"\baudiovisu\w*", r"\bcinema\b",
+    r"\bm[úu]sic\w*", r"\bdanç\w*", r"\bdanc\w*", r"\borquestra\w*",
+    r"\bshows?\b", r"\bbandas?\b", r"\bmuseu\w*", r"\bbiblioteca\w*",
+    r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural)",
+)))
+
+# Se o objeto contém um destes, NÃO é cultura mesmo que bata acima — cobre
+# nomes de logradouro em obras ("Rua do Teatro"), "-cultura" técnicos e
+# "banda larga" (internet, não música).
+_OBJETO_VETO = (
+    "puericultura", "piscicultura", "horticultura", "fruticultura",
+    "floricultura", "silvicultura", "avicultura", "bovinocultura",
+    "apicultura", "aquicultura", "suinocultura", "olericultura",
+    "pavimenta", "terraplan", "recapea", "drenagem", "esgoto", "saneament",
+    "extintor", "merenda", "transporte escolar", "medicament", "hospital",
+    "banda larga", "internet", "link de dados",
 )
 
 
@@ -112,16 +139,28 @@ def _normalizar(txt: str) -> str:
 
 
 def _eh_cultura(unidade: str, objeto: str) -> bool:
-    """True se o contrato pertence ao recorte Cultura (por unidade ou objeto)."""
+    """
+    True se o contrato pertence ao recorte Cultura.
+
+    Dois sinais, do mais forte ao mais fraco:
+      1. UNIDADE gestora é do setor cultural (Secretaria de Cultura, Fundação
+         de Patrimônio etc.) — sinal forte, aceita direto.
+      2. OBJETO cita termo cultural inequívoco (palavra inteira) e NÃO cita
+         nenhum termo de veto — cobre municípios que publicam tudo numa
+         unidade genérica (ex.: Raposa, contratos de shows artísticos).
+    """
     u = _normalizar(unidade)
-    # 'agricultura' contém 'cultura' — exclui explicitamente.
-    if "agricult" in u:
+    if any(v in u for v in _UNIDADE_VETO):
         u_cult = False
     else:
         u_cult = any(k in u for k in _CULTURA_UNIDADE)
+    if u_cult:
+        return True
+
     o = _normalizar(objeto)
-    o_cult = any(k in o for k in _CULTURA_OBJETO)
-    return u_cult or o_cult
+    if any(v in o for v in _OBJETO_VETO):
+        return False
+    return bool(_CULTURA_OBJETO_RGX.search(o))
 
 # ── Diretório de saída dos JSONs ───────────────────────────────────────────────
 DIR_SAIDA = RAIZ_PROJETO / "frontend" / "public" / "data"
