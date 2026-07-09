@@ -30,7 +30,7 @@ import httpx
 
 _BASE = "https://transparencia.ma.gov.br/app/v2"
 _UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-_TIMEOUT = 60.0
+_TIMEOUT = 20.0   # portal responde em <5s no Brasil; timeout curto p/ falhar rápido no CI
 _MAX_TENT = 3
 
 
@@ -158,6 +158,14 @@ async def coletar_emendas_cultura(
             cult = [_normaliza_estadual(x) for x in linhas if _eh_cultura(x.get("Função"), x.get("Nome UG"))]
             emendas.extend(cult)
             print(f"[EMENDAS] estaduais: {len(cult)} de cultura (de {len(linhas)})")
+        else:
+            # Disjuntor: se o portal (mesmo host das federais) não respondeu ao
+            # dataset estadual, não adianta tentar as federais — pula e falha
+            # rápido. Em runners do GitHub (IP EUA) isso poupa vários minutos;
+            # o run.py preserva o emendas.json anterior.
+            print("[EMENDAS] portal MA inalcançável no dataset estadual — "
+                  "pulando federais (dados anteriores preservados)")
+            return {"emendas": [], "stats": {"total": 0, "indisponivel": True}}
 
         # ── Federais (respeita ano; cultura é rara mas coletamos) ──────────
         vistos: set[str] = set()

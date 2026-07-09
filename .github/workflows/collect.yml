@@ -1,11 +1,15 @@
 name: Coleta de Dados
 
-# Executa SEMANALMENTE (segunda 09:00 UTC = 06:00 São Luís) e permite disparo manual.
-# Nota: a cadência horária anterior empilhava execuções de 2-5h e derrubava o site
-# com dados degradados. O run.py tem guarda de regressão; ainda assim, semanal basta.
+# Executa 2x/semana (segunda e quinta, 09:00 UTC = 06:00 São Luís) + disparo manual.
+# Só atualiza CONTRATOS (PNCP federal funciona em runner do GitHub). O portal
+# estadual do MA bloqueia IP fora do Brasil, então cruzamentos/emendas/execução
+# do Estado falham rápido (disjuntor) e são PRESERVADOS — quem os atualiza é a
+# coleta no Mac (IP Brasil). As guardas de regressão do run.py garantem que uma
+# coleta parcial nunca zere o portal.
+# Histórico: a cadência HORÁRIA antiga empilhava runs de 2-5h e derrubava o site.
 on:
   schedule:
-    - cron: "0 9 * * 1"
+    - cron: "0 9 * * 1,4"
   workflow_dispatch:
 
 permissions:

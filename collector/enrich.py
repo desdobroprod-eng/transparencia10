@@ -45,6 +45,25 @@ _SLEEP_CNPJ = 0.7      # BrasilAPI: respeitar limite de taxa
 _SLEEP_SERV = 0.3
 _MAX_TENT = 3
 
+# ── Disjuntor (circuit breaker) do portal de servidores do MA ──────────────────
+# O portal transparencia.ma.gov.br só aceita IP do Brasil: em runners do GitHub
+# (IP dos EUA) TODA chamada estoura o timeout, e como buscar_servidores é
+# chamada uma vez por sócio, isso transformava a coleta em execuções de horas.
+# Após algumas falhas de CONEXÃO seguidas, desistimos do host pelo resto da
+# execução: buscar_servidores passa a retornar [] instantaneamente. A guarda de
+# regressão do run.py preserva os cruzamentos anteriores nesse caso, então o
+# grafo não zera. Localmente (IP Brasil) o portal responde e o disjuntor nunca
+# arma — qualquer sucesso zera o contador.
+_MA_TIMEOUT_SERV = 15         # s por chamada (Brasil responde em <5s)
+_MA_LIMITE_FALHAS = 4         # falhas de conexão seguidas antes de desistir
+_ma_falhas_seguidas = 0
+_ma_indisponivel = False
+
+
+def ma_servidores_indisponivel() -> bool:
+    """True se o disjuntor armou (portal de servidores dado como inalcançável)."""
+    return _ma_indisponivel
+
 
 # ── Cache em disco ─────────────────────────────────────────────────────────---
 
@@ -147,19 +166,24 @@ async def buscar_servidores(client: httpx.AsyncClient, termo: str) -> list[dict]
     Busca servidores estaduais cujo nome contém `termo` (mín. 3 chars).
     Retorna lista de {nome, cpf}. Usa cache por termo normalizado.
     """
+    global _ma_falhas_seguidas, _ma_indisponivel
     termo_norm = normalizar(termo)
     if len(termo_norm) < 3:
         return []
     if termo_norm in _cache_serv:
         return _cache_serv[termo_norm]
+    # Disjuntor armado: portal inalcançável nesta execução → não tenta mais.
+    if _ma_indisponivel:
+        return []
 
+    servidores: list[dict] = []
     for tent in range(1, _MAX_TENT + 1):
         try:
             r = await client.get(
                 SERVIDORES_MA,
                 params={"nomeServidor": termo_norm},
                 headers={"User-Agent": _UA, "X-Requested-With": "XMLHttpRequest"},
-                timeout=30,
+                timeout=_MA_TIMEOUT_SERV,
             )
             if r.status_code in (429, 500, 502, 503):
                 await asyncio.sleep(1.0 * tent)
@@ -171,14 +195,31 @@ async def buscar_servidores(client: httpx.AsyncClient, termo: str) -> list[dict]
                 for s in (dados if isinstance(dados, list) else [])
                 if s.get("nome")
             ]
+            _ma_falhas_seguidas = 0  # sucesso zera o disjuntor
             break
-        except (httpx.HTTPError, ValueError):
+        except (httpx.TimeoutException, httpx.ConnectError):
+            # Falha de CONEXÃO (host inalcançável) — conta para o disjuntor.
+            _ma_falhas_seguidas += 1
+            if _ma_falhas_seguidas >= _MA_LIMITE_FALHAS:
+                _ma_indisponivel = True
+                print(
+                    f"[DISJUNTOR] Portal de servidores MA inalcançável "
+                    f"({_ma_falhas_seguidas} timeouts de conexão seguidos). "
+                    f"Pulando cruzamento nesta execução — dados anteriores "
+                    f"serão preservados. (Rode no Mac/IP-BR para atualizar.)"
+                )
+                servidores = []
+                break
             if tent >= _MAX_TENT:
                 servidores = []
                 break
             await asyncio.sleep(1.0 * tent)
-    else:
-        servidores = []
+        except (httpx.HTTPError, ValueError):
+            # Erro não relacionado a conexão (não conta para o disjuntor).
+            if tent >= _MAX_TENT:
+                servidores = []
+                break
+            await asyncio.sleep(1.0 * tent)
 
     _cache_serv[termo_norm] = servidores
     await asyncio.sleep(_SLEEP_SERV)

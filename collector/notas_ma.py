@@ -51,8 +51,14 @@ async def coletar_execucao_cultura_estado(anos: Optional[list] = None) -> dict:
 
     # verify=False: o portal MA usa cadeia de certificado self-signed que o
     # httpx rejeita; curl/browsers aceitam. Dado público e somente leitura.
-    async with httpx.AsyncClient(timeout=40, headers={"User-Agent": _UA}, verify=False) as client:
+    # timeout curto (15s): o portal responde em <5s no Brasil; em runners do
+    # GitHub (IP EUA bloqueado) queremos falhar rápido, não esperar 40s×6.
+    _falhas_conexao = 0
+    _abortar = False
+    async with httpx.AsyncClient(timeout=15, headers={"User-Agent": _UA}, verify=False) as client:
         for ano in anos:
+            if _abortar:
+                break
             for ug, _nome in UGS_CULTURA.items():
                 try:
                     r = await client.get(
@@ -61,10 +67,21 @@ async def coletar_execucao_cultura_estado(anos: Optional[list] = None) -> dict:
                     if r.status_code != 200 or not r.content:
                         continue
                     notas = r.json()
+                except (httpx.TimeoutException, httpx.ConnectError):
+                    # Falha de conexão: portal provavelmente inalcançável (IP
+                    # fora do Brasil). Após 2 seguidas, desiste do host.
+                    _falhas_conexao += 1
+                    if _falhas_conexao >= 2:
+                        print("[NOTAS-MA] portal inalcançável — abortando "
+                              "execução do Estado (valor anterior preservado)")
+                        _abortar = True
+                        break
+                    continue
                 except (httpx.HTTPError, ValueError):
                     continue
                 if not isinstance(notas, list):
                     continue
+                _falhas_conexao = 0  # sucesso zera o contador
                 # Empenhos (tipo 'E') — valor líquido (reforços positivos,
                 # anulações negativas) reflete o comprometido no exercício.
                 sub = sum(

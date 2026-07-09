@@ -947,9 +947,27 @@ async def executar_coleta(
     # unidade gestora para todos os contratos, injetando centenas de contratos
     # de combustível/peças/obras irrelevantes. Mantendo filtro cultura-only.)
 
+    # Execução do Estado via empenhos (notas MA). Se o portal MA estava
+    # inalcançável (ex.: runner do GitHub), vem 0 — nesse caso preservamos o
+    # valor já publicado em stats.json em vez de despencar para o SICONFI, para
+    # o KPI de R$ do Estado não regredir numa coleta parcial.
+    exec_estado_total = float(execucao_estado.get("total_empenhado") or 0)
+    if exec_estado_total <= 0:
+        try:
+            _prev_stats = json.loads((DIR_SAIDA / "stats.json").read_text(encoding="utf-8"))
+            _prev_est = (_prev_stats.get("stats") or {}).get("maranhao_estado") or {}
+            if (
+                _prev_est.get("base_gasto") == "empenhos_estado_ma"
+                and float(_prev_est.get("total_gasto") or 0) > 0
+            ):
+                exec_estado_total = float(_prev_est["total_gasto"])
+                print(f"[NOTAS-MA] execução do Estado preservada do publicado: "
+                      f"R$ {exec_estado_total:,.2f}")
+        except Exception:
+            pass
+
     # stats.json: dicionário indexado por chave de ente, no formato {stats:{...}}
     stats_dict = {}
-    exec_estado_total = float(execucao_estado.get("total_empenhado") or 0)
     for s in stats_entes:
         chave = s["chave_ente"]
         total_gasto = s["total_gasto"]
