@@ -1,18 +1,27 @@
 name: Coleta de Dados
 
-# Executa de hora em hora e permite disparo manual
+# Executa SEMANALMENTE (segunda 09:00 UTC = 06:00 São Luís) e permite disparo manual.
+# Nota: a cadência horária anterior empilhava execuções de 2-5h e derrubava o site
+# com dados degradados. O run.py tem guarda de regressão; ainda assim, semanal basta.
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 9 * * 1"
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# Nunca empilhar coletas: uma nova cancela a anterior presa
+concurrency:
+  group: coleta
+  cancel-in-progress: true
+
 jobs:
   collect:
     name: Coletar dados do Portal da Transparência
     runs-on: ubuntu-latest
+    # Mata execuções travadas (coletas saudáveis cabem em 2h30; presas de 5h+ não)
+    timeout-minutes: 170
 
     steps:
       # 1. Checkout com histórico completo para permitir git push
@@ -58,6 +67,8 @@ jobs:
         run: |
           git diff --staged --quiet || git commit -m "data: atualização automática $(date -u '+%Y-%m-%d %H:%M UTC')"
 
-      # 8. Enviar para o repositório remoto
+      # 8. Enviar para o repositório remoto (rebase caso o remoto tenha avançado)
       - name: Push das alterações
-        run: git push
+        run: |
+          git pull --rebase origin main
+          git push

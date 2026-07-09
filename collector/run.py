@@ -727,6 +727,54 @@ async def executar_coleta(
         print(f"[AVISO] Fase 4 — cruzamento falhou (não bloqueante): {exc}")
         enrich.persistir_caches()
 
+    # ── Guarda de regressão dos CRUZAMENTOS (independente da de contratos) ─────
+    # A API de servidores do MA costuma dar timeout em runners do GitHub mesmo
+    # com o PNCP saudável: os contratos chegam íntegros, mas a FASE 4 acha ~0
+    # cruzamentos e apagaria os reais. Se esta rodada achou menos da metade do
+    # publicado (mín. 5), restaura os cruzamentos anteriores E os alertas de
+    # nepotismo correspondentes (em shape cru), mantendo servidores.json,
+    # alertas.json, contadores e scores consistentes entre si.
+    # Override manual: FORCAR_ATUALIZACAO=1 python3 run.py
+    _cruz_prev: list = []
+    try:
+        _p_srv = DIR_SAIDA / "servidores.json"
+        if _p_srv.exists():
+            _cruz_prev = json.loads(_p_srv.read_text(encoding="utf-8")).get("cruzamentos") or []
+    except Exception:
+        _cruz_prev = []
+
+    if (
+        len(_cruz_prev) >= 5
+        and len(matches_servidores) < len(_cruz_prev) * 0.5
+        and os.environ.get("FORCAR_ATUALIZACAO") != "1"
+    ):
+        print("=" * 60)
+        print(f"[GUARD] Fonte de servidores instável: rodada achou "
+              f"{len(matches_servidores)} cruzamentos vs {len(_cruz_prev)} publicados.")
+        print("[GUARD] Restaurando cruzamentos e alertas de nepotismo anteriores.")
+        print("=" * 60)
+        matches_servidores = _cruz_prev
+        todos_alertas = [a for a in todos_alertas if a.get("categoria") != "nepotismo"]
+        try:
+            _prev_al = json.loads((DIR_SAIDA / "alertas.json").read_text(encoding="utf-8"))
+        except Exception:
+            _prev_al = []
+        for a in _prev_al if isinstance(_prev_al, list) else []:
+            if a.get("categoria") != "nepotismo":
+                continue
+            # Converte shape frontend → shape cru consumido adiante
+            todos_alertas.append({
+                "regra": a.get("regra") or "",
+                "score": int(a.get("score") or 0),
+                "motivo": a.get("motivo") or "",
+                "dados": {"cnpj": a.get("cnpj") or "", "nome_socio": a.get("fornecedor") or ""},
+                "id_contrato": a.get("contrato_id") or "",
+                "chave_ente": a.get("ente") or "",
+                "nome_ente": "",
+                "categoria": "nepotismo",
+                "orgao_servidor": a.get("orgao_servidor") or "",
+            })
+
     # ── FASE 4b: Verificação de exoneração via Diário Oficial (Querido Diário) ──
     # Para cada cruzamento encontrado, verifica se o servidor consta no DOM de
     # São Luís com ato de exoneração mais recente que o de nomeação.
@@ -769,7 +817,8 @@ async def executar_coleta(
             print(f"[AVISO] Fase 4b falhou (não bloqueante): {exc}")
 
     # servidores.json — cruzamentos sócio × servidor encontrados
-    # (respeita a guarda de regressão: não zera cruzamentos com fonte instável)
+    # (a guarda de regressão dos cruzamentos já rodou logo após a FASE 4;
+    #  aqui matches_servidores já contém o conjunto restaurado, se for o caso)
     if not _preservar_dataset:
         _salvar_json("servidores.json", {"cruzamentos": matches_servidores})
     else:

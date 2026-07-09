@@ -20,10 +20,14 @@ permissions:
   pages: write
   id-token: write
 
-# Garante que apenas um deploy rode por vez; cancela o pendente se um novo chegar
+# Garante que apenas um deploy rode por vez. cancel-in-progress FALSO de
+# propósito: com true, uma rajada de workflow_run (ex.: coletas canceladas em
+# lote) cancelava o deploy bom em andamento e o site ficava sem atualizar.
+# Com false os deploys enfileiram e todos concluem — na cadência semanal a
+# fila nunca cresce.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   # ── Build ──────────────────────────────────────────────────────────────────

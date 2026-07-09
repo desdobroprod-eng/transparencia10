@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Fraunces, Inter } from "next/font/google";
 import CountUp from "@/components/landing/CountUp";
 import BlurText from "@/components/landing/BlurText";
@@ -97,7 +98,9 @@ const FOTOS_GALERIA: FotoCultural[] = [
 ];
 
 // ── Faixa de impacto ────────────────────────────────────────────────────────
-const ESTATISTICAS = [
+// Fallback exibido até os JSONs do pipeline carregarem (2 KB); os valores
+// reais vêm de meta.json + stats.json para a landing nunca ficar defasada.
+const ESTATISTICAS_FALLBACK = [
   {
     valor: 1.5,
     decimals: 1,
@@ -105,16 +108,67 @@ const ESTATISTICAS = [
     sufixo: " bi",
     rotulo: "acompanhados em recursos públicos",
   },
-  { valor: 918, decimals: 0, prefixo: "", sufixo: "", rotulo: "contratos reunidos" },
+  { valor: 1067, decimals: 0, prefixo: "", sufixo: "", rotulo: "contratos reunidos" },
   { valor: 6, decimals: 0, prefixo: "", sufixo: "", rotulo: "entes federativos" },
   {
-    valor: 335,
+    valor: 406,
     decimals: 0,
     prefixo: "",
     sufixo: "",
     rotulo: "pontos a verificar",
   },
 ];
+
+function useEstatisticas() {
+  const [stats, setStats] = useState(ESTATISTICAS_FALLBACK);
+  useEffect(() => {
+    const BASE = "/transparencia10/data";
+    Promise.all([
+      fetch(`${BASE}/meta.json`).then((r) => (r.ok ? r.json() : null)),
+      fetch(`${BASE}/stats.json`).then((r) => (r.ok ? r.json() : null)),
+    ])
+      .then(([meta, st]) => {
+        if (!meta || !st) return;
+        const entes = Object.keys(st.stats ?? {});
+        const gasto = entes.reduce(
+          (soma, k) => soma + (Number(st.stats[k]?.total_gasto) || 0),
+          0,
+        );
+        setStats([
+          {
+            valor: Math.round((gasto / 1e9) * 10) / 10,
+            decimals: 1,
+            prefixo: "R$ ",
+            sufixo: " bi",
+            rotulo: "acompanhados em recursos públicos",
+          },
+          {
+            valor: Number(meta.total_contratos) || ESTATISTICAS_FALLBACK[1].valor,
+            decimals: 0,
+            prefixo: "",
+            sufixo: "",
+            rotulo: "contratos reunidos",
+          },
+          {
+            valor: entes.length || 6,
+            decimals: 0,
+            prefixo: "",
+            sufixo: "",
+            rotulo: "entes federativos",
+          },
+          {
+            valor: Number(meta.total_alertas) || ESTATISTICAS_FALLBACK[3].valor,
+            decimals: 0,
+            prefixo: "",
+            sufixo: "",
+            rotulo: "pontos a verificar",
+          },
+        ]);
+      })
+      .catch(() => {});
+  }, []);
+  return stats;
+}
 
 // ── O que fazemos ───────────────────────────────────────────────────────────
 const O_QUE_FAZEMOS = [
@@ -163,6 +217,7 @@ const PASSOS = [
 ];
 
 export default function LandingInicio() {
+  const ESTATISTICAS = useEstatisticas();
   return (
     <div
       className={`${fraunces.variable} ${inter.variable} min-h-screen scroll-smooth bg-[#F7F3EC] text-[#0B0B0C] antialiased`}
