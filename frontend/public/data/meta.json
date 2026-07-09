@@ -1,11 +1,11 @@
 {
-  "ultima_coleta": "2026-07-08T17:11:01.108057+00:00",
-  "total_registros": 1007,
+  "ultima_coleta": "2026-07-09T00:00:05.352934+00:00",
+  "total_registros": 1065,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-07-08T15:04:58.086946+00:00",
-  "timestamp_fim": "2026-07-08T17:11:01.108057+00:00",
-  "total_contratos": 1007,
-  "total_alertas": 285,
+  "timestamp_inicio": "2026-07-08T19:00:20.086980+00:00",
+  "timestamp_fim": "2026-07-09T00:00:05.352934+00:00",
+  "total_contratos": 1065,
+  "total_alertas": 345,
   "gasto_cultura_siconfi": {
     "maranhao_estado": 1166256489.86,
     "sao_luis": 290211889.45,
@@ -15,9 +15,9 @@
     "pinheiro": 16150619.66
   },
   "alertas_por_categoria": {
-    "financeiro": 0,
+    "financeiro": 344,
     "conflito_interesse": 0,
-    "nepotismo": 0
+    "nepotismo": 1
   },
   "total_emendas_cultura": 0,
   "valor_emendas_cultura": 0,
