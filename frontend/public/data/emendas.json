@@ -88,7 +88,7 @@
       "valor_liquidado": 300000.0,
       "valor_pago": 300000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -718,7 +718,7 @@
       "valor_liquidado": 0.0,
       "valor_pago": 0.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -2032,7 +2032,7 @@
       "valor_liquidado": 500000.0,
       "valor_pago": 500000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -2410,7 +2410,7 @@
       "valor_liquidado": 450000.0,
       "valor_pago": 450000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -4210,7 +4210,7 @@
       "valor_liquidado": 500000.0,
       "valor_pago": 500000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -5434,7 +5434,7 @@
       "valor_liquidado": 500000.0,
       "valor_pago": 500000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": true
+      "fornecedor_contratado": false
     },
     {
       "esfera": "estadual",
@@ -5979,13 +5979,8 @@
     }
   ],
   "stats": {
-    "total": 332,
-    "estaduais": 331,
-    "federais": 1,
-    "com_cnpj_favorecido": 324,
-    "valor_empenhado": 119122176.1,
-    "valor_pago": 114512176.1,
-    "atualizado_em": "2026-07-09T05:23:34.068228+00:00",
-    "favorecido_tambem_fornecedor": 65
+    "total": 0,
+    "indisponivel": true,
+    "favorecido_tambem_fornecedor": 59
   }
 }
