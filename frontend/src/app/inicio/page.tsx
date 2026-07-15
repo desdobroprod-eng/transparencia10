@@ -30,7 +30,9 @@ const inter = Inter({
 });
 
 const BASE = "/transparencia10";
-const PAINEL = "/transparencia10/";
+// ?painel=1 sinaliza entrada intencional no painel — a raiz "nua" segue
+// redirecionando para a landing pública; com o parâmetro, mostra o portão.
+const PAINEL = "/transparencia10/?painel=1";
 
 // ── Paleta editorial (docs/BRANDING.md) ────────────────────────────────────
 const TINTA = "#0B0B0C";

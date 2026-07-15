@@ -27,17 +27,23 @@ function Painel({ rota, children }: { rota: string; children: React.ReactNode })
   const { senha, pronto } = useAuth();
   const router = useRouter();
 
-  // URL raiz sem autenticação → manda para a landing pública (evita "muro" de
-  // senha logo na porta). Rotas de dados específicas mostram o portão.
-  // router.replace já prefixa o basePath automaticamente — passar rota "crua".
+  // A raiz "nua" (alguém digitou a URL) sem sessão → landing pública, para não
+  // bater num muro de senha na porta. Mas o botão "Ver o painel" chega como
+  // `/?painel=1` (entrada intencional): aí mostramos o portão, sem redirecionar.
+  // router.replace já prefixa o basePath — passar rota "crua".
   useEffect(() => {
-    if (pronto && !senha && rota === "/") router.replace("/inicio");
+    if (!pronto || senha || rota !== "/") return;
+    const intencional = new URLSearchParams(window.location.search).has("painel");
+    if (!intencional) router.replace("/inicio");
   }, [pronto, senha, rota, router]);
 
   if (!pronto) return null; // aguarda ler o sessionStorage (sem flash)
 
   if (!senha) {
-    if (rota === "/") return null; // redirecionando para /inicio
+    const intencional =
+      rota !== "/" ||
+      new URLSearchParams(window.location.search).has("painel");
+    if (!intencional) return null; // raiz nua: redirecionando para /inicio
     return <PortaoSenha />;
   }
 
