@@ -1,8 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { decifrar } from "@/lib/cripto";
+import { useAuth } from "@/lib/auth";
 
 const BASE = "/transparencia10/data";
+
+// Arquivos com nomes de pessoas/empresas são publicados cifrados (.enc).
+// stats.json e meta.json (só números agregados) continuam em texto puro.
+// Busca o .enc e decifra com a senha; em desenvolvimento (sem build), cai
+// para o .json puro se o .enc não existir.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function buscarProtegido(nome: string, senha: string, vazio: any): Promise<any> {
+  try {
+    const r = await fetch(`${BASE}/${nome}.json.enc`, { cache: "no-store" });
+    if (r.ok) {
+      const texto = await decifrar(await r.text(), senha);
+      return JSON.parse(texto);
+    }
+    if (process.env.NODE_ENV === "development") {
+      const rp = await fetch(`${BASE}/${nome}.json`);
+      if (rp.ok) return rp.json();
+    }
+  } catch {
+    /* senha errada ou conteúdo indisponível → devolve vazio */
+  }
+  return vazio;
+}
 
 export type NivelRisco = "critico" | "atencao" | "baixo" | "normal";
 
@@ -148,6 +172,7 @@ function norm(s: string): string {
 }
 
 export function useDados(): Dados {
+  const { senha } = useAuth();
   const [d, setD] = useState<Dados>({
     loading: true, erro: null, stats: {}, alertas: [], contratos: [],
     cruzamentos: [], empresas: [], emendas: [], explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
@@ -155,16 +180,18 @@ export function useDados(): Dados {
 
   useEffect(() => {
     let vivo = true;
+    if (!senha) return; // sem acesso: o painel está atrás do portão de senha
     (async () => {
       try {
-        const [s, a, c, m, sv, ex, emd] = await Promise.all([
+        // stats/meta são públicos (só números); os demais vêm cifrados.
+        const [s, m, a, c, sv, ex, emd] = await Promise.all([
           fetch(`${BASE}/stats.json`).then((r) => (r.ok ? r.json() : { stats: {} })),
-          fetch(`${BASE}/alertas.json`).then((r) => (r.ok ? r.json() : [])),
-          fetch(`${BASE}/contratos.json`).then((r) => (r.ok ? r.json() : [])),
           fetch(`${BASE}/meta.json`).then((r) => (r.ok ? r.json() : null)),
-          fetch(`${BASE}/servidores.json`).then((r) => (r.ok ? r.json() : { cruzamentos: [] })),
-          fetch(`${BASE}/explicacoes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-          fetch(`${BASE}/emendas.json`).then((r) => (r.ok ? r.json() : { emendas: [] })).catch(() => ({ emendas: [] })),
+          buscarProtegido("alertas", senha, []),
+          buscarProtegido("contratos", senha, []),
+          buscarProtegido("servidores", senha, { cruzamentos: [] }),
+          buscarProtegido("explicacoes", senha, null),
+          buscarProtegido("emendas", senha, { emendas: [] }),
         ]);
         if (!vivo) return;
 
@@ -227,7 +254,7 @@ export function useDados(): Dados {
       }
     })();
     return () => { vivo = false; };
-  }, []);
+  }, [senha]);
 
   return d;
 }

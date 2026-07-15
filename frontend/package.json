@@ -6,8 +6,8 @@
   "author": "10Dobro Prod",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "export": "next build",
+    "build": "next build && node scripts/proteger-dados.mjs",
+    "export": "next build && node scripts/proteger-dados.mjs",
     "start": "next start"
   },
   "dependencies": {
