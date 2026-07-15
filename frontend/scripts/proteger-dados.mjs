@@ -25,10 +25,23 @@ const SENSIVEIS = ["contratos", "alertas", "servidores", "emendas", "explicacoes
 const ITER = 150_000;
 const SENTINELA_TEXTO = "TRANSPARENCIA10_OK";
 
+// Há dado sensível neste build? (Numa clonagem da comunidade, sem coletar
+// dados, não há — então o passo é um no-op e o build de contribuição funciona.)
+const temDadoSensivel = SENSIVEIS.some((n) => existsSync(join(DIR, `${n}.json`)));
+
+if (!temDadoSensivel) {
+  console.log(
+    "[proteger] nenhum dado sensível no build (out/data) — nada a cifrar. " +
+    "Rode o coletor para gerar os dados. Pulando."
+  );
+  process.exit(0);
+}
+
 if (!SENHA) {
+  // Só falha quando HÁ dado a proteger e falta a senha — nunca publica texto puro.
   console.error(
-    "[proteger] ERRO: variável PORTAL_SENHA não definida. Abortando o build " +
-    "para NÃO publicar dados em texto puro. Defina o secret/ env PORTAL_SENHA."
+    "[proteger] ERRO: há dados sensíveis no build mas PORTAL_SENHA não está " +
+    "definida. Abortando para NÃO publicar texto puro. Defina o secret/env."
   );
   process.exit(1);
 }
