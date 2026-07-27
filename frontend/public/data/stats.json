@@ -1,17 +1,17 @@
 {
-  "ultima_atualizacao": "2026-07-20T12:00:06.213087+00:00",
+  "ultima_atualizacao": "2026-07-27T12:40:28.037240+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 1477343630.2,
-      "total_contratos": 243,
-      "total_alertas": 67,
+      "total_contratos": 256,
+      "total_alertas": 74,
       "nivel_risco": "critico",
       "base_gasto": "empenhos_estado_ma"
     },
     "sao_luis": {
-      "total_gasto": 178308034.69,
-      "total_contratos": 543,
-      "total_alertas": 210,
+      "total_gasto": 178064829.1,
+      "total_contratos": 542,
+      "total_alertas": 200,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
@@ -30,8 +30,8 @@
       "base_gasto": "contratos_pncp"
     },
     "paco_lumiar": {
-      "total_gasto": 5308657.05,
-      "total_contratos": 19,
+      "total_gasto": 5387600.9,
+      "total_contratos": 20,
       "total_alertas": 9,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
