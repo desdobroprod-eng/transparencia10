@@ -1,256 +1,6 @@
 {
   "cruzamentos": [
     {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000008/2026",
-      "cnpj": "00659137000152",
-      "fornecedor": "INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA",
-      "socio": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "servidor": "MARTHA RAYANNE SERRAO DA SILVA NOBRE",
-      "sobrenomes_comuns": [
-        "RAYANNE",
-        "SERRAO",
-        "SILVA",
-        "NOBRE"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 4,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000010/2026",
-      "cnpj": "00190781000124",
-      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
-      "socio": "WASHINGTON LUIS ROCHA COELHO",
-      "servidor": "WASHINGTON LUIS ROCHA COELHO",
-      "sobrenomes_comuns": [
-        "LUIS",
-        "ROCHA",
-        "COELHO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000024/2026",
-      "cnpj": "04428126000112",
-      "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO HUMBERTO DE CAMPOS",
-      "socio": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "servidor": "JOVENILDES RODRIGUES DOS SANTOS NETA",
-      "sobrenomes_comuns": [
-        "RODRIGUES",
-        "SANTOS",
-        "NETA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000061/2026",
-      "cnpj": "20087290000160",
-      "fornecedor": "TIME PROJETOS E EVENTOS LTDA",
-      "socio": "WANDERSON DOS SANTOS SILVA",
-      "servidor": "WANDERSON DOS SANTOS SILVA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SILVA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000073/2026",
-      "cnpj": "24511983000199",
-      "fornecedor": "JOTAPONTOPE MUSICAS E CANCOES ARTE BRASIL LTDA",
-      "socio": "JOAO PAULO GOMES DA SILVA",
-      "servidor": "MARCOS PAULO GOMES DA SILVA",
-      "sobrenomes_comuns": [
-        "PAULO",
-        "GOMES",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000088/2026",
-      "cnpj": "06221120000286",
-      "fornecedor": "ASSOCIACAO ARTISTICA - CULTURAL BRILHO DA BALAIADA",
-      "socio": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
-      "servidor": "MARIA DA CONCEICAO FORTES BRAGA DE CAMARGO",
-      "sobrenomes_comuns": [
-        "CONCEICAO",
-        "FORTES",
-        "BRAGA",
-        "CAMARGO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000163/2026",
-      "cnpj": "02496566000181",
-      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
-      "socio": "JOSE ANTONIO RIBEIRO",
-      "servidor": "JOSE ANTONIO RIBEIRO",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000183/2026",
-      "cnpj": "05099622000132",
-      "fornecedor": "GRUPO PIACABA DE DANCAS E RITIMOS POPULARES DO MARANHAO LTDA",
-      "socio": "ANTONIO DANTAS RIBEIRO NETO",
-      "servidor": "ANTONIO DANTAS RIBEIRO NETO",
-      "sobrenomes_comuns": [
-        "DANTAS",
-        "RIBEIRO",
-        "NETO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000204/2026",
-      "cnpj": "04346499000144",
-      "fornecedor": "ASSOCIACAO DO BUMBA MEU BOI TRADICAO DE SAO BENTO",
-      "socio": "ANTONIO DE JESUS COSTA FILHO",
-      "servidor": "MANOEL DE JESUS COSTA FILHO",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "COSTA",
-        "FILHO"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 2,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000211/2026",
-      "cnpj": "40517164000105",
-      "fornecedor": "CBSD SERVICOS DE EVENTOS E LOCACOES LTDA",
-      "socio": "RAFAEL GOMES DOS SANTOS",
-      "servidor": "RAFAEL GOMES DOS SANTOS",
-      "sobrenomes_comuns": [
-        "GOMES",
-        "SANTOS"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000225/2026",
-      "cnpj": "46222959000172",
-      "fornecedor": "ASSOCIACAO CULTURAL ALTERNATIVA DO BUMBA MEU BOI ENCANTOS DE PINHEIRO",
-      "socio": "ELENILDO DE JESUS RODRIGUES RIBEIRO",
-      "servidor": "ROSEMARY DE JESUS RODRIGUES RIBEIRO",
-      "sobrenomes_comuns": [
-        "JESUS",
-        "RODRIGUES",
-        "RIBEIRO"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "maranhao_estado",
-      "contrato": "05508362000101-2-000235/2026",
-      "cnpj": "63442149000140",
-      "fornecedor": "INSTITUTO SOCIAL E CULTURAL DA CIDADE OPERARIA - ISCCO",
-      "socio": "ROMULO COSTA MACEDO",
-      "servidor": "ROMULO COSTA MACEDO",
-      "sobrenomes_comuns": [
-        "COSTA",
-        "MACEDO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
       "ente": "sao_luis",
       "contrato": "06307102000130-2-000166/2024",
       "cnpj": "48351834000178",
@@ -355,47 +105,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000237/2025",
-      "cnpj": "00190781000124",
-      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
-      "socio": "WASHINGTON LUIS ROCHA COELHO",
-      "servidor": "WASHINGTON LUIS ROCHA COELHO",
-      "sobrenomes_comuns": [
-        "LUIS",
-        "ROCHA",
-        "COELHO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000239/2025",
-      "cnpj": "02496566000181",
-      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
-      "socio": "JOSE ANTONIO RIBEIRO",
-      "servidor": "JOSE ANTONIO RIBEIRO",
-      "sobrenomes_comuns": [
-        "ANTONIO",
-        "RIBEIRO"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 3,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-000220/2025",
       "cnpj": "14772585000172",
       "fornecedor": "ASSOCIACAO FOLCLORICA DE BUMBA MEU BOI LINDA JOIA DO POVOADO JACAREI",
@@ -438,6 +147,26 @@
     },
     {
       "ente": "sao_luis",
+      "contrato": "06307102000130-2-000263/2025",
+      "cnpj": "01137139000144",
+      "fornecedor": "UNIAO DE BUMBA MEU BOI DO POVOADO MALVINAS",
+      "socio": "ODIRLEI SOUSA RODRIGUES",
+      "servidor": "ODIRLEI SOUSA RODRIGUES",
+      "sobrenomes_comuns": [
+        "SOUSA",
+        "RODRIGUES"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 2,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
       "contrato": "06307102000130-2-000241/2025",
       "cnpj": "04428126000112",
       "fornecedor": "ASSOCIACAO FLOCORICA DO BUMBA - MEU BOI FAMOSAO DE SAO JOAO",
@@ -459,14 +188,14 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000298/2025",
-      "cnpj": "06163101000160",
-      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL DE BUMBA BOI DE MATRACA DO MAIOBAO",
-      "socio": "SILIANE LIMA COELHO",
-      "servidor": "SILIANE LIMA COELHO",
+      "contrato": "06307102000130-2-000271/2025",
+      "cnpj": "04832815000198",
+      "fornecedor": "ASSOCIACAO CULTURAL E FOLCLORICA BRILHO DA JUVENTUDE",
+      "socio": "MARIA RAIMUNDA BOGEA",
+      "servidor": "MARIA RAIMUNDA BOGEA",
       "sobrenomes_comuns": [
-        "LIMA",
-        "COELHO"
+        "RAIMUNDA",
+        "BOGEA"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -479,38 +208,18 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000309/2025",
-      "cnpj": "05162047000175",
-      "fornecedor": "CLUBE CULTURAL DE BUMBA-MEU-BOI DE ZABUMBA E TAMBOR DE CRIOULA DO MARANHAO",
-      "socio": "BASILIO COSTA DURANS",
-      "servidor": "BASILIO COSTA DURANS",
+      "contrato": "06307102000130-2-000298/2025",
+      "cnpj": "06163101000160",
+      "fornecedor": "ASSOCIACAO FOLCLORICA E CULTURAL DE BUMBA BOI DE MATRACA DO MAIOBAO",
+      "socio": "SILIANE LIMA COELHO",
+      "servidor": "SILIANE LIMA COELHO",
       "sobrenomes_comuns": [
-        "COSTA",
-        "DURANS"
+        "LIMA",
+        "COELHO"
       ],
       "match": "nome_identico",
       "score": 75,
-      "num_contratos": 3,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000263/2025",
-      "cnpj": "01137139000144",
-      "fornecedor": "UNIAO DE BUMBA MEU BOI DO POVOADO MALVINAS",
-      "socio": "ODIRLEI SOUSA RODRIGUES",
-      "servidor": "ODIRLEI SOUSA RODRIGUES",
-      "sobrenomes_comuns": [
-        "SOUSA",
-        "RODRIGUES"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
+      "num_contratos": 2,
       "orgao": "Servidor estadual MA",
       "cargo": "",
       "fonte": "Portal da Transparência MA (servidores estaduais)",
@@ -540,15 +249,15 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000305/2025",
-      "cnpj": "02244409000189",
-      "fornecedor": "GRUPO FOLCLORICO BENEFICENTE BUMBA-MEU-BOI DE AXIXA",
-      "socio": "LUCE LEILA BIBIANO NAIVA",
-      "servidor": "LUCE LEILA BIBIANO NAIVA",
+      "contrato": "06307102000130-2-000237/2025",
+      "cnpj": "00190781000124",
+      "fornecedor": "UNIAO RECREATIVA E CULTURAL BUMBA MEU BOI DA LUA",
+      "socio": "WASHINGTON LUIS ROCHA COELHO",
+      "servidor": "WASHINGTON LUIS ROCHA COELHO",
       "sobrenomes_comuns": [
-        "LEILA",
-        "BIBIANO",
-        "NAIVA"
+        "LUIS",
+        "ROCHA",
+        "COELHO"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -561,38 +270,18 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000330/2025",
-      "cnpj": "32467010000128",
-      "fornecedor": "E M DA S LTDA",
-      "socio": "EVERALDO MIGUEL DA SILVA",
-      "servidor": "EVERALDO MIGUEL DA SILVA",
+      "contrato": "06307102000130-2-000239/2025",
+      "cnpj": "02496566000181",
+      "fornecedor": "ASSOCIACAO CULTURAL BENEFICENTE NOSSA SENHORA DA CONCEICAO",
+      "socio": "JOSE ANTONIO RIBEIRO",
+      "servidor": "JOSE ANTONIO RIBEIRO",
       "sobrenomes_comuns": [
-        "MIGUEL",
-        "SILVA"
+        "ANTONIO",
+        "RIBEIRO"
       ],
       "match": "nome_identico",
       "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000271/2025",
-      "cnpj": "04832815000198",
-      "fornecedor": "ASSOCIACAO CULTURAL E FOLCLORICA BRILHO DA JUVENTUDE",
-      "socio": "MARIA RAIMUNDA BOGEA",
-      "servidor": "MARIA RAIMUNDA BOGEA",
-      "sobrenomes_comuns": [
-        "RAIMUNDA",
-        "BOGEA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 2,
+      "num_contratos": 3,
       "orgao": "Servidor estadual MA",
       "cargo": "",
       "fonte": "Portal da Transparência MA (servidores estaduais)",
@@ -621,18 +310,38 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000287/2025",
-      "cnpj": "05371128000185",
-      "fornecedor": "ASSOCIACAO CULTURAL TAMBOR DE CRIOULA BRINQUEDO DE SAO BENEDITO",
-      "socio": "ADRIANO ANDRADE RODRIGUES",
-      "servidor": "ADRIANO ANDRADE RODRIGUES",
+      "contrato": "06307102000130-2-000324/2025",
+      "cnpj": "05162047000175",
+      "fornecedor": "CLUBE CULTURAL DE BUMBA-MEU-BOI DE ZABUMBA E TAMBOR DE CRIOULA DO MARANHAO",
+      "socio": "BASILIO COSTA DURANS",
+      "servidor": "BASILIO COSTA DURANS",
       "sobrenomes_comuns": [
-        "ANDRADE",
-        "RODRIGUES"
+        "COSTA",
+        "DURANS"
       ],
       "match": "nome_identico",
       "score": 75,
-      "num_contratos": 2,
+      "num_contratos": 3,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000330/2025",
+      "cnpj": "32467010000128",
+      "fornecedor": "E M DA S LTDA",
+      "socio": "EVERALDO MIGUEL DA SILVA",
+      "servidor": "EVERALDO MIGUEL DA SILVA",
+      "sobrenomes_comuns": [
+        "MIGUEL",
+        "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1,
       "orgao": "Servidor estadual MA",
       "cargo": "",
       "fonte": "Portal da Transparência MA (servidores estaduais)",
@@ -684,6 +393,68 @@
     },
     {
       "ente": "sao_luis",
+      "contrato": "06307102000130-2-000335/2025",
+      "cnpj": "19738556000108",
+      "fornecedor": "INTERART PRODUCAO CRIATIVA E SERVICOS LTDA",
+      "socio": "EMANUEL DE JESUS PEREIRA DE SOUSA",
+      "servidor": "MARIA DE JESUS PEREIRA DE SOUSA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "PEREIRA",
+        "SOUSA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000335/2025",
+      "cnpj": "19738556000108",
+      "fornecedor": "INTERART PRODUCAO CRIATIVA E SERVICOS LTDA",
+      "socio": "EMANUEL DE JESUS PEREIRA DE SOUSA",
+      "servidor": "TEREZINHA DE JESUS PEREIRA DE SOUSA",
+      "sobrenomes_comuns": [
+        "JESUS",
+        "PEREIRA",
+        "SOUSA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000461/2025",
+      "cnpj": "22518056000175",
+      "fornecedor": "CANA PRODUCOES & MS LTDA",
+      "socio": "TEREZINHA MARIA DA SILVA",
+      "servidor": "TEREZINHA MARIA DA SILVA",
+      "sobrenomes_comuns": [
+        "MARIA",
+        "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
       "contrato": "06307102000130-2-000439/2025",
       "cnpj": "23674205000158",
       "fornecedor": "S. M. EVENTOS MUSICAIS LTDA",
@@ -718,26 +489,6 @@
       "match": "sobrenome_familia",
       "score": 65,
       "num_contratos": 2,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
-      "contrato": "06307102000130-2-000461/2025",
-      "cnpj": "22518056000175",
-      "fornecedor": "CANA PRODUCOES & MS LTDA",
-      "socio": "TEREZINHA MARIA DA SILVA",
-      "servidor": "TEREZINHA MARIA DA SILVA",
-      "sobrenomes_comuns": [
-        "MARIA",
-        "SILVA"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
       "orgao": "Servidor estadual MA",
       "cargo": "",
       "fonte": "Portal da Transparência MA (servidores estaduais)",
@@ -830,14 +581,15 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-001089/2025",
-      "cnpj": "07358310000121",
-      "fornecedor": "GREMIO RECREATIVO ESCOLA DE SAMBA IMPERIO SERRANO",
-      "socio": "NELIO PEREIRA DA SILVA",
-      "servidor": "NELIO PEREIRA DA SILVA",
+      "contrato": "06307102000130-2-001038/2025",
+      "cnpj": "56636562000180",
+      "fornecedor": "56.636.562 MARCIONE PEREIRA MONTEIRO DIAS",
+      "socio": "MARCIONE PEREIRA MONTEIRO DIAS",
+      "servidor": "MARCIONE PEREIRA MONTEIRO DIAS",
       "sobrenomes_comuns": [
         "PEREIRA",
-        "SILVA"
+        "MONTEIRO",
+        "DIAS"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -850,15 +602,14 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-001038/2025",
-      "cnpj": "56636562000180",
-      "fornecedor": "56.636.562 MARCIONE PEREIRA MONTEIRO DIAS",
-      "socio": "MARCIONE PEREIRA MONTEIRO DIAS",
-      "servidor": "MARCIONE PEREIRA MONTEIRO DIAS",
+      "contrato": "06307102000130-2-001089/2025",
+      "cnpj": "07358310000121",
+      "fornecedor": "GREMIO RECREATIVO ESCOLA DE SAMBA IMPERIO SERRANO",
+      "socio": "NELIO PEREIRA DA SILVA",
+      "servidor": "NELIO PEREIRA DA SILVA",
       "sobrenomes_comuns": [
         "PEREIRA",
-        "MONTEIRO",
-        "DIAS"
+        "SILVA"
       ],
       "match": "nome_identico",
       "score": 75,
@@ -891,27 +642,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-000474/2026",
-      "cnpj": "35442671000197",
-      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
-      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
-      "servidor": "ANTONIA SANTOS SOUZA SILVA",
-      "sobrenomes_comuns": [
-        "SANTOS",
-        "SOUZA",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-000476/2026",
       "cnpj": "02666289000108",
       "fornecedor": "PONTO DE BALA PRODUCOES E EDITORA MUSICAL LTDA",
@@ -933,6 +663,27 @@
     },
     {
       "ente": "sao_luis",
+      "contrato": "06307102000130-2-000474/2026",
+      "cnpj": "35442671000197",
+      "fornecedor": "RAPHAELA SANTOS PRODUCOES LTDA",
+      "socio": "RAPHAELA SANTOS SOUZA DA SILVA",
+      "servidor": "ANTONIA SANTOS SOUZA SILVA",
+      "sobrenomes_comuns": [
+        "SANTOS",
+        "SOUZA",
+        "SILVA"
+      ],
+      "match": "sobrenome_familia",
+      "score": 65,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
       "contrato": "06307102000130-2-000533/2026",
       "cnpj": "33491858000155",
       "fornecedor": "LET'S GIG SERVICOS DE PRODUCAO CULTURAL E AGENCIAMENTO LTDA",
@@ -941,6 +692,47 @@
       "sobrenomes_comuns": [
         "RODRIGUES",
         "SILVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000663/2026",
+      "cnpj": "02244409000189",
+      "fornecedor": "GRUPO FOLCLORICO BENEFICENTE BUMBA-MEU-BOI DE AXIXA",
+      "socio": "LUCE LEILA BIBIANO NAIVA",
+      "servidor": "LUCE LEILA BIBIANO NAIVA",
+      "sobrenomes_comuns": [
+        "LEILA",
+        "BIBIANO",
+        "NAIVA"
+      ],
+      "match": "nome_identico",
+      "score": 75,
+      "num_contratos": 1,
+      "orgao": "Servidor estadual MA",
+      "cargo": "",
+      "fonte": "Portal da Transparência MA (servidores estaduais)",
+      "situacao": "ativo",
+      "situacao_fonte": ""
+    },
+    {
+      "ente": "sao_luis",
+      "contrato": "06307102000130-2-000670/2026",
+      "cnpj": "05371128000185",
+      "fornecedor": "ASSOCIACAO CULTURAL TAMBOR DE CRIOULA BRINQUEDO DE SAO BENEDITO",
+      "socio": "ADRIANO ANDRADE RODRIGUES",
+      "servidor": "ADRIANO ANDRADE RODRIGUES",
+      "sobrenomes_comuns": [
+        "ANDRADE",
+        "RODRIGUES"
       ],
       "match": "nome_identico",
       "score": 75,
