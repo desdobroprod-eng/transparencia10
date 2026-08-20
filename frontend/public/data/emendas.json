@@ -448,7 +448,7 @@
       "valor_liquidado": 210000.0,
       "valor_pago": 210000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -1600,7 +1600,7 @@
       "valor_liquidado": 250000.0,
       "valor_pago": 250000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -1618,7 +1618,7 @@
       "valor_liquidado": 250000.0,
       "valor_pago": 250000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -3094,7 +3094,7 @@
       "valor_liquidado": 250000.0,
       "valor_pago": 250000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -4156,7 +4156,7 @@
       "valor_liquidado": 300000.0,
       "valor_pago": 300000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -5542,7 +5542,7 @@
       "valor_liquidado": 250000.0,
       "valor_pago": 250000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -5979,13 +5979,8 @@
     }
   ],
   "stats": {
-    "total": 332,
-    "estaduais": 331,
-    "federais": 1,
-    "com_cnpj_favorecido": 326,
-    "valor_empenhado": 123165905.1,
-    "valor_pago": 122105905.1,
-    "atualizado_em": "2026-08-17T11:39:06.181857+00:00",
-    "favorecido_tambem_fornecedor": 61
+    "total": 0,
+    "indisponivel": true,
+    "favorecido_tambem_fornecedor": 67
   }
 }
