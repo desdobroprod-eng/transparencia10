@@ -1,9 +1,9 @@
 {
-  "ultima_atualizacao": "2026-10-01T16:59:12.345198+00:00",
+  "ultima_atualizacao": "2026-10-05T11:11:05.466885+00:00",
   "stats": {
     "maranhao_estado": {
-      "total_gasto": 1545446673.61,
-      "total_contratos": 410,
+      "total_gasto": 1698590725.93,
+      "total_contratos": 412,
       "total_alertas": 99,
       "nivel_risco": "critico",
       "base_gasto": "empenhos_estado_ma"
