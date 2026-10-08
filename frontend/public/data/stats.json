@@ -1,17 +1,17 @@
 {
-  "ultima_atualizacao": "2026-10-05T18:59:08.130822+00:00",
+  "ultima_atualizacao": "2026-10-08T17:08:16.272808+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 1698590725.93,
       "total_contratos": 412,
-      "total_alertas": 99,
+      "total_alertas": 98,
       "nivel_risco": "critico",
       "base_gasto": "empenhos_estado_ma"
     },
     "sao_luis": {
-      "total_gasto": 217032504.24,
-      "total_contratos": 620,
-      "total_alertas": 235,
+      "total_gasto": 217036004.24,
+      "total_contratos": 621,
+      "total_alertas": 236,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },

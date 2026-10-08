@@ -1,10 +1,10 @@
 {
-  "ultima_coleta": "2026-10-05T18:59:08.130822+00:00",
-  "total_registros": 1089,
+  "ultima_coleta": "2026-10-08T17:08:16.272808+00:00",
+  "total_registros": 1090,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-10-05T18:00:59.578146+00:00",
-  "timestamp_fim": "2026-10-05T18:59:08.130822+00:00",
-  "total_contratos": 1089,
+  "timestamp_inicio": "2026-10-08T16:10:14.619780+00:00",
+  "timestamp_fim": "2026-10-08T17:08:16.272808+00:00",
+  "total_contratos": 1090,
   "total_alertas": 415,
   "gasto_cultura_siconfi": {
     "maranhao_estado": 1564136440.2,
