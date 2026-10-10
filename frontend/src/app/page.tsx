@@ -57,6 +57,14 @@ export default function VisaoGeralPage() {
       })
     : "—";
 
+  // Início do período coletado: 1º de janeiro do primeiro ano de meta.anos_coletados
+  // (o coletor consulta o PNCP a partir de AAAA0101).
+  const anosColetados = meta?.anos_coletados;
+  const anoInicio = Array.isArray(anosColetados)
+    ? anosColetados.map(Number).filter(Boolean).sort((a, b) => a - b)[0]
+    : Number(String(anosColetados ?? "").slice(0, 4)) || null;
+  const inicioFmt = anoInicio ? `1º de janeiro de ${anoInicio}` : null;
+
   // ----- Estado de erro -----
   if (erro) {
     return (
@@ -112,7 +120,9 @@ export default function VisaoGeralPage() {
           <p className="mt-1 text-sm text-gray-600">
             Gastos com cultura nas secretarias do Maranhão
           </p>
-          <p className="mt-1 text-xs text-gray-400">Atualizado em {dataFmt}</p>
+          <p className="mt-1 text-xs text-gray-400">
+            {inicioFmt ? <>Período coletado: {inicioFmt} a {dataFmt}</> : <>Atualizado em {dataFmt}</>}
+          </p>
         </div>
         <a
           href="/transparencia10/inicio"
