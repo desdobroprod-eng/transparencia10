@@ -1,7 +1,7 @@
 {
   "entes": {
-    "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.698.590.725,93 em gastos de cultura e 412 contrato(s) nos dados públicos. 98 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
-    "sao_luis": "Prefeitura de São Luís aparece com R$ 217.036.004,24 em gastos de cultura e 621 contrato(s) nos dados públicos. 236 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
+    "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.704.771.727,43 em gastos de cultura e 413 contrato(s) nos dados públicos. 99 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
+    "sao_luis": "Prefeitura de São Luís aparece com R$ 217.046.004,24 em gastos de cultura e 622 contrato(s) nos dados públicos. 236 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "raposa": "Prefeitura de Raposa aparece com R$ 3.930.936,00 em gastos de cultura e 22 contrato(s) nos dados públicos. 0 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "sao_jose_ribamar": "Prefeitura de São José de Ribamar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 5.387.600,90 em gastos de cultura e 20 contrato(s) nos dados públicos. 9 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
@@ -21,6 +21,8 @@
     "CONTRATO_SEM_LICITACAO": "Contrato por dispensa/inexigibilidade acima do teto — situação que exige justificativa."
   },
   "contratos": {
+    "05508362000101-2-000414/2026": "Contrato de R$ 200.000,00 com MARCIA A FENOMENAL SHOWS LTDA. Objeto: contratação de serviços artísticos da atração MARCIA FELIPE para fins de apresentação nos eventos realizados ou apoiados…",
+    "06307102000130-2-001111/2026": "Contrato de R$ 10.000,00 com 33.007.061 ADRIANA PEREIRA BOSAIPO GUIMARAES. Objeto: Serviço de contratação do show da cantora ADRIANA BOSAIPO, como atração artística de cunho cultural,\ndestinados aos even…",
     "06307102000130-2-001107/2026": "Contrato de R$ 3.500,00 com SOL MAIOR PRODUCAO MUSICAL LTDA. Objeto: Serviço de contratação para  atrações artisticas de cunho cultural,\ndestinados aos eventos promovidos e/ou apoiados pelo…",
     "05508362000101-2-000413/2026": "Contrato de R$ 138.000,00 com ASSOCIACAO SOCIAL E CULTURAL ARCANJOS - ASCA. Objeto: contratação de serviços artísticos da atração Quadrilha Rosas Juninas para fins de apresentação nos eventos realizados o…",
     "05508362000101-2-000412/2026": "Contrato de R$ 135.000,00 com ASSOCIACAO RECREATIVA E BENEFICENTE FOLCLORICA E CULTURAL DE MARACANA. Objeto: contratação de serviços artísticos da atração Bumba meu boi de Maracanã para fins de apresentação nos eventos realizados…",
@@ -1141,10 +1143,10 @@
     "23268243000100": "TATY GIRL GRAVACOES, EDICOES MUSICAIS E EVENTOS LTDA recebeu R$ 1.900.000,00 em 5 contrato(s) de cultura.",
     "19019335000180": "LIVE TALENTOS AGENCIAMENTO, PRODUCAO E PUBLICIDADE LTDA. recebeu R$ 1.840.000,00 em 3 contrato(s) de cultura.",
     "43099846000133": "JG SHOWS LTDA recebeu R$ 1.840.000,00 em 3 contrato(s) de cultura. O capital social declarado (R$ 20.000,00) é muito menor que o total contratado — divergência que merece verificação.",
+    "22413698000100": "MARCIA A FENOMENAL SHOWS LTDA recebeu R$ 1.800.000,00 em 5 contrato(s) de cultura.",
     "11136197000107": "L S MUSIC PRODUCOES ARTISTICAS LTDA recebeu R$ 1.655.000,00 em 1 contrato(s) de cultura.",
     "60623905000140": "INTERSHOWS PRODUCOES LTDA recebeu R$ 1.650.000,00 em 3 contrato(s) de cultura.",
     "11655915000151": "AG PRODUCOES EVENTOS E EDICAO MUSICAL LTDA recebeu R$ 1.600.000,00 em 2 contrato(s) de cultura.",
-    "22413698000100": "MARCIA A FENOMENAL SHOWS LTDA recebeu R$ 1.600.000,00 em 4 contrato(s) de cultura.",
     "14608683000179": "JB CONSTRUCOES E INCORPORACOES LTDA recebeu R$ 1.572.575,26 em 1 contrato(s) de cultura.",
     "28214459000107": "SD PRODUCOES E EVENTOS LTDA recebeu R$ 1.550.000,00 em 3 contrato(s) de cultura.",
     "37057774000169": "TEP ENTRETENIMENTO E PROMOCOES LTDA recebeu R$ 1.500.000,00 em 1 contrato(s) de cultura.",
