@@ -1,7 +1,7 @@
 "use client";
 
 // Painel-resumo da página de Contratos. Recebe a lista JÁ FILTRADA, então todos
-// os números e gráficos acompanham busca, ente, ano e "somente com indícios".
+// os números e gráficos acompanham busca, ente e ano.
 
 import { useMemo } from "react";
 import {
@@ -56,7 +56,7 @@ function TooltipBRL({
 export default function PainelContratos({ contratos }: { contratos: Contrato[] }) {
   const resumo = useMemo(() => {
     const total = contratos.reduce((s, c) => s + (c.valor || 0), 0);
-    const comPontos = contratos.filter((c) => c.alertas.length > 0 || c.score_risco > 0).length;
+    const fornecedores = new Set(contratos.map((c) => c.cnpj || c.fornecedor)).size;
 
     const porFornecedor = new Map<string, { valor: number; n: number }>();
     for (const c of contratos) {
@@ -100,13 +100,12 @@ export default function PainelContratos({ contratos }: { contratos: Contrato[] }
       .filter((e) => e.n > 0)
       .sort((a, b) => b.valor - a.valor);
 
-    return { total, comPontos, topFornecedores, anos, entes };
+    return { total, fornecedores, topFornecedores, anos, entes };
   }, [contratos]);
 
   const n = contratos.length;
   if (n === 0) return null;
   const media = resumo.total / n;
-  const pct = Math.round((resumo.comPontos / n) * 100);
 
   return (
     <section aria-label="Resumo dos contratos filtrados" className="mb-6 space-y-4">
@@ -114,11 +113,7 @@ export default function PainelContratos({ contratos }: { contratos: Contrato[] }
         <Kpi rotulo="Total contratado" valor={formatBRL(resumo.total)} />
         <Kpi rotulo="Contratos" valor={n.toLocaleString("pt-BR")} />
         <Kpi rotulo="Valor médio" valor={formatBRL(media)} />
-        <Kpi
-          rotulo="Com pontos a verificar"
-          valor={`${pct}%`}
-          nota={`${resumo.comPontos.toLocaleString("pt-BR")} de ${n.toLocaleString("pt-BR")}`}
-        />
+        <Kpi rotulo="Fornecedores" valor={resumo.fornecedores.toLocaleString("pt-BR")} />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">

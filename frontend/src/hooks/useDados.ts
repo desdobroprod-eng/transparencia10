@@ -142,8 +142,37 @@ export interface Meta {
   anos_coletados: string[] | string;
   total_emendas_cultura?: number;
   total_cruzamentos?: number;
+  total_fornecedores?: number;
   contratos_excluidos?: { id: string; motivo: string }[];
   valor_emendas_cultura?: number;
+}
+
+export interface SocioQSA {
+  nome: string;
+  qualificacao: string;
+  desde: string;
+}
+
+export interface SancaoCGU {
+  fonte?: string;
+  tipo?: string;
+  orgao?: string;
+  data_inicio?: string;
+  data_fim?: string;
+}
+
+// Ficha pública do fornecedor (Receita Federal via BrasilAPI + CEIS/CNEP).
+export interface FichaEmpresa {
+  razao_social: string;
+  abertura: string;
+  situacao: string;
+  natureza_juridica: string;
+  porte: string;
+  mei: boolean;
+  capital_social: number;
+  cnae: string;
+  socios: SocioQSA[];
+  sancoes: SancaoCGU[];
 }
 
 export interface Explicacoes {
@@ -163,6 +192,7 @@ export interface Dados {
   cruzamentos: Cruzamento[];
   empresas: EmpresaRanking[]; // fornecedores agregados, ordenados por valor desc
   emendas: Emenda[];
+  fichas: Record<string, FichaEmpresa>;
   explicacoes: Explicacoes | null;
   meta: Meta | null;
   anosDisponiveis: number[];
@@ -177,7 +207,7 @@ export function useDados(): Dados {
   const { senha } = useAuth();
   const [d, setD] = useState<Dados>({
     loading: true, erro: null, stats: {}, alertas: [], contratos: [],
-    cruzamentos: [], empresas: [], emendas: [], explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
+    cruzamentos: [], empresas: [], emendas: [], fichas: {}, explicacoes: null, meta: null, anosDisponiveis: [], ultimaAtualizacao: null,
   });
 
   useEffect(() => {
@@ -187,13 +217,14 @@ export function useDados(): Dados {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const publico = (nome: string, vazio: any): Promise<any> =>
           fetch(`${BASE}/${nome}.json`).then((r) => (r.ok ? r.json() : vazio)).catch(() => vazio);
-        const [s, m, aPub, c, ex, emd, sv, aNom] = await Promise.all([
+        const [s, m, aPub, c, ex, emd, fch, sv, aNom] = await Promise.all([
           publico("stats", { stats: {} }),
           publico("meta", null),
           publico("alertas", []),
           publico("contratos", []),
           publico("explicacoes", null),
           publico("emendas", { emendas: [] }),
+          publico("empresas", {}),
           senha ? buscarProtegido("servidores", senha, { cruzamentos: [] }) : { cruzamentos: [] },
           senha ? buscarProtegido("alertas_nominais", senha, []) : [],
         ]);
@@ -252,6 +283,7 @@ export function useDados(): Dados {
           loading: false, erro: null,
           stats: s?.stats ?? {},
           alertas, contratos, cruzamentos, empresas, emendas,
+          fichas: (fch ?? {}) as Record<string, FichaEmpresa>,
           explicacoes: ex,
           meta: m,
           anosDisponiveis,

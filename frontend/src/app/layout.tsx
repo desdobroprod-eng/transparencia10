@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Portal Transparência Cultural",
   },
   description:
-    "Fiscalização cidadã dos gastos públicos com cultura: contratos, emendas parlamentares, alertas e cruzamento de dados públicos. Maranhão, Brasil.",
+    "Fiscalização cidadã dos gastos públicos com cultura: contratos, fornecedores, emendas parlamentares e cruzamento de dados públicos. Maranhão, Brasil.",
   keywords: [
     "transparência pública",
     "cultura Maranhão",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "Portal Transparência Cultural do Brasil",
     title: "Portal Transparência Cultural do Brasil",
     description:
-      "918 contratos, 335 alertas, 230 emendas parlamentares: fiscalização cidadã dos gastos com cultura no Maranhão.",
+      "Contratos, fornecedores e emendas parlamentares da cultura no Maranhão, com a fonte de cada dado.",
     images: [
       {
         url: `${BASE_URL}/og-image.png`,
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portal Transparência Cultural do Brasil",
     description:
-      "Fiscalização cidadã dos gastos com cultura no Maranhão. Dados abertos, contratos, emendas e alertas.",
+      "Fiscalização cidadã dos gastos com cultura no Maranhão. Dados abertos: contratos, fornecedores e emendas.",
     creator: "@benhurreal",
     images: [`${BASE_URL}/og-image.png`],
   },

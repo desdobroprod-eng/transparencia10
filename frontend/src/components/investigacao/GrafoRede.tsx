@@ -144,7 +144,7 @@ export default function GrafoRede({
         </div>
         <div className="flex items-center gap-1.5">
           <span className="inline-block h-0.5 w-5 bg-red-600" />
-          Nome completo igual — identidade a verificar
+          Nome completo igual (não confirma identidade)
         </div>
         <div className="flex items-center gap-1.5">
           <span

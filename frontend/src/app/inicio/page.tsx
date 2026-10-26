@@ -113,11 +113,11 @@ const ESTATISTICAS_FALLBACK = [
   { valor: 1067, decimals: 0, prefixo: "", sufixo: "", rotulo: "contratos reunidos" },
   { valor: 6, decimals: 0, prefixo: "", sufixo: "", rotulo: "entes federativos" },
   {
-    valor: 406,
+    valor: 467,
     decimals: 0,
     prefixo: "",
     sufixo: "",
-    rotulo: "pontos a verificar",
+    rotulo: "fornecedores identificados",
   },
 ];
 
@@ -159,11 +159,11 @@ function useEstatisticas() {
             rotulo: "entes federativos",
           },
           {
-            valor: Number(meta.total_alertas) || ESTATISTICAS_FALLBACK[3].valor,
+            valor: Number(meta.total_fornecedores) || ESTATISTICAS_FALLBACK[3].valor,
             decimals: 0,
             prefixo: "",
             sufixo: "",
-            rotulo: "pontos a verificar",
+            rotulo: "fornecedores identificados",
           },
         ]);
       })
@@ -180,14 +180,14 @@ const O_QUE_FAZEMOS = [
       "Coletamos contratos, empenhos e fornecedores diretamente dos portais de transparência e diários oficiais dos entes públicos.",
   },
   {
-    titulo: "Sinaliza pontos a verificar",
+    titulo: "Monta a ficha de cada fornecedor",
     texto:
-      "Marcamos situações que merecem conferência — como empresa aberta pouco antes do contrato ou capital social muito inferior ao valor contratado. São indícios a apurar, nunca conclusões.",
+      "Para cada CNPJ, reunimos os dados da Receita Federal, o quadro de sócios e dirigentes, os contratos e as emendas recebidas, cada um com link para a fonte.",
   },
   {
     titulo: "Cruza informações públicas",
     texto:
-      "Conectamos sócios, empresas e servidores a partir de bases abertas, evidenciando coincidências que pedem checagem documental.",
+      "Comparamos os nomes de sócios com bases públicas de servidores e mostramos onde há nome igual, com a fonte de cada registro.",
   },
   {
     titulo: "Publica para o cidadão",
@@ -208,7 +208,7 @@ const PASSOS = [
     n: "02",
     titulo: "Análise e cruzamento",
     texto:
-      "Padronizamos os registros e aplicamos regras objetivas que destacam pontos a verificar, sempre com linguagem condicional.",
+      "Padronizamos os registros, separamos o que é gasto com cultura e cruzamos fornecedores, sócios e emendas entre as bases.",
   },
   {
     n: "03",
@@ -389,9 +389,9 @@ export default function LandingInicio() {
               O que fazemos
             </h2>
             <p className="mt-4 max-w-2xl text-lg text-[#6B7280]">
-              Trabalhamos só com dado público e fonte linkada. Nada aqui é
-              acusação — são indícios a apurar, oferecidos para a checagem de
-              quem fiscaliza.
+              Trabalhamos só com dado público e fonte linkada. Mostramos os
+              fatos como estão nos registros oficiais, para que qualquer pessoa
+              confira na origem.
             </p>
           </ScrollReveal>
 
@@ -524,14 +524,14 @@ export default function LandingInicio() {
           {/* Disclaimer */}
           <div className="rounded-md border border-[#F7F3EC]/15 bg-[#F7F3EC]/[0.04] p-6">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#F7F3EC]/70">
-              Indício, não acusação
+              Dado público, não acusação
             </p>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#F7F3EC]/75">
-              Os pontos sinalizados neste portal são <strong>indícios a
-              apurar</strong>, gerados por regras objetivas sobre dados
-              públicos. Não constituem acusação, prova de irregularidade ou
-              juízo sobre pessoas e empresas. Toda conclusão depende de
-              verificação documental pelos órgãos competentes.
+              Este portal reúne e organiza registros públicos, com link para a
+              fonte de cada um. Não faz juízo sobre pessoas ou empresas. Nome
+              igual não confirma que se trata da mesma pessoa, e qualquer
+              conclusão depende de verificação documental pelos órgãos
+              competentes.
             </p>
           </div>
 

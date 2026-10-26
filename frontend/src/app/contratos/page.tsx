@@ -15,7 +15,6 @@ import Fuse from "fuse.js";
 
 import { useDados, type Contrato } from "@/hooks/useDados";
 import { NOME_ENTE, ENTES, formatBRLcheio } from "@/lib/config";
-import RiscoBadge from "@/components/contratos/RiscoBadge";
 import DetalheContrato from "@/components/contratos/DetalheContrato";
 import PainelContratos from "@/components/contratos/PainelContratos";
 
@@ -31,13 +30,12 @@ function formatarData(iso: string): string {
 }
 
 export default function ContratosPage() {
-  const { loading, erro, contratos, anosDisponiveis, explicacoes } = useDados();
+  const { loading, erro, contratos, anosDisponiveis, explicacoes, fichas, emendas, cruzamentos } = useDados();
 
   // Filtros
   const [busca, setBusca] = useState("");
   const [ente, setEnte] = useState("");
   const [ano, setAno] = useState("");
-  const [somenteIndicios, setSomenteIndicios] = useState(false);
 
   // Estado da tabela
   // Abre sempre do maior para o menor valor contratado.
@@ -65,11 +63,8 @@ export default function ContratosPage() {
     }
     if (ente) base = base.filter((c) => c.ente === ente);
     if (ano) base = base.filter((c) => String(c.ano) === ano);
-    if (somenteIndicios) {
-      base = base.filter((c) => c.alertas.length > 0 || c.score_risco > 0);
-    }
     return base;
-  }, [contratos, fuse, busca, ente, ano, somenteIndicios]);
+  }, [contratos, fuse, busca, ente, ano]);
 
   const colunas = useMemo<ColumnDef<Contrato>[]>(
     () => [
@@ -148,12 +143,6 @@ export default function ContratosPage() {
         ),
         sortingFn: "datetime",
       },
-      {
-        accessorKey: "score_risco",
-        header: "Pontuação",
-        cell: (info) => <RiscoBadge score={info.getValue<number>()} />,
-        sortingFn: "basic",
-      },
     ],
     []
   );
@@ -204,8 +193,8 @@ export default function ContratosPage() {
       </header>
 
       {/* Filtros */}
-      <section className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="sm:col-span-2 lg:col-span-1">
+      <section className="mb-5 grid gap-3 sm:grid-cols-3">
+        <div>
           <label className="mb-1 block text-xs font-medium text-gray-600">Busca</label>
           <input
             type="search"
@@ -248,17 +237,6 @@ export default function ContratosPage() {
           </select>
         </div>
 
-        <div className="flex items-end">
-          <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              checked={somenteIndicios}
-              onChange={(e) => setSomenteIndicios(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-300"
-            />
-            Somente com indícios
-          </label>
-        </div>
       </section>
 
       {/* Painel visual — acompanha os filtros */}
@@ -323,6 +301,12 @@ export default function ContratosPage() {
                       <td colSpan={row.getVisibleCells().length} className="p-0">
                         <DetalheContrato
                           contrato={row.original}
+                          ficha={fichas[row.original.cnpj.replace(/\D/g, "")]}
+                          contratosFornecedor={contratos.filter(
+                            (c) => c.cnpj && c.cnpj === row.original.cnpj
+                          )}
+                          emendas={emendas}
+                          cruzamentos={cruzamentos}
                           explicacao={explicacoes?.contratos?.[row.original.id]}
                         />
                       </td>

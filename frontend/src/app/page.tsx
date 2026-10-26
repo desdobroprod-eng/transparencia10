@@ -12,16 +12,15 @@ import {
   LabelList,
 } from "recharts";
 import { useDados } from "@/hooks/useDados";
-import { ENTES, OBSERVACOES_ENTE, formatBRL, formatBRLcheio, RISCO, type NivelRisco } from "@/lib/config";
+import { ENTES, OBSERVACOES_ENTE, formatBRL, formatBRLcheio } from "@/lib/config";
 import KpiCard from "@/components/visao/KpiCard";
-import ChipRisco from "@/components/visao/ChipRisco";
 
 function Skeleton({ className = "" }: { className?: string }) {
   return <div className={`animate-pulse rounded-lg bg-gray-200 ${className}`} />;
 }
 
 export default function VisaoGeralPage() {
-  const { loading, erro, stats, meta, cruzamentos, emendas, explicacoes, ultimaAtualizacao } = useDados();
+  const { loading, erro, stats, meta, cruzamentos, empresas, emendas, explicacoes, ultimaAtualizacao } = useDados();
 
   const emendasResumo = useMemo(() => {
     const total = emendas.length;
@@ -38,7 +37,7 @@ export default function VisaoGeralPage() {
           chave: e.chave,
           nome: e.curto,
           gasto: s?.total_gasto ?? 0,
-          nivel: (s?.nivel_risco ?? "normal") as NivelRisco,
+          contratos: s?.total_contratos ?? 0,
         };
       }),
     [stats]
@@ -100,16 +99,6 @@ export default function VisaoGeralPage() {
     );
   }
 
-  const cat = meta?.alertas_por_categoria ?? {
-    financeiro: 0,
-    conflito_interesse: 0,
-    nepotismo: 0,
-  };
-  const categorias = [
-    { rotulo: "Financeiro (empresa/contrato)", valor: cat.financeiro, cor: RISCO.critico.cor },
-    { rotulo: "Coincidência nominal (a verificar)", valor: cat.conflito_interesse + cat.nepotismo, cor: "#7c3aed" },
-  ];
-  const maxCat = Math.max(1, ...categorias.map((c) => c.valor));
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
@@ -140,11 +129,11 @@ export default function VisaoGeralPage() {
           valor={(meta?.total_contratos ?? 0).toLocaleString("pt-BR")}
         />
         <KpiCard
-          rotulo="Total de alertas"
-          valor={(meta?.total_alertas ?? 0).toLocaleString("pt-BR")}
+          rotulo="Fornecedores"
+          valor={empresas.length.toLocaleString("pt-BR")}
         />
         <KpiCard
-          rotulo="Cruzamentos sócio × servidor"
+          rotulo="Nomes de sócios iguais a servidores"
           valor={(meta?.total_cruzamentos ?? cruzamentos.length).toLocaleString("pt-BR")}
         />
       </div>
@@ -201,7 +190,7 @@ export default function VisaoGeralPage() {
               />
               <Bar dataKey="gasto" radius={[0, 4, 4, 0]} barSize={22}>
                 {dadosBarras.map((d) => (
-                  <Cell key={d.chave} fill={(RISCO[d.nivel] ?? RISCO.normal).cor} />
+                  <Cell key={d.chave} fill="#C8102E" />
                 ))}
                 <LabelList
                   dataKey="gasto"
@@ -215,22 +204,23 @@ export default function VisaoGeralPage() {
         </div>
       </div>
 
-      {/* Pontos a verificar por ente */}
+      {/* Contratos por ente */}
       <div className="mt-8">
-        <h2 className="text-base font-semibold text-gray-900">Pontos a verificar por ente</h2>
-        <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-          {ENTES.map((e) => {
-            const s = stats[e.chave];
-            return (
-              <ChipRisco
-                key={e.chave}
-                nome={e.curto}
-                nivel={(s?.nivel_risco ?? "normal") as NivelRisco}
-                contratos={s?.total_contratos ?? 0}
-                alertas={s?.total_alertas ?? 0}
-              />
-            );
-          })}
+        <h2 className="text-base font-semibold text-gray-900">Contratos por ente</h2>
+        <div className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
+          {dadosBarras.map((d) => (
+            <a
+              key={d.chave}
+              href={`/transparencia10/contratos`}
+              className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-[#C8102E]"
+            >
+              <div className="text-sm font-semibold text-gray-900">{d.nome}</div>
+              <div className="mt-1 text-2xl font-bold tabular-nums text-gray-900">
+                {d.contratos.toLocaleString("pt-BR")}
+              </div>
+              <div className="text-xs text-gray-500">contratos · {formatBRL(d.gasto)}</div>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -275,39 +265,19 @@ export default function VisaoGeralPage() {
         </div>
       )}
 
-      {/* Composição de alertas */}
-      <div className="mt-8 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-          <h2 className="text-base font-semibold text-gray-900">Composição de alertas</h2>
-          <a
-            href="/transparencia10/cruzamentos"
-            className="text-sm font-medium text-blue-700 hover:text-blue-800 hover:underline"
-          >
-            Ver coincidências de nomes (sócio × servidor) →
-          </a>
+      <a
+        href="/transparencia10/cruzamentos"
+        className="mt-8 flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-[#C8102E]"
+      >
+        <div>
+          <h2 className="text-base font-semibold text-gray-900">Coincidências de nomes</h2>
+          <p className="mt-1 text-sm text-gray-600">
+            Sócios de fornecedores com nome igual ao de servidores públicos, com a
+            fonte de cada registro. Acesso com senha.
+          </p>
         </div>
-        <ul className="mt-4 space-y-3">
-          {categorias.map((c) => (
-            <li key={c.rotulo}>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-700">{c.rotulo}</span>
-                <span className="font-semibold text-gray-900">
-                  {c.valor.toLocaleString("pt-BR")}
-                </span>
-              </div>
-              <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-gray-100">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: `${(c.valor / maxCat) * 100}%`,
-                    backgroundColor: c.cor,
-                  }}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <span className="shrink-0 text-sm font-medium text-blue-700">Abrir →</span>
+      </a>
     </section>
   );
 }

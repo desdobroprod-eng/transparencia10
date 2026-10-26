@@ -8,9 +8,10 @@ export default function Rodape() {
           estaduais), SICONFI/Tesouro Nacional e Receita Federal/BrasilAPI (CNPJ).
         </p>
         <p>
-          Os indicadores e cruzamentos são <strong className="text-gray-700">sinalizações automáticas</strong> por
-          regras objetivas sobre dados públicos. <strong className="text-gray-700">Não constituem acusação</strong> e
-          devem ser apurados pelos órgãos competentes (TCE-MA, CGU, MPF). Homonímia é possível.
+          O portal organiza <strong className="text-gray-700">registros públicos</strong> com a fonte de cada um.
+          As informações <strong className="text-gray-700">não constituem acusação</strong>; qualquer conclusão
+          depende de verificação pelos órgãos competentes (TCE-MA, CGU, MPF). Nome igual não confirma
+          que é a mesma pessoa.
         </p>
         <p>
           <strong className="text-gray-700">Canal de retificação:</strong> se você ou sua empresa

@@ -4,14 +4,14 @@ import { useMemo, useState } from "react";
 
 import { useDados } from "@/hooks/useDados";
 import GraficoTop from "@/components/empresas/GraficoTop";
-import TabelaEmpresas, { comRisco } from "@/components/empresas/TabelaEmpresas";
+import TabelaEmpresas from "@/components/empresas/TabelaEmpresas";
 
 function Skeleton({ className = "" }: { className?: string }) {
   return <div className={`animate-pulse rounded-lg bg-gray-200 ${className}`} />;
 }
 
 export default function EmpresasPage() {
-  const { loading, erro, empresas } = useDados();
+  const { loading, erro, empresas, fichas, contratos, emendas, cruzamentos } = useDados();
   const [busca, setBusca] = useState("");
 
   const filtradas = useMemo(() => {
@@ -25,7 +25,7 @@ export default function EmpresasPage() {
   const top20 = useMemo(() => empresas.slice(0, 20), [empresas]);
 
   const linhasTabela = useMemo(
-    () => filtradas.slice(0, 50).map(comRisco),
+    () => filtradas.slice(0, 50),
     [filtradas]
   );
 
@@ -96,14 +96,19 @@ export default function EmpresasPage() {
         </div>
 
         <div className="mt-4">
-          <TabelaEmpresas empresas={linhasTabela} />
+          <TabelaEmpresas
+            empresas={linhasTabela}
+            fichas={fichas}
+            contratos={contratos}
+            emendas={emendas}
+            cruzamentos={cruzamentos}
+          />
         </div>
 
         <p className="mt-3 text-xs text-gray-400">
-          A marca (!) sinaliza empresas cujo valor contratado supera em mais de
-          50 vezes o capital social declarado — uma divergência cadastral entre
-          o porte registrado e o montante contratado que merece verificação
-          pelos órgãos de controle. Não é, por si só, indício de irregularidade.
+          Abra a ficha de cada fornecedor para ver os dados da Receita Federal, o
+          quadro de sócios e dirigentes, os contratos no PNCP e as emendas
+          recebidas, com link para cada fonte.
         </p>
       </div>
     </section>
