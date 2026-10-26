@@ -74,8 +74,8 @@ def _ia(prompt: str) -> Optional[str]:
 def _prompt(base: str) -> str:
     return (
         "Você explica dados públicos para o cidadão comum, em português do Brasil, "
-        "linguagem simples, sem jargão e SEM acusar ninguém (use 'merece verificação', "
-        "'a apurar'). No máximo 2 frases curtas. Explique: " + base +
+        "linguagem simples, sem jargão, só fatos e SEM juízo sobre ninguém. "
+        "No máximo 2 frases curtas. Explique: " + base +
         "\nResponda apenas a explicação."
     )
 
@@ -87,13 +87,12 @@ def _tpl_ente(nome: str, s: dict) -> str:
     nc = s.get("total_contratos", 0)
     na = s.get("total_alertas", 0)
     base = (
-        f"{nome} aparece com {g} em gastos de cultura e {nc} contrato(s) nos dados públicos. "
-        f"{na} ponto(s) merecem verificação."
+        f"{nome} aparece com {g} em gastos de cultura e {nc} contrato(s) nos dados públicos."
         if nc else
         f"{nome} aparece com {g} em execução de cultura nos dados públicos (sem contratos "
         f"individuais publicados no período)."
     )
-    return base + " Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação."
+    return base + " Os números vêm de fontes oficiais e servem para acompanhar o gasto."
 
 
 def _tpl_contrato(c: dict) -> str:
@@ -101,11 +100,7 @@ def _tpl_contrato(c: dict) -> str:
     forn = c.get("fornecedor") or "a empresa contratada"
     obj = (c.get("objeto") or "").strip()
     obj = (obj[:120] + "…") if len(obj) > 120 else obj
-    nalert = len(c.get("alertas", []))
-    txt = f"Contrato de {v} com {forn}. Objeto: {obj}"
-    if nalert:
-        txt += f" Há {nalert} ponto(s) que merecem verificação neste contrato."
-    return txt
+    return f"Contrato de {v} com {forn}. Objeto: {obj}"
 
 
 def _tpl_empresa(e: dict) -> str:
@@ -114,8 +109,8 @@ def _tpl_empresa(e: dict) -> str:
     nc = e.get("num_contratos", 0)
     cap = e.get("capital_social", 0)
     txt = f"{nome} recebeu {v} em {nc} contrato(s) de cultura."
-    if cap and e.get("total_valor", 0) > 50 * cap:
-        txt += f" O capital social declarado ({_brl(cap)}) é muito menor que o total contratado — divergência que merece verificação."
+    if cap:
+        txt += f" Capital social declarado na Receita Federal: {_brl(cap)}."
     return txt
 
 
@@ -174,7 +169,7 @@ def main() -> None:
         nome = NOME_ENTE.get(chave, chave)
         ia = _ia(_prompt(
             f"{nome} aparece com {_brl(s.get('total_gasto',0))} em cultura, "
-            f"{s.get('total_contratos',0)} contratos e {s.get('total_alertas',0)} pontos a verificar."
+            f"{s.get('total_contratos',0)} contratos."
         ))
         out["entes"][chave] = ia or _tpl_ente(nome, s)
     print(f"[EXPLICADOR] {len(out['entes'])} entes")
