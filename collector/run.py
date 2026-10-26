@@ -259,6 +259,16 @@ def _planificar_contratos(dados_historico: dict, chave_ente: str, nome_ente: str
             categoria = (c.get("categoriaProcesso") or {}).get("nome") or ""
 
             e = dict(c)
+            # Alguns órgãos (ex.: Prefeitura de Raposa) publicam valorInicial = 0
+            # e o valor real só em valorGlobal. Sem isso o contrato aparece a R$ 0
+            # e escapa das regras que dependem de valor.
+            try:
+                vi = float(c.get("valorInicial") or 0)
+                vg = float(c.get("valorGlobal") or 0)
+            except (TypeError, ValueError):
+                vi, vg = 0.0, 0.0
+            if vi <= 0 < vg:
+                e["valorInicial"] = vg
             # Campos normalizados consumidos pelo detector (domain/rules)
             e["cnpjFornecedor"] = c.get("niFornecedor") or ""
             e["unidadeGestora"] = unidade

@@ -62,6 +62,10 @@ export function rotuloRegra(regra: string): string {
 // Observações sobre a cobertura dos dados de um ente, exibidas na Visão Geral.
 // Servem para o leitor não interpretar um número baixo como gasto baixo.
 export const OBSERVACOES_ENTE: Record<string, string> = {
+  raposa:
+    "Raposa publica no PNCP os contratos de todas as secretarias sob uma única unidade, a Prefeitura Municipal. Os de cultura são identificados pelo objeto do contrato (shows, festejos e eventos de interesse da Secretaria de Cultura). O município registra o valor de cada contrato apenas no campo de valor global, deixando o valor inicial zerado; o painel usa o valor global. O total exibido é o valor contratado, que pode ser maior que a despesa paga e que o valor declarado na função Cultura no SICONFI.",
+  sao_jose_ribamar:
+    "Nenhuma das unidades de São José de Ribamar que publicam no PNCP é de cultura: os contratos disponíveis são de Saúde, Obras, Administração, Assistência Social e outras áreas, e nenhum tem objeto cultural. O município também não declara despesa na função Cultura no SICONFI. O valor zero significa que não há gasto com cultura publicado nessas fontes, não que o município não gaste com cultura.",
   paco_lumiar:
     "A pasta de cultura de Paço do Lumiar é a Secretaria Municipal de Cultura, Esportes e Lazer, que publica no PNCP os contratos das três áreas juntos. Só entra no painel o contrato cujo objeto é cultural; compras gerais da pasta (água, material de expediente, organização de eventos sem descrição cultural) e obras esportivas ficam de fora. O município também não declara despesa na função Cultura no SICONFI. Por isso o valor exibido é o mínimo comprovado, não o gasto total do município com cultura.",
 };
