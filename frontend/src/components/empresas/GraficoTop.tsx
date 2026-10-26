@@ -7,7 +7,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Cell,
 } from "recharts";
 import { type EmpresaRanking } from "@/hooks/useDados";
 import { formatBRLcheio } from "@/lib/config";
@@ -22,7 +21,6 @@ interface LinhaGrafico {
   rotulo: string;
   nomeCompleto: string;
   valor: number;
-  risco: boolean;
 }
 
 export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] }) {
@@ -31,7 +29,6 @@ export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] })
     rotulo: truncar(e.razao_social || e.nome),
     nomeCompleto: e.razao_social || e.nome,
     valor: e.total_valor,
-    risco: e.capital_social > 0 && e.total_valor > 50 * e.capital_social,
   }));
 
   return (
@@ -41,7 +38,7 @@ export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] })
           Top 20 por valor contratado
         </h2>
         <p className="text-xs text-gray-400">
-          Barras em destaque: valor contratado muito acima do capital social — a verificar.
+          Abra a ficha de cada fornecedor na tabela abaixo para ver os dados e as fontes.
         </p>
       </div>
       <div className="mt-4" style={{ width: "100%", height: 600 }}>
@@ -68,11 +65,7 @@ export default function GraficoTop({ empresas }: { empresas: EmpresaRanking[] })
               }
               cursor={{ fill: "rgba(0,0,0,0.04)" }}
             />
-            <Bar dataKey="valor" radius={[0, 4, 4, 0]} barSize={18}>
-              {dados.map((d) => (
-                <Cell key={d.cnpj} fill={d.risco ? "#b45309" : "#1d4ed8"} />
-              ))}
-            </Bar>
+            <Bar dataKey="valor" fill="#1d4ed8" radius={[0, 4, 4, 0]} barSize={18} />
           </BarChart>
         </ResponsiveContainer>
       </div>
