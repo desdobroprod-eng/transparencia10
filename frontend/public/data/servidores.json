@@ -1058,27 +1058,6 @@
     },
     {
       "ente": "sao_luis",
-      "contrato": "06307102000130-2-001038/2025",
-      "cnpj": "56636562000180",
-      "fornecedor": "56.636.562 MARCIONE PEREIRA MONTEIRO DIAS",
-      "socio": "MARCIONE PEREIRA MONTEIRO DIAS",
-      "servidor": "MARCIONE PEREIRA MONTEIRO DIAS",
-      "sobrenomes_comuns": [
-        "PEREIRA",
-        "MONTEIRO",
-        "DIAS"
-      ],
-      "match": "nome_identico",
-      "score": 75,
-      "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "sao_luis",
       "contrato": "06307102000130-2-001089/2025",
       "cnpj": "07358310000121",
       "fornecedor": "GREMIO RECREATIVO ESCOLA DE SAMBA IMPERIO SERRANO",
@@ -1237,27 +1216,6 @@
       "match": "sobrenome_familia",
       "score": 65,
       "num_contratos": 1,
-      "orgao": "Servidor estadual MA",
-      "cargo": "",
-      "fonte": "Portal da Transparência MA (servidores estaduais)",
-      "situacao": "ativo",
-      "situacao_fonte": ""
-    },
-    {
-      "ente": "paco_lumiar",
-      "contrato": "06003636000173-2-000007/2025",
-      "cnpj": "13278683000195",
-      "fornecedor": "MARKA - SERVICO E LOCACAO LTDA",
-      "socio": "MARCO ANDRE VIEIRA DA SILVA",
-      "servidor": "CARLOS ANDRE VIEIRA DA SILVA",
-      "sobrenomes_comuns": [
-        "ANDRE",
-        "VIEIRA",
-        "SILVA"
-      ],
-      "match": "sobrenome_familia",
-      "score": 65,
-      "num_contratos": 2,
       "orgao": "Servidor estadual MA",
       "cargo": "",
       "fonte": "Portal da Transparência MA (servidores estaduais)",

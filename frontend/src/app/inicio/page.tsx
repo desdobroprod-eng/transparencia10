@@ -182,7 +182,7 @@ const O_QUE_FAZEMOS = [
   {
     titulo: "Sinaliza pontos a verificar",
     texto:
-      "Marcamos situações que merecem conferência — como preço acima da mediana ou capital social inferior ao contrato. São indícios a apurar, nunca conclusões.",
+      "Marcamos situações que merecem conferência — como empresa aberta pouco antes do contrato ou capital social muito inferior ao valor contratado. São indícios a apurar, nunca conclusões.",
   },
   {
     titulo: "Cruza informações públicas",

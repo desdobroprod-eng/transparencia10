@@ -35,15 +35,11 @@ const fontes = [
 const indicadores = [
   {
     nome: "Duplicidade",
-    desc: "Contratos com fornecedor, valor e objeto semelhantes em datas próximas — padrão que os órgãos de controle verificam como possível redundância ou pagamento repetido.",
+    desc: "Dois contratos com o mesmo objeto e o mesmo fornecedor assinados com até 30 dias de diferença. Na cultura isso costuma ser legítimo (a mesma atração em datas ou locais diferentes); o alerta só pede que se confira se são serviços distintos.",
   },
   {
     nome: "Monopólio de fornecedor",
     desc: "Um único fornecedor concentra uma fatia desproporcional dos contratos de um órgão, sinalizando baixa concorrência.",
-  },
-  {
-    nome: "Preço acima da mediana",
-    desc: "Valor acima do padrão observado para objetos semelhantes, considerando o conjunto dos contratos analisados. É uma comparação estatística, não um juízo sobre legalidade.",
   },
   {
     nome: "Empresa recém-aberta",
@@ -51,7 +47,7 @@ const indicadores = [
   },
   {
     nome: "Capital social inferior ao contrato",
-    desc: "O capital social declarado da empresa é muito menor que o valor contratado — divergência cadastral que merece verificação.",
+    desc: "O capital social declarado da empresa é muito menor que o valor contratado (50 vezes ou mais) — divergência cadastral que merece verificação. Como referência, a Lei 14.133/2021 (art. 69, §4º) permite ao órgão exigir capital mínimo de até 10% do valor da contratação. A exigência é opcional e costuma não constar em contratação direta de artista, por isso o alerta indica divergência a conferir, não irregularidade.",
   },
   {
     nome: "Coincidência de nomes (sócio × servidor)",
@@ -158,22 +154,37 @@ export default function MetodologiaPage() {
         <section>
           <h2>Como funciona o recorte de Cultura</h2>
           <p>
-            Nem todo contrato de um município é cultural. Para isolar o que de fato
-            diz respeito à cultura, um contrato entra na análise quando:
+            Nem todo contrato de um município é cultural. O recorte prioriza
+            precisão: é melhor deixar de fora um caso duvidoso do que publicar
+            obra ou serviço de outra área como gasto com cultura. A decisão segue
+            esta ordem:
           </p>
-          <ul>
+          <ol>
             <li>
-              a unidade gestora é a secretaria de cultura ou de patrimônio; <strong>ou</strong>
+              Objeto de obra urbana ou esporte (asfalto, pavimentação, iluminação
+              pública, drenagem, quadra ou espaço esportivo) fica <strong>fora</strong>,
+              qualquer que seja a secretaria.
             </li>
             <li>
-              o objeto do contrato contém termos culturais — como festival, show,
-              banda, teatro, carnaval, entre outros.
+              Contrato de secretaria exclusivamente de cultura ou de patrimônio
+              histórico <strong>entra</strong>, inclusive o custeio da própria pasta.
             </li>
-          </ul>
-          <p>
-            Esse recorte amplo procura capturar o máximo de gastos culturais, mesmo
-            quando estão registrados em outras unidades.
-          </p>
+            <li>
+              Secretaria mista (por exemplo, &quot;Cultura, Esportes e Lazer&quot;)
+              só entra quando o objeto do contrato é cultural.
+            </li>
+            <li>
+              Secretaria de outro setor (Saúde, Educação, Obras, Urbanismo,
+              Desporto…) fica <strong>fora</strong>.
+            </li>
+            <li>
+              Unidade genérica (Prefeitura, Gabinete, Administração) entra quando o
+              objeto cita termo cultural inequívoco — show, apresentação artística,
+              festejo junino, carnaval, teatro, entre outros. As palavras são
+              comparadas inteiras, para que &quot;cultura&quot; não case com
+              &quot;puericultura&quot; nem &quot;teatro&quot; com o nome de uma rua.
+            </li>
+          </ol>
         </section>
 
         <section>

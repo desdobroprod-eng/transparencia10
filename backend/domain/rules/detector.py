@@ -57,6 +57,9 @@ def verificar_capital_incompativel(
     if capital <= 0 or valor <= 0:
         return None
 
+    # Vale igual para cachê artístico: a Lei 14.133 (art. 69, §4º) admite exigir
+    # capital mínimo de até 10% do valor contratado; 50x fica muito além disso.
+
     razao = valor / capital
     if razao < fator:
         return None
@@ -148,15 +151,21 @@ def verificar_fracionamento(contratos_fornecedor: list[dict], teto_dispensa: flo
 
 
 def verificar_duplicidade(contratos: list[dict], janela_dias: int = 30) -> list[ResultadoRegra]:
-    """Contratos com objeto similar, mesmo fornecedor, dentro de 30 dias."""
+    """
+    Dois contratos com o mesmo objeto (início do texto) e o mesmo fornecedor
+    assinados a até `janela_dias` um do outro. Na cultura isso é comum e
+    legítimo (mesma atração em datas/praças diferentes), por isso o texto pede
+    conferência e o alerta aponta o contrato e o par para checagem.
+    """
     alertas = []
     visto = {}
 
     for c in contratos:
-        chave = (
-            c.get("cnpjFornecedor", "")[:14],
-            (c.get("objetoContrato") or "")[:80].lower().strip(),
-        )
+        cnpj = (c.get("cnpjFornecedor") or "")[:14]
+        objeto = (c.get("objetoContrato") or "")[:80].lower().strip()
+        if not cnpj or not objeto:
+            continue
+        chave = (cnpj, objeto)
         data_str = c.get("dataAssinatura") or c.get("dataPublicacao")
         if not data_str:
             continue
@@ -166,20 +175,28 @@ def verificar_duplicidade(contratos: list[dict], janela_dias: int = 30) -> list[
         except ValueError:
             continue
 
+        id_c = c.get("numeroControlePNCP") or c.get("id") or ""
         if chave in visto:
-            delta = abs((data - visto[chave]["data"]).days)
-            if delta <= janela_dias:
+            anterior = visto[chave]
+            delta = abs((data - anterior["data"]).days)
+            if delta <= janela_dias and id_c != anterior["id"]:
                 alertas.append(ResultadoRegra(
                     regra="DUPLICIDADE_CONTRATO",
-                    score=80,
+                    score=50,
                     motivo=(
-                        f"Contrato com objeto similar ao mesmo fornecedor "
-                        f"em {delta} dias de diferença"
+                        f"Outro contrato com o mesmo objeto e o mesmo fornecedor "
+                        f"foi assinado {delta} dia(s) antes — conferir se são "
+                        f"serviços distintos (ex.: datas ou locais diferentes)"
                     ),
-                    dados={"delta_dias": delta, "cnpj": chave[0]},
+                    dados={
+                        "delta_dias": delta,
+                        "cnpj": cnpj,
+                        "id_contrato": id_c,
+                        "contrato_par": anterior["id"],
+                    },
                 ))
         else:
-            visto[chave] = {"data": data, "contrato": c}
+            visto[chave] = {"data": data, "id": id_c}
 
     return alertas
 

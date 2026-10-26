@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -43,7 +44,6 @@ from domain.rules.detector import (
     verificar_fracionamento,
     verificar_duplicidade,
     verificar_sancionado,
-    verificar_preco_abusivo,
     verificar_contrato_sem_licitacao,
     verificar_fornecedor_monopolio,
     verificar_contrato_vencido_renovado,
@@ -104,6 +104,22 @@ _CULTURA_UNIDADE = ("cultura", "cultural", "patrimonio histor", "patrimônio his
 # Unidades que CONTÊM "cultura" mas NÃO são do setor cultural (falsos amigos).
 _UNIDADE_VETO = ("agricult", "pesca", "abastec")
 
+# Unidades de OUTRO setor. Sem palavra de cultura no nome → contrato descartado,
+# mesmo que o objeto cite "festival", "biblioteca", "dança" etc. (ex.: Festival
+# do Estudante da Educação, aula de dança do Desporto, GPS "banda L" do Urbanismo).
+# Com palavra de cultura no nome (secretaria mista, ex.: "Cultura, Esportes,
+# Lazer" ou "Administração / Cultura / Infraestrutura e Urbanismo") a unidade
+# deixa de valer sozinha e o objeto precisa provar que é cultura.
+_UNIDADE_OUTRO_SETOR = (
+    "saúde", "saude", "educação", "educacao", "esporte", "desporto", "obras",
+    "infraestrutura", "urbanismo", "habitação", "habitacao", "serviços públicos",
+    "servicos publicos", "trânsito", "transito", "transporte", "meio ambiente",
+    "indústria", "industria", "segurança", "seguranca",
+    "agricult", "pesca", "abastec",
+)
+# Administração/Finanças/Fazenda ficam de fora de propósito: em municípios como
+# Pinheiro elas pagam os shows de São João e Carnaval; o objeto decide.
+
 # Palavras FORTES no objeto — usadas com FRONTEIRA DE PALAVRA (\b) para não
 # casar dentro de outra palavra. Ex.: \bcultura\b NÃO casa em "puericultura",
 # "agricultura", "piscicultura"; \bdança\b NÃO casa em "mudança"; \bteatr\w*
@@ -111,26 +127,38 @@ _UNIDADE_VETO = ("agricult", "pesca", "abastec")
 # "Rua do Teatro") e termos técnicos ("puericultura") entravam como cultura.
 _CULTURA_OBJETO_RGX = re.compile("|".join((
     r"\bcultura\b", r"\bcultura(is|l)\b",
-    r"\bart[íi]stic\w*", r"\bartes\b", r"\bartesanat\w*",
+    r"\bart[íi]stic\w*", r"\bartistas?\b", r"\bartesanat\w*",
     r"\bfestival\w*", r"\bfestejos?\b", r"\bfestivid\w*",
     r"\bjunin\w*", r"\barraial\w*", r"\bquadrilha\w*", r"\bcarnaval\w*",
     r"\bfolclor\w*", r"\bbumba\b", r"\btambor de crioula\b", r"\bcacuri\w*",
     r"\bteatr\w*", r"\bcineteatro\b", r"\baudiovisu\w*", r"\bcinema\b",
     r"\bm[úu]sic\w*", r"\bdanç\w*", r"\bdanc\w*", r"\borquestra\w*",
     r"\bshows?\b", r"\bbandas?\b", r"\bmuseu\w*", r"\bbiblioteca\w*",
-    r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural)",
+    r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural)", r"\baldir blanc\b",
 )))
 
-# Se o objeto contém um destes, NÃO é cultura mesmo que bata acima — cobre
-# nomes de logradouro em obras ("Rua do Teatro"), "-cultura" técnicos e
-# "banda larga" (internet, não música).
-_OBJETO_VETO = (
+# Veto DURO — vale para QUALQUER unidade, inclusive a secretaria de cultura:
+# obra urbana (asfalto, iluminação pública), esporte e "-cultura" técnicos.
+_OBJETO_VETO_DURO = (
     "puericultura", "piscicultura", "horticultura", "fruticultura",
     "floricultura", "silvicultura", "avicultura", "bovinocultura",
     "apicultura", "aquicultura", "suinocultura", "olericultura",
-    "pavimenta", "terraplan", "recapea", "drenagem", "esgoto", "saneament",
+    "asfalt", "pavimentação", "pavimentacao", "recapea", "meio-fio", "meio fio",
+    "terraplan", "drenagem", "esgoto", "saneament", "iluminação pública",
+    "iluminacao publica", "sinalização viária", "sinalizacao viaria",
+    "espaço esportivo", "espaco esportivo", "quadra poliesportiva",
+    "poliesportiv", "campo de futebol", "zumba",
+)
+
+# Veto LEVE — só quando a unidade NÃO é exclusivamente de cultura (o custeio da
+# própria secretaria, como veículo com extintor, continua contando). Cobre
+# "Rua do Teatro", "banda larga", consumo administrativo que só cita museu etc.
+_OBJETO_VETO_LEVE = (
     "extintor", "merenda", "transporte escolar", "medicament", "hospital",
-    "banda larga", "internet", "link de dados",
+    "banda larga", "internet", "link de dados", "gnss", "geodésic", "geodesic",
+    "gás de cozinha", "gas de cozinha", "botijão", "botijao",
+    "material de consumo (limpeza", "serviços gráficos", "servicos graficos",
+    "festival do estudante", "mapa ilustrado",
 )
 
 
@@ -138,27 +166,51 @@ def _normalizar(txt: str) -> str:
     return (txt or "").lower()
 
 
+def _sem_acento(txt: str) -> str:
+    """Minúsculas sem acento — "asfáltica" e "asfaltica" casam igual no veto."""
+    return "".join(
+        ch for ch in unicodedata.normalize("NFKD", (txt or "").lower())
+        if not unicodedata.combining(ch)
+    )
+
+
+def _contem(texto_sa: str, termos: tuple) -> bool:
+    return any(_sem_acento(t) in texto_sa for t in termos)
+
+
 def _eh_cultura(unidade: str, objeto: str) -> bool:
     """
     True se o contrato pertence ao recorte Cultura.
 
-    Dois sinais, do mais forte ao mais fraco:
-      1. UNIDADE gestora é do setor cultural (Secretaria de Cultura, Fundação
-         de Patrimônio etc.) — sinal forte, aceita direto.
-      2. OBJETO cita termo cultural inequívoco (palavra inteira) e NÃO cita
-         nenhum termo de veto — cobre municípios que publicam tudo numa
-         unidade genérica (ex.: Raposa, contratos de shows artísticos).
+    Ordem de decisão (precisão antes de cobertura):
+      1. Objeto com veto duro (asfalto, iluminação pública, esporte…) → fora,
+         qualquer que seja a unidade.
+      2. Unidade só de cultura (Secretaria de Cultura, Fundação de Patrimônio)
+         → dentro: é o gasto da pasta, inclusive custeio (veículo, combustível).
+      3. Unidade mista (cultura + outro setor no nome) → objeto decide.
+      4. Unidade de outro setor (Saúde, Educação, Obras…) → fora.
+      5. Unidade genérica (Prefeitura, Gabinete, Administração) → objeto decide
+         (sem veto leve e com termo cultural de palavra inteira);
+         cobre municípios que publicam tudo numa unidade só (ex.: Raposa).
     """
-    u = _normalizar(unidade)
-    if any(v in u for v in _UNIDADE_VETO):
-        u_cult = False
-    else:
-        u_cult = any(k in u for k in _CULTURA_UNIDADE)
-    if u_cult:
-        return True
-
+    u = _sem_acento(unidade)
     o = _normalizar(objeto)
-    if any(v in o for v in _OBJETO_VETO):
+    o_sa = _sem_acento(objeto)
+
+    if _contem(o_sa, _OBJETO_VETO_DURO):
+        return False
+
+    tem_cultura = (
+        not _contem(u, _UNIDADE_VETO)
+        and _contem(u, _CULTURA_UNIDADE)
+    )
+    outro_setor = _contem(u, _UNIDADE_OUTRO_SETOR)
+
+    if tem_cultura and not outro_setor:
+        return True
+    if outro_setor and not tem_cultura:
+        return False
+    if _contem(o_sa, _OBJETO_VETO_LEVE):
         return False
     return bool(_CULTURA_OBJETO_RGX.search(o))
 
@@ -237,7 +289,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
             "score": r.score,
             "motivo": r.motivo,
             "dados": r.dados,
-            "id_contrato": None,
+            "id_contrato": r.dados.get("id_contrato"),
             "categoria": "financeiro",
         })
 
@@ -301,17 +353,11 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "categoria": "financeiro",
             })
 
-        # Regra: preço abusivo — compara com histórico do mesmo ente
-        r_preco = verificar_preco_abusivo(contrato, contratos_ente)
-        if r_preco:
-            alertas.append({
-                "regra": r_preco.regra,
-                "score": r_preco.score,
-                "motivo": r_preco.motivo,
-                "dados": r_preco.dados,
-                "id_contrato": id_c,
-                "categoria": "financeiro",
-            })
+        # Regra PRECO_ABUSIVO desativada (out/2026): comparava cada contrato com
+        # a mediana de qualquer contrato do ente que dividisse UMA palavra do
+        # objeto. Na cultura isso põe cachê de artista nacional ao lado de grupo
+        # folclórico local (ex.: R$ 1,5 mi × mediana R$ 81 mil de bois) — conta
+        # sem base estatística e com risco de expor nome de forma injusta.
 
     # Regra: fracionamento — agrupa por CNPJ do fornecedor
     por_cnpj: dict[str, list] = {}
@@ -327,7 +373,7 @@ def _aplicar_regras_ente(contratos_ente: list[dict]) -> list[dict]:
                 "regra": r_frac.regra,
                 "score": r_frac.score,
                 "motivo": r_frac.motivo,
-                "dados": r_frac.dados,
+                "dados": {**r_frac.dados, "cnpj": cnpj},
                 "id_contrato": None,
                 "categoria": "financeiro",
             })
@@ -916,10 +962,17 @@ async def executar_coleta(
 
     alertas_frontend = []
     score_por_contrato: dict[str, int] = {}
+    # Alertas que olham o fornecedor inteiro (monopólio, fracionamento) não têm
+    # contrato único: busca um contrato do mesmo CNPJ para mostrar o nome.
+    contrato_por_cnpj: dict[str, dict] = {}
+    for c in todos_contratos:
+        contrato_por_cnpj.setdefault((c.get("cnpjFornecedor") or "")[:14], c)
     for i, a in enumerate(todos_alertas):
         cid = a.get("id_contrato") or ""
-        contrato_ref = contratos_por_id.get(cid, {})
         dados = a.get("dados") or {}
+        contrato_ref = contratos_por_id.get(cid) or contrato_por_cnpj.get(
+            (dados.get("cnpj") or "")[:14], {}
+        )
         cnpj = dados.get("cnpj") or contrato_ref.get("cnpjFornecedor") or ""
         fornecedor = (
             dados.get("nome_socio")
