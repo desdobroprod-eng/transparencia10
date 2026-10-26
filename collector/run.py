@@ -156,11 +156,19 @@ _PATRIMONIO_RGX = re.compile("|".join((
     r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural|art[íi]stic\w*)",
     r"\btombad[oa]s?\b", r"\btombamento\b", r"\biphan\b",
     r"\b(pr[ée]dio|im[óo]vel|edif[íi]cio|casar[ãa]o|sobrado|igreja|bem|bens) (hist[óo]ric\w*|tombad\w*)",
-    # "Centro Histórico" sozinho costuma ser só endereço (ex.: assinatura de
-    # software de um órgão na Rua do Egito). Conta quando há ação de patrimônio.
+    # Revitalização/restauração de centro ou conjunto histórico.
     r"\b(revitaliza\w*|restaura\w*|requalifica\w*|preserva\w*|conserva\w*)"
     r" d[oa]s? (centro|s[íi]tio|conjunto|n[úu]cleo) (hist[óo]ric\w*|tombad\w*)",
 )))
+
+# Obra em imóvel dentro de centro histórico/área tombada também é patrimônio
+# (ex.: reforma do Mercado Central, no Centro Histórico de São Luís). Serviço
+# que só usa o endereço (ex.: assinatura de software na Rua do Egito) não é.
+_OBRA_RGX = re.compile(
+    r"\b(obras?|reforma\w*|amplia[çc][ãa]o|restaura\w*|recupera[çc][ãa]o|"
+    r"revitaliza\w*|requalifica\w*|conserva[çc][ãa]o|manuten[çc][ãa]o predial)\b"
+)
+_AREA_HISTORICA_RGX = re.compile(r"\b(centro|s[íi]tio|conjunto|n[úu]cleo) hist[óo]ric\w*|\btombad\w*")
 
 # Veto DURO — vale para QUALQUER unidade, inclusive a secretaria de cultura:
 # obra urbana (asfalto, iluminação pública), esporte e "-cultura" técnicos.
@@ -235,7 +243,7 @@ def _eh_cultura(unidade: str, objeto: str) -> bool:
 
     if tem_cultura and not outro_setor:
         return True
-    if _PATRIMONIO_RGX.search(o):
+    if _PATRIMONIO_RGX.search(o) or (_OBRA_RGX.search(o) and _AREA_HISTORICA_RGX.search(o)):
         return True
     if outro_setor and not tem_cultura:
         return False
@@ -330,6 +338,37 @@ def _ler_publicado(nome: str):
     except Exception as exc:
         print(f"[PROTEGIDO] não foi possível ler {nome} publicado: {exc}")
     return None
+
+
+def _fichas_cnpj(contratos: list[dict]) -> dict:
+    """
+    Ficha pública de cada fornecedor, só com dado da Receita Federal (via
+    BrasilAPI) e do CEIS/CNEP — sem juízo nem pontuação. Sócios/dirigentes
+    vêm do QSA, que é público. Coincidência de nome com servidor NÃO entra
+    aqui: fica no arquivo cifrado de cruzamentos.
+    """
+    fichas: dict = {}
+    for c in contratos:
+        cnpj = "".join(ch for ch in (c.get("cnpjFornecedor") or "") if ch.isdigit())
+        info = c.get("cnpj_info") or {}
+        if len(cnpj) != 14 or cnpj in fichas or not info or info.get("erro"):
+            continue
+        socios = info.get("socios_detalhe") or [
+            {"nome": n, "qualificacao": "", "desde": ""} for n in info.get("socios") or []
+        ]
+        fichas[cnpj] = {
+            "razao_social": info.get("razao_social") or c.get("nomeRazaoSocialFornecedor") or "",
+            "abertura": info.get("data_inicio_atividade") or "",
+            "situacao": info.get("situacao") or "",
+            "natureza_juridica": info.get("natureza_juridica") or "",
+            "porte": info.get("porte") or "",
+            "mei": bool(info.get("mei")),
+            "capital_social": float(info.get("capital_social") or 0),
+            "cnae": info.get("cnae") or "",
+            "socios": socios,
+            "sancoes": info.get("sancoes") or [],
+        }
+    return fichas
 
 
 def _timestamp_utc() -> str:
@@ -1230,6 +1269,7 @@ async def executar_coleta(
             [a for a in alertas_frontend if a.get("categoria") == "nepotismo"],
         )
         _salvar_json("stats.json", stats_frontend)
+        _salvar_json("empresas.json", _fichas_cnpj(todos_contratos))
 
     # ── Emendas parlamentares de Cultura (estaduais + federais MA) ─────────────
     # Não-bloqueante: se a fonte cair, o pipeline segue sem emendas.
@@ -1292,6 +1332,9 @@ async def executar_coleta(
         "total_contratos": len(contratos_frontend),
         "total_alertas": len(alertas_frontend),
         "total_cruzamentos": len(matches_servidores),
+        "total_fornecedores": len({
+            (c.get("cnpj") or c.get("fornecedor") or "") for c in contratos_frontend
+        } - {""}),
         "contratos_excluidos": [
             {"id": k, "motivo": v} for k, v in CONTRATOS_EXCLUIDOS.items()
         ],

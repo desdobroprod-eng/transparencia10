@@ -231,14 +231,14 @@ export default function CruzamentosPage() {
           )}
         </section>
 
-        {/* Nota de rodapé reforçando a fonte e o caráter de indício */}
+        {/* Nota de rodapé com as fontes */}
         <footer className="border-t border-gray-200 pt-6 text-xs text-gray-400">
           <p>
             Fontes públicas: quadro societário via Receita Federal (CNPJ) ×
             servidores estaduais via Portal da Transparência do Maranhão.
-            Coincidência de nome é{" "}
-            <strong className="text-gray-500">sinalização automática, não prova</strong>; a
-            verificação compete aos órgãos de controle.
+            Nome igual <strong className="text-gray-500">não confirma que é a mesma
+            pessoa</strong>; a verificação de identidade compete aos órgãos de
+            controle.
           </p>
         </footer>
       </div>

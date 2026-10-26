@@ -32,26 +32,36 @@ const fontes = [
   },
 ];
 
-const indicadores = [
+const ficha = [
   {
-    nome: "Duplicidade",
-    desc: "Dois contratos com o mesmo objeto e o mesmo fornecedor assinados com até 30 dias de diferença. Na cultura isso costuma ser legítimo (a mesma atração em datas ou locais diferentes); o alerta só pede que se confira se são serviços distintos.",
+    nome: "Dados cadastrais",
+    fonte: "Receita Federal (via BrasilAPI)",
+    desc: "Razão social, natureza jurídica, data de abertura, situação cadastral, porte, capital social declarado e atividade principal (CNAE).",
   },
   {
-    nome: "Monopólio de fornecedor",
-    desc: "Um único fornecedor concentra uma fatia desproporcional dos contratos de um órgão, sinalizando baixa concorrência.",
+    nome: "Sócios e dirigentes",
+    fonte: "Quadro societário (QSA) — Receita Federal",
+    desc: "Nome, qualificação (sócio-administrador, presidente, diretor etc.) e data de entrada de cada pessoa no quadro da empresa ou entidade.",
   },
   {
-    nome: "Empresa recém-aberta",
-    desc: "Fornecedor com CNPJ aberto há pouco tempo antes da contratação, o que merece verificação quando associado a valores altos.",
+    nome: "Contratos de cultura",
+    fonte: "PNCP",
+    desc: "Cada contrato do fornecedor com os entes monitorados, com valor, data, número de retificações e link para o registro no PNCP.",
   },
   {
-    nome: "Capital social inferior ao contrato",
-    desc: "O capital social declarado da empresa é muito menor que o valor contratado (50 vezes ou mais) — divergência cadastral que merece verificação. Como referência, a Lei 14.133/2021 (art. 69, §4º) permite ao órgão exigir capital mínimo de até 10% do valor da contratação. A exigência é opcional e costuma não constar em contratação direta de artista, por isso o alerta indica divergência a conferir, não irregularidade.",
+    nome: "Emendas parlamentares recebidas",
+    fonte: "Portal da Transparência do Maranhão",
+    desc: "Emendas de cultura em que o fornecedor aparece como favorecido, com parlamentar, objeto e valores empenhado e pago.",
   },
   {
-    nome: "Coincidência de nomes (sócio × servidor)",
-    desc: "Comparação entre nomes de sócios das empresas contratadas e a base de servidores estaduais. Sinaliza apenas COINCIDÊNCIA DE NOME — não confirma identidade, parentesco ou irregularidade (homonímia é comum). Serve para orientar apuração pelos órgãos de controle.",
+    nome: "Sanções",
+    fonte: "CEIS/CNEP — Controladoria-Geral da União",
+    desc: "Registro do fornecedor em cadastros de empresas sancionadas, quando houver, com órgão e período.",
+  },
+  {
+    nome: "Nome igual ao de servidor público (acesso com senha)",
+    fonte: "Portal da Transparência do Maranhão e Diário Oficial de São Luís",
+    desc: "Ao lado de cada sócio, indica servidor com nome completo idêntico ou com os mesmos sobrenomes na mesma ordem. Nome igual não confirma que é a mesma pessoa.",
   },
 ];
 
@@ -88,10 +98,10 @@ export default function MetodologiaPage() {
             </div>
             <div>
               <dt className="text-xs uppercase tracking-wide text-gray-500">
-                Alertas
+                Fornecedores
               </dt>
               <dd className="mt-1 text-sm font-semibold text-gray-900">
-                {meta.total_alertas?.toLocaleString("pt-BR") ?? "—"}
+                {meta.total_fornecedores?.toLocaleString("pt-BR") ?? "—"}
               </dd>
             </div>
             <div>
@@ -113,9 +123,9 @@ export default function MetodologiaPage() {
             O Portal Transparência Cultural do Brasil acompanha os gastos com
             cultura das secretarias do Maranhão — Estado (SECMA), São Luís,
             Raposa, São José de Ribamar, Paço do Lumiar e Pinheiro. A plataforma
-            reúne dados públicos de diferentes fontes oficiais e sinaliza padrões
-            que merecem atenção, tornando mais simples para o cidadão acompanhar
-            para onde vai o dinheiro da cultura.
+            reúne dados públicos de diferentes fontes oficiais, cruza essas
+            informações e organiza tudo com link para a fonte de cada registro,
+            para que o cidadão acompanhe para onde vai o dinheiro da cultura.
           </p>
         </section>
 
@@ -192,7 +202,7 @@ export default function MetodologiaPage() {
             <h2>Contratos excluídos manualmente</h2>
             <p>
               Registros publicados no PNCP com erro comprovado são retirados do
-              painel para não distorcer totais e alertas. Cada exclusão fica
+              painel para não distorcer os totais. Cada exclusão fica
               listada aqui, com o motivo:
             </p>
             <ul>
@@ -206,41 +216,22 @@ export default function MetodologiaPage() {
         )}
 
         <section>
-          <h2>Indicadores e cálculo do score</h2>
+          <h2>O que aparece na ficha do fornecedor</h2>
           <p>
-            Cada contrato pode acionar um ou mais indicadores. São regras objetivas
-            aplicadas sobre os dados públicos:
+            Cada fornecedor tem uma ficha, aberta pelo botão &quot;Ficha&quot; em
+            Empresas ou pelo detalhe de um contrato. A ficha mostra apenas fatos
+            dos registros oficiais, sem pontuação nem classificação, e cada
+            bloco aponta para a fonte:
           </p>
           <div className="not-prose mt-4 space-y-3">
-            {indicadores.map((ind) => (
-              <div
-                key={ind.nome}
-                className="rounded-lg border border-gray-200 p-4"
-              >
-                <h3 className="text-sm font-semibold text-gray-900">
-                  {ind.nome}
-                </h3>
-                <p className="mt-1 text-sm text-gray-700">{ind.desc}</p>
+            {ficha.map((f) => (
+              <div key={f.nome} className="rounded-lg border border-gray-200 p-4">
+                <h3 className="text-sm font-semibold text-gray-900">{f.nome}</h3>
+                <p className="mt-0.5 text-xs text-gray-500">Fonte: {f.fonte}</p>
+                <p className="mt-1 text-sm text-gray-700">{f.desc}</p>
               </div>
             ))}
           </div>
-          <p className="mt-6">
-            Cada indicador contribui para uma <strong>pontuação de 0 a 100</strong>,
-            em que valores mais altos representam maior necessidade de verificação.
-            A pontuação NÃO é um julgamento — apenas ordena o que merece olhar
-            primeiro:
-          </p>
-          <ul>
-            <li>
-              <strong>≥ 80:</strong> vários pontos a verificar — convém apurar primeiro.
-            </li>
-            <li>
-              <strong>≥ 60:</strong> alguns pontos que merecem acompanhamento.
-            </li>
-            <li>
-              <strong>Abaixo de 60:</strong> poucos ou nenhum ponto a verificar no momento.
-            </li>
-          </ul>
         </section>
 
         <section>
@@ -279,8 +270,8 @@ export default function MetodologiaPage() {
           <p>
             <strong>Como isso se aplica aqui:</strong> quando o nome de um sócio
             coincide com o de um servidor, esse é exatamente o cenário que a lei
-            manda observar — e por isso o dado é <strong>sinalizado para
-            verificação pelos órgãos de controle</strong>. O portal <strong>não afirma</strong> que houve
+            manda observar — e por isso o nome igual é <strong>mostrado ao lado
+            do sócio, com a fonte</strong>. O portal <strong>não afirma</strong> que houve
             vedação, conflito de interesses ou irregularidade em nenhum caso
             concreto: a coincidência de nome não confirma identidade, e a
             verificação (inclusive de quem administra a empresa e de CPF)
@@ -301,9 +292,9 @@ export default function MetodologiaPage() {
               municípios monitorados.
             </li>
             <li>
-              O cruzamento por nome pode gerar coincidências (homonímia). Um{" "}
-              <strong>nome completo idêntico</strong> é um indício mais forte;{" "}
-              <strong>sobrenomes em comum</strong> é um indício bem mais fraco.
+              A comparação por nome pode juntar pessoas diferentes (homonímia).
+              Um <strong>nome completo idêntico</strong> é uma coincidência mais
+              estreita; <strong>sobrenomes em comum</strong>, bem mais ampla.
             </li>
             <li>
               Os valores de contrato refletem o momento da{" "}
@@ -321,14 +312,14 @@ export default function MetodologiaPage() {
           <div className="not-prose mt-8 rounded-lg border-l-4 border-amber-400 bg-amber-50 p-5">
             <h2 className="text-lg font-semibold text-amber-900">Aviso legal</h2>
             <p className="mt-2 text-sm leading-relaxed text-amber-900">
-              Os indicadores apresentados são <strong>sinalizações automáticas</strong>{" "}
-              geradas sobre dados públicos. Eles <strong>não constituem acusação</strong>{" "}
-              nem comprovação de irregularidade. Cada apontamento deve ser apurado
-              pelos órgãos competentes — como o TCE-MA, a CGU e o MPF — que detêm os
-              meios e a autoridade para apuração.
+              O portal reúne <strong>registros públicos</strong> e mostra cada um
+              com a fonte. As informações <strong>não constituem acusação</strong>{" "}
+              nem comprovação de irregularidade. Qualquer conclusão depende de
+              verificação documental pelos órgãos competentes — como o TCE-MA, a
+              CGU e o MPF.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-amber-900">
-              Encontrou uma informação incorreta ou deseja contestar um apontamento?
+              Encontrou uma informação incorreta ou deseja contestar um registro?
               Entre em contato conosco para solicitar correção. Avaliaremos todos os
               pedidos e atualizaremos os dados quando cabível.
             </p>

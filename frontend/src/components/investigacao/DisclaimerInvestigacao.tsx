@@ -1,7 +1,7 @@
 "use client";
 
 // Aviso ético/jurídico obrigatório — fixo e visível no topo da página.
-// "Indício, não acusação." Homonímia é possível.
+// Dado público, não acusação. Homonímia é possível.
 export default function DisclaimerInvestigacao() {
   return (
     <div className="rounded-xl border border-amber-300 bg-amber-50 px-5 py-4">
@@ -9,7 +9,7 @@ export default function DisclaimerInvestigacao() {
         <span aria-hidden className="mt-0.5 text-lg leading-none">⚠️</span>
         <div className="space-y-1">
           <p className="text-sm font-semibold text-amber-800">
-            Sinalização automática por coincidência de nome — não é acusação, não identifica pessoas
+            Comparação de nomes entre bases públicas — não é acusação e não identifica pessoas
           </p>
           <p className="text-sm leading-relaxed text-amber-800/90">
             Este painel cruza <strong>nomes</strong> que aparecem em bases públicas

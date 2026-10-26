@@ -104,14 +104,18 @@ def normalizar(txt: str) -> str:
 
 async def enriquecer_cnpj(client: httpx.AsyncClient, cnpj: str) -> dict:
     """
-    Retorna {razao_social, data_inicio_atividade, situacao, socios:[nome,...]}.
+    Retorna {razao_social, data_inicio_atividade, situacao, socios:[nome,...],
+    socios_detalhe:[{nome, qualificacao, desde}], natureza_juridica, ...}.
     Usa cache. Em falha, retorna dict vazio com a chave 'erro'.
     """
     cnpj = "".join(filter(str.isdigit, cnpj or ""))
     if len(cnpj) != 14:
         return {}
-    if cnpj in _cache_cnpj:
-        return _cache_cnpj[cnpj]
+    em_cache = _cache_cnpj.get(cnpj)
+    # Entradas antigas do cache não têm a qualificação dos sócios: rebusca só
+    # essas (uma vez), para a ficha do CNPJ mostrar quem é sócio, presidente etc.
+    if em_cache is not None and ("socios_detalhe" in em_cache or "erro" in em_cache):
+        return em_cache
 
     url = BRASILAPI.format(cnpj=cnpj)
     for tent in range(1, _MAX_TENT + 1):
@@ -125,11 +129,16 @@ async def enriquecer_cnpj(client: httpx.AsyncClient, cnpj: str) -> dict:
                 break
             r.raise_for_status()
             d = r.json()
-            socios = [
-                s.get("nome_socio") or s.get("nome")
+            socios_detalhe = [
+                {
+                    "nome": s.get("nome_socio") or s.get("nome"),
+                    "qualificacao": s.get("qualificacao_socio") or "",
+                    "desde": s.get("data_entrada_sociedade") or "",
+                }
                 for s in (d.get("qsa") or [])
                 if (s.get("nome_socio") or s.get("nome"))
             ]
+            socios = [x["nome"] for x in socios_detalhe]
             try:
                 capital = float(d.get("capital_social") or 0)
             except (TypeError, ValueError):
@@ -144,6 +153,8 @@ async def enriquecer_cnpj(client: httpx.AsyncClient, cnpj: str) -> dict:
                 "mei": bool(d.get("opcao_pelo_mei")),
                 "cnae": d.get("cnae_fiscal_descricao") or "",
                 "socios": socios,
+                "socios_detalhe": socios_detalhe,
+                "natureza_juridica": d.get("natureza_juridica") or "",
             }
             break
         except (httpx.HTTPError, ValueError) as e:
