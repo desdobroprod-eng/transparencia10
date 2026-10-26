@@ -187,6 +187,24 @@ export default function MetodologiaPage() {
           </ol>
         </section>
 
+        {meta?.contratos_excluidos && meta.contratos_excluidos.length > 0 && (
+          <section>
+            <h2>Contratos excluídos manualmente</h2>
+            <p>
+              Registros publicados no PNCP com erro comprovado são retirados do
+              painel para não distorcer totais e alertas. Cada exclusão fica
+              listada aqui, com o motivo:
+            </p>
+            <ul>
+              {meta.contratos_excluidos.map((x) => (
+                <li key={x.id}>
+                  <code>{x.id}</code> — {x.motivo}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section>
           <h2>Indicadores e cálculo do score</h2>
           <p>

@@ -145,7 +145,7 @@ export default function VisaoGeralPage() {
         />
         <KpiCard
           rotulo="Cruzamentos sócio × servidor"
-          valor={cruzamentos.length.toLocaleString("pt-BR")}
+          valor={(meta?.total_cruzamentos ?? cruzamentos.length).toLocaleString("pt-BR")}
         />
       </div>
 

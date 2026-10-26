@@ -51,6 +51,8 @@ jobs:
         run: python collector/run.py
         env:
           PORTAL_TRANSPARENCIA_API_KEY: ${{ secrets.PORTAL_TRANSPARENCIA_API_KEY }}
+          # Cifra os dados nominais (cruzamentos sócio × servidor) antes do commit
+          PORTAL_SENHA: ${{ secrets.PORTAL_SENHA }}
 
       # 4b. Gerar explicações em linguagem simples (template; usa IA local se houver)
       - name: Gerar explicações

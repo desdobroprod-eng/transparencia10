@@ -17,6 +17,7 @@ import { useDados, type Contrato } from "@/hooks/useDados";
 import { NOME_ENTE, ENTES, formatBRLcheio } from "@/lib/config";
 import RiscoBadge from "@/components/contratos/RiscoBadge";
 import DetalheContrato from "@/components/contratos/DetalheContrato";
+import PainelContratos from "@/components/contratos/PainelContratos";
 
 function truncar(texto: string, max = 80): string {
   if (!texto) return "—";
@@ -39,7 +40,8 @@ export default function ContratosPage() {
   const [somenteIndicios, setSomenteIndicios] = useState(false);
 
   // Estado da tabela
-  const [sorting, setSorting] = useState<SortingState>([]);
+  // Abre sempre do maior para o menor valor contratado.
+  const [sorting, setSorting] = useState<SortingState>([{ id: "valor", desc: true }]);
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   // Índice fuzzy (recriado quando a lista de contratos muda)
@@ -73,18 +75,28 @@ export default function ContratosPage() {
     () => [
       {
         id: "expand",
-        header: "",
+        header: () => <span className="sr-only">Detalhes</span>,
         enableSorting: false,
-        cell: ({ row }) => (
-          <button
-            type="button"
-            onClick={() => row.toggleExpanded()}
-            aria-label={row.getIsExpanded() ? "Recolher" : "Expandir"}
-            className="flex h-6 w-6 items-center justify-center rounded text-gray-500 hover:bg-gray-200"
-          >
-            {row.getIsExpanded() ? "▾" : "▸"}
-          </button>
-        ),
+        cell: ({ row }) => {
+          const aberto = row.getIsExpanded();
+          return (
+            <button
+              type="button"
+              onClick={() => row.toggleExpanded()}
+              aria-expanded={aberto}
+              aria-controls={`detalhe-${row.id}`}
+              aria-label={`${aberto ? "Fechar" : "Ver"} detalhes do contrato de ${row.original.fornecedor || "fornecedor não informado"}`}
+              className={`inline-flex items-center gap-1 whitespace-nowrap rounded-md border px-2.5 py-1 text-xs font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8102E] focus-visible:ring-offset-1 ${
+                aberto
+                  ? "border-[#C8102E] bg-[#C8102E] text-white"
+                  : "border-gray-300 bg-white text-gray-800 hover:border-[#C8102E] hover:text-[#C8102E]"
+              }`}
+            >
+              <span aria-hidden className={`transition-transform ${aberto ? "rotate-90" : ""}`}>▸</span>
+              {aberto ? "Fechar" : "Detalhes"}
+            </button>
+          );
+        },
       },
       {
         accessorFn: (c) => NOME_ENTE[c.ente] ?? c.ente,
@@ -249,6 +261,9 @@ export default function ContratosPage() {
         </div>
       </section>
 
+      {/* Painel visual — acompanha os filtros */}
+      <PainelContratos contratos={filtrados} />
+
       {/* Tabela */}
       <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -304,7 +319,7 @@ export default function ContratosPage() {
                     ))}
                   </tr>
                   {row.getIsExpanded() && (
-                    <tr>
+                    <tr id={`detalhe-${row.id}`}>
                       <td colSpan={row.getVisibleCells().length} className="p-0">
                         <DetalheContrato
                           contrato={row.original}

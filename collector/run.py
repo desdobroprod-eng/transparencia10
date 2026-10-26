@@ -93,6 +93,17 @@ ENTES_ALVO = {
     },
 }
 
+# ── Contratos excluídos manualmente ────────────────────────────────────────---
+# Registros do PNCP comprovadamente errados. Só entra aqui com a verificação
+# documentada; o motivo é publicado em meta.json (transparência da exclusão).
+CONTRATOS_EXCLUIDOS = {
+    "06307102000130-2-000087/2024": (
+        "SG Produções & Eventos — 'Vibrações Positivas', aniversário de São Luís: "
+        "registro com valor de R$ 66,6 milhões emitido com erro e cancelado "
+        "(verificado em 26/10/2026)."
+    ),
+}
+
 # ── Recorte temático: Cultura ───────────────────────────────────────────────---
 # Prefeituras publicam contratos de todas as secretarias sob o mesmo CNPJ.
 # Marcamos como "cultura" o contrato cuja unidade gestora seja a secretaria de
@@ -135,6 +146,20 @@ _CULTURA_OBJETO_RGX = re.compile("|".join((
     r"\bm[úu]sic\w*", r"\bdanç\w*", r"\bdanc\w*", r"\borquestra\w*",
     r"\bshows?\b", r"\bbandas?\b", r"\bmuseu\w*", r"\bbiblioteca\w*",
     r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural)", r"\baldir blanc\b",
+)))
+
+# Patrimônio histórico/cultural: conservação, restauração ou revitalização de
+# bem tombado ou histórico é gasto com cultura, mesmo quando pago por outra
+# secretaria (ex.: Educação restaurando prédio histórico). Vence o filtro de
+# setor, mas não o veto duro (pavimentação de rua continua fora).
+_PATRIMONIO_RGX = re.compile("|".join((
+    r"\bpatrim[ôo]nio (hist[óo]ric\w*|cultural|art[íi]stic\w*)",
+    r"\btombad[oa]s?\b", r"\btombamento\b", r"\biphan\b",
+    r"\b(pr[ée]dio|im[óo]vel|edif[íi]cio|casar[ãa]o|sobrado|igreja|bem|bens) (hist[óo]ric\w*|tombad\w*)",
+    # "Centro Histórico" sozinho costuma ser só endereço (ex.: assinatura de
+    # software de um órgão na Rua do Egito). Conta quando há ação de patrimônio.
+    r"\b(revitaliza\w*|restaura\w*|requalifica\w*|preserva\w*|conserva\w*)"
+    r" d[oa]s? (centro|s[íi]tio|conjunto|n[úu]cleo) (hist[óo]ric\w*|tombad\w*)",
 )))
 
 # Veto DURO — vale para QUALQUER unidade, inclusive a secretaria de cultura:
@@ -187,6 +212,8 @@ def _eh_cultura(unidade: str, objeto: str) -> bool:
          qualquer que seja a unidade.
       2. Unidade só de cultura (Secretaria de Cultura, Fundação de Patrimônio)
          → dentro: é o gasto da pasta, inclusive custeio (veículo, combustível).
+      2b. Conservação/restauração de bem tombado ou histórico → dentro, em
+         qualquer secretaria.
       3. Unidade mista (cultura + outro setor no nome) → objeto decide.
       4. Unidade de outro setor (Saúde, Educação, Obras…) → fora.
       5. Unidade genérica (Prefeitura, Gabinete, Administração) → objeto decide
@@ -207,6 +234,8 @@ def _eh_cultura(unidade: str, objeto: str) -> bool:
     outro_setor = _contem(u, _UNIDADE_OUTRO_SETOR)
 
     if tem_cultura and not outro_setor:
+        return True
+    if _PATRIMONIO_RGX.search(o):
         return True
     if outro_setor and not tem_cultura:
         return False
@@ -229,6 +258,78 @@ def _salvar_json(nome_arquivo: str, dados: object) -> None:
         json.dump(dados, f, ensure_ascii=False, indent=2, default=str)
     tamanho_kb = caminho.stat().st_size // 1024
     print(f"[SALVO] {caminho} ({tamanho_kb} KB)")
+
+
+# ── Dados nominais (sócio × servidor) ─────────────────────────────────────────
+# Cruzamentos e alertas de coincidência de nome citam pessoas físicas. Saem
+# daqui JÁ CIFRADOS (AES-256-GCM, chave PBKDF2 da senha do painel) e o texto
+# puro nunca vai para frontend/public/data — portanto nem para o repositório.
+# Formato idêntico ao do build e ao do navegador (frontend/src/lib/cripto.ts):
+# base64( salt[16] | iv[12] | tag[16] | ciphertext ), PBKDF2-SHA256 150k.
+# Senha: env PORTAL_SENHA (secret no CI) ou collector/.env (gitignored).
+def _carregar_env_local() -> None:
+    arq = COLLECTOR_PATH / ".env"
+    if not arq.exists():
+        return
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if "=" in linha and not linha.lstrip().startswith("#"):
+            k, v = linha.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_carregar_env_local()
+_ITER_CRIPTO = 150_000
+
+
+def _chave(senha: str, salt: bytes) -> bytes:
+    import hashlib
+    return hashlib.pbkdf2_hmac("sha256", senha.encode("utf-8"), salt, _ITER_CRIPTO, 32)
+
+
+def _cifrar_texto(texto: str, senha: str) -> str:
+    import base64
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    salt, iv = os.urandom(16), os.urandom(12)
+    ct_tag = AESGCM(_chave(senha, salt)).encrypt(iv, texto.encode("utf-8"), None)
+    return base64.b64encode(salt + iv + ct_tag[-16:] + ct_tag[:-16]).decode("ascii")
+
+
+def _decifrar_texto(b64: str, senha: str) -> str:
+    import base64
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    raw = base64.b64decode(b64.strip())
+    salt, iv, tag, ct = raw[:16], raw[16:28], raw[28:44], raw[44:]
+    return AESGCM(_chave(senha, salt)).decrypt(iv, ct + tag, None).decode("utf-8")
+
+
+def _salvar_protegido(nome: str, dados: object) -> None:
+    """Grava <nome>.json.enc e apaga qualquer <nome>.json em texto puro."""
+    senha = os.environ.get("PORTAL_SENHA", "")
+    puro = DIR_SAIDA / f"{nome}.json"
+    if not senha:
+        print(f"[PROTEGIDO] PORTAL_SENHA ausente — {nome} NÃO gravado "
+              f"(o arquivo cifrado anterior é mantido)")
+        return
+    texto = json.dumps(dados, ensure_ascii=False, indent=2, default=str)
+    (DIR_SAIDA / f"{nome}.json.enc").write_text(_cifrar_texto(texto, senha), encoding="utf-8")
+    if puro.exists():
+        puro.unlink()
+    print(f"[SALVO] {nome}.json.enc (cifrado, {len(texto) // 1024} KB em claro)")
+
+
+def _ler_publicado(nome: str):
+    """Lê o dado já publicado: .json.enc (com a senha) ou .json legado."""
+    enc = DIR_SAIDA / f"{nome}.json.enc"
+    senha = os.environ.get("PORTAL_SENHA", "")
+    try:
+        if enc.exists() and senha:
+            return json.loads(_decifrar_texto(enc.read_text(encoding="utf-8"), senha))
+        puro = DIR_SAIDA / f"{nome}.json"
+        if puro.exists():
+            return json.loads(puro.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"[PROTEGIDO] não foi possível ler {nome} publicado: {exc}")
+    return None
 
 
 def _timestamp_utc() -> str:
@@ -541,6 +642,15 @@ async def executar_coleta(
         unicos_b.append(c)
     todos_contratos_bruto = unicos_b
 
+    _antes = len(todos_contratos)
+    todos_contratos = [
+        c for c in todos_contratos
+        if (c.get("numeroControlePNCP") or c.get("id") or "") not in CONTRATOS_EXCLUIDOS
+    ]
+    if len(todos_contratos) != _antes:
+        print(f"[EXCLUSÃO] {_antes - len(todos_contratos)} contrato(s) removido(s) "
+              f"pela lista CONTRATOS_EXCLUIDOS")
+
     print(
         f"\n[FASE 1] Concluída — {len(todos_contratos)} contratos únicos "
         f"({duplicatas} duplicatas removidas)"
@@ -830,13 +940,7 @@ async def executar_coleta(
     # nepotismo correspondentes (em shape cru), mantendo servidores.json,
     # alertas.json, contadores e scores consistentes entre si.
     # Override manual: FORCAR_ATUALIZACAO=1 python3 run.py
-    _cruz_prev: list = []
-    try:
-        _p_srv = DIR_SAIDA / "servidores.json"
-        if _p_srv.exists():
-            _cruz_prev = json.loads(_p_srv.read_text(encoding="utf-8")).get("cruzamentos") or []
-    except Exception:
-        _cruz_prev = []
+    _cruz_prev: list = (_ler_publicado("servidores") or {}).get("cruzamentos") or []
 
     if (
         len(_cruz_prev) >= 5
@@ -850,10 +954,9 @@ async def executar_coleta(
         print("=" * 60)
         matches_servidores = _cruz_prev
         todos_alertas = [a for a in todos_alertas if a.get("categoria") != "nepotismo"]
-        try:
-            _prev_al = json.loads((DIR_SAIDA / "alertas.json").read_text(encoding="utf-8"))
-        except Exception:
-            _prev_al = []
+        _prev_al = _ler_publicado("alertas_nominais") or [
+            a for a in (_ler_publicado("alertas") or []) if a.get("categoria") == "nepotismo"
+        ]
         for a in _prev_al if isinstance(_prev_al, list) else []:
             if a.get("categoria") != "nepotismo":
                 continue
@@ -915,7 +1018,7 @@ async def executar_coleta(
     # (a guarda de regressão dos cruzamentos já rodou logo após a FASE 4;
     #  aqui matches_servidores já contém o conjunto restaurado, se for o caso)
     if not _preservar_dataset:
-        _salvar_json("servidores.json", {"cruzamentos": matches_servidores})
+        _salvar_protegido("servidores", {"cruzamentos": matches_servidores})
     else:
         print("[GUARD] servidores.json preservado (dataset anterior mantido)")
 
@@ -1109,14 +1212,23 @@ async def executar_coleta(
             _prev_c = json.loads((DIR_SAIDA / "contratos.json").read_text(encoding="utf-8"))
             if isinstance(_prev_c, list) and _prev_c:
                 contratos_frontend = _prev_c
-            _prev_a = json.loads((DIR_SAIDA / "alertas.json").read_text(encoding="utf-8"))
-            if isinstance(_prev_a, list) and _prev_a:
+            _prev_a = (_ler_publicado("alertas") or []) + (_ler_publicado("alertas_nominais") or [])
+            if _prev_a:
                 alertas_frontend = _prev_a
         except Exception:
             pass
     else:
+        # Alertas de coincidência de nome citam pessoas físicas → arquivo cifrado
+        # à parte; o resto dos alertas (financeiros, cadastrais) é público.
         _salvar_json("contratos.json", contratos_frontend)
-        _salvar_json("alertas.json", alertas_frontend)
+        _salvar_json(
+            "alertas.json",
+            [a for a in alertas_frontend if a.get("categoria") != "nepotismo"],
+        )
+        _salvar_protegido(
+            "alertas_nominais",
+            [a for a in alertas_frontend if a.get("categoria") == "nepotismo"],
+        )
         _salvar_json("stats.json", stats_frontend)
 
     # ── Emendas parlamentares de Cultura (estaduais + federais MA) ─────────────
@@ -1179,6 +1291,10 @@ async def executar_coleta(
         "timestamp_fim": fim,
         "total_contratos": len(contratos_frontend),
         "total_alertas": len(alertas_frontend),
+        "total_cruzamentos": len(matches_servidores),
+        "contratos_excluidos": [
+            {"id": k, "motivo": v} for k, v in CONTRATOS_EXCLUIDOS.items()
+        ],
         "gasto_cultura_siconfi": gasto_siconfi_por_ente,
         "alertas_por_categoria": contadores_categoria,
         "total_emendas_cultura": emendas_stats.get("total", 0),

@@ -143,7 +143,6 @@ def main() -> None:
 
     stats = carregar("stats.json", {}).get("stats", {})
     contratos = carregar("contratos.json", [])
-    cruz = carregar("servidores.json", {}).get("cruzamentos", [])
 
     # Agrega empresas por CNPJ (espelho do hook do frontend)
     porc = {}

@@ -6,14 +6,17 @@
 // arquivos com nomes de pessoas/empresas e REMOVEMOS o texto puro do build.
 // O navegador só decifra com a senha que o cidadão digita no portão.
 //
-// Público (sem nomes, fica em texto puro para a landing): stats.json, meta.json.
-// Protegido: contratos, alertas, servidores (cruzamentos), emendas, explicacoes.
+// Protegido: só o que cita pessoa física por coincidência de nome —
+// servidores (cruzamentos sócio × servidor) e alertas_nominais. O coletor já
+// grava esses dois cifrados (.json.enc); este passo cifra se algum chegar em
+// texto puro (desenvolvimento local) e gera a sentinela que valida a senha.
+// Público: contratos, alertas financeiros, emendas, explicações, stats, meta.
 //
 // Contrato de bytes (idêntico ao lib/cripto.ts do front): base64( salt[16] |
 // iv[12] | tag[16] | ciphertext ), PBKDF2-HMAC-SHA256 150k iterações, AES-256-GCM.
 //
-// A senha vem de PORTAL_SENHA (secret no CI / env local). Se faltar, o script
-// FALHA de propósito — assim um build mal configurado nunca publica texto puro.
+// A senha vem de PORTAL_SENHA (secret no CI / env local). Se faltar e houver
+// dado nominal em texto puro, o script FALHA — nunca publica texto puro.
 
 import { readFileSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import { pbkdf2Sync, randomBytes, createCipheriv } from "node:crypto";
@@ -21,29 +24,27 @@ import { join } from "node:path";
 
 const SENHA = process.env.PORTAL_SENHA;
 const DIR = join(process.cwd(), "out", "data");
-const SENSIVEIS = ["contratos", "alertas", "servidores", "emendas", "explicacoes"];
+const SENSIVEIS = ["servidores", "alertas_nominais"];
 const ITER = 150_000;
 const SENTINELA_TEXTO = "TRANSPARENCIA10_OK";
 
-// Há dado sensível neste build? (Numa clonagem da comunidade, sem coletar
-// dados, não há — então o passo é um no-op e o build de contribuição funciona.)
-const temDadoSensivel = SENSIVEIS.some((n) => existsSync(join(DIR, `${n}.json`)));
-
-if (!temDadoSensivel) {
-  console.log(
-    "[proteger] nenhum dado sensível no build (out/data) — nada a cifrar. " +
-    "Rode o coletor para gerar os dados. Pulando."
-  );
-  process.exit(0);
-}
+const temTextoPuro = SENSIVEIS.some((n) => existsSync(join(DIR, `${n}.json`)));
+const temCifrado = SENSIVEIS.some((n) => existsSync(join(DIR, `${n}.json.enc`)));
 
 if (!SENHA) {
-  // Só falha quando HÁ dado a proteger e falta a senha — nunca publica texto puro.
-  console.error(
-    "[proteger] ERRO: há dados sensíveis no build mas PORTAL_SENHA não está " +
-    "definida. Abortando para NÃO publicar texto puro. Defina o secret/env."
+  if (temTextoPuro) {
+    // Nunca publica texto puro de dado nominal.
+    console.error(
+      "[proteger] ERRO: há dados nominais em texto puro no build mas " +
+      "PORTAL_SENHA não está definida. Abortando para NÃO publicá-los."
+    );
+    process.exit(1);
+  }
+  console.log(
+    "[proteger] PORTAL_SENHA ausente e nenhum dado nominal em texto puro — " +
+    (temCifrado ? "sem sentinela, o portão não validará senha neste build." : "nada a fazer.")
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 function cifrar(texto) {
@@ -62,10 +63,7 @@ writeFileSync(join(DIR, "sentinela.enc"), cifrar(SENTINELA_TEXTO));
 let protegidos = 0;
 for (const nome of SENSIVEIS) {
   const puro = join(DIR, `${nome}.json`);
-  if (!existsSync(puro)) {
-    console.warn(`[proteger] aviso: ${nome}.json não encontrado no build`);
-    continue;
-  }
+  if (!existsSync(puro)) continue; // já veio cifrado do coletor
   const texto = readFileSync(puro, "utf8");
   writeFileSync(join(DIR, `${nome}.json.enc`), cifrar(texto));
   rmSync(puro); // remove o texto puro do artefato publicado
@@ -73,4 +71,4 @@ for (const nome of SENSIVEIS) {
   console.log(`[proteger] ${nome}.json → ${nome}.json.enc (${texto.length} bytes) · texto puro removido`);
 }
 
-console.log(`[proteger] concluído: ${protegidos} arquivo(s) cifrado(s); stats.json e meta.json permanecem públicos.`);
+console.log(`[proteger] concluído: sentinela gerada; ${protegidos} arquivo(s) nominal(is) cifrado(s) no build.`);

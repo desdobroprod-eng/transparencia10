@@ -6,10 +6,10 @@ import { useAuth } from "@/lib/auth";
 
 const BASE = "/transparencia10/data";
 
-// Arquivos com nomes de pessoas/empresas são publicados cifrados (.enc).
-// stats.json e meta.json (só números agregados) continuam em texto puro.
-// Busca o .enc e decifra com a senha; em desenvolvimento (sem build), cai
-// para o .json puro se o .enc não existir.
+// Só o dado NOMINAL (coincidência de nome sócio × servidor) é publicado cifrado
+// (.json.enc): servidores e alertas_nominais. Contratos, alertas financeiros,
+// emendas e explicações são públicos. Sem senha, o nominal simplesmente não
+// carrega; em desenvolvimento cai para o .json puro se o .enc não existir.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function buscarProtegido(nome: string, senha: string, vazio: any): Promise<any> {
   try {
@@ -141,6 +141,8 @@ export interface Meta {
   gasto_cultura_siconfi: Record<string, number>;
   anos_coletados: string[] | string;
   total_emendas_cultura?: number;
+  total_cruzamentos?: number;
+  contratos_excluidos?: { id: string; motivo: string }[];
   valor_emendas_cultura?: number;
 }
 
@@ -180,22 +182,28 @@ export function useDados(): Dados {
 
   useEffect(() => {
     let vivo = true;
-    if (!senha) return; // sem acesso: o painel está atrás do portão de senha
     (async () => {
       try {
-        // stats/meta são públicos (só números); os demais vêm cifrados.
-        const [s, m, a, c, sv, ex, emd] = await Promise.all([
-          fetch(`${BASE}/stats.json`).then((r) => (r.ok ? r.json() : { stats: {} })),
-          fetch(`${BASE}/meta.json`).then((r) => (r.ok ? r.json() : null)),
-          buscarProtegido("alertas", senha, []),
-          buscarProtegido("contratos", senha, []),
-          buscarProtegido("servidores", senha, { cruzamentos: [] }),
-          buscarProtegido("explicacoes", senha, null),
-          buscarProtegido("emendas", senha, { emendas: [] }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const publico = (nome: string, vazio: any): Promise<any> =>
+          fetch(`${BASE}/${nome}.json`).then((r) => (r.ok ? r.json() : vazio)).catch(() => vazio);
+        const [s, m, aPub, c, ex, emd, sv, aNom] = await Promise.all([
+          publico("stats", { stats: {} }),
+          publico("meta", null),
+          publico("alertas", []),
+          publico("contratos", []),
+          publico("explicacoes", null),
+          publico("emendas", { emendas: [] }),
+          senha ? buscarProtegido("servidores", senha, { cruzamentos: [] }) : { cruzamentos: [] },
+          senha ? buscarProtegido("alertas_nominais", senha, []) : [],
         ]);
+        const a = [
+          ...(Array.isArray(aPub) ? aPub : aPub?.alertas ?? []),
+          ...(Array.isArray(aNom) ? aNom : []),
+        ];
         if (!vivo) return;
 
-        const alertas: Alerta[] = Array.isArray(a) ? a : a.alertas ?? [];
+        const alertas: Alerta[] = a;
         const contratosRaw: Contrato[] = Array.isArray(c) ? c : c.contratos ?? [];
 
         // Liga alertas aos contratos por contrato_id (corrige a expansão da tabela)

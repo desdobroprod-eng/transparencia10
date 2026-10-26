@@ -1,11 +1,18 @@
 {
-  "ultima_coleta": "2026-10-26T17:26:57.959535+00:00",
-  "total_registros": 1071,
+  "ultima_coleta": "2026-10-26T18:59:43.618368+00:00",
+  "total_registros": 1072,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-10-26T17:24:09.600792+00:00",
-  "timestamp_fim": "2026-10-26T17:26:57.959535+00:00",
-  "total_contratos": 1071,
-  "total_alertas": 149,
+  "timestamp_inicio": "2026-10-26T18:48:10.416522+00:00",
+  "timestamp_fim": "2026-10-26T18:59:43.618368+00:00",
+  "total_contratos": 1072,
+  "total_alertas": 148,
+  "total_cruzamentos": 59,
+  "contratos_excluidos": [
+    {
+      "id": "06307102000130-2-000087/2024",
+      "motivo": "SG Produções & Eventos — 'Vibrações Positivas', aniversário de São Luís: registro com valor de R$ 66,6 milhões emitido com erro e cancelado (verificado em 26/10/2026)."
+    }
+  ],
   "gasto_cultura_siconfi": {
     "maranhao_estado": 1564136440.2,
     "sao_luis": 328812556.93,
@@ -15,7 +22,7 @@
     "pinheiro": 17655025.34
   },
   "alertas_por_categoria": {
-    "financeiro": 90,
+    "financeiro": 89,
     "conflito_interesse": 0,
     "nepotismo": 59
   },
