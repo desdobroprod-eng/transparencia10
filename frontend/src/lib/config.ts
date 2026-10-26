@@ -58,3 +58,10 @@ export const REGRA_LABEL: Record<string, string> = {
 export function rotuloRegra(regra: string): string {
   return REGRA_LABEL[regra] ?? regra.replace(/_/g, " ").toLowerCase();
 }
+
+// Observações sobre a cobertura dos dados de um ente, exibidas na Visão Geral.
+// Servem para o leitor não interpretar um número baixo como gasto baixo.
+export const OBSERVACOES_ENTE: Record<string, string> = {
+  paco_lumiar:
+    "A pasta de cultura de Paço do Lumiar é a Secretaria Municipal de Cultura, Esportes e Lazer, que publica no PNCP os contratos das três áreas juntos. Só entra no painel o contrato cujo objeto é cultural; compras gerais da pasta (água, material de expediente, organização de eventos sem descrição cultural) e obras esportivas ficam de fora. O município também não declara despesa na função Cultura no SICONFI. Por isso o valor exibido é o mínimo comprovado, não o gasto total do município com cultura.",
+};

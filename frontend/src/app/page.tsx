@@ -12,7 +12,7 @@ import {
   LabelList,
 } from "recharts";
 import { useDados } from "@/hooks/useDados";
-import { ENTES, formatBRL, formatBRLcheio, RISCO, type NivelRisco } from "@/lib/config";
+import { ENTES, OBSERVACOES_ENTE, formatBRL, formatBRLcheio, RISCO, type NivelRisco } from "@/lib/config";
 import KpiCard from "@/components/visao/KpiCard";
 import ChipRisco from "@/components/visao/ChipRisco";
 
@@ -233,6 +233,23 @@ export default function VisaoGeralPage() {
           })}
         </div>
       </div>
+
+      {/* Observações de cobertura por ente */}
+      {ENTES.some((e) => OBSERVACOES_ENTE[e.chave]) && (
+        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <h2 className="text-sm font-semibold text-amber-900">Observação sobre os dados</h2>
+          <ul className="mt-2 space-y-2">
+            {ENTES.map((e) =>
+              OBSERVACOES_ENTE[e.chave] ? (
+                <li key={e.chave} className="text-sm leading-snug text-amber-900">
+                  <strong className="font-semibold">{e.curto}:</strong>{" "}
+                  {OBSERVACOES_ENTE[e.chave]}
+                </li>
+              ) : null
+            )}
+          </ul>
+        </div>
+      )}
 
       {/* Entenda os números (explicação em linguagem simples por ente) */}
       {explicacoes?.entes && (
