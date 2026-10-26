@@ -1,7 +1,7 @@
 {
   "entes": {
     "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.700.713.504,77 em gastos de cultura e 413 contrato(s) nos dados públicos. 99 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
-    "sao_luis": "Prefeitura de São Luís aparece com R$ 217.016.827,14 em gastos de cultura e 629 contrato(s) nos dados públicos. 242 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
+    "sao_luis": "Prefeitura de São Luís aparece com R$ 217.907.011,64 em gastos de cultura e 630 contrato(s) nos dados públicos. 243 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "raposa": "Prefeitura de Raposa aparece com R$ 3.930.936,00 em gastos de cultura e 22 contrato(s) nos dados públicos. 0 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "sao_jose_ribamar": "Prefeitura de São José de Ribamar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
     "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 5.387.600,90 em gastos de cultura e 20 contrato(s) nos dados públicos. 9 ponto(s) merecem verificação. Os números vêm de fontes oficiais e servem para acompanhar o gasto, não são acusação.",
@@ -21,6 +21,7 @@
     "CONTRATO_SEM_LICITACAO": "Contrato por dispensa/inexigibilidade acima do teto — situação que exige justificativa."
   },
   "contratos": {
+    "06307102000130-2-001202/2026": "Contrato de R$ 890.184,50 com ANGRA CONSERVACAO E RESTAURACAO LTDA. Objeto: contratação de empresa especializada para execução de serviços de restauração de fachadas azulejadas históricas, além de…",
     "06307102000130-2-001148/2026": "Contrato de R$ 9.000,00 com INSTITUTO CULTURAL E EDUCACIONAL RAIZES - ICER - BOI DA PINDOBA. Objeto: Serviço de contratação do BMB DA PINDOBA, como atração artisticas de cunho cultural,\ndestinados aos eventos promovidos e…",
     "06307102000130-2-001139/2026": "Contrato de R$ 5.000,00 com 47.417.856 REGINA DE FATIMA GOMES DE OLIVEIRA. Objeto: Serviço de contratação do show LAPARINA, como atração artisticas de cunho cultural,\ndestinados aos eventos promovidos e/…",
     "06307102000130-2-001138/2026": "Contrato de R$ 8.000,00 com GRUPO DE ARTE E CULTURA POPULAR BOI PIRILAMPO. Objeto: Serviço de contratação do BOI PIRILAMPO, como atração artisticas de cunho cultural,\ndestinados aos eventos promovidos e/…",
