@@ -1,0 +1,26 @@
+# Mantém ativo o Supabase do piloto Missão Patrimônio (projeto transparencia-cultural).
+# No plano grátis, o Supabase pausa o projeto após 7 dias sem uso. Este job faz
+# uma leitura pública (a mesma que a página /fiscalize faz) a cada 3 dias.
+# A chave usada é a publicável, que já está no código do site.
+name: Supabase — manter ativo
+
+on:
+  schedule:
+    - cron: "0 12 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Leitura dos relatos aprovados
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --retry 3 --retry-delay 20 -m 30 \
+            -X POST "https://lnjtrjrfnhpdfempfxjy.supabase.co/rest/v1/rpc/visitas_aprovadas" \
+            -H "apikey: sb_publishable_vBOcu7A1Id6y-wr0qTmMCQ_DKYigqgy" \
+            -H "Authorization: Bearer sb_publishable_vBOcu7A1Id6y-wr0qTmMCQ_DKYigqgy" \
+            -H "Content-Type: application/json" -d '{}')
+          echo "HTTP $code"
+          # Falha visível se o projeto estiver pausado: o GitHub avisa por e-mail.
+          test "$code" = "200"
