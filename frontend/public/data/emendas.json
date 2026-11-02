@@ -196,7 +196,7 @@
       "valor_liquidado": 500000.0,
       "valor_pago": 500000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -1366,7 +1366,7 @@
       "valor_liquidado": 500000.0,
       "valor_pago": 500000.0,
       "fonte": "https://transparencia.ma.gov.br/app/v2/emendasestaduais",
-      "fornecedor_contratado": false
+      "fornecedor_contratado": true
     },
     {
       "esfera": "estadual",
@@ -5925,13 +5925,8 @@
     }
   ],
   "stats": {
-    "total": 329,
-    "estaduais": 328,
-    "federais": 1,
-    "com_cnpj_favorecido": 324,
-    "valor_empenhado": 122805905.1,
-    "valor_pago": 122405905.1,
-    "atualizado_em": "2026-11-02T15:23:31.435790+00:00",
-    "favorecido_tambem_fornecedor": 65
+    "total": 0,
+    "indisponivel": true,
+    "favorecido_tambem_fornecedor": 67
   }
 }

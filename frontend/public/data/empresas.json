@@ -4732,7 +4732,7 @@
     "sancoes": []
   },
   "47125025000185": {
-    "razao_social": "MAGNO GERSON FILGUEIRAS SILVA 33104506353",
+    "razao_social": "MAGNO GERSON FILGUEIRAS SILVA ***04506***",
     "abertura": "2022-07-12",
     "situacao": "ATIVA",
     "natureza_juridica": "Empresário (Individual)",
@@ -5880,7 +5880,7 @@
     "sancoes": []
   },
   "35420723000124": {
-    "razao_social": "VITORIA DE OLIVEIRA ARAUJO 60631883398",
+    "razao_social": "VITORIA DE OLIVEIRA ARAUJO ***31883***",
     "abertura": "2019-11-05",
     "situacao": "BAIXADA",
     "natureza_juridica": "Empresário (Individual)",
@@ -6634,7 +6634,7 @@
     "sancoes": []
   },
   "24055791000115": {
-    "razao_social": "CRISTIANI GONCALVES CAMPOS 66205182300",
+    "razao_social": "CRISTIANI GONCALVES CAMPOS ***05182***",
     "abertura": "2016-01-26",
     "situacao": "ATIVA",
     "natureza_juridica": "Empresário (Individual)",
@@ -6819,7 +6819,7 @@
     "sancoes": []
   },
   "40574666000178": {
-    "razao_social": "MARIA DE FATIMA SOUSA SANTOS 22485015368",
+    "razao_social": "MARIA DE FATIMA SOUSA SANTOS ***85015***",
     "abertura": "2021-01-26",
     "situacao": "ATIVA",
     "natureza_juridica": "Empresário (Individual)",
@@ -6840,6 +6840,1162 @@
     "capital_social": 4000.0,
     "cnae": "Serviços de organização de feiras, congressos, exposições e festas",
     "socios": [],
+    "sancoes": []
+  },
+  "12532115000106": {
+    "razao_social": "L. H. DURANS PINHEIRO",
+    "abertura": "1988-04-27",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 25000.0,
+    "cnae": "Comércio varejista de bebidas",
+    "socios": [],
+    "sancoes": []
+  },
+  "46470984000175": {
+    "razao_social": "EXTRA DISTRIBUIDORA DE AGUA LTDA",
+    "abertura": "2022-05-20",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 150000.0,
+    "cnae": "Comércio atacadista de água mineral",
+    "socios": [
+      {
+        "nome": "CRISTINA FREITAS DE ASSIS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2023-10-31"
+      }
+    ],
+    "sancoes": []
+  },
+  "27028020000127": {
+    "razao_social": "FERNANDA MONTEIRO OLIVEIRA ***49448***",
+    "abertura": "2017-02-03",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 2500.0,
+    "cnae": "Agenciamento de profissionais para atividades esportivas, culturais e artísticas",
+    "socios": [],
+    "sancoes": []
+  },
+  "28546362000100": {
+    "razao_social": "PABLLO VITTAR ENTRETENIMENTO LTDA",
+    "abertura": "2017-08-31",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "PHABULLO RODRIGUES DA SILVA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2018-10-24"
+      }
+    ],
+    "sancoes": []
+  },
+  "28505708000113": {
+    "razao_social": "OS LEMOS PRODUTORA DE EVENTOS LTDA",
+    "abertura": "2017-08-25",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Agenciamento de profissionais para atividades esportivas, culturais e artísticas",
+    "socios": [
+      {
+        "nome": "ELIESER DE OLIVEIRA LEMOS",
+        "qualificacao": "Sócio",
+        "desde": "2017-08-25"
+      },
+      {
+        "nome": "RODRIGO DE SOUZA LEMOS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2017-08-25"
+      },
+      {
+        "nome": "VICTORIA SHIZUE MARIA LEMOS",
+        "qualificacao": "Sócio",
+        "desde": "2017-08-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "43980224000110": {
+    "razao_social": "ALL-GUS PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2021-10-22",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 20000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ALLAN MARCELO DE SOUZA CELESTINO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2021-10-22"
+      },
+      {
+        "nome": "BRUTAL PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-08-22"
+      },
+      {
+        "nome": "GUSTAVO GOMES PEREIRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2021-10-22"
+      },
+      {
+        "nome": "LUCI ESCRITORIO ARTISTICO LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-08-22"
+      }
+    ],
+    "sancoes": []
+  },
+  "39702550000198": {
+    "razao_social": "FAZ CHOVER PRODUCOES ARTISTICAS E MUSICAIS LTDA",
+    "abertura": "1994-11-22",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 50000.0,
+    "cnae": "Agenciamento de profissionais para atividades esportivas, culturais e artísticas",
+    "socios": [
+      {
+        "nome": "FAZ CHOVER HOLDING LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2023-07-31"
+      },
+      {
+        "nome": "FERNANDO JERONIMO DOS SANTOS JUNIOR",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1994-11-22"
+      },
+      {
+        "nome": "PAULA CRISTINA TERRA SILVA DOS SANTOS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2005-07-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "20675201000104": {
+    "razao_social": "A3B EMPREENDIMENTOS ARTISTICOS LTDA",
+    "abertura": "2014-07-18",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 120000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ALEXANDRE ALBERTO MONTESINO BAPTESTINI",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2025-11-27"
+      },
+      {
+        "nome": "ALEXANDRE ALBERTO MONTESINO BAPTESTINI JUNIOR",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2024-01-23"
+      }
+    ],
+    "sancoes": []
+  },
+  "60623905000140": {
+    "razao_social": "INTERSHOWS PRODUCOES LTDA",
+    "abertura": "2025-04-30",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ISRAEL MIZRACH",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2025-04-30"
+      }
+    ],
+    "sancoes": []
+  },
+  "27833672000134": {
+    "razao_social": "L C EDICOES MUSICAIS LTDA",
+    "abertura": "1982-12-23",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 5000.0,
+    "cnae": "Artes cênicas, espetáculos e atividades complementares não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "CRISTIANO DE ASSIS COUGIL",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2000-07-19"
+      },
+      {
+        "nome": "JOSE AUGUSTO COUGIL",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2016-12-06"
+      },
+      {
+        "nome": "LUCIANO DE ASSIS COUGIL",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2014-10-10"
+      }
+    ],
+    "sancoes": []
+  },
+  "55115655000105": {
+    "razao_social": "INSTITUTO SOTAQUES",
+    "abertura": "2024-05-13",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Associação Privada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Atividades de organizações associativas ligadas à cultura e à arte",
+    "socios": [
+      {
+        "nome": "FERNANDA DA SILVA PEREIRA",
+        "qualificacao": "Presidente",
+        "desde": "2024-09-06"
+      }
+    ],
+    "sancoes": []
+  },
+  "18495289000122": {
+    "razao_social": "MUNDO PARALELO PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2013-07-16",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 200000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "MATHEUS ALEIXO PINTO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2013-07-16"
+      },
+      {
+        "nome": "OSVALDO PINTO ROSA FILHO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2015-06-18"
+      }
+    ],
+    "sancoes": []
+  },
+  "57740908000159": {
+    "razao_social": "BLACK SERVICE SHOWS LTDA",
+    "abertura": "2024-10-18",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 20000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "JORGE MARIO DA SILVA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2024-10-18"
+      }
+    ],
+    "sancoes": []
+  },
+  "00795734000104": {
+    "razao_social": "JOTA QUEST PRODUCOES ARTISTICAS E FONOGRAFICAS LTDA",
+    "abertura": "1995-09-05",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 10000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "MARCIO TULIO MARQUES BUZELIN",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1998-07-08"
+      },
+      {
+        "nome": "MARCOS TULIO DE OLIVEIRA LARA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2014-01-17"
+      },
+      {
+        "nome": "PAULO ALEXANDRE AMADO FONSECA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1998-07-08"
+      },
+      {
+        "nome": "PAULO ROBERTO DINIZ JUNIOR",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1998-07-08"
+      },
+      {
+        "nome": "ROGERIO OLIVEIRA DE OLIVEIRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1998-07-08"
+      }
+    ],
+    "sancoes": []
+  },
+  "60750839000179": {
+    "razao_social": "OS CARAS DO ARROCHA LTDA",
+    "abertura": "2025-05-09",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "SHOWMAN PRODUCOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-05-09"
+      },
+      {
+        "nome": "THIAGO DE MORAIS RAMOS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2025-05-09"
+      }
+    ],
+    "sancoes": []
+  },
+  "23674205000158": {
+    "razao_social": "S. M. EVENTOS MUSICAIS LTDA",
+    "abertura": "2015-11-12",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 10000.0,
+    "cnae": "Atividades de gravação de som e de edição de música",
+    "socios": [
+      {
+        "nome": "BRUNO BAPTISTA CARDOSO DOS SANTOS",
+        "qualificacao": "Administrador",
+        "desde": "2015-11-12"
+      },
+      {
+        "nome": "CRIS DO NASCIMENTO CABRAL DE OLIVEIRA",
+        "qualificacao": "Administrador",
+        "desde": "2015-11-12"
+      },
+      {
+        "nome": "FREDERICO AUGUSTO DA SILVA ARAUJO",
+        "qualificacao": "Administrador",
+        "desde": "2015-11-12"
+      },
+      {
+        "nome": "SERGIO MANOEL IGNACIO JUNIOR",
+        "qualificacao": "Administrador",
+        "desde": "2015-11-12"
+      },
+      {
+        "nome": "SM AUGUSTO PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-06-08"
+      },
+      {
+        "nome": "SM CARDOSO PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-06-08"
+      },
+      {
+        "nome": "SM IGNACIO PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-06-08"
+      },
+      {
+        "nome": "SM NEVES PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-06-08"
+      },
+      {
+        "nome": "SM OLIVEIRA PARTICIPACOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-06-08"
+      },
+      {
+        "nome": "VINICIUS AUGUSTO NEVES DA SILVA",
+        "qualificacao": "Administrador",
+        "desde": "2015-11-12"
+      }
+    ],
+    "sancoes": []
+  },
+  "08828429000183": {
+    "razao_social": "LOCADORA CONTE LTDA",
+    "abertura": "2007-05-18",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 400000.0,
+    "cnae": "Locação de automóveis sem condutor",
+    "socios": [
+      {
+        "nome": "CARLOS EDUARDO BORGES MACHADO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2008-09-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "18816994000184": {
+    "razao_social": "M L DE BARROS NETO",
+    "abertura": "2013-09-04",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 50000.0,
+    "cnae": "Instalação e manutenção de sistemas centrais de ar condicionado, de ventilação e refrigeração",
+    "socios": [],
+    "sancoes": []
+  },
+  "32296392000174": {
+    "razao_social": "IZAZ CONTEUDO CULTURAL LTDA",
+    "abertura": "2018-12-20",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 10000.0,
+    "cnae": "Outras atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "SIMONE ALVES MIZRAHI",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2018-12-20"
+      }
+    ],
+    "sancoes": []
+  },
+  "22518056000175": {
+    "razao_social": "CANA PRODUCOES & MS LTDA",
+    "abertura": "2015-05-25",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 20000.0,
+    "cnae": "Artes cênicas, espetáculos e atividades complementares não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "ORLANDO MESSIAS DA SILVA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2015-05-25"
+      },
+      {
+        "nome": "TEREZINHA MARIA DA SILVA",
+        "qualificacao": "Sócio",
+        "desde": "2015-05-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "11805174000148": {
+    "razao_social": "11.805.174 ANTONIO ROBERTO DOS SANTOS",
+    "abertura": "2010-04-12",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "MICRO EMPRESA",
+    "mei": true,
+    "capital_social": 1.0,
+    "cnae": "Edição de cadastros, listas e de outros produtos gráficos",
+    "socios": [],
+    "sancoes": []
+  },
+  "48059838000187": {
+    "razao_social": "48.059.838 CAMILA REIS BRITO",
+    "abertura": "2022-09-23",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "MICRO EMPRESA",
+    "mei": true,
+    "capital_social": 2500.0,
+    "cnae": "Edição de livros",
+    "socios": [],
+    "sancoes": []
+  },
+  "32823975000106": {
+    "razao_social": "VKN PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2019-02-19",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "VICTOR LINDOSO DA NOBREGA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2023-10-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "34989515000188": {
+    "razao_social": "NOSSA ESSENCIA PRODUCOES LTDA",
+    "abertura": "2019-09-25",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 30000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "DEBORA MARIA MOREIRA FIGUEIRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2019-09-25"
+      },
+      {
+        "nome": "ROGERIO DIAS DE SOUSA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2019-09-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "60998497000100": {
+    "razao_social": "JU MARQUES PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2025-05-26",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ALINE SOARES DE AZEVEDO",
+        "qualificacao": "Administrador",
+        "desde": "2026-01-05"
+      },
+      {
+        "nome": "BANDANNA LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-06-16"
+      },
+      {
+        "nome": "DRACENA MUSIC PRODUCOES LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-06-16"
+      },
+      {
+        "nome": "JOAO VICTOR DE CARVALHO MENEZES",
+        "qualificacao": "Sócio",
+        "desde": "2025-05-26"
+      },
+      {
+        "nome": "JULIANA MARQUES SOARES",
+        "qualificacao": "Sócio",
+        "desde": "2025-05-26"
+      },
+      {
+        "nome": "PL PARTICIPACOES SS LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-05-26"
+      }
+    ],
+    "sancoes": []
+  },
+  "35751179000101": {
+    "razao_social": "RUSCH EVENTOS LTDA",
+    "abertura": "2019-12-10",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 50000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "L. RUBACK GESTAO E PARTICIPACAO LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-08-28"
+      },
+      {
+        "nome": "LUCAS RUBACK SCHMIDT",
+        "qualificacao": "Administrador",
+        "desde": "2019-12-10"
+      },
+      {
+        "nome": "M. RUBACK GESTAO E PARTICIPACAO LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2026-08-28"
+      },
+      {
+        "nome": "MARCOS RUBACK SCHMIDT",
+        "qualificacao": "Administrador",
+        "desde": "2019-12-10"
+      }
+    ],
+    "sancoes": []
+  },
+  "44800638000182": {
+    "razao_social": "BHASKAR PRODUCOES E ENTRETENIMENTO LTDA",
+    "abertura": "2022-01-10",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 10000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "BHASKAR ACHKAR PERES PETRILLO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-01-10"
+      },
+      {
+        "nome": "LUCAS BATISTA BEZERRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-01-10"
+      }
+    ],
+    "sancoes": []
+  },
+  "07422115000113": {
+    "razao_social": "MV PRODUCOES ARTISTICAS LTDA.",
+    "abertura": "2005-02-22",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Atividades de produção cinematográfica, de vídeos e de programas de televisão não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "ALCEU PAIVA VALENCA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2005-02-22"
+      },
+      {
+        "nome": "YANE MARIA DE FARIAS MONTENEGRO VALENCA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2005-02-22"
+      }
+    ],
+    "sancoes": []
+  },
+  "21035224000109": {
+    "razao_social": "TABAROINHA PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2014-09-15",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 5000.0,
+    "cnae": "Artes cênicas, espetáculos e atividades complementares não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "MARIENE BEZERRA DE CASTRO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2014-09-15"
+      }
+    ],
+    "sancoes": []
+  },
+  "10344305000174": {
+    "razao_social": "MOTA PROMOCOES E EVENTOS LTDA",
+    "abertura": "2008-09-11",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 125000.0,
+    "cnae": "Artes cênicas, espetáculos e atividades complementares não especificadas anteriormente",
+    "socios": [
+      {
+        "nome": "PEDRO DA MOTA SILVEIRA NETO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2008-09-11"
+      }
+    ],
+    "sancoes": []
+  },
+  "45288591000182": {
+    "razao_social": "FURACAO MUSIC LTDA",
+    "abertura": "2022-02-15",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 20000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "MARCOS VINICIUS SOARES DE OLIVEIRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-02-15"
+      },
+      {
+        "nome": "THAUANE ALVES FONTINELE",
+        "qualificacao": "Sócio",
+        "desde": "2026-05-04"
+      }
+    ],
+    "sancoes": []
+  },
+  "05861843000104": {
+    "razao_social": "AGAMEMNON PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2003-07-04",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 45000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "DAVID PEREIRA NUNES",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2025-02-13"
+      },
+      {
+        "nome": "JOSE CLENILSON JESUS DOS SANTOS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2025-02-13"
+      },
+      {
+        "nome": "LUAN RIBEIRO SOUZA",
+        "qualificacao": "Sócio",
+        "desde": "2025-02-13"
+      },
+      {
+        "nome": "LUDSON OLIVEIRA GUSMAO",
+        "qualificacao": "Sócio",
+        "desde": "2025-02-13"
+      },
+      {
+        "nome": "M&P PRODUCOES ARTISTICAS LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2025-08-27"
+      },
+      {
+        "nome": "ROSANA PASSOS SANTANA",
+        "qualificacao": "Sócio",
+        "desde": "2025-02-13"
+      }
+    ],
+    "sancoes": []
+  },
+  "52897594000189": {
+    "razao_social": "CHAO SLZ LTDA",
+    "abertura": "2023-11-15",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 4000.0,
+    "cnae": "Serviços de organização de feiras, congressos, exposições e festas",
+    "socios": [
+      {
+        "nome": "CAMILA PEREIRA",
+        "qualificacao": "Sócio",
+        "desde": "2024-03-01"
+      },
+      {
+        "nome": "JOSE RAIMUNDO ARAUJO JUNIOR",
+        "qualificacao": "Sócio",
+        "desde": "2024-03-01"
+      },
+      {
+        "nome": "MARCOS THADEU EVERTON MACEDO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2024-03-01"
+      },
+      {
+        "nome": "SAMANTHA MOREIRA",
+        "qualificacao": "Sócio",
+        "desde": "2024-03-01"
+      }
+    ],
+    "sancoes": []
+  },
+  "28742388000115": {
+    "razao_social": "SOLUCCI DISTRIBUIDORA & SERVICOS LTDA",
+    "abertura": "2017-09-27",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Comércio atacadista especializado em outros produtos alimentícios não especificados anteriormente",
+    "socios": [
+      {
+        "nome": "SHAMIA VALENIA DE SOUSA FERREIRA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2019-08-13"
+      }
+    ],
+    "sancoes": []
+  },
+  "12125791000165": {
+    "razao_social": "L S COMERCIO E SERVICOS LTDA",
+    "abertura": "2010-06-23",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 200000.0,
+    "cnae": "Comércio varejista de combustíveis para veículos automotores",
+    "socios": [
+      {
+        "nome": "LEOPOLDO CORREA SANTOS NETO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2010-06-23"
+      },
+      {
+        "nome": "NATUREZA COMERCIO E SERVICOS LTDA",
+        "qualificacao": "Sócio",
+        "desde": "2018-01-15"
+      }
+    ],
+    "sancoes": []
+  },
+  "21498772000175": {
+    "razao_social": "E V DE MOURA",
+    "abertura": "2014-11-28",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Empresário (Individual)",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - minimercados, mercearias e armazéns",
+    "socios": [],
+    "sancoes": []
+  },
+  "45113389000110": {
+    "razao_social": "PRETO DO BECO PRODUCOES ARTISTICAS LTDA",
+    "abertura": "2022-02-02",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 10000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ANGELO VITOR SIMPLICIO DA SILVA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-02-02"
+      },
+      {
+        "nome": "RACHEL PERES DO NASCIMENTO SIMPLICIO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-02-02"
+      }
+    ],
+    "sancoes": []
+  },
+  "65149197000251": {
+    "razao_social": "REPREMIG REPRESENTACAO E COMERCIO DE MINAS GERAIS LTDA",
+    "abertura": "2019-10-23",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 234000.0,
+    "cnae": "Comércio atacadista de equipamentos de informática",
+    "socios": [
+      {
+        "nome": "BIANCA FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio",
+        "desde": "2016-06-14"
+      },
+      {
+        "nome": "CAMILA FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio",
+        "desde": "2009-11-09"
+      },
+      {
+        "nome": "CARLOS RENATO FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1995-07-13"
+      },
+      {
+        "nome": "CAROLINA FIGUEIREDO DE CASTRO MIRANDA",
+        "qualificacao": "Sócio",
+        "desde": "2016-06-14"
+      },
+      {
+        "nome": "LEANDRO FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2002-03-27"
+      },
+      {
+        "nome": "LEONARDO FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio",
+        "desde": "2009-11-09"
+      },
+      {
+        "nome": "MARCUS VINICIUS FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio",
+        "desde": "2008-01-25"
+      },
+      {
+        "nome": "PAULO OSORIO DE CASTRO JUNIOR",
+        "qualificacao": "Sócio",
+        "desde": "2008-01-25"
+      },
+      {
+        "nome": "RODRIGO FIGUEIREDO DE CASTRO",
+        "qualificacao": "Sócio",
+        "desde": "2009-11-09"
+      }
+    ],
+    "sancoes": []
+  },
+  "46403730000134": {
+    "razao_social": "DW VIAGENS LTDA",
+    "abertura": "2022-05-16",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 250000.0,
+    "cnae": "Agências de viagens",
+    "socios": [
+      {
+        "nome": "WALKIRIA MACEDO GALENO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2022-05-16"
+      }
+    ],
+    "sancoes": []
+  },
+  "11302593000167": {
+    "razao_social": "PALMARES CONSTRUCOES LTDA",
+    "abertura": "1986-11-03",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 6700000.0,
+    "cnae": "Construção de edifícios",
+    "socios": [
+      {
+        "nome": "ANA JULIA DE MACEDO UTTA PINHEIRO",
+        "qualificacao": "Sócio",
+        "desde": "2011-06-20"
+      },
+      {
+        "nome": "WALBERT COSTA PINHEIRO FILHO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "1996-07-05"
+      }
+    ],
+    "sancoes": []
+  },
+  "32740455000130": {
+    "razao_social": "ASSOCIACAO DA ORQUESTRA JOVEM DO MARANHAO JOAO DO VALE",
+    "abertura": "2017-05-03",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Associação Privada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "DALIA JESSICA SILVA DA CUNHA",
+        "qualificacao": "Administrador",
+        "desde": "2017-05-03"
+      },
+      {
+        "nome": "EDSON COSMOS SANTOS ALVES",
+        "qualificacao": "Presidente",
+        "desde": "2017-05-03"
+      },
+      {
+        "nome": "GEISIANNY DE SOUZA BRITO",
+        "qualificacao": "Administrador",
+        "desde": "2017-05-03"
+      },
+      {
+        "nome": "MARCO ANTONIO SANTOS RIBEIRO",
+        "qualificacao": "Administrador",
+        "desde": "2017-05-03"
+      }
+    ],
+    "sancoes": []
+  },
+  "33667661000124": {
+    "razao_social": "BANDA MORADA PRODUCOES E EVENTOS LTDA",
+    "abertura": "2019-05-20",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 50000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "BRUNO LEONARDO DE OLIVEIRA CAVALCANTE",
+        "qualificacao": "Sócio",
+        "desde": "2019-05-20"
+      },
+      {
+        "nome": "MIRIAM DA SILVA CASTRO CAVALCANTE",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2019-05-20"
+      }
+    ],
+    "sancoes": []
+  },
+  "05796753000179": {
+    "razao_social": "OFICINA DA MUSICA LTDA",
+    "abertura": "2003-07-22",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Produção musical",
+    "socios": [
+      {
+        "nome": "ELIONAI CARVALHO DE SANTANA",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2003-07-22"
+      }
+    ],
+    "sancoes": []
+  },
+  "52717272000100": {
+    "razao_social": "XDL COMERCIO E SERVICOS LTDA",
+    "abertura": "2023-10-30",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 100000.0,
+    "cnae": "Suporte técnico, manutenção e outros serviços em tecnologia da informação",
+    "socios": [
+      {
+        "nome": "MARIA EDUARDA ARAUJO BRITO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2024-01-03"
+      }
+    ],
+    "sancoes": []
+  },
+  "04869711000158": {
+    "razao_social": "FLEXIBASE INDUSTRIA E COMERCIO DE MOVEIS, IMPORTACAO E EXPORTACAO LTDA",
+    "abertura": "2002-01-24",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 5000000.0,
+    "cnae": "Fabricação de móveis com predominância de madeira",
+    "socios": [
+      {
+        "nome": "JOAO FRANCISCO MENDES",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2002-01-24"
+      },
+      {
+        "nome": "RICARDO ALVES DE DEUS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2002-01-24"
+      }
+    ],
+    "sancoes": []
+  },
+  "46536960000171": {
+    "razao_social": "HA ARQUITETURA E CONSTRUCAO LTDA",
+    "abertura": "2022-05-25",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "MICRO EMPRESA",
+    "mei": false,
+    "capital_social": 30000.0,
+    "cnae": "Serviços de arquitetura",
+    "socios": [
+      {
+        "nome": "HENRIQUE SILVA DE AZEVEDO",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2023-05-25"
+      }
+    ],
+    "sancoes": []
+  },
+  "41492992000107": {
+    "razao_social": "GREMIO RECREATIVO ESCOLA DE SAMBA FLOR DO SAMBA",
+    "abertura": "1992-07-01",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Associação Privada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Atividades de associações de defesa de direitos sociais",
+    "socios": [
+      {
+        "nome": "LUIS CESAR MAIA ARAUJO",
+        "qualificacao": "Diretor",
+        "desde": "2004-12-23"
+      }
+    ],
+    "sancoes": []
+  },
+  "07358310000121": {
+    "razao_social": "GREMIO RECREATIVO ESCOLA DE SAMBA IMPERIO SERRANO",
+    "abertura": "1984-01-24",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Associação Privada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Atividades de associações de defesa de direitos sociais",
+    "socios": [
+      {
+        "nome": "NELIO PEREIRA DA SILVA",
+        "qualificacao": "Presidente",
+        "desde": "2022-02-01"
+      }
+    ],
+    "sancoes": []
+  },
+  "05285226000108": {
+    "razao_social": "SOCIEDADE RECREATIVA UNIDOS DE FATIMA",
+    "abertura": "1977-06-08",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Associação Privada",
+    "porte": "DEMAIS",
+    "mei": false,
+    "capital_social": 0.0,
+    "cnae": "Atividades de organizações associativas ligadas à cultura e à arte",
+    "socios": [
+      {
+        "nome": "JOSE RIBAMAR DE JESUS PEREIRA",
+        "qualificacao": "Presidente",
+        "desde": "2014-02-17"
+      }
+    ],
     "sancoes": []
   },
   "08596476000149": {
@@ -6981,18 +8137,6 @@
     "mei": false,
     "capital_social": 4500.0,
     "cnae": "Produção musical",
-    "socios": [],
-    "sancoes": []
-  },
-  "12532115000106": {
-    "razao_social": "L. H. DURANS PINHEIRO",
-    "abertura": "1988-04-27",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Empresário (Individual)",
-    "porte": "EMPRESA DE PEQUENO PORTE",
-    "mei": false,
-    "capital_social": 25000.0,
-    "cnae": "Comércio varejista de bebidas",
     "socios": [],
     "sancoes": []
   },
@@ -7223,29 +8367,6 @@
     ],
     "sancoes": []
   },
-  "12125791000165": {
-    "razao_social": "L S COMERCIO E SERVICOS LTDA",
-    "abertura": "2010-06-23",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "DEMAIS",
-    "mei": false,
-    "capital_social": 200000.0,
-    "cnae": "Comércio varejista de combustíveis para veículos automotores",
-    "socios": [
-      {
-        "nome": "LEOPOLDO CORREA SANTOS NETO",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2010-06-23"
-      },
-      {
-        "nome": "NATUREZA COMERCIO E SERVICOS LTDA",
-        "qualificacao": "Sócio",
-        "desde": "2018-01-15"
-      }
-    ],
-    "sancoes": []
-  },
   "02650833000476": {
     "razao_social": "POLO SEGURANCA ESPECIALIZADA LTDA",
     "abertura": "2022-10-20",
@@ -7316,24 +8437,6 @@
         "nome": "THIAGO BRITTO GARCIA",
         "qualificacao": "Sócio-Administrador",
         "desde": "2025-10-22"
-      }
-    ],
-    "sancoes": []
-  },
-  "08828429000183": {
-    "razao_social": "LOCADORA CONTE LTDA",
-    "abertura": "2007-05-18",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "EMPRESA DE PEQUENO PORTE",
-    "mei": false,
-    "capital_social": 400000.0,
-    "cnae": "Locação de automóveis sem condutor",
-    "socios": [
-      {
-        "nome": "CARLOS EDUARDO BORGES MACHADO",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2008-09-25"
       }
     ],
     "sancoes": []
@@ -7838,47 +8941,6 @@
     ],
     "sancoes": []
   },
-  "07422115000113": {
-    "razao_social": "MV PRODUCOES ARTISTICAS LTDA.",
-    "abertura": "2005-02-22",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "EMPRESA DE PEQUENO PORTE",
-    "mei": false,
-    "capital_social": 0.0,
-    "cnae": "Atividades de produção cinematográfica, de vídeos e de programas de televisão não especificadas anteriormente",
-    "socios": [
-      {
-        "nome": "ALCEU PAIVA VALENCA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2005-02-22"
-      },
-      {
-        "nome": "YANE MARIA DE FARIAS MONTENEGRO VALENCA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2005-02-22"
-      }
-    ],
-    "sancoes": []
-  },
-  "32823975000106": {
-    "razao_social": "VKN PRODUCOES ARTISTICAS LTDA",
-    "abertura": "2019-02-19",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "MICRO EMPRESA",
-    "mei": false,
-    "capital_social": 100000.0,
-    "cnae": "Produção musical",
-    "socios": [
-      {
-        "nome": "VICTOR LINDOSO DA NOBREGA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2023-10-25"
-      }
-    ],
-    "sancoes": []
-  },
   "30347391000186": {
     "razao_social": "KASE AGENCY BOOKINGS E PRODUCOES CULTURAIS LTDA",
     "abertura": "2018-05-02",
@@ -8017,24 +9079,6 @@
         "nome": "EDILSON COELHO DE SOUZA JUNIOR",
         "qualificacao": "Sócio-Administrador",
         "desde": "2022-10-21"
-      }
-    ],
-    "sancoes": []
-  },
-  "52717272000100": {
-    "razao_social": "XDL COMERCIO E SERVICOS LTDA",
-    "abertura": "2023-10-30",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "EMPRESA DE PEQUENO PORTE",
-    "mei": false,
-    "capital_social": 100000.0,
-    "cnae": "Suporte técnico, manutenção e outros serviços em tecnologia da informação",
-    "socios": [
-      {
-        "nome": "MARIA EDUARDA ARAUJO BRITO",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2024-01-03"
       }
     ],
     "sancoes": []
@@ -8294,44 +9338,6 @@
     ],
     "sancoes": []
   },
-  "00795734000104": {
-    "razao_social": "JOTA QUEST PRODUCOES ARTISTICAS E FONOGRAFICAS LTDA",
-    "abertura": "1995-09-05",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "EMPRESA DE PEQUENO PORTE",
-    "mei": false,
-    "capital_social": 10000.0,
-    "cnae": "Produção musical",
-    "socios": [
-      {
-        "nome": "MARCIO TULIO MARQUES BUZELIN",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "1998-07-08"
-      },
-      {
-        "nome": "MARCOS TULIO DE OLIVEIRA LARA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2014-01-17"
-      },
-      {
-        "nome": "PAULO ALEXANDRE AMADO FONSECA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "1998-07-08"
-      },
-      {
-        "nome": "PAULO ROBERTO DINIZ JUNIOR",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "1998-07-08"
-      },
-      {
-        "nome": "ROGERIO OLIVEIRA DE OLIVEIRA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "1998-07-08"
-      }
-    ],
-    "sancoes": []
-  },
   "45315776000139": {
     "razao_social": "FAROL MUSICAL PRODUTORA LTDA",
     "abertura": "2022-02-16",
@@ -8397,24 +9403,6 @@
         "nome": "RONY PETERSON MENDES SANTOS",
         "qualificacao": "Sócio-Administrador",
         "desde": "2025-04-09"
-      }
-    ],
-    "sancoes": []
-  },
-  "60623905000140": {
-    "razao_social": "INTERSHOWS PRODUCOES LTDA",
-    "abertura": "2025-04-30",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "MICRO EMPRESA",
-    "mei": false,
-    "capital_social": 100000.0,
-    "cnae": "Produção musical",
-    "socios": [
-      {
-        "nome": "ISRAEL MIZRACH",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2025-04-30"
       }
     ],
     "sancoes": []
@@ -8555,24 +9543,6 @@
         "nome": "WORK ARTE LTDA",
         "qualificacao": "Sócio",
         "desde": "2026-07-28"
-      }
-    ],
-    "sancoes": []
-  },
-  "28546362000100": {
-    "razao_social": "PABLLO VITTAR ENTRETENIMENTO LTDA",
-    "abertura": "2017-08-31",
-    "situacao": "ATIVA",
-    "natureza_juridica": "Sociedade Empresária Limitada",
-    "porte": "DEMAIS",
-    "mei": false,
-    "capital_social": 100000.0,
-    "cnae": "Produção musical",
-    "socios": [
-      {
-        "nome": "PHABULLO RODRIGUES DA SILVA",
-        "qualificacao": "Sócio-Administrador",
-        "desde": "2018-10-24"
       }
     ],
     "sancoes": []
