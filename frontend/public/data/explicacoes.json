@@ -2,7 +2,7 @@
   "entes": {
     "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.706.871.219,29 em gastos de cultura e 413 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "sao_luis": "Prefeitura de São Luís aparece com R$ 193.792.177,42 em gastos de cultura e 625 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
-    "raposa": "Prefeitura de Raposa aparece com R$ 7.062.331,43 em gastos de cultura e 22 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
+    "raposa": "Prefeitura de Raposa aparece com R$ 7.562.331,43 em gastos de cultura e 23 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "sao_jose_ribamar": "Prefeitura de São José de Ribamar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 54.720,00 em gastos de cultura e 1 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "pinheiro": "pinheiro aparece com R$ 17.509.913,82 em gastos de cultura e 15 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto."
@@ -21,6 +21,7 @@
     "CONTRATO_SEM_LICITACAO": "Contrato por dispensa/inexigibilidade acima do teto — situação que exige justificativa."
   },
   "contratos": {
+    "01612325000198-2-000178/2026": "Contrato de R$ 500.000,00 com REY VAQUEIRO PRODUÇÕES ARTÍSTICAS LTDA. Objeto: Prestação de serviços de Show Artístico de Rey Vaqueiro, de interesse da Secretaria Municipal de Cultura-SECULT.",
     "06307102000130-2-001209/2026": "Contrato de R$ 3.000,00 com CRISTIANI GONCALVES CAMPOS 66205182300. Objeto: Serviço de contratação do ESPETACULO TEATRAL HISTÓRIAS NO BALÃO, como atração artisticas de cunho cultural,\ndestinados a…",
     "06307102000130-2-001208/2026": "Contrato de R$ 12.000,00 com W D R OLIVEIRA MUSICAL. Objeto: Serviço de contratação do MARAJUNINO como atração artisticas de cunho cultural,\ndestinados aos eventos promovidos e/ou a…",
     "06307102000130-2-001207/2026": "Contrato de R$ 5.000,00 com 33.007.061 ADRIANA PEREIRA BOSAIPO GUIMARAES. Objeto: Serviço de contratação de ADRIANA BOSAIPO, como atração artisticas de cunho cultural,\ndestinados aos eventos promovidos …",
@@ -1116,12 +1117,12 @@
     "45524496000130": "P M L DOS SANTOS recebeu R$ 2.626.000,00 em 22 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 150.000,00.",
     "11302593000167": "PALMARES CONSTRUCOES LTDA recebeu R$ 2.598.608,67 em 1 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 6.700.000,00.",
     "51466972000107": "ARGUS PRODUCOES E EVENTOS LTDA recebeu R$ 2.569.302,45 em 1 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 950.000,00.",
+    "21488092000170": "REY VAQUEIRO PRODUCOES ARTISTICAS LTDA recebeu R$ 2.550.000,00 em 5 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
     "08648622000132": "CRIATIVE MUSIC LTDA recebeu R$ 2.370.000,00 em 14 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 3.500.000,00.",
     "26337395000106": "AD PRODUCAO MUSICAL LTDA recebeu R$ 2.360.000,00 em 4 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
     "32808839000147": "TO LIGADO SERVICOS DE ORGANIZACAO, PRODUCAO E PUBLICIDADE LTDA recebeu R$ 2.280.000,00 em 8 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 20.000,00.",
     "10794128000128": "T A DA S LOPES LTDA recebeu R$ 2.084.000,00 em 2 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 1.200.000,00.",
     "39888402000100": "J MUSIC EDITORA E PRODUCOES ARTISTICAS LTDA recebeu R$ 2.050.000,00 em 4 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 20.000,00.",
-    "21488092000170": "REY VAQUEIRO PRODUCOES ARTISTICAS LTDA recebeu R$ 2.050.000,00 em 4 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
     "49799656000105": "49.799.656 EDINO DOS SANTOS recebeu R$ 2.048.500,00 em 31 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 30.000,00.",
     "09123494000176": "O GUARANY PRODUCOES ARTISTICAS LTDA recebeu R$ 2.029.095,00 em 7 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 30.000,00.",
     "43407534000140": "ALEX SANDRO DA SILVA CALIL recebeu R$ 2.000.000,00 em 3 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",

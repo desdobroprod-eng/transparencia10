@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "2026-11-02T20:08:44.918580+00:00",
+  "ultima_atualizacao": "2026-11-05T18:23:34.337106+00:00",
   "stats": {
     "maranhao_estado": {
       "total_gasto": 1706871219.29,
@@ -16,8 +16,8 @@
       "base_gasto": "contratos_pncp"
     },
     "raposa": {
-      "total_gasto": 7062331.43,
-      "total_contratos": 22,
+      "total_gasto": 7562331.43,
+      "total_contratos": 23,
       "total_alertas": 1,
       "nivel_risco": "atencao",
       "base_gasto": "contratos_pncp"

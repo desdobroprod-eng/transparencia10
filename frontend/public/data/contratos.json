@@ -1,5 +1,26 @@
 [
   {
+    "id": "01612325000198-2-000178/2026",
+    "ente": "raposa",
+    "fornecedor": "REY VAQUEIRO PRODUÇÕES ARTÍSTICAS LTDA",
+    "cnpj": "21488092000170",
+    "objeto": "Prestação de serviços de Show Artístico de Rey Vaqueiro, de interesse da Secretaria Municipal de Cultura-SECULT.",
+    "valor": 500000.0,
+    "modalidade": "Contrato (termo inicial)",
+    "score_risco": 0,
+    "data_publicacao": "2026-11-04T17:01:27",
+    "ano": 2026,
+    "unidade": "PREFEITURA MUNICIPAL DE RAPOSA",
+    "razao_social": "REY VAQUEIRO PRODUCOES ARTISTICAS LTDA",
+    "capital_social": 100000.0,
+    "porte": "DEMAIS",
+    "mei": false,
+    "abertura": "2014-11-28",
+    "situacao": "ATIVA",
+    "retificacoes": 0,
+    "area_cultura": true
+  },
+  {
     "id": "06307102000130-2-001209/2026",
     "ente": "sao_luis",
     "fornecedor": "CRISTIANI GONCALVES CAMPOS 66205182300",
