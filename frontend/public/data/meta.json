@@ -1,13 +1,13 @@
 {
-  "ultima_coleta": "2026-11-05T18:23:34.337106+00:00",
-  "total_registros": 1077,
+  "ultima_coleta": "2026-11-09T11:51:00.837757+00:00",
+  "total_registros": 996,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-11-05T17:09:09.385437+00:00",
-  "timestamp_fim": "2026-11-05T18:23:34.337106+00:00",
-  "total_contratos": 1077,
-  "total_alertas": 142,
-  "total_cruzamentos": 52,
-  "total_fornecedores": 467,
+  "timestamp_inicio": "2026-11-09T11:00:08.784096+00:00",
+  "timestamp_fim": "2026-11-09T11:51:00.837757+00:00",
+  "total_contratos": 996,
+  "total_alertas": 147,
+  "total_cruzamentos": 60,
+  "total_fornecedores": 438,
   "contratos_excluidos": [
     {
       "id": "06307102000130-2-000087/2024",
@@ -23,12 +23,12 @@
     "pinheiro": 17655025.34
   },
   "alertas_por_categoria": {
-    "financeiro": 90,
+    "financeiro": 87,
     "conflito_interesse": 0,
-    "nepotismo": 52
+    "nepotismo": 60
   },
-  "total_emendas_cultura": 0,
-  "valor_emendas_cultura": 0,
+  "total_emendas_cultura": 329,
+  "valor_emendas_cultura": 122805905.1,
   "entes_processados": [
     "maranhao_estado",
     "sao_luis",
