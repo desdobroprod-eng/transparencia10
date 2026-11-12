@@ -9786,6 +9786,24 @@
     ],
     "sancoes": []
   },
+  "17092056000116": {
+    "razao_social": "PILAR DAS PRODUCOES E EVENTOS LTDA",
+    "abertura": "2012-10-30",
+    "situacao": "ATIVA",
+    "natureza_juridica": "Sociedade Empresária Limitada",
+    "porte": "EMPRESA DE PEQUENO PORTE",
+    "mei": false,
+    "capital_social": 1000000.0,
+    "cnae": "Serviços de organização de feiras, congressos, exposições e festas",
+    "socios": [
+      {
+        "nome": "ANTONIO CARLOS SANTOS DE FREITAS",
+        "qualificacao": "Sócio-Administrador",
+        "desde": "2012-10-30"
+      }
+    ],
+    "sancoes": []
+  },
   "26732091000143": {
     "razao_social": "RAYLANE CHAVES R DA SILVA",
     "abertura": "2016-12-19",

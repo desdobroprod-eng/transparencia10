@@ -1,13 +1,13 @@
 {
-  "ultima_coleta": "2026-11-09T20:36:39.009471+00:00",
-  "total_registros": 1077,
+  "ultima_coleta": "2026-11-12T18:48:30.795472+00:00",
+  "total_registros": 1081,
   "fonte": "PNCP · SICONFI/Tesouro · Portal da Transparência · Receita Federal",
-  "timestamp_inicio": "2026-11-09T19:33:20.552431+00:00",
-  "timestamp_fim": "2026-11-09T20:36:39.009471+00:00",
-  "total_contratos": 1077,
-  "total_alertas": 150,
+  "timestamp_inicio": "2026-11-12T17:23:55.091690+00:00",
+  "timestamp_fim": "2026-11-12T18:48:30.795472+00:00",
+  "total_contratos": 1081,
+  "total_alertas": 151,
   "total_cruzamentos": 60,
-  "total_fornecedores": 467,
+  "total_fornecedores": 468,
   "contratos_excluidos": [
     {
       "id": "06307102000130-2-000087/2024",
@@ -23,7 +23,7 @@
     "pinheiro": 17655025.34
   },
   "alertas_por_categoria": {
-    "financeiro": 90,
+    "financeiro": 91,
     "conflito_interesse": 0,
     "nepotismo": 60
   },
