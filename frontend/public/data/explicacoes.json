@@ -1,7 +1,7 @@
 {
   "entes": {
-    "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.707.604.126,79 em gastos de cultura e 413 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
-    "sao_luis": "Prefeitura de São Luís aparece com R$ 194.751.677,42 em gastos de cultura e 629 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
+    "maranhao_estado": "Estado do Maranhão (Secretaria de Cultura) aparece com R$ 1.712.856.653,07 em gastos de cultura e 413 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
+    "sao_luis": "Prefeitura de São Luís aparece com R$ 194.780.177,42 em gastos de cultura e 633 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "raposa": "Prefeitura de Raposa aparece com R$ 7.562.331,43 em gastos de cultura e 23 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "sao_jose_ribamar": "Prefeitura de São José de Ribamar aparece com R$ 0,00 em execução de cultura nos dados públicos (sem contratos individuais publicados no período). Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
     "paco_lumiar": "Prefeitura de Paço do Lumiar aparece com R$ 54.720,00 em gastos de cultura e 1 contrato(s) nos dados públicos. Os números vêm de fontes oficiais e servem para acompanhar o gasto.",
@@ -21,6 +21,10 @@
     "CONTRATO_SEM_LICITACAO": "Contrato por dispensa/inexigibilidade acima do teto — situação que exige justificativa."
   },
   "contratos": {
+    "06307102000130-2-001364/2026": "Contrato de R$ 6.500,00 com S & W PRODUCOES LTDA. Objeto: Serviço de contratação da DANÇAPORTUGUESA FILHOS DE LISBOA E ELLAS DO FORRO, como atrações artísticas de cunho cultural.…",
+    "06307102000130-2-001362/2026": "Contrato de R$ 9.000,00 com ASSOCIACAO ARTISTICA - CULTURAL BRILHO DA BALAIADA. Objeto: Serviço de contratação do BMB DE NINA RODRIGUES, como atração artística  de cunho cultural ,destinados aos eventos promo…",
+    "06307102000130-2-001360/2026": "Contrato de R$ 9.000,00 com GRUPO FOLCLORICO BENEFICENTE BUMBA-MEU-BOI DE AXIXA. Objeto: Serviço de contratação do BUMBA-MEU-BOI DE AXIXA como atração artística de cunho cultural. destinados aos eventos\npromov…",
+    "06307102000130-2-001359/2026": "Contrato de R$ 4.000,00 com TIME PROJETOS E EVENTOS LTDA. Objeto: Serviço de contratação do CACURIÁ DO JHON, como atração artística de cunho cultural. destinados aos eventos\npromovidos e…",
     "06307102000130-2-001349/2026": "Contrato de R$ 490.000,00 com BAIANASYSTEM PRODUCAO MUSICAL LTDA. Objeto: Serviço de contratação do Show do  BAIANASYSTEM  para o FESTIVAL NEGRITUDE de São Luis, 2026.",
     "06307102000130-2-001348/2026": "Contrato de R$ 450.000,00 com PILAR DAS PRODUCOES E EVENTOS LTDA. Objeto: Serviço de contratação do Show de   CARLINHOS \nBROWN para o FESTIVAL NEGRITUDE 2026.",
     "06307102000130-2-001330/2026": "Contrato de R$ 3.500,00 com LR PRODUCOES LTDA. Objeto: Serviço de contratação da  RAYANE PASSOS E BANDA como atração artisticas de cunho cultural,\ndestinados aos eventos promo…",
@@ -1108,7 +1112,7 @@
     "09654059000178": "FERREIRA JUNIOR ENGENHARIA LTDA recebeu R$ 15.708.688,91 em 3 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 2.000.000,00.",
     "07817303000140": "INSTITUTO MOVIMENTACAO recebeu R$ 9.999.896,30 em 1 contrato(s) de cultura.",
     "31617831000130": "WB SOLUCOES E ENGENHARIA LTDA recebeu R$ 6.632.889,77 em 1 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 3.000.000,00.",
-    "04175202000125": "S&W SOLUCOES LTDA recebeu R$ 5.972.623,99 em 56 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
+    "04175202000125": "S&W SOLUCOES LTDA recebeu R$ 5.979.123,99 em 57 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
     "02668222000102": "M J P HELAL recebeu R$ 5.937.831,34 em 4 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 2.000.000,00.",
     "04450493000112": "L D M CONSTRUCOES LTDA recebeu R$ 4.981.000,00 em 1 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 1.500.000,00.",
     "21363253000108": "BALADA EVENTOS E PRODUCOES LTDA recebeu R$ 4.300.000,00 em 3 contrato(s) de cultura. Capital social declarado na Receita Federal: R$ 100.000,00.",
