@@ -1,17 +1,17 @@
 {
-  "ultima_atualizacao": "2026-11-23T22:36:22.245517+00:00",
+  "ultima_atualizacao": "2026-11-26T19:39:34.233779+00:00",
   "stats": {
     "maranhao_estado": {
-      "total_gasto": 1712856653.07,
-      "total_contratos": 413,
-      "total_alertas": 27,
+      "total_gasto": 1718855242.82,
+      "total_contratos": 414,
+      "total_alertas": 28,
       "nivel_risco": "atencao",
       "base_gasto": "empenhos_estado_ma"
     },
     "sao_luis": {
-      "total_gasto": 194789177.42,
-      "total_contratos": 634,
-      "total_alertas": 45,
+      "total_gasto": 194816177.42,
+      "total_contratos": 638,
+      "total_alertas": 54,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
@@ -30,15 +30,15 @@
       "base_gasto": "contratos_pncp"
     },
     "paco_lumiar": {
-      "total_gasto": 54720.0,
-      "total_contratos": 1,
+      "total_gasto": 71220.0,
+      "total_contratos": 2,
       "total_alertas": 1,
       "nivel_risco": "critico",
       "base_gasto": "contratos_pncp"
     },
     "pinheiro": {
-      "total_gasto": 17509913.82,
-      "total_contratos": 15,
+      "total_gasto": 17689913.82,
+      "total_contratos": 16,
       "total_alertas": 7,
       "nivel_risco": "atencao",
       "base_gasto": "contratos_pncp"
